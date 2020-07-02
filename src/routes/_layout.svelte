@@ -1,7 +1,7 @@
 <script context="module">
   import { waitLocale } from 'svelte-i18n'
   export async function preload(page, session) {
-    // await waitLocale()
+    await waitLocale()
     // TODO Read user session or cookie or url param or ...
     // return { theme: session.theme || 'dark' }
     return { theme: `dark` }
@@ -9,6 +9,7 @@
 </script>
 
 <script>
+  import { _ } from 'svelte-i18n'
   import LanguageSelector from '../components/LanguageSelector.svelte'
   import ThemeSelector from '../components/ThemeSelector.svelte'
   import Logo from '../components/Logo.svelte'
@@ -23,7 +24,7 @@
 
 <header>
   <LanguageSelector {segment} />
-  <a href="#">CONTACT</a>
+  <a href="#">{$_('contact')}</a>
   <ThemeSelector {segment} />
   <Logo />
 </header>
@@ -48,5 +49,6 @@
     font-size: 48px;
     text-decoration: none;
     display: block;
+    text-transform: uppercase;
   }
 </style>

@@ -1,22 +1,36 @@
 <script>
   export let segment
+  import { locale } from 'svelte-i18n'
+
+  function handleClick(language) {
+    locale.set(language)
+  }
 </script>
 
 <nav>
   <ul>
     <li>
-      <a aria-current="{segment === undefined ? 'page' : undefined}" href=".">
+      <a
+        aria-current="{segment === 'en' ? 'language' : undefined}"
+        href="/en"
+        on:click="{() => handleClick('en')}">
         EN
       </a>
     </li>
     <li>
-      <a aria-current="{segment === 'about' ? 'page' : undefined}" href="about">
+      <a
+        aria-current="{segment === 'es' ? 'language' : undefined}"
+        href="/es"
+        on:click="{() => handleClick('es')}">
         SP
       </a>
     </li>
     <li>
-      <a aria-current="{segment === 'blog' ? 'page' : undefined}" href="blog">
-        DK
+      <a
+        aria-current="{segment === 'da' ? 'language' : undefined}"
+        href="/da"
+        on:click="{() => handleClick('da')}">
+        DA
       </a>
     </li>
   </ul>
@@ -46,6 +60,7 @@
   }
 
   [aria-current] {
+    pointer-events: none;
   }
 
   [aria-current]::after {
