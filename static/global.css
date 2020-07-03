@@ -17,6 +17,20 @@
   box-sizing: inherit;
 }
 
+:root {
+  /* fallback colors */
+  --text: white;
+  --background: black;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 32px;
+  --space-5: 64px;
+  --space-6: 128px;
+  --space-7: 256px;
+}
+
 html {
   background: var(--background);
 }

@@ -1,10 +1,7 @@
 <script context="module">
   import { waitLocale } from 'svelte-i18n'
-  export async function preload(page, session) {
-    await waitLocale()
-    // TODO Read user session or cookie or url param or ...
-    // return { theme: session.theme || 'dark' }
-    return { theme: `dark` }
+  export async function preload() {
+    return waitLocale()
   }
 </script>
 
@@ -15,19 +12,16 @@
   import Logo from '../components/Logo.svelte'
 
   export let segment
-  export let theme
 </script>
 
-<svelte:head>
-  <link rel="stylesheet" type="text/css" href="{theme}-theme.css" />
-</svelte:head>
-
+<!-- TODO could we avoid init-theme with #if process browser here-->
 <header>
   <LanguageSelector {segment} />
   <a href="#">{$_('contact')}</a>
-  <ThemeSelector {segment} />
+  <ThemeSelector />
   <Logo />
 </header>
+
 <main>
   <slot />
 </main>

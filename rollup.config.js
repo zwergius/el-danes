@@ -1,3 +1,4 @@
+import path from 'path'
 import resolve from '@rollup/plugin-node-resolve'
 import replace from '@rollup/plugin-replace'
 import commonjs from '@rollup/plugin-commonjs'
@@ -6,6 +7,7 @@ import babel from '@rollup/plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import svelteSVG from 'rollup-plugin-svelte-svg'
 import json from '@rollup/plugin-json'
+import alias from '@rollup/plugin-alias'
 import config from 'sapper/config/rollup.js'
 import pkg from './package.json'
 
@@ -22,11 +24,23 @@ const onwarn = (warning, onwarn) => {
   )
 }
 
+const aliases = alias({
+  resolve: ['.js, .svelte', '/index.svelte'],
+  entries: [
+    {
+      find: '@',
+      replacement: path.resolve(__dirname, 'src'),
+    },
+  ],
+})
+const projectRootDir = path.resolve(__dirname)
+
 export default {
   client: {
     input: config.client.input(),
     output: config.client.output(),
     plugins: [
+      aliases,
       json(),
       svelteSVG({ dev }),
       replace({
@@ -82,6 +96,7 @@ export default {
     input: config.server.input(),
     output: config.server.output(),
     plugins: [
+      aliases,
       json(),
       svelteSVG({ generate: 'ssr', dev }),
       replace({

@@ -37,6 +37,7 @@ export function startClient(language) {
   })
 }
 
+// https://github.com/sveltejs/sapper/issues/78
 const DOCUMENT_REGEX = /^([^.?#@]+)?([?#](.+)?)?$/
 // initialize the i18n library in the server and returns its middleware
 export function i18nMiddleware() {
