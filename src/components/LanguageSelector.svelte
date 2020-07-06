@@ -57,6 +57,7 @@
   li:not(:last-child):after {
     content: '/';
     padding: 0 var(--space-3);
+    transition: color 0.5s ease;
   }
 
   [aria-current] {

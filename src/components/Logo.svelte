@@ -28,5 +28,6 @@
 
   svg > path {
     fill: var(--text);
+    transition: fill 0.5s ease;
   }
 </style>

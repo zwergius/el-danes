@@ -1,3 +1,11 @@
 {
-  "contact": "Contact"
+  "contact": "Contact",
+  "home": {
+    "section-1": "Great design must be accompanied by equally great functionality. Our solutions use cutting-edge technology which reflects our engineering where quality, speed and efficiency goes hand in hand 🤜🤛",
+    "section-2": "We treat our customers projects as if they were our own and will be your supporting partner from idea to execution, building and customising to your needs and expectations, so you and your clients can reach your objectives in the best possible way.",
+    "section-3": "We love ‘nerding’🤓 around with the latest trends and innovations, you can rely on us, to guarantee you with a state of the art solution.",
+    "section-4": "Passionate about quality with a meticulous sense for detail, we enjoy building creative design driven webs & apps. We are always anxious to create something new and unique to take your digital product to the next level 🚀.",
+    "quote": "Pleasure in the job puts perfection in the work.",
+    "quoteAuthor": "Aristoteles"
+  }
 }

@@ -28,13 +28,16 @@
 
 <style>
   header {
+    position: fixed;
+    left: var(--space-5);
+    top: 0;
+    right: var(--space-5);
     display: flex;
     justify-content: space-between;
   }
 
   main {
     position: relative;
-    background-color: white;
     margin: 0 auto;
     box-sizing: border-box;
   }

@@ -1,3 +1,11 @@
 {
-  "contact": "Contacto"
+  "contact": "Contacto",
+  "home": {
+    "section-1": "Es importante que un gran diseño esté apoyado en un mejor desarrollo web, es la única forma que tu sitio web o app cumplan tus expectativas, sea funcional y consigas alcanzar tus objetivos.",
+    "section-2": "",
+    "section-3": "Nos encanta \"curiosear\" con las últimas tendencias e innovaciones, en nuestro sector, donde la tecnología evoluciona más rápido que nunca. Muchas veces tu web o app no requiere simplemente una única solución, sino un pequeño conjunto de aplicaciones diferentes que funcionan juntas; porque una cadena es tan fuerte como su eslabón más débil.",
+    "section-4": "Nos apasiona la calidad y el cuidado de los detalles, aportando soluciones creativas y diferentes. Estamos siempre ansiosos por crear algo nuevo y especial para llevar tu producto digital al siguiente nivel.",
+    "quote": "Calidad significa hacerlo bien cuando nadie está mirando.",
+    "quoteAuthor": "Henry Ford"
+  }
 }
