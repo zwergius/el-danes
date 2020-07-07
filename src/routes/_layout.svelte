@@ -10,6 +10,7 @@
   import LanguageSelector from '../components/LanguageSelector.svelte'
   import ThemeSelector from '../components/ThemeSelector.svelte'
   import Logo from '../components/Logo.svelte'
+  import Clients from '@/components/Clients.svelte'
 
   export let segment
 </script>
@@ -25,6 +26,7 @@
 <main>
   <slot />
 </main>
+<Clients />
 
 <style>
   header {

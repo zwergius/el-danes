@@ -30,17 +30,11 @@
   --space-6: 128px;
   --space-7: 256px;
 
-  --font-1: 12px;
-  --font-2: 14px;
-  --font-3: 16px;
-  --font-4: 20px;
-  --font-5: 24px;
-  --font-6: 32px;
-  --font-7: 64px;
-  --font-8: 96px;
-  --font-9: 160px;
-
-  --font-p-responsive: calc(2em + 1vw + 1vh);
+  --font-1: calc(0.5em + 1vw + 1vh);
+  --font-2: calc(1.25em + 1vw + 1vh);
+  --font-4: calc(1.5em + 1vw + 1vh);
+  --font-3: calc(1.75em + 1vw + 1vh);
+  --font-5: calc(2em + 1vw + 1vh);
 }
 
 html {
@@ -67,10 +61,10 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
 }
 
-p, blockquote, cite {
+button, p, blockquote, cite {
   color: var(--text);
   transition: color 0.5s ease;
-  font-size: var(--font-p-responsive);
+  font-size: var(--font-5);
   margin: 0;
 }
 
@@ -81,7 +75,6 @@ a {
 
 code {
 	font-family: menlo, inconsolata, monospace;
-	font-size: calc(1em - 2px);
 	color: #555;
 	background-color: #f0f0f0;
 	padding: 0.2em 0.4em;

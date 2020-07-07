@@ -7,25 +7,44 @@
 </script>
 
 <svelte:head>
-  <title>Sapper project template</title>
+  <title>EL DANÉS</title>
 </svelte:head>
 
 <section bind:clientWidth="{w}" style="margin-top:{margin}px">
-  <p>{$_('home.section-1')}</p>
-  <p>{$_('home.section-2')}</p>
-  <blockquote>&#8220;{$_('home.quote')}&#8221;</blockquote>
-  <cite>&#8213; {$_('home.quoteAuthor')}</cite>
-  <p>{$_('home.section-3')}</p>
-  <p>{$_('home.section-4')}</p>
+  {#if w}
+    <p>{$_('home.section-1')}</p>
+    <p>{$_('home.section-2')}</p>
+
+    <blockquote>
+      &#8220;{$_('home.quote')}&#8221;
+      <cite>&#8213; {$_('home.quoteAuthor')}</cite>
+    </blockquote>
+
+    <p>{$_('home.section-3')}</p>
+    <p>{$_('home.section-4')}</p>
+  {/if}
 </section>
 
 <style>
   section {
     padding: var(--space-5) 0;
   }
-  p,
-  cite {
+
+  p {
     margin-bottom: var(--space-5);
     display: block;
+  }
+
+  blockquote {
+    margin-bottom: var(--space-5);
+  }
+
+  cite {
+    font-size: inherit;
+    visibility: hidden;
+  }
+
+  blockquote:hover cite {
+    visibility: visible;
   }
 </style>
