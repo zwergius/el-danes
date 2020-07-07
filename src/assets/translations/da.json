@@ -1,3 +1,11 @@
 {
-  "contact": "Kontakt"
+  "contact": "Kontakt",
+  "home": {
+    "section-1": "Godt design skal understøttes af tilsvarende god softwareudvikling. Vores løsninger er lavet med de seneste teknologier som afspejler vores arbejde  hvor det vigtigste er kvalitet, hastighed og effektivitet.",
+    "section-2": "Vi behandler vores kunders projekter, som var de vores egne og vi vil være jeres supportpartner fra idé til eksekvering. Vi udvikler efter jeres behov og forventninger. For os er opgaven først løst, når kunden er tilfreds.",
+    "section-3": "Vi elsker at “nørde” med de seneste trends og innovationer. I kan derfor stole på, at vi kan garantere jer med en “state of the art” løsning.",
+    "section-4": "Vi er passionerede omkring kvalitet og med sans for detaljen. Vi nyder at bygge kreative design drevne webs & apps og vi er altid spændte på at lave noget nyt og unikt.",
+    "quote": "Pleasure in the job puts perfection in the work.",
+    "quoteAuthor": "Aristoteles"
+  }
 }
