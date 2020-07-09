@@ -21,13 +21,32 @@
   div {
     position: fixed;
     z-index: -1;
-    left: var(--space-5);
-    top: 0;
-    right: var(--space-5);
+    left: var(--space-2);
+    top: calc(var(--space-3) + var(--space-1));
+    right: var(--space-2);
   }
 
   svg > path {
     fill: var(--text);
     transition: fill 0.5s ease;
+  }
+
+  /* Tablet - 768px */
+  @media only screen and (min-width: 48em) {
+    div {
+      position: fixed;
+      left: var(--space-3);
+      top: 0;
+      right: var(--space-3);
+    }
+  }
+  /* Desktop - 1080px*/
+  @media only screen and (min-width: 67.5em) {
+    div {
+      position: fixed;
+      left: var(--space-5);
+      top: 0;
+      right: var(--space-5);
+    }
   }
 </style>

@@ -27,24 +27,53 @@
 
 <style>
   section {
-    padding: var(--space-5) 0;
+    padding: var(--space-3) 0;
+    overflow-wrap: break-word;
   }
 
   p {
-    margin-bottom: var(--space-5);
-    display: block;
+    margin-bottom: var(--space-4);
+  }
+
+  p:after,
+  blockquote:after,
+  cite:after {
+    color: var(--background);
+    mix-blend-mode: difference;
   }
 
   blockquote {
-    margin-bottom: var(--space-5);
+    margin-bottom: var(--space-4);
   }
 
   cite {
     font-size: inherit;
-    visibility: hidden;
+    display: block;
   }
 
   blockquote:hover cite {
     visibility: visible;
+  }
+
+  /* Tablet - 768px */
+  @media only screen and (min-width: 48em) {
+  }
+  /* Desktop - 1080px*/
+  @media only screen and (min-width: 67.5em) {
+    section {
+      padding: var(--space-5) 0;
+    }
+
+    p {
+      margin-bottom: var(--space-5);
+    }
+
+    cite {
+      visibility: hidden;
+    }
+
+    blockquote {
+      margin-bottom: var(--space-5);
+    }
   }
 </style>

@@ -17,9 +17,11 @@
 
 <!-- TODO could we avoid init-theme with #if process browser here-->
 <header>
-  <LanguageSelector {segment} />
-  <a href="#">{$_('contact')}</a>
-  <ThemeSelector />
+  <div class="row">
+    <LanguageSelector {segment} />
+    <a href="#">{$_('contact')}</a>
+    <ThemeSelector />
+  </div>
   <Logo />
 </header>
 
@@ -31,11 +33,18 @@
 <style>
   header {
     position: fixed;
-    left: var(--space-5);
-    top: 0;
-    right: var(--space-5);
+    z-index: 10;
+    left: 0;
+    top: var(--space-2);
+    right: 0;
+    font-size: var(--font-0);
+  }
+
+  .row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding-left: var(--space-2);
   }
 
   main {
@@ -45,9 +54,29 @@
   }
 
   a {
-    font-size: 48px;
     text-decoration: none;
     display: block;
     text-transform: uppercase;
+  }
+
+  /* Tablet - 768px */
+  @media only screen and (min-width: 48em) {
+    header {
+      left: var(--space-3);
+      top: var(--space-1);
+      right: var(--space-2);
+    }
+
+    .row {
+      padding: 0;
+    }
+  }
+  /* Desktop - 1080px*/
+  @media only screen and (min-width: 67.5em) {
+    header {
+      left: var(--space-5);
+      top: var(--space-2);
+      right: var(--space-5);
+    }
   }
 </style>

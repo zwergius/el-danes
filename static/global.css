@@ -30,6 +30,7 @@
   --space-6: 128px;
   --space-7: 256px;
 
+  --font-0: calc(0.25em + 1vw + 1vh);
   --font-1: calc(0.5em + 1vw + 1vh);
   --font-2: calc(1.25em + 1vw + 1vh);
   --font-4: calc(1.5em + 1vw + 1vh);
@@ -45,10 +46,10 @@ html {
 body {
 	margin: 0;
 	font-family: La Nord Light, Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 1.5;
 	color: var(--text);
-  padding: var(--space-2) var(--space-5);
+  padding: var(--space-2) var(--space-2);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -81,8 +82,17 @@ code {
 	border-radius: 2px;
 }
 
-@media (min-width: 400px) {
-	body {
-		font-size: 16px;
-	}
+/* Tablet - 768px */
+@media only screen and (min-width: 48em) {
+  body {
+    padding: var(--space-2) var(--space-3);
+
+  }
+}
+/* Desktop - 1080px*/
+@media only screen and (min-width: 67.5em) {
+  body {
+    padding: var(--space-2) var(--space-5);
+
+  }
 }

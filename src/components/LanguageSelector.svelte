@@ -37,10 +37,6 @@
 </nav>
 
 <style>
-  nav {
-    font-size: 48px;
-  }
-
   ul {
     display: flex;
     margin: 0;
@@ -56,7 +52,7 @@
 
   li:not(:last-child):after {
     content: '/';
-    padding: 0 var(--space-3);
+    padding: 0 var(--space-1);
     transition: color 0.5s ease;
   }
 
@@ -78,5 +74,18 @@
   a {
     text-decoration: none;
     display: block;
+  }
+
+  /* Tablet - 768px */
+  @media only screen and (min-width: 48em) {
+    li:not(:last-child):after {
+      padding: 0 var(--space-2);
+    }
+  }
+  /* Desktop - 1080px*/
+  @media only screen and (min-width: 67.5em) {
+    li:not(:last-child):after {
+      padding: 0 var(--space-3);
+    }
   }
 </style>
