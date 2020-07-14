@@ -19,8 +19,8 @@
 
 :root {
   /* fallback colors */
-  --text: white;
-  --background: black;
+  --text: #fff;
+  --background: #000;
 
   --space-1: 4px;
   --space-2: 8px;
@@ -44,25 +44,34 @@ html {
 }
 
 body {
-	margin: 0;
-	font-family: La Nord Light, Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-	font-size: 16px;
-	line-height: 1.5;
-	color: var(--text);
+  margin: 0;
+  font-family: La Nord Light, Roboto, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
   padding: var(--space-2) var(--space-2);
+  background: var(--background);
+  transition: background 0.2s ease;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: La Nord Regular;
-	margin: 0 0 0.5em 0;
-	font-weight: 400;
-	line-height: 1.2;
+  margin: 0 0 0.5em 0;
+  font-weight: 400;
+  line-height: 1.2;
 }
 
-h1 {
-}
-
-button, p, blockquote, cite {
+button,
+p,
+blockquote,
+cite {
   color: var(--text);
   transition: color 0.5s ease;
   font-size: var(--font-5);
@@ -70,29 +79,27 @@ button, p, blockquote, cite {
 }
 
 a {
-	color: inherit;
+  color: inherit;
   transition: color 0.5s ease;
 }
 
 code {
-	font-family: menlo, inconsolata, monospace;
-	color: #555;
-	background-color: #f0f0f0;
-	padding: 0.2em 0.4em;
-	border-radius: 2px;
+  font-family: menlo, inconsolata, monospace;
+  color: #555;
+  background-color: #f0f0f0;
+  padding: 0.2em 0.4em;
+  border-radius: 2px;
 }
 
 /* Tablet - 768px */
 @media only screen and (min-width: 48em) {
   body {
     padding: var(--space-2) var(--space-3);
-
   }
 }
 /* Desktop - 1080px*/
 @media only screen and (min-width: 67.5em) {
   body {
     padding: var(--space-2) var(--space-5);
-
   }
 }

@@ -21,12 +21,12 @@
 
   var theme = {
     dark: [
-      { name: '--text', value: 'white' },
-      { name: '--background', value: 'black' },
+      { name: '--text', value: '#fff' },
+      { name: '--background', value: '#000' },
     ],
     light: [
-      { name: '--text', value: 'black' },
-      { name: '--background', value: 'white' },
+      { name: '--text', value: '#000' },
+      { name: '--background', value: '#fff' },
     ],
   }
   var colorMode = getInitialColorMode()

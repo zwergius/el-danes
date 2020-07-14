@@ -103,10 +103,5 @@
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
-    button {
-      margin-left: var(--space-4);
-      height: 40px;
-      width: 40px;
-    }
   }
 </style>

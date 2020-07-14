@@ -22,8 +22,9 @@
     <a href="#">{$_('contact')}</a>
     <ThemeSelector />
   </div>
-  <Logo />
 </header>
+
+<Logo />
 
 <main>
   <slot />
@@ -48,7 +49,6 @@
   }
 
   main {
-    position: relative;
     margin: 0 auto;
     box-sizing: border-box;
   }

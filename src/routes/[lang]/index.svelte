@@ -10,7 +10,7 @@
   <title>EL DANÉS</title>
 </svelte:head>
 
-<section bind:clientWidth="{w}" style="margin-top:{margin}px">
+<section style="margin-top:{margin}px">
   {#if w}
     <p>{$_('home.section-1')}</p>
     <p>{$_('home.section-2')}</p>
@@ -24,6 +24,7 @@
     <p>{$_('home.section-4')}</p>
   {/if}
 </section>
+<div bind:clientWidth="{w}"></div>
 
 <style>
   section {
@@ -35,10 +36,10 @@
     margin-bottom: var(--space-4);
   }
 
-  p:after,
-  blockquote:after,
-  cite:after {
-    color: var(--background);
+  p,
+  blockquote,
+  cite {
+    color: white;
     mix-blend-mode: difference;
   }
 
