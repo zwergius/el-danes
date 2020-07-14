@@ -1,15 +1,13 @@
 <script>
   import { _ } from 'svelte-i18n'
+  import SEO from '@/components/SEO.svelte'
   const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
   let w
 
   $: margin = (w * aspectRatio).toFixed(2)
 </script>
 
-<svelte:head>
-  <title>EL DANÉS</title>
-</svelte:head>
-
+<SEO />
 <section style="margin-top:{margin}px">
   {#if w}
     <p>{$_('home.section-1')}</p>
