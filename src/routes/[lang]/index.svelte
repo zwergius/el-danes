@@ -36,11 +36,13 @@
     margin-bottom: var(--space-4);
   }
 
-  p,
-  blockquote,
-  cite {
-    color: white;
-    mix-blend-mode: difference;
+  @supports (mix-blend-mode: difference) {
+    p,
+    blockquote,
+    cite {
+      color: white;
+      mix-blend-mode: difference;
+    }
   }
 
   blockquote {
