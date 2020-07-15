@@ -7,27 +7,35 @@
 
 <script>
   import { _ } from 'svelte-i18n'
-  import LanguageSelector from '../components/LanguageSelector.svelte'
-  import ThemeSelector from '../components/ThemeSelector.svelte'
-  import Logo from '../components/Logo.svelte'
+  import LanguageSelector from '@/components/LanguageSelector.svelte'
+  import ThemeSelector from '@/components/ThemeSelector.svelte'
+  import Logo from '@/components/Logo.svelte'
   import Clients from '@/components/Clients.svelte'
+  import Anchor from '@/components/Anchor.svelte'
 
   export let segment
+
+  const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
+  let w
+
+  $: margin = (w * aspectRatio).toFixed(2)
 </script>
 
 <!-- TODO could we avoid init-theme with #if process browser here-->
-<header>
+<header bind:clientWidth="{w}">
   <div class="row">
     <LanguageSelector {segment} />
-    <a href="#">{$_('contact')}</a>
+    <Anchor id="contact-link" href="/contact">{$_('contact')}</Anchor>
     <ThemeSelector />
   </div>
 </header>
 
 <Logo />
 
-<main>
-  <slot />
+<main style="margin-top:{margin}px">
+  {#if w}
+    <slot />
+  {/if}
 </main>
 <Clients />
 
@@ -48,15 +56,23 @@
     padding-left: var(--space-2);
   }
 
-  main {
-    margin: 0 auto;
-    box-sizing: border-box;
+  :global(#contact-link) {
+    text-transform: uppercase;
+    font-size: inherit;
   }
 
-  a {
-    text-decoration: none;
-    display: block;
-    text-transform: uppercase;
+  main {
+    margin: 0 auto;
+    padding: var(--space-3) 0;
+    box-sizing: border-box;
+    font-size: var(--font-5);
+  }
+
+  @supports (mix-blend-mode: difference) {
+    main {
+      color: white;
+      mix-blend-mode: difference;
+    }
   }
 
   /* Tablet - 768px */
@@ -77,6 +93,9 @@
       left: var(--space-5);
       top: var(--space-2);
       right: var(--space-5);
+    }
+    main {
+      padding: var(--space-5) 0;
     }
   }
 </style>

@@ -1,6 +1,7 @@
 <script>
-  export let segment
   import { locale } from 'svelte-i18n'
+  import Anchor from '@/components/Anchor.svelte'
+  export let segment
 
   function handleClick(language) {
     locale.set(language)
@@ -10,28 +11,31 @@
 <nav>
   <ul>
     <li>
-      <a
+      <Anchor
         aria-current="{segment === 'en' ? 'language' : undefined}"
         href="/en"
+        target="_self"
         on:click="{() => handleClick('en')}">
         EN
-      </a>
+      </Anchor>
     </li>
     <li>
-      <a
+      <Anchor
         aria-current="{segment === 'es' ? 'language' : undefined}"
         href="/es"
+        target="_self"
         on:click="{() => handleClick('es')}">
         SP
-      </a>
+      </Anchor>
     </li>
     <li>
-      <a
+      <Anchor
         aria-current="{segment === 'da' ? 'language' : undefined}"
         href="/da"
+        target="_self"
         on:click="{() => handleClick('da')}">
         DA
-      </a>
+      </Anchor>
     </li>
   </ul>
 </nav>
@@ -56,24 +60,22 @@
     transition: color 0.5s ease;
   }
 
-  [aria-current] {
+  :global(a[aria-current]) {
+    position: relative;
     pointer-events: none;
   }
 
-  [aria-current]::after {
-    /* 
-    display: block;
+  :global(a[aria-current]::before) {
     position: absolute;
-    content: '';
-    width: calc(100% - 1em);
-    height: 2px;
-    background-color: rgb(255, 62, 0);
-    bottom: -1px; */
-  }
-
-  a {
-    text-decoration: none;
-    display: block;
+    top: -1em;
+    left: 0;
+    right: 0;
+    margin: auto;
+    content: '\25CF';
+    color: var(--text);
+    font-size: 0.2em;
+    display: flex;
+    justify-content: center;
   }
 
   /* Tablet - 768px */
