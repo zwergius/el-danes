@@ -1,11 +1,12 @@
 <script>
   import { _ } from 'svelte-i18n'
+  import Anchor from '@/components/Anchor.svelte'
 </script>
 
-<button>{$_('clients')}</button>
+<Anchor id="clients-link" href="/clients">{$_('clients')}</Anchor>
 
 <style>
-  button {
+  :global(a#clients-link) {
     position: fixed;
     top: 50%;
     transform: translateY(-50%) rotate(-11deg);
@@ -15,19 +16,19 @@
     border: 1px solid var(--text);
     border-radius: 50%;
     padding: var(--space-2) var(--space-3);
-    font-size: var(--font-1);
+    font-size: var(--font-4);
     text-transform: uppercase;
   }
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
-    button {
+    :global(a#clients-link) {
       right: var(--space-3);
     }
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
-    button {
+    :global(a#clients-link) {
       right: var(--space-5);
       padding: var(--space-3) var(--space-4);
     }

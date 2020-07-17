@@ -46,7 +46,7 @@
     left: 0;
     top: var(--space-2);
     right: 0;
-    font-size: var(--font-0);
+    font-size: var(--font-3);
   }
 
   .row {

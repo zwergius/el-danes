@@ -31,10 +31,11 @@
   --space-7: 256px;
 
   --font-0: calc(0.25em + 1vw + 1vh);
-  --font-1: calc(0.5em + 1vw + 1vh);
-  --font-2: calc(1.25em + 1vw + 1vh);
-  --font-4: calc(1.5em + 1vw + 1vh);
-  --font-3: calc(1.75em + 1vw + 1vh);
+
+  --font-1: calc(-0.1em + 1vw + 1vh);
+  --font-2: calc(0em + 1vw + 1vh);
+  --font-3: calc(0.25em + 1vw + 1vh);
+  --font-4: calc(0.5em + 1vw + 1vh);
   --font-5: calc(2em + 1vw + 1vh);
 }
 
@@ -72,11 +73,21 @@ button,
 p,
 blockquote,
 cite {
-  color: var(--text);
   transition: color 0.5s ease;
   margin: 0;
   font-family: inherit;
   font-size: inherit;
+}
+
+a,
+button {
+  color: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 code {

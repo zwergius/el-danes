@@ -43,9 +43,6 @@
 <style>
   ul {
     display: flex;
-    margin: 0;
-    padding: 0;
-    list-style: none;
     text-transform: uppercase;
   }
 
