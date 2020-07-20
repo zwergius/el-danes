@@ -1,0 +1,293 @@
+[
+  {
+    "company": "Keytree",
+    "contact": "",
+    "from": "08/01/2016",
+    "jobTitle": "Senior UI developer",
+    "link": "",
+    "projects": [
+      {
+        "id": "heineken",
+        "devices": ["web"],
+        "description": "project.heineken.description",
+        "iconName": "heineken-logo",
+        "stack": "react, javascript, es6, css, html, redux, styled-components, npm",
+        "title": "Heineken Backoffice Portal",
+        "name": "Heineken",
+        "visible": true,
+        "type": "ReactJs Web App"
+      },
+      {
+        "id": "bp-fuels",
+        "devices": ["mobile", "tablet"],
+        "description": "project.bpFuels.description",
+        "iconName": "bp-logo",
+        "stack": "angular, ionic, npm scripts, javascript",
+        "title": "BP Fuels Apps.",
+        "name": "British Petroleum",
+        "visible": true,
+        "type": "Ionic AngularJS Hybrid App"
+      },
+      {
+        "id": "bp-service-scan",
+        "devices": ["tablet"],
+        "description": "project.bpServiceScan.description",
+        "iconName": "bp-logo",
+        "stack": "angular, ionic, npm scripts, javascript",
+        "title": "BP Service Scan",
+        "name": "British Petroleum",
+        "visible": false,
+        "type": "Ionic AngularJS Hybrid App"
+      },
+      {
+        "id": "herfy",
+        "devices": ["mobile"],
+        "description": "project.herfy.description",
+        "iconName": "herfy-logo",
+        "stack": "swift, storyboard, snapkit",
+        "title": "Herfy Delivery",
+        "type": "Native iOS App",
+        "name": "Herfy",
+        "visible": false,
+        "url": "https://apps.apple.com/app/herfy-delivery/id1300514088"
+      },
+      {
+        "id": "jaguar-land-rover",
+        "devices": ["web"],
+        "description": "project.jlr.description",
+        "iconName": "jaguar-land-rover-logo",
+        "stack": "angular, bootstrap, npm, oauth, html, css, javascript",
+        "title": "Jaguar Land Rover",
+        "name": "Jaguar Land Rover",
+        "visible": true,
+        "type": "AngularJS Web App"
+      },
+      {
+        "id": "arm",
+        "devices": ["web"],
+        "description": "project.arm.description",
+        "iconName": "arm-logo",
+        "stack": "react, javascript, mobx, velocity, es6, npm, postman",
+        "title": "ARM Deal Evaluator",
+        "name": "arm",
+        "visible": true,
+        "type": "ReactJS Web App"
+      }
+    ],
+    "to": "05/30/2018"
+  },
+  {
+    "company": "Freelance",
+    "contact": "",
+    "from": "04/01/2018",
+    "jobTitle": "Web & iOS Developer",
+    "link": "/apps/club-vulco",
+    "projects": [
+      {
+        "id": "keep-komp",
+        "devices": ["web"],
+        "description": "project.keepcomp.description",
+        "iconName": "keep-comp-logo",
+        "stack": "gatsby, react, javascript, html, css",
+        "title": "Keep Comp*",
+        "type": "Corporate Website",
+        "name": "keep comp*",
+        "visible": true,
+        "url": "https://keepcomp.com/"
+      },
+      {
+        "id": "yes-no-keyboard",
+        "devices": ["iOS"],
+        "description": "project.keyboard.description",
+        "iconName": "yes-no-keyboard-logo",
+        "stack": "swift, snapkit",
+        "title": "Yes / No Keyboard",
+        "name": "Yes / No Keyboard",
+        "visible": false,
+        "type": "Native iOS App with keyboard extension",
+        "url": "https://apps.apple.com/us/app/yes-no-keyboard/id1512961865"
+      },
+      {
+        "id": "zwergius-web",
+        "devices": ["web"],
+        "description": "project.portfolio.description",
+        "iconName": "portfolio-logo",
+        "stack": "gatsby, react, javascript, html, css",
+        "title": "Portfolio Web",
+        "name": "Zwergius",
+        "visible": true,
+        "type": "ReactJS/Gatsby Static Web",
+        "url": "https://www.zwergius.com"
+      },
+      {
+        "id": "club-vulco",
+        "devices": ["iOS"],
+        "description": "project.clubVulco.description",
+        "iconName": "club-vulco-logo",
+        "stack": "swift, snapkit, alamofire",
+        "title": "Club Vulco",
+        "name": "Club Vulco",
+        "visible": false,
+        "type": "Native iOS App",
+        "url": ""
+      }
+    ],
+    "to": null
+  },
+  {
+    "company": "FortKnoxster",
+    "contact": "Mickey",
+    "from": "06/01/2018",
+    "jobTitle": "Remote Frontend Architect & Lead Developer",
+    "link": "/webs/fortknoxster",
+    "projects": [
+      {
+        "id": "fortknoxster-web",
+        "devices": ["web"],
+        "description": "project.fkxWeb.description",
+        "iconName": "fortknoxster-logo",
+        "stack": "react, javascript, es6, npm, react-spring, html, css, webcrypto, webpack",
+        "title": "FortKnoxster Web App",
+        "name": "FortKnoxster",
+        "visible": true,
+        "type": "ReactJS Web App",
+        "url": "https://web.fortknoxster.com/"
+      },
+      {
+        "id": "fortknoxster-crypto-lib",
+        "devices": ["web"],
+        "description": "project.fkxCrypto.description",
+        "iconName": "fortknoxster-logo",
+        "stack": "javascript, es6, webpack, npm, webcrypto",
+        "title": "FortKnoxster Crypto Library",
+        "name": "FortKnoxster",
+        "visible": false,
+        "type": "Javascript Library",
+        "url": ""
+      }
+    ],
+    "to": "12/01/2019"
+  },
+  {
+    "company": "PinPointer",
+    "contact": "",
+    "from": "2016",
+    "jobTitle": "Founder & Head of iOS",
+    "link": "/apps/pinpointer",
+    "projects": [
+      {
+        "id": "pinpointer",
+        "devices": ["iOS"],
+        "description": "project.pinpointer.description",
+        "iconName": "pinpointer-logo",
+        "stack": "swift, snapkit, cocoapods, mapkit",
+        "title": "PinPointer",
+        "name": "PinPointer",
+        "visible": false,
+        "type": "Native iOS App",
+        "url": "https://apps.apple.com/us/app/pinpointer/id1076691245?ls=1"
+      }
+    ],
+    "to": "10/01/2019"
+  },
+  {
+    "company": "Packlink",
+    "contact": "",
+    "from": "04/01/2015",
+    "jobTitle": "Frontend Developer",
+    "link": "",
+    "projects": [
+      {
+        "id": "packlink-pro",
+        "devices": ["web"],
+        "description": "project.packlinkPro.description",
+        "iconName": "packlink-pro-logo",
+        "stack": "angular, javascript, npm, bash, html, css",
+        "title": "Packlink Pro",
+        "name": "Packlink Pro",
+        "visible": false,
+        "type": "AngularJS Web App",
+        "url": "https://pro.packlink.es"
+      },
+      {
+        "id": "packlink-pro-ebay",
+        "devices": ["web"],
+        "description": "project.packlinkEbay.description",
+        "iconName": "ebay-logo",
+        "stack": "angular, javascript, npm, bash, html, css",
+        "title": "Packlink Pro eBay",
+        "name": "Packlink Pro eBay",
+        "visible": true,
+        "type": "AngularJS eBay Integration",
+        "url": "https://envios.ebay.es"
+      },
+      {
+        "id": "packlink-backoffice",
+        "devices": ["web"],
+        "description": "project.packlinkBackoffice.description",
+        "iconName": "backoffice-packlink",
+        "stack": "angular, javascript, npm, bash, html, css",
+        "title": "Backoffice",
+        "name": "Packlink Backoffice",
+        "visible": false,
+        "type": "AngularJS Web App"
+      }
+    ],
+    "to": "08/01/2016"
+  },
+  {
+    "company": "Openjaw Technologies",
+    "contact": "",
+    "from": "12/01/2011",
+    "jobTitle": "Fullstack Developer",
+    "link": "",
+    "projects": [
+      {
+        "id": "british-airways",
+        "devices": ["web"],
+        "description": "project.ba.description",
+        "iconName": "british-airways-logo",
+        "stack": "java, jsp, javascript, html, css, jquery, xsl, xml, ota",
+        "title": "British Airways",
+        "name": "British Airways",
+        "visible": true,
+        "type": "Web Integration",
+        "url": "https://www.britishairways.com"
+      },
+      {
+        "id": "iberia",
+        "devices": ["web"],
+        "description": "project.iberia.description",
+        "iconName": "iberia-logo",
+        "stack": "java, jsp, javascript, html, css, jquery, xsl, xml, ota",
+        "title": "Iberia",
+        "name": "Iberia",
+        "visible": true,
+        "type": "Web Integration",
+        "url": "https://www.iberia.com"
+      }
+    ],
+    "to": "04/01/2015"
+  },
+  {
+    "company": "OneBookie",
+    "contact": "",
+    "from": "01/01/2011",
+    "jobTitle": "Founder & Fullstack Developer",
+    "link": "/webs/onebookie",
+    "projects": [
+      {
+        "id": "onebookie",
+        "devices": ["web"],
+        "description": "project.onebookie.description",
+        "iconName": "onebookie-logo",
+        "stack": "ruby on rails, mysql, javascript, html, css, jquery",
+        "title": "OneBookie Web app",
+        "name": "OneBookie",
+        "visible": false,
+        "type": "Ruby On Rails Web App"
+      }
+    ],
+    "to": "05/01/2015"
+  }
+]
