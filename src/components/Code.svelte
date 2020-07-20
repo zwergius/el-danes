@@ -15,4 +15,5 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css" />
 </svelte:head>
+
 <svelte:component this="{Prism}" language="html" source="{data}" />

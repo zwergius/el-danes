@@ -1,10 +1,30 @@
-<script>
-  import { _ } from 'svelte-i18n'
-  import SEO from '@/components/SEO.svelte'
+<script context="module">
+  export async function preload() {
+    const url =
+      'https://api.github.com/repos/zwergius/el-danes/contents/src/routes/[lang]/index.svelte'
+    const res = await this.fetch(url, {
+      'User-Agent': 'zwergius',
+    })
+    if (res.status === 200) {
+      const data = await res.json()
+      return { data }
+    }
+    // this.error(404, 'Not found')
+  }
 </script>
 
+<script>
+  import { _ } from 'svelte-i18n'
+  import { pageCode } from '@/stores.js'
+  import SEO from '@/components/SEO.svelte'
+
+  export let data
+  pageCode.set(atob(data.content))
+</script>
+
+<!-- HOME | EL DANÉS-->
 <SEO />
-<section>
+<div>
   <p>{$_('home.section-1')}</p>
   <p>{$_('home.section-2')}</p>
 
@@ -15,10 +35,10 @@
 
   <p>{$_('home.section-3')}</p>
   <p>{$_('home.section-4')}</p>
-</section>
+</div>
 
 <style>
-  section {
+  div {
     overflow-wrap: break-word;
   }
 
