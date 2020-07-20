@@ -41,9 +41,11 @@
 </header>
 
 <main style="margin-top:{margin}px">
-  <Logo />
+  <Logo isFolded="{showsCode}" />
   {#if w}
-    <slot />
+    <section>
+      <slot />
+    </section>
   {/if}
 </main>
 
@@ -94,7 +96,8 @@
   }
 
   @supports (mix-blend-mode: difference) {
-    main {
+    main,
+    section {
       color: white;
       mix-blend-mode: difference;
     }
