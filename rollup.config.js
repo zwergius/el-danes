@@ -6,6 +6,7 @@ import svelte from 'rollup-plugin-svelte'
 import babel from '@rollup/plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import svelteSVG from 'rollup-plugin-svelte-svg'
+import inlineSvg from 'rollup-plugin-inline-svg'
 import json from '@rollup/plugin-json'
 import alias from '@rollup/plugin-alias'
 import config from 'sapper/config/rollup.js'
@@ -42,7 +43,8 @@ export default {
     plugins: [
       aliases,
       json(),
-      svelteSVG({ dev }),
+      // svelteSVG({ dev }),
+      inlineSvg(),
       replace({
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
@@ -98,7 +100,8 @@ export default {
     plugins: [
       aliases,
       json(),
-      svelteSVG({ generate: 'ssr', dev }),
+      // svelteSVG({ generate: 'ssr', dev }),
+      inlineSvg(),
       replace({
         'process.browser': false,
         'process.env.NODE_ENV': JSON.stringify(mode),

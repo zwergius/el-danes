@@ -12,8 +12,15 @@
   import Logo from '@/components/Logo.svelte'
   import Clients from '@/components/Clients.svelte'
   import Anchor from '@/components/Anchor.svelte'
+  import Flip from '@/components/Flip.svelte'
+  import Code from '@/components/Code.svelte'
 
   export let segment
+  let showsCode = false
+
+  function handleClick() {
+    showsCode = !showsCode
+  }
 
   const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
   let w
@@ -26,17 +33,35 @@
   <div class="row">
     <LanguageSelector {segment} />
     <Anchor id="contact-link" href="/contact">{$_('contact')}</Anchor>
-    <ThemeSelector />
+    <div>
+      <button type="button" on:click="{handleClick}">CLICK</button>
+      <ThemeSelector />
+    </div>
   </div>
 </header>
 
-<Logo />
-
 <main style="margin-top:{margin}px">
+  <Logo />
   {#if w}
     <slot />
   {/if}
 </main>
+
+<!-- 
+<Flip isFlipped="{showsCode}">
+
+  <main slot="front" style="margin-top:{margin}px">
+    <Logo />
+    {#if w}
+      <slot />
+    {/if}
+  </main>
+
+  <div slot="back">
+    <Code />
+  </div>
+</Flip>
+-->
 <Clients />
 
 <style>
