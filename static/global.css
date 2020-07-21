@@ -90,14 +90,6 @@ ul {
   list-style: none;
 }
 
-code {
-  font-family: menlo, inconsolata, monospace;
-  color: #555;
-  background-color: #f0f0f0;
-  padding: 0.2em 0.4em;
-  border-radius: 2px;
-}
-
 /* Tablet - 768px */
 @media only screen and (min-width: 48em) {
   body {

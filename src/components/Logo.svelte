@@ -89,7 +89,7 @@
     width: 100%;
     height: 100%;
     background-color: black;
-    transform: rotateY(180deg) translateZ(1px);
+    transform: rotateY(180deg) translateZ(0px);
     transform-style: preserve-3d;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
@@ -109,6 +109,13 @@
   .wrapper.active .c {
     transform: rotateY(-180deg) translate3d(-5px, 0, -1px);
     transition: transform 1s;
+  }
+
+  @supports (mix-blend-mode: difference) {
+    .container {
+      color: white;
+      mix-blend-mode: difference;
+    }
   }
 
   /* Tablet - 768px */

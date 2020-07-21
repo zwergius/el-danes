@@ -7,6 +7,7 @@
 
 <script>
   import { _ } from 'svelte-i18n'
+  import { pageCode } from '@/stores.js'
   import LanguageSelector from '@/components/LanguageSelector.svelte'
   import ThemeSelector from '@/components/ThemeSelector.svelte'
   import Logo from '@/components/Logo.svelte'
@@ -16,6 +17,7 @@
   import Code from '@/components/Code.svelte'
 
   export let segment
+  let code = ''
   let showsCode = false
 
   function handleClick() {
@@ -40,11 +42,14 @@
   </div>
 </header>
 
-<main style="margin-top:{margin}px">
+<main class:showsCode>
   <Logo isFolded="{showsCode}" />
   {#if w}
-    <section>
-      <slot />
+    <section class="main" style="margin-top:{margin}px">
+      <slot {code} />
+    </section>
+    <section class="code">
+      <Code data="{$pageCode}" />
     </section>
   {/if}
 </main>
@@ -92,12 +97,29 @@
     margin: 0 auto;
     padding: var(--space-3) 0;
     box-sizing: border-box;
+    overflow-x: hidden;
+    display: flex;
+  }
+
+  main.showsCode > section {
+    width: 50%;
+  }
+
+  section {
+    transition: all 1s;
+  }
+
+  section.main {
+    width: 100%;
     font-size: var(--font-5);
   }
 
+  section.code {
+    width: 0;
+  }
+
   @supports (mix-blend-mode: difference) {
-    main,
-    section {
+    section.main {
       color: white;
       mix-blend-mode: difference;
     }

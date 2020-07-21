@@ -2,8 +2,11 @@
   export async function preload(page, session) {
     const dotUrl =
       'https://api.github.com/repos/zwergius/dotfiles/contents/makesymlinks.sh'
-    const url = 'https://api.github.com/repos/zwergius/el-danes/contents/'
-    const res = await this.fetch(dotUrl, { 'User-Agent': 'zwergius' })
+    const url =
+      'https://api.github.com/repos/zwergius/el-danes/contents/src/routes/[lang]/index.svelte'
+    const res = await this.fetch(url, {
+      'User-Agent': 'zwergius',
+    })
     if (res.status === 200) {
       const data = await res.json()
       return { data }
