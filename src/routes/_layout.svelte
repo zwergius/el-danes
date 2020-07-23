@@ -7,7 +7,6 @@
 
 <script>
   import { _ } from 'svelte-i18n'
-  import turn from '@/transitions/turn.js'
   import { pageCode } from '@/stores.js'
   import LanguageSelector from '@/components/LanguageSelector.svelte'
   import ThemeSelector from '@/components/ThemeSelector.svelte'
@@ -33,6 +32,17 @@
     console.log('height: ', h)
   }
   $: logoHeight = (w * aspectRatio).toFixed(2)
+
+  function turn(node, { delay = 0, duration = 5000 }) {
+    return {
+      delay,
+      duration,
+      css: (t, u) => `
+      transform: rotateY(${1 - u * 180}deg) translate3d(0,0,0);
+      opacity: ${1 - u};
+      `,
+    }
+  }
 </script>
 
 <!-- TODO could we avoid init-theme with #if process browser here-->
@@ -47,7 +57,7 @@
   </div>
 </header>
 
-<Logo turn="{showsCode}" />
+<Logo />
 
 <main style="margin-top:{logoHeight}px">
   <div class="scene">
