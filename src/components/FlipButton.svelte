@@ -1,5 +1,4 @@
 <script>
-  import reverse from '@/assets/reverse.svg'
   export let toggleFlip
 
   function handleKeypress(e) {

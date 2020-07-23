@@ -25,6 +25,18 @@ const onwarn = (warning, onwarn) => {
   )
 }
 
+const preprocessOptions = {
+  transformers: {
+    postcss: {
+      plugins: [
+        require('postcss-import')(),
+        require('postcss-url')(),
+        require('autoprefixer')(),
+      ],
+    },
+  },
+}
+
 const aliases = alias({
   resolve: ['.js, .svelte', '/index.svelte'],
   entries: [
@@ -53,6 +65,7 @@ export default {
         dev,
         hydratable: true,
         emitCss: true,
+        preprocess: require('svelte-preprocess')(preprocessOptions),
       }),
       resolve({
         browser: true,
@@ -109,6 +122,7 @@ export default {
       svelte({
         generate: 'ssr',
         dev,
+        preprocess: require('svelte-preprocess')(preprocessOptions),
       }),
       resolve({
         dedupe: ['svelte'],

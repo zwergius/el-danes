@@ -15,7 +15,6 @@
   import Anchor from '@/components/Anchor.svelte'
   import Code from '@/components/Code.svelte'
   import FlipButton from '@/components/FlipButton.svelte'
-  import Flipper from '@/components/Flipper.svelte'
 
   export let segment
   let showsCode = false
@@ -28,12 +27,9 @@
   let w
   let h
 
-  $: {
-    console.log('height: ', h)
-  }
   $: logoHeight = (w * aspectRatio).toFixed(2)
 
-  function turn(node, { delay = 0, duration = 5000 }) {
+  function turn(node, { delay = 0, duration = 500 }) {
     return {
       delay,
       duration,
@@ -57,18 +53,19 @@
   </div>
 </header>
 
-<Logo />
-
-<main style="margin-top:{logoHeight}px">
+<main style="margin-top:{logoHeight}px; height: {h}px;">
+  <div class="logo-wrapper">
+    <Logo turn="{showsCode}" />
+  </div>
   <div class="scene">
     {#if !showsCode}
-      <section class="side front" transition:turn>
+      <section class="side front" bind:clientHeight="{h}" transition:turn>
         {#if w}
           <slot />
         {/if}
       </section>
     {:else}
-      <section class="side back" transition:turn>
+      <section class="side back" bind:clientHeight="{h}" transition:turn>
         <Code data="{$pageCode}" />
       </section>
     {/if}
@@ -99,11 +96,14 @@
     font-size: inherit;
   }
 
+  .logo-wrapper {
+  }
+
   main {
     position: relative;
     font-size: var(--font-5);
     width: 100%;
-    height: 100%;
+    background: transparent;
   }
 
   .scene {
@@ -117,7 +117,7 @@
   .side {
     position: absolute;
     width: 100%;
-    margin: var(--space-3) 0;
+    padding: var(--space-3) 0;
     overflow: hidden;
     transform-style: preserve-3d;
     backface-visibility: hidden;
@@ -125,7 +125,8 @@
   }
 
   @supports (mix-blend-mode: difference) {
-    main {
+    main,
+    .scene {
       color: white;
       mix-blend-mode: difference;
     }
@@ -140,7 +141,7 @@
     }
 
     .side {
-      margin: var(--space-5) 0;
+      padding: var(--space-5) 0;
     }
 
     .row {
