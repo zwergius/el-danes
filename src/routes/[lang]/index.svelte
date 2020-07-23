@@ -1,7 +1,7 @@
 <script context="module">
   export async function preload() {
     const url =
-      'https://api.github.com/repos/zwergius/el-danes/contents/src/routes/[lang]/index.svelte'
+      'https://api.github.com/repos/zwergius/el-danes/contents/src/routes/%5Blang%5D/index.svelte'
     const res = await this.fetch(url, {
       'User-Agent': 'zwergius',
     })
@@ -19,7 +19,8 @@
   import SEO from '@/components/SEO.svelte'
 
   export let data
-  pageCode.set(atob(data.content))
+
+  $pageCode = atob(data.content)
 </script>
 
 <!-- HOME | EL DANÉS-->

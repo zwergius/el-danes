@@ -13,7 +13,7 @@
     right: var(--space-2);
     background: var(--background);
     color: var(--text);
-    border: 1px solid var(--text);
+    border: 2px solid var(--text);
     border-radius: 50%;
     padding: var(--space-2) var(--space-3);
     font-size: var(--font-4);

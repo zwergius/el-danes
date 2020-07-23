@@ -7,27 +7,32 @@
 
 <script>
   import { _ } from 'svelte-i18n'
+  import turn from '@/transitions/turn.js'
   import { pageCode } from '@/stores.js'
   import LanguageSelector from '@/components/LanguageSelector.svelte'
   import ThemeSelector from '@/components/ThemeSelector.svelte'
   import Logo from '@/components/Logo.svelte'
   import Clients from '@/components/Clients.svelte'
   import Anchor from '@/components/Anchor.svelte'
-  import Flip from '@/components/Flip.svelte'
   import Code from '@/components/Code.svelte'
+  import FlipButton from '@/components/FlipButton.svelte'
+  import Flipper from '@/components/Flipper.svelte'
 
   export let segment
-  let code = ''
   let showsCode = false
 
-  function handleClick() {
+  function toggleFlip() {
     showsCode = !showsCode
   }
 
   const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
   let w
+  let h
 
-  $: margin = (w * aspectRatio).toFixed(2)
+  $: {
+    console.log('height: ', h)
+  }
+  $: logoHeight = (w * aspectRatio).toFixed(2)
 </script>
 
 <!-- TODO could we avoid init-theme with #if process browser here-->
@@ -35,40 +40,31 @@
   <div class="row">
     <LanguageSelector {segment} />
     <Anchor id="contact-link" href="/contact">{$_('contact')}</Anchor>
-    <div>
-      <button type="button" on:click="{handleClick}">CLICK</button>
+    <div class="row">
+      <FlipButton {toggleFlip} />
       <ThemeSelector />
     </div>
   </div>
 </header>
 
-<main class:showsCode>
-  <Logo isFolded="{showsCode}" />
-  {#if w}
-    <section class="main" style="margin-top:{margin}px">
-      <slot {code} />
-    </section>
-    <section class="code">
-      <Code data="{$pageCode}" />
-    </section>
-  {/if}
+<Logo turn="{showsCode}" />
+
+<main style="margin-top:{logoHeight}px">
+  <div class="scene">
+    {#if !showsCode}
+      <section class="side front" transition:turn>
+        {#if w}
+          <slot />
+        {/if}
+      </section>
+    {:else}
+      <section class="side back" transition:turn>
+        <Code data="{$pageCode}" />
+      </section>
+    {/if}
+  </div>
 </main>
 
-<!-- 
-<Flip isFlipped="{showsCode}">
-
-  <main slot="front" style="margin-top:{margin}px">
-    <Logo />
-    {#if w}
-      <slot />
-    {/if}
-  </main>
-
-  <div slot="back">
-    <Code />
-  </div>
-</Flip>
--->
 <Clients />
 
 <style>
@@ -94,32 +90,32 @@
   }
 
   main {
-    margin: 0 auto;
-    padding: var(--space-3) 0;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    display: flex;
-  }
-
-  main.showsCode > section {
-    width: 50%;
-  }
-
-  section {
-    transition: all 1s;
-  }
-
-  section.main {
-    width: 100%;
+    position: relative;
     font-size: var(--font-5);
+    width: 100%;
+    height: 100%;
   }
 
-  section.code {
-    width: 0;
+  .scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .side {
+    position: absolute;
+    width: 100%;
+    margin: var(--space-3) 0;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
   @supports (mix-blend-mode: difference) {
-    section.main {
+    main {
       color: white;
       mix-blend-mode: difference;
     }
@@ -133,6 +129,10 @@
       right: var(--space-2);
     }
 
+    .side {
+      margin: var(--space-5) 0;
+    }
+
     .row {
       padding: 0;
     }
@@ -143,9 +143,6 @@
       left: var(--space-5);
       top: var(--space-2);
       right: var(--space-5);
-    }
-    main {
-      padding: var(--space-5) 0;
     }
   }
 </style>
