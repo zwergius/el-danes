@@ -12,7 +12,8 @@
 
   export let email, phoneNo
 
-  function handleEmail() {
+  function handleEmail(e) {
+    e.preventDefault()
     window.location.href = `mailto:${email}`
   }
 </script>
@@ -20,33 +21,43 @@
 <SEO title="{$_('contact')}" />
 
 <section>
-  <button on:click="{handleEmail}">hi@eldan&eacute;s.com</button>
-  <Anchor id="telephone-link" href="{`tel:${phoneNo}`}" target="_self">
-    {phoneNo}
-  </Anchor>
-  <Anchor href="" rel="external" target="_blank">instagram</Anchor>
-  <Anchor href="" rel="external" target="_blank">behance</Anchor>
-  <Anchor
-    href="https://www.linkedin.com/in/christian-zwergius"
-    rel="external"
-    target="_blank">
-    linkedin
-  </Anchor>
-  <Anchor href="https://github.com/zwergius" rel="external" target="_blank">
-    github
-  </Anchor>
+  <ul>
+    <li>
+      <Anchor on:click="{handleEmail}">{email}</Anchor>
+    </li>
+    <li>
+      <Anchor id="telephone-link" href="{`tel:${phoneNo}`}" target="_self">
+        {phoneNo}
+      </Anchor>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <Anchor href="" rel="external" target="_blank">instagram</Anchor>
+    </li>
+    <li>
+      <Anchor href="https://github.com/zwergius" rel="external" target="_blank">
+        github
+      </Anchor>
+
+    </li>
+    <li>
+      <Anchor
+        href="https://www.linkedin.com/in/christian-zwergius"
+        rel="external"
+        target="_blank">
+        linkedin
+      </Anchor>
+    </li>
+    <li>
+      <Anchor href="" rel="external" target="_blank">behance</Anchor>
+    </li>
+  </ul>
 </section>
 
 <style>
-  :global(a#telephone-link) {
+  ul {
     margin-bottom: var(--space-3);
-  }
-
-  button {
-    padding: 0;
-    background: none;
-    border: 0;
-    cursor: pointer;
   }
 
   /* Tablet - 768px */

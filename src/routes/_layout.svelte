@@ -94,6 +94,7 @@
   :global(#contact-link) {
     text-transform: uppercase;
     font-size: inherit;
+    line-height: 1.3em;
   }
 
   .logo-wrapper {

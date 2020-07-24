@@ -2,6 +2,7 @@
   import { _ } from 'svelte-i18n'
   import data from '@/assets/data/clients.json'
   import Hoverable from '@/components/Hoverable.svelte'
+  import Anchor from '@/components/Anchor.svelte'
 
   const clients = data
     .map((job) => job.projects)
@@ -16,7 +17,12 @@
         <li class:isHovering>
 
           {#if client.url}
-            <a href="{client.url}" rel="external noopener" target="_blank">
+            <Anchor
+              id="{client.id}"
+              class="client-link"
+              href="{client.url}"
+              rel="external noopener"
+              target="_blank">
               {client.name}
               <span>{$_('view')}</span>
 
@@ -26,7 +32,7 @@
                 </div>
               {/if}
 
-            </a>
+            </Anchor>
           {:else}
             <p>{client.name}</p>
 
@@ -48,16 +54,18 @@
     display: inline-block;
   }
 
-  a,
   li {
     position: relative;
   }
 
-  a > span {
+  :global(li > a.client-link::after) {
+    width: 100%;
+  }
+
+  li span {
     position: absolute;
     top: 0.4em;
     left: 100%;
-    z-index: 2;
     font-size: var(--font-1);
     text-transform: uppercase;
   }

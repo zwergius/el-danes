@@ -13,6 +13,7 @@
     <li>
       <Anchor
         aria-current="{segment === 'en' ? 'language' : undefined}"
+        class="lang-selector"
         href="/en"
         target="_self"
         on:click="{() => handleClick('en')}">
@@ -59,7 +60,6 @@
 
   :global(a[aria-current]) {
     position: relative;
-    pointer-events: none;
   }
 
   :global(a[aria-current]::before) {

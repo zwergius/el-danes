@@ -33,7 +33,7 @@
   <p>{$_('home.section-2')}</p>
 
   <blockquote>
-    &#8220;{$_('home.quote')}&#8221;
+    <span>&#8220;{$_('home.quote')}&#8221;</span>
     <cite>&#8213; {$_('home.quoteAuthor')}</cite>
   </blockquote>
 
@@ -51,16 +51,29 @@
   }
 
   blockquote {
+    position: relative;
     margin-bottom: var(--space-4);
   }
 
   cite {
+    position: absolute;
+    top: 0;
+    left: 0;
     font-size: inherit;
     display: block;
+    transition: all 1s;
+  }
+
+  blockquote > span {
+    transition: all 1s;
+  }
+
+  blockquote:hover span {
+    opacity: 0;
   }
 
   blockquote:hover cite {
-    visibility: visible;
+    opacity: 1;
   }
 
   /* Tablet - 768px */
@@ -73,7 +86,7 @@
     }
 
     cite {
-      visibility: hidden;
+      opacity: 0;
     }
 
     blockquote {
