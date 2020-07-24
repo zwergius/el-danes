@@ -1,9 +1,11 @@
 <script>
+  import { locale } from 'svelte-i18n'
   import logo from '@/assets/el-danes-logo.svg'
+  import bgLogo from '@/assets/el-danes-solutions-logo.svg'
   export let turn
 </script>
 
-<div class:turn>
+<div class="container" class:turn>
   <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1197.07 296.6">
     <path
       d="M0,165.41V68.82H67.55v7.61H9V112.6H64.79v7.55H9V157.8H67.55v7.61Z"></path>
@@ -19,11 +21,24 @@
       d="M1043.44,204.05c0,26.78,8.46,47.14,22.08,58.41,13.78,11.28,29.76,16.6,48.39,16.6a90.17,90.17,0,0,0,30.38-5,54.14,54.14,0,0,0,22.87-15.82,38.06,38.06,0,0,0,8.92-25.05c0-6.89-1.09-12.37-4.85-17.23s-6.26-8-13.78-11.59c-3.76-1.88-7-3.44-9.71-4.54a91.2,91.2,0,0,0-12.37-4.23c-5.48-1.72-9.87-3-13.47-3.91l-16-4.07-16-4.07c-4.22-1.26-9.24-2.82-15-4.86a112.19,112.19,0,0,1-14.56-6.11c-7.68-4.22-17.23-10.64-22.24-17.38a46.66,46.66,0,0,1-8.61-27.25c0-16.13,7-31.16,19.57-42.91s33.51-19.26,58.1-19.26c25.21,0,44.94,7,59.35,21.3,14.57,14.25,21.77,34.14,21.77,59.82h-20.83q0-63.42-58.72-63.42c-40.72,0-58.26,23-58.26,43.85a32.41,32.41,0,0,0,3.76,14.72c2,3.91,7.2,8,11,10.65s11.75,5.95,16.76,7.83c2.5.94,6,2,10.49,3.28l11.12,3.14,12.53,3.13,11.58,3c3,.79,6.89,1.88,11.75,3.45s9.08,3,12.37,4.38c3.29,1.26,7.2,3,11.59,5.17a67,67,0,0,1,19.89,14.1c8.92,8.45,13.31,19.26,13.78,33.67a52.41,52.41,0,0,1-11.59,33.35c-15.5,19.42-41.81,29.44-71.88,29.44-47.45.16-91.14-27.25-91.14-92.55Z"></path>
     <path d="M.73,293.88V197.3h9v89H60.6v7.61Z"></path>
   </svg> -->
-  <img src="data:image/svg+xml;utf8,{logo}" alt="El Danés logo" />
+  <a href="/{$locale}">
+    <img
+      class="main-logo"
+      src="data:image/svg+xml;utf8,{logo}"
+      alt="El Danés logo" />
+    <img
+      class="secondary-logo"
+      src="data:image/svg+xml;utf8,{bgLogo}"
+      alt="El Danés Solutions logo" />
+    <img
+      class="secondary-logo two"
+      src="data:image/svg+xml;utf8,{bgLogo}"
+      alt="El Danés Solutions logo" />
+  </a>
 </div>
 
 <style>
-  div {
+  .container {
     position: fixed;
     z-index: 0;
     left: var(--space-2);
@@ -36,18 +51,65 @@
     -webkit-backface-visibility: visible;
   }
 
+  a {
+    position: relative;
+    display: block;
+    transform: translate3d(0, 0, 0);
+    outline: none;
+  }
+
+  a:hover .main-logo {
+    visibility: hidden;
+  }
+
+  a:hover .secondary-logo {
+    display: block;
+  }
+
+  img {
+    display: block;
+  }
+
+  .secondary-logo {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 77%;
+    width: auto;
+    transform: translate3d(0, 0, 0);
+    animation: marquee 20s linear infinite;
+  }
+
+  .secondary-logo.two {
+    animation: marqueeTwo 20s linear infinite;
+  }
+
   .turn {
     transform: rotateY(-180deg);
   }
 
-  svg > path {
-    fill: var(--text);
-    transition: fill 0.5s ease;
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes marqueeTwo {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
-    div {
+    .container {
       position: fixed;
       left: var(--space-3);
       top: 0;
@@ -56,7 +118,7 @@
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
-    div {
+    .container {
       position: fixed;
       left: var(--space-5);
       top: 0;
