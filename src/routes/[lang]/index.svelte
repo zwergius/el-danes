@@ -11,7 +11,7 @@
       const data = await res.json()
       return { data }
     }
-    // this.error(404, 'Not found')
+    this.error(404, 'Not found')
   }
 </script>
 
@@ -21,8 +21,6 @@
   import SEO from '@/components/SEO.svelte'
 
   export let data
-  console.log(process.env.NODE_ENV)
-
   $pageCode = atob(data.content)
 </script>
 

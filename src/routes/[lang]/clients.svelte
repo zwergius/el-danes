@@ -1,10 +1,31 @@
+<script context="module">
+  export async function preload() {
+    const url =
+      process.env.NODE_ENV === 'development'
+        ? '/mock.json'
+        : 'https://api.github.com/repos/zwergius/el-danes/contents/src/routes/%5Blang%5D/clients.svelte'
+    const res = await this.fetch(url, {
+      'User-Agent': 'zwergius',
+    })
+    if (res.status === 200) {
+      const data = await res.json()
+      return { data }
+    }
+    this.error(404, 'Not found')
+  }
+</script>
+
 <script>
   import { _ } from 'svelte-i18n'
-  import data from '@/assets/data/clients.json'
+  import { pageCode } from '@/stores.js'
+  import clientsData from '@/assets/data/clients.json'
   import Hoverable from '@/components/Hoverable.svelte'
   import Anchor from '@/components/Anchor.svelte'
 
-  const clients = data
+  export let data
+  $pageCode = atob(data.content)
+
+  const clients = clientsData
     .map((job) => job.projects)
     .flat()
     .filter(({ visible }) => visible)
