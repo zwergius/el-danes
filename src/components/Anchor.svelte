@@ -20,12 +20,8 @@
   a,
   button {
     display: inline-block;
-    color: var(--text);
-    text-decoration: none;
     transition: all 0.275s ease-in-out;
     position: relative;
-    text-shadow: 2px 2px var(--background), 2px -2px var(--background),
-      -2px 2px var(--background), -2px -2px var(--background);
   }
 
   a::after,
@@ -33,8 +29,8 @@
     content: '';
     position: absolute;
     z-index: -1;
-    bottom: 0.15em;
-    height: 0.05em;
+    bottom: 0.1em;
+    height: 0.06em;
     margin: 5px 0 0;
     transition: all 0.2s ease-in-out;
     min-height: 2px;
@@ -48,5 +44,12 @@
   a:hover::after,
   button:hover::after {
     width: 100%;
+  }
+
+  @supports (mix-blend-mode: difference) {
+    a::after,
+    button::after {
+      background-color: white;
+    }
   }
 </style>

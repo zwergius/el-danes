@@ -47,7 +47,7 @@
     <LanguageSelector {segment} />
     <Anchor id="contact-link" href="/contact">{$_('contact')}</Anchor>
     <div class="row">
-      <FlipButton {toggleFlip} />
+      <FlipButton {toggleFlip} flipped="{showsCode}" />
       <ThemeSelector />
     </div>
   </div>
@@ -82,6 +82,7 @@
     top: var(--space-2);
     right: 0;
     font-size: var(--font-3);
+    color: var(--text);
   }
 
   .row {
@@ -93,8 +94,10 @@
 
   :global(#contact-link) {
     text-transform: uppercase;
-    font-size: inherit;
-    line-height: 1.3em;
+  }
+
+  :global(#contact-link::after) {
+    background-color: var(--text);
   }
 
   .logo-wrapper {

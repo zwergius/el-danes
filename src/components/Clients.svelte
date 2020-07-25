@@ -3,10 +3,12 @@
   import Anchor from '@/components/Anchor.svelte'
 </script>
 
-<Anchor id="clients-link" href="/clients">{$_('clients')}</Anchor>
+<div>
+  <Anchor id="clients-link" href="/clients">{$_('clients')}</Anchor>
+</div>
 
 <style>
-  :global(a#clients-link) {
+  div {
     position: fixed;
     top: 50%;
     transform: translateY(-50%) rotate(-11deg);
@@ -18,17 +20,20 @@
     padding: var(--space-2) var(--space-3);
     font-size: var(--font-4);
     text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
-    :global(a#clients-link) {
+    div {
       right: var(--space-3);
     }
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
-    :global(a#clients-link) {
+    div {
       right: var(--space-5);
       padding: var(--space-3) var(--space-4);
     }

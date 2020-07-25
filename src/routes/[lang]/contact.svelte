@@ -22,7 +22,9 @@
   import Anchor from '@/components/Anchor.svelte'
   import SEO from '@/components/SEO.svelte'
 
-  export let email, phoneNo
+  export let data, email, phoneNo
+
+  $pageCode = atob(data.content)
 
   function handleEmail(e) {
     e.preventDefault()

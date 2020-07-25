@@ -1,5 +1,5 @@
 <script>
-  export let toggleFlip
+  export let toggleFlip, flipped
 
   function handleKeypress(e) {
     const { key } = e
@@ -13,7 +13,7 @@
   on:keypress="{handleKeypress}"
   role="button"
   tabindex="0"
-  aria-selected=""
+  aria-selected="{flipped ? true : undefined}"
   aria-label="Show code">
 
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256.5 262.57">
@@ -29,12 +29,18 @@
     cursor: pointer;
     outline: none;
     margin-top: 0.4em;
+    transform: rotateY(0deg);
+    transition: transform 0.5s linear;
   }
 
   .button svg {
     height: 1.1em;
     width: 1.1em;
     fill: var(--text);
+  }
+
+  [aria-selected] {
+    transform: rotateY(-180deg);
   }
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
