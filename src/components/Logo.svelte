@@ -31,7 +31,7 @@
     right: var(--space-2);
     transition: transform 0.5s linear;
     transform-style: preserve-3d;
-    transform: rotateY(0deg);
+    transform: rotate3d(0, 1, 0, 0deg);
     backface-visibility: visible;
     -webkit-backface-visibility: visible;
   }
@@ -71,7 +71,7 @@
   }
 
   .turn {
-    transform: rotateY(-180deg);
+    transform: rotate3d(0, 1, 0, -180deg);
   }
 
   @keyframes marquee {

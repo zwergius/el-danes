@@ -55,9 +55,7 @@
 </header>
 
 <main style="margin-top:{logoHeight}px; height: {totalHeight}px;">
-  <div class="logo-wrapper">
-    <Logo turn="{showsCode}" />
-  </div>
+  <Logo turn="{showsCode}" />
   <div class="scene">
     {#if !showsCode}
       <section class="side front" bind:clientHeight="{h}" transition:turn>
@@ -99,9 +97,6 @@
 
   :global(#contact-link::after) {
     background-color: var(--text);
-  }
-
-  .logo-wrapper {
   }
 
   main {
