@@ -13,6 +13,7 @@
     <li>
       <Anchor
         aria-current="{segment === 'en' ? 'language' : undefined}"
+        class="language-selector"
         href="/en"
         target="_self"
         on:click="{() => handleClick('en')}">
@@ -22,6 +23,7 @@
     <li>
       <Anchor
         aria-current="{segment === 'es' ? 'language' : undefined}"
+        class="language-selector"
         href="/es"
         target="_self"
         on:click="{() => handleClick('es')}">
@@ -31,6 +33,7 @@
     <li>
       <Anchor
         aria-current="{segment === 'da' ? 'language' : undefined}"
+        class="language-selector"
         href="/da"
         target="_self"
         on:click="{() => handleClick('da')}">
@@ -57,9 +60,12 @@
     transition: color 0.5s ease;
   }
 
+  :global(li > a.language-selector::after) {
+    background-color: var(--text);
+  }
+
   :global(a[aria-current]) {
     position: relative;
-    pointer-events: none;
   }
 
   :global(a[aria-current]::before) {

@@ -1,7 +1,9 @@
 <script context="module">
   export async function preload() {
     const url =
-      'https://api.github.com/repos/zwergius/el-danes/contents/src/routes/[lang]/index.svelte'
+      process.env.NODE_ENV === 'development'
+        ? '/mock.json'
+        : 'https://api.github.com/repos/zwergius/el-danes/contents/src/routes/%5Blang%5D/index.svelte'
     const res = await this.fetch(url, {
       'User-Agent': 'zwergius',
     })
@@ -9,7 +11,7 @@
       const data = await res.json()
       return { data }
     }
-    // this.error(404, 'Not found')
+    this.error(404, 'Not found')
   }
 </script>
 
@@ -19,7 +21,7 @@
   import SEO from '@/components/SEO.svelte'
 
   export let data
-  pageCode.set(atob(data.content))
+  $pageCode = atob(data.content)
 </script>
 
 <!-- HOME | EL DANÉS-->
@@ -29,7 +31,7 @@
   <p>{$_('home.section-2')}</p>
 
   <blockquote>
-    &#8220;{$_('home.quote')}&#8221;
+    <span>&#8220;{$_('home.quote')}&#8221;</span>
     <cite>&#8213; {$_('home.quoteAuthor')}</cite>
   </blockquote>
 
@@ -47,16 +49,26 @@
   }
 
   blockquote {
+    position: relative;
     margin-bottom: var(--space-4);
   }
 
   cite {
     font-size: inherit;
     display: block;
+    transition: all 1s;
+  }
+
+  blockquote > span {
+    transition: all 1s;
+  }
+
+  blockquote:hover span {
+    opacity: 0;
   }
 
   blockquote:hover cite {
-    visibility: visible;
+    opacity: 1;
   }
 
   /* Tablet - 768px */
@@ -69,7 +81,10 @@
     }
 
     cite {
-      visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
     }
 
     blockquote {

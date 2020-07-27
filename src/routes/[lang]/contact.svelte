@@ -1,18 +1,33 @@
 <script context="module">
   export async function preload(_, session) {
     const { email, phoneNo } = session
-    return { email, phoneNo }
+    const url =
+      process.env.NODE_ENV === 'development'
+        ? '/mock.json'
+        : 'https://api.github.com/repos/zwergius/el-danes/contents/src/routes/%5Blang%5D/contact.svelte'
+    const res = await this.fetch(url, {
+      'User-Agent': 'zwergius',
+    })
+    if (res.status === 200) {
+      const data = await res.json()
+      return { data, email, phoneNo }
+    }
+    this.error(404, 'Not found')
   }
 </script>
 
 <script>
   import { _ } from 'svelte-i18n'
+  import { pageCode } from '@/stores.js'
   import Anchor from '@/components/Anchor.svelte'
   import SEO from '@/components/SEO.svelte'
 
-  export let email, phoneNo
+  export let data, email, phoneNo
 
-  function handleEmail() {
+  $pageCode = atob(data.content)
+
+  function handleEmail(e) {
+    e.preventDefault()
     window.location.href = `mailto:${email}`
   }
 </script>
@@ -20,33 +35,56 @@
 <SEO title="{$_('contact')}" />
 
 <section>
-  <button on:click="{handleEmail}">hi@eldan&eacute;s.com</button>
-  <Anchor id="telephone-link" href="{`tel:${phoneNo}`}" target="_self">
-    {phoneNo}
-  </Anchor>
-  <Anchor href="" rel="external" target="_blank">instagram</Anchor>
-  <Anchor href="" rel="external" target="_blank">behance</Anchor>
-  <Anchor
-    href="https://www.linkedin.com/in/christian-zwergius"
-    rel="external"
-    target="_blank">
-    linkedin
-  </Anchor>
-  <Anchor href="https://github.com/zwergius" rel="external" target="_blank">
-    github
-  </Anchor>
+  <ul>
+    <li>
+      <Anchor on:click="{handleEmail}">{email}</Anchor>
+    </li>
+    <li>
+      <Anchor id="telephone-link" href="{`tel:${phoneNo}`}" target="_self">
+        {phoneNo}
+      </Anchor>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <Anchor
+        href="https://www.instagram.com/el.danes/"
+        rel="external noopener"
+        target="_blank">
+        instagram
+      </Anchor>
+    </li>
+    <li>
+      <Anchor
+        href="https://github.com/zwergius"
+        rel="external noopener"
+        target="_blank">
+        github
+      </Anchor>
+
+    </li>
+    <li>
+      <Anchor
+        href="https://www.linkedin.com/in/christian-zwergius"
+        rel="external noopener"
+        target="_blank">
+        linkedin
+      </Anchor>
+    </li>
+    <li>
+      <Anchor
+        href="https://www.behance.net/christizwergiu"
+        rel="external noopener"
+        target="_blank">
+        behance
+      </Anchor>
+    </li>
+  </ul>
 </section>
 
 <style>
-  :global(a#telephone-link) {
+  ul {
     margin-bottom: var(--space-3);
-  }
-
-  button {
-    padding: 0;
-    background: none;
-    border: 0;
-    cursor: pointer;
   }
 
   /* Tablet - 768px */

@@ -7,68 +7,70 @@
 
 <script>
   import { _ } from 'svelte-i18n'
-  import { pageCode } from '@/stores.js'
+  import { pageCode, theme } from '@/stores.js'
   import LanguageSelector from '@/components/LanguageSelector.svelte'
   import ThemeSelector from '@/components/ThemeSelector.svelte'
   import Logo from '@/components/Logo.svelte'
   import Clients from '@/components/Clients.svelte'
   import Anchor from '@/components/Anchor.svelte'
-  import Flip from '@/components/Flip.svelte'
   import Code from '@/components/Code.svelte'
+  import FlipButton from '@/components/FlipButton.svelte'
 
   export let segment
-  let code = ''
   let showsCode = false
 
-  function handleClick() {
+  function toggleFlip() {
     showsCode = !showsCode
   }
 
   const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
-  let w
+  let w = 0
+  let h = 0
 
-  $: margin = (w * aspectRatio).toFixed(2)
+  $: logoHeight = (w * aspectRatio).toFixed(2)
+  $: totalHeight = (Number(logoHeight) + h).toFixed(2)
+
+  function turn(node, { delay = 0, duration = 500 }) {
+    return {
+      delay,
+      duration,
+      css: (t, u) => `
+      transform: rotateY(${1 - u * 180}deg) translate3d(0,0,0);
+      opacity: ${1 - u};
+      `,
+    }
+  }
 </script>
 
 <!-- TODO could we avoid init-theme with #if process browser here-->
 <header bind:clientWidth="{w}">
-  <div class="row">
+  <div class="row {$theme && 'visible'}">
     <LanguageSelector {segment} />
     <Anchor id="contact-link" href="/contact">{$_('contact')}</Anchor>
-    <div>
-      <button type="button" on:click="{handleClick}">CLICK</button>
+    <div class="row {$theme && 'visible'}">
+      <FlipButton {toggleFlip} flipped="{showsCode}" />
       <ThemeSelector />
     </div>
   </div>
 </header>
 
-<main class:showsCode>
-  <Logo isFolded="{showsCode}" />
-  {#if w}
-    <section class="main" style="margin-top:{margin}px">
-      <slot {code} />
-    </section>
-    <section class="code">
-      <Code data="{$pageCode}" />
-    </section>
-  {/if}
+<main style="margin-top:{logoHeight}px; height: {totalHeight}px;">
+  <Logo turn="{showsCode}" />
+  <div class="scene">
+    {#if !showsCode}
+      <section class="side front" bind:clientHeight="{h}" transition:turn>
+        {#if w}
+          <slot />
+        {/if}
+      </section>
+    {:else}
+      <section class="side back" bind:clientHeight="{h}" transition:turn>
+        <Code data="{$pageCode}" />
+      </section>
+    {/if}
+  </div>
 </main>
 
-<!-- 
-<Flip isFlipped="{showsCode}">
-
-  <main slot="front" style="margin-top:{margin}px">
-    <Logo />
-    {#if w}
-      <slot />
-    {/if}
-  </main>
-
-  <div slot="back">
-    <Code />
-  </div>
-</Flip>
--->
 <Clients />
 
 <style>
@@ -79,6 +81,7 @@
     top: var(--space-2);
     right: 0;
     font-size: var(--font-3);
+    color: var(--text);
   }
 
   .row {
@@ -86,40 +89,49 @@
     justify-content: space-between;
     align-items: center;
     padding-left: var(--space-2);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .visible {
+    opacity: 1;
   }
 
   :global(#contact-link) {
     text-transform: uppercase;
-    font-size: inherit;
+  }
+
+  :global(#contact-link::after) {
+    background-color: var(--text);
   }
 
   main {
-    margin: 0 auto;
-    padding: var(--space-3) 0;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    display: flex;
-  }
-
-  main.showsCode > section {
-    width: 50%;
-  }
-
-  section {
-    transition: all 1s;
-  }
-
-  section.main {
-    width: 100%;
+    position: relative;
     font-size: var(--font-5);
+    width: 100%;
   }
 
-  section.code {
-    width: 0;
+  .scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .side {
+    position: absolute;
+    width: 100%;
+    padding: var(--space-3) 0;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
   @supports (mix-blend-mode: difference) {
-    section.main {
+    main,
+    .scene {
       color: white;
       mix-blend-mode: difference;
     }
@@ -133,6 +145,10 @@
       right: var(--space-2);
     }
 
+    .side {
+      padding: var(--space-5) 0;
+    }
+
     .row {
       padding: 0;
     }
@@ -143,9 +159,6 @@
       left: var(--space-5);
       top: var(--space-2);
       right: var(--space-5);
-    }
-    main {
-      padding: var(--space-5) 0;
     }
   }
 </style>

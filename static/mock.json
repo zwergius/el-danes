@@ -1,0 +1,18 @@
+{
+    "_links": {
+        "git": "https://api.github.com/repos/zwergius/el-danes/git/blobs/e81ef71fa1ce716aed565f9bb83209f13a4575c8",
+        "html": "https://github.com/zwergius/el-danes/blob/master/src/routes/[lang]/index.svelte",
+        "self": "https://api.github.com/repos/zwergius/el-danes/contents/src/routes/[lang]/index.svelte?ref=master"
+    },
+    "content": "PHNjcmlwdCBjb250ZXh0PSJtb2R1bGUiPgogIGV4cG9ydCBhc3luYyBmdW5j\ndGlvbiBwcmVsb2FkKCkgewogICAgY29uc3QgdXJsID0KICAgICAgJ2h0dHBz\nOi8vYXBpLmdpdGh1Yi5jb20vcmVwb3MvendlcmdpdXMvZWwtZGFuZXMvY29u\ndGVudHMvc3JjL3JvdXRlcy9bbGFuZ10vaW5kZXguc3ZlbHRlJwogICAgY29u\nc3QgcmVzID0gYXdhaXQgdGhpcy5mZXRjaCh1cmwsIHsKICAgICAgJ1VzZXIt\nQWdlbnQnOiAnendlcmdpdXMnLAogICAgfSkKICAgIGlmIChyZXMuc3RhdHVz\nID09PSAyMDApIHsKICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlcy5qc29u\nKCkKICAgICAgcmV0dXJuIHsgZGF0YSB9CiAgICB9CiAgICAvLyB0aGlzLmVy\ncm9yKDQwNCwgJ05vdCBmb3VuZCcpCiAgfQo8L3NjcmlwdD4KCjxzY3JpcHQ+\nCiAgaW1wb3J0IHsgXyB9IGZyb20gJ3N2ZWx0ZS1pMThuJwogIGltcG9ydCB7\nIHBhZ2VDb2RlIH0gZnJvbSAnQC9zdG9yZXMuanMnCiAgaW1wb3J0IFNFTyBm\ncm9tICdAL2NvbXBvbmVudHMvU0VPLnN2ZWx0ZScKCiAgZXhwb3J0IGxldCBk\nYXRhCiAgcGFnZUNvZGUuc2V0KGF0b2IoZGF0YS5jb250ZW50KSkKPC9zY3Jp\ncHQ+Cgo8IS0tIEhPTUUgfCBFTCBEQU7DiVMtLT4KPFNFTyAvPgo8ZGl2Pgog\nIDxwPnskXygnaG9tZS5zZWN0aW9uLTEnKX08L3A+CiAgPHA+eyRfKCdob21l\nLnNlY3Rpb24tMicpfTwvcD4KCiAgPGJsb2NrcXVvdGU+CiAgICAmIzgyMjA7\neyRfKCdob21lLnF1b3RlJyl9JiM4MjIxOwogICAgPGNpdGU+JiM4MjEzOyB7\nJF8oJ2hvbWUucXVvdGVBdXRob3InKX08L2NpdGU+CiAgPC9ibG9ja3F1b3Rl\nPgoKICA8cD57JF8oJ2hvbWUuc2VjdGlvbi0zJyl9PC9wPgogIDxwPnskXygn\naG9tZS5zZWN0aW9uLTQnKX08L3A+CjwvZGl2PgoKPHN0eWxlPgogIGRpdiB7\nCiAgICBvdmVyZmxvdy13cmFwOiBicmVhay13b3JkOwogIH0KCiAgcCB7CiAg\nICBtYXJnaW4tYm90dG9tOiB2YXIoLS1zcGFjZS00KTsKICB9CgogIGJsb2Nr\ncXVvdGUgewogICAgbWFyZ2luLWJvdHRvbTogdmFyKC0tc3BhY2UtNCk7CiAg\nfQoKICBjaXRlIHsKICAgIGZvbnQtc2l6ZTogaW5oZXJpdDsKICAgIGRpc3Bs\nYXk6IGJsb2NrOwogIH0KCiAgYmxvY2txdW90ZTpob3ZlciBjaXRlIHsKICAg\nIHZpc2liaWxpdHk6IHZpc2libGU7CiAgfQoKICAvKiBUYWJsZXQgLSA3Njhw\neCAqLwogIEBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogNDhl\nbSkgewogIH0KICAvKiBEZXNrdG9wIC0gMTA4MHB4Ki8KICBAbWVkaWEgb25s\neSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDY3LjVlbSkgewogICAgcCB7CiAg\nICAgIG1hcmdpbi1ib3R0b206IHZhcigtLXNwYWNlLTUpOwogICAgfQoKICAg\nIGNpdGUgewogICAgICB2aXNpYmlsaXR5OiBoaWRkZW47CiAgICB9CgogICAg\nYmxvY2txdW90ZSB7CiAgICAgIG1hcmdpbi1ib3R0b206IHZhcigtLXNwYWNl\nLTUpOwogICAgfQogIH0KPC9zdHlsZT4K\n",
+    "download_url": "https://raw.githubusercontent.com/zwergius/el-danes/master/src/routes/%5Blang%5D/index.svelte",
+    "encoding": "base64",
+    "git_url": "https://api.github.com/repos/zwergius/el-danes/git/blobs/e81ef71fa1ce716aed565f9bb83209f13a4575c8",
+    "html_url": "https://github.com/zwergius/el-danes/blob/master/src/routes/[lang]/index.svelte",
+    "name": "index.svelte",
+    "path": "src/routes/[lang]/index.svelte",
+    "sha": "e81ef71fa1ce716aed565f9bb83209f13a4575c8",
+    "size": 1464,
+    "type": "file",
+    "url": "https://api.github.com/repos/zwergius/el-danes/contents/src/routes/[lang]/index.svelte?ref=master"
+}

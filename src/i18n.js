@@ -53,15 +53,21 @@ export function i18nMiddleware() {
     }
 
     const urlLocale = req.path.split('/')[1]
+
     // language not in url
     if (supportedLanguages.indexOf(urlLocale) === -1) {
-      const headerLang = req.headers['accept-language'].split(',')[0].trim()
-      if (headerLang && headerLang.length > 1) {
-        $locale.set(headerLang)
-        let language = headerLang.slice(0, 2)
-        if (supportedLanguages.indexOf(language) === -1) language = 'en'
-        res.writeHead(301, { Location: `/${language}` })
-        res.end(`Redirect to ${language}`)
+      if (req.headers['accept-language']) {
+        const headerLang = req.headers['accept-language'].split(',')[0].trim()
+        if (headerLang && headerLang.length > 1) {
+          $locale.set(headerLang)
+          let language = headerLang.slice(0, 2)
+          if (supportedLanguages.indexOf(language) === -1) language = 'en'
+          res.writeHead(301, { Location: `/${language}` })
+          res.end(`Redirect to ${language}`)
+        }
+      } else {
+        res.writeHead(301, { Location: `/${INIT_OPTIONS.fallbackLocale}` })
+        res.end(`Redirect to ${INIT_OPTIONS.fallbackLocale}`)
       }
     } else if (currentLocale !== urlLocale) {
       $locale.set(urlLocale)
