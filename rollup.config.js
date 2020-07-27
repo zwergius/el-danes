@@ -5,7 +5,6 @@ import commonjs from '@rollup/plugin-commonjs'
 import svelte from 'rollup-plugin-svelte'
 import babel from '@rollup/plugin-babel'
 import { terser } from 'rollup-plugin-terser'
-import svelteSVG from 'rollup-plugin-svelte-svg'
 import inlineSvg from 'rollup-plugin-inline-svg'
 import json from '@rollup/plugin-json'
 import alias from '@rollup/plugin-alias'
@@ -55,7 +54,6 @@ export default {
     plugins: [
       aliases,
       json(),
-      // svelteSVG({ dev }),
       inlineSvg(),
       replace({
         'process.browser': true,
@@ -113,7 +111,6 @@ export default {
     plugins: [
       aliases,
       json(),
-      // svelteSVG({ generate: 'ssr', dev }),
       inlineSvg(),
       replace({
         'process.browser': false,
