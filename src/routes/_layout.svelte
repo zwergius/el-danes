@@ -7,7 +7,7 @@
 
 <script>
   import { _ } from 'svelte-i18n'
-  import { pageCode } from '@/stores.js'
+  import { pageCode, theme } from '@/stores.js'
   import LanguageSelector from '@/components/LanguageSelector.svelte'
   import ThemeSelector from '@/components/ThemeSelector.svelte'
   import Logo from '@/components/Logo.svelte'
@@ -44,10 +44,10 @@
 
 <!-- TODO could we avoid init-theme with #if process browser here-->
 <header bind:clientWidth="{w}">
-  <div class="row">
+  <div class="row {$theme && 'visible'}">
     <LanguageSelector {segment} />
     <Anchor id="contact-link" href="/contact">{$_('contact')}</Anchor>
-    <div class="row">
+    <div class="row {$theme && 'visible'}">
       <FlipButton {toggleFlip} flipped="{showsCode}" />
       <ThemeSelector />
     </div>
@@ -89,6 +89,12 @@
     justify-content: space-between;
     align-items: center;
     padding-left: var(--space-2);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .visible {
+    opacity: 1;
   }
 
   :global(#contact-link) {
