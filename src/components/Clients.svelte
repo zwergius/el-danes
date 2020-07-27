@@ -25,6 +25,10 @@
     align-items: center;
   }
 
+  :global(#clients-link::after) {
+    background-color: var(--text);
+  }
+
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
     div {

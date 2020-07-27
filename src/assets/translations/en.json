@@ -12,6 +12,10 @@
   },
   "meta": {
     "title": "Creative website & app development",
-    "description": "We are a web & app development agency specializing in creative webs, Jamstack webs, progressive web apps, single page apps."
+    "description": "We are a web & app development agency specializing in creative webs, Jamstack webs, progressive web apps, single page apps.",
+    "clients": {
+      "title": "",
+      "description":""
+    }
   }
 }

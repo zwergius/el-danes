@@ -18,22 +18,23 @@
 <script>
   import { _ } from 'svelte-i18n'
   import { pageCode } from '@/stores.js'
-  import clientsData from '@/assets/data/clients.json'
+  import projectsData from '@/assets/data/projects.json'
+  import SEO from '@/components/SEO.svelte'
   import Hoverable from '@/components/Hoverable.svelte'
   import Anchor from '@/components/Anchor.svelte'
 
   export let data
   $pageCode = atob(data.content)
-
-  const clients = clientsData
-    .map((job) => job.projects)
-    .flat()
-    .filter(({ visible }) => visible)
+  const projects = projectsData
+    .filter(({ visible }) => Boolean(visible))
+    .sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase())
 </script>
+
+<SEO title="{$_('clients')}" />
 
 <section>
   <ul>
-    {#each clients as client}
+    {#each projects as client}
       <Hoverable let:hovering="{isHovering}">
         <li class:isHovering>
 
@@ -49,7 +50,7 @@
 
               {#if isHovering}
                 <div class="stack">
-                  <p>{client.stack}</p>
+                  <p>{client.type} - {client.stack}</p>
                 </div>
               {/if}
 
@@ -59,7 +60,7 @@
 
             {#if isHovering}
               <div class="stack">
-                <p>{client.stack}</p>
+                <p>{client.type} - {client.stack}</p>
               </div>
             {/if}
           {/if}

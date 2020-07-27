@@ -54,6 +54,7 @@ body {
   background: var(--background);
   transition: background 0.2s ease;
   padding: var(--space-2) var(--space-2);
+  -webkit-overflow-scrolling: touch;
 }
 
 h1,

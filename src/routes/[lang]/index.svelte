@@ -54,9 +54,6 @@
   }
 
   cite {
-    position: absolute;
-    top: 0;
-    left: 0;
     font-size: inherit;
     display: block;
     transition: all 1s;
@@ -84,6 +81,9 @@
     }
 
     cite {
+      position: absolute;
+      top: 0;
+      left: 0;
       opacity: 0;
     }
 

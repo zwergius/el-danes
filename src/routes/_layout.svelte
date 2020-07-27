@@ -24,10 +24,11 @@
   }
 
   const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
-  let w
-  let h
+  let w = 0
+  let h = 0
 
   $: logoHeight = (w * aspectRatio).toFixed(2)
+  $: totalHeight = (Number(logoHeight) + h).toFixed(2)
 
   function turn(node, { delay = 0, duration = 500 }) {
     return {
@@ -53,7 +54,7 @@
   </div>
 </header>
 
-<main style="margin-top:{logoHeight}px; height: {h}px;">
+<main style="margin-top:{logoHeight}px; height: {totalHeight}px;">
   <div class="logo-wrapper">
     <Logo turn="{showsCode}" />
   </div>
@@ -107,7 +108,6 @@
     position: relative;
     font-size: var(--font-5);
     width: 100%;
-    background: transparent;
   }
 
   .scene {

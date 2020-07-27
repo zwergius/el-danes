@@ -25,10 +25,10 @@
 <style>
   .button {
     display: flex;
-    padding: 0 var(--space-3);
+    padding: 0 var(--space-2);
     cursor: pointer;
     outline: none;
-    margin-top: 0.4em;
+    margin-top: 0.3em;
     transform: rotateY(0deg);
     transition: transform 0.5s linear;
   }
@@ -44,9 +44,9 @@
   }
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
-    .button div {
-      height: 0.75em;
-      width: 0.75em;
+    .button {
+      margin-top: 0.4em;
+      padding: 0 var(--space-3);
     }
   }
   /* Desktop - 1080px*/

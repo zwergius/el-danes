@@ -47,10 +47,18 @@
   </ul>
   <ul>
     <li>
-      <Anchor href="" rel="external" target="_blank">instagram</Anchor>
+      <Anchor
+        href="https://www.instagram.com/el.danes/"
+        rel="external noopener"
+        target="_blank">
+        instagram
+      </Anchor>
     </li>
     <li>
-      <Anchor href="https://github.com/zwergius" rel="external" target="_blank">
+      <Anchor
+        href="https://github.com/zwergius"
+        rel="external noopener"
+        target="_blank">
         github
       </Anchor>
 
@@ -58,13 +66,18 @@
     <li>
       <Anchor
         href="https://www.linkedin.com/in/christian-zwergius"
-        rel="external"
+        rel="external noopener"
         target="_blank">
         linkedin
       </Anchor>
     </li>
     <li>
-      <Anchor href="" rel="external" target="_blank">behance</Anchor>
+      <Anchor
+        href="https://www.behance.net/christizwergiu"
+        rel="external noopener"
+        target="_blank">
+        behance
+      </Anchor>
     </li>
   </ul>
 </section>
