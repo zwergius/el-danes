@@ -1,12 +1,6 @@
 <script context="module">
   export async function preload() {
-    const url =
-      process.env.NODE_ENV === 'development'
-        ? '/mock.json'
-        : 'https://api.github.com/repos/zwergius/el-danes/contents/src/routes/%5Blang%5D/clients.svelte'
-    const res = await this.fetch(url, {
-      'User-Agent': 'zwergius',
-    })
+    const res = await this.fetch('clients.json')
     if (res.status === 200) {
       const data = await res.json()
       return { data }
