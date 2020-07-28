@@ -67,6 +67,7 @@
   }
 
   .secondary-logo.two {
+    margin-left: 2em;
     animation: marqueeTwo 20s linear infinite;
   }
 

@@ -11,7 +11,7 @@
   import LanguageSelector from '@/components/LanguageSelector.svelte'
   import ThemeSelector from '@/components/ThemeSelector.svelte'
   import Logo from '@/components/Logo.svelte'
-  import Clients from '@/components/Clients.svelte'
+  import ClientsSticker from '@/components/ClientsSticker.svelte'
   import Anchor from '@/components/Anchor.svelte'
   import Code from '@/components/Code.svelte'
   import FlipButton from '@/components/FlipButton.svelte'
@@ -71,7 +71,7 @@
   </div>
 </main>
 
-<Clients />
+<ClientsSticker />
 
 <style>
   header {
@@ -124,6 +124,7 @@
     width: 100%;
     padding: var(--space-3) 0;
     overflow: hidden;
+    will-change: opacity;
     transform-style: preserve-3d;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;

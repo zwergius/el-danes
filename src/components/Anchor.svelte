@@ -41,9 +41,11 @@
     border-radius: 4px;
   }
 
-  a:hover::after,
-  button:hover::after {
-    width: 100%;
+  @media (hover: hover) {
+    a:hover::after,
+    button:hover::after {
+      width: 100%;
+    }
   }
 
   @supports (mix-blend-mode: difference) {
