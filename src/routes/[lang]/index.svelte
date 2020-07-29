@@ -54,6 +54,7 @@
   }
 
   blockquote > span {
+    margin-left: var(--space-1);
     transition: all 1s;
   }
 
