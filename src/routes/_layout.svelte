@@ -6,15 +6,10 @@
 </script>
 
 <script>
-  import { _ } from 'svelte-i18n'
-  import { pageCode, theme } from '@/stores.js'
-  import LanguageSelector from '@/components/LanguageSelector.svelte'
-  import ThemeSelector from '@/components/ThemeSelector.svelte'
-  import Logo from '@/components/Logo.svelte'
+  import { pageCode } from '@/stores.js'
+  import Header from '@/components/Header.svelte'
   import ClientsSticker from '@/components/ClientsSticker.svelte'
-  import Anchor from '@/components/Anchor.svelte'
   import Code from '@/components/Code.svelte'
-  import FlipButton from '@/components/FlipButton.svelte'
 
   export let segment
   let showsCode = false
@@ -28,7 +23,6 @@
   let h = 0
 
   $: logoHeight = (w * aspectRatio).toFixed(2)
-  $: totalHeight = (Number(logoHeight) + h).toFixed(2)
 
   function turn(node, { delay = 0, duration = 500 }) {
     return {
@@ -43,19 +37,9 @@
 </script>
 
 <!-- TODO could we avoid init-theme with #if process browser here-->
-<header bind:clientWidth="{w}">
-  <div class="row {$theme && 'visible'}">
-    <LanguageSelector {segment} />
-    <Anchor id="contact-link" href="/contact">{$_('contact')}</Anchor>
-    <div class="row {$theme && 'visible'}">
-      <FlipButton {toggleFlip} flipped="{showsCode}" />
-      <ThemeSelector />
-    </div>
-  </div>
-</header>
+<Header {showsCode} {segment} {toggleFlip} />
 
-<main style="margin-top:{logoHeight}px; height: {totalHeight}px;">
-  <Logo turn="{showsCode}" />
+<main bind:clientWidth="{w}" style="margin-top:{logoHeight}px; height: {h}px;">
   <div class="scene">
     {#if !showsCode}
       <section class="side front" bind:clientHeight="{h}" transition:turn>
@@ -74,37 +58,6 @@
 <ClientsSticker />
 
 <style>
-  header {
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: var(--space-2);
-    right: 0;
-    font-size: var(--font-3);
-    color: var(--text);
-  }
-
-  .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: var(--space-2);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .visible {
-    opacity: 1;
-  }
-
-  :global(#contact-link) {
-    text-transform: uppercase;
-  }
-
-  :global(#contact-link::after) {
-    background-color: var(--text);
-  }
-
   main {
     position: relative;
     font-size: var(--font-5);
@@ -124,7 +77,6 @@
     width: 100%;
     padding: var(--space-3) 0;
     overflow: hidden;
-    will-change: opacity;
     transform-style: preserve-3d;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
@@ -140,26 +92,11 @@
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
-    header {
-      left: var(--space-3);
-      top: var(--space-1);
-      right: var(--space-2);
-    }
-
     .side {
       padding: var(--space-5) 0;
-    }
-
-    .row {
-      padding: 0;
     }
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
-    header {
-      left: var(--space-5);
-      top: var(--space-2);
-      right: var(--space-5);
-    }
   }
 </style>

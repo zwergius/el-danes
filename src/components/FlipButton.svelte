@@ -42,6 +42,13 @@
   [aria-selected] {
     transform: rotateY(-180deg);
   }
+
+  @supports (mix-blend-mode: difference) {
+    .button svg {
+      fill: white;
+    }
+  }
+
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
     .button {

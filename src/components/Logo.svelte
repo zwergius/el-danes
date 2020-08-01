@@ -5,7 +5,7 @@
   export let turn
 </script>
 
-<div class="container" class:turn>
+<div class="logo-container" class:turn>
   <a href="/{$locale}">
     <img
       class="main-logo"
@@ -23,12 +23,10 @@
 </div>
 
 <style>
-  .container {
-    position: fixed;
-    z-index: 0;
-    left: var(--space-2);
+  .logo-container {
+    left: var(--space-3);
     top: calc(var(--space-3) + var(--space-1));
-    right: var(--space-2);
+    right: var(--space-3);
     transition: transform 0.5s linear;
     transform-style: preserve-3d;
     transform: rotate3d(0, 1, 0, 0deg);
@@ -95,7 +93,7 @@
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
-    .container {
+    .logo-container {
       position: fixed;
       left: var(--space-3);
       top: 0;
@@ -104,7 +102,7 @@
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
-    .container {
+    .logo-container {
       position: fixed;
       left: var(--space-5);
       top: 0;

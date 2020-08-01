@@ -75,7 +75,6 @@
     right: 0;
     margin: auto;
     content: '\25CF';
-    color: var(--text);
     font-size: 0.2em;
     display: flex;
     justify-content: center;
@@ -86,6 +85,12 @@
     background: var(--background);
     border: 1px solid var(--text);
     pointer-events: none;
+  }
+
+  @supports (mix-blend-mode: difference) {
+    .button div {
+      border: 1px solid white;
+    }
   }
 
   /* Tablet - 768px */

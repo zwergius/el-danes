@@ -34,7 +34,10 @@
 
   div:hover {
     transition: none;
-    animation: vibrate 0.2s linear;
+    animation-name: vibrate, vibrate;
+    animation-duration: 0.25s;
+    animation-delay: 0s, 1s;
+    animation-timing-function: ease-in, ease-out;
   }
 
   :global(#clients-link::after) {
