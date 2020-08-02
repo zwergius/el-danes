@@ -78,7 +78,7 @@
 
 <style>
   ul {
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-5);
   }
 
   /* Tablet - 768px */
@@ -86,8 +86,5 @@
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
-    :global(a#telephone-link) {
-      margin-bottom: var(--space-5);
-    }
   }
 </style>

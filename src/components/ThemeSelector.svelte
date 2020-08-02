@@ -66,9 +66,10 @@
     width: 1em;
     border: 1px solid var(--text);
     border-radius: 50%;
+    transition: all 0.2s ease;
   }
 
-  [aria-selected] div::before {
+  .button[aria-selected] div::before {
     position: absolute;
     top: -2.5em;
     left: 0;
@@ -80,16 +81,16 @@
     justify-content: center;
   }
 
-  [aria-selected] div {
+  .button[aria-selected] div {
     position: relative;
-    background: var(--background);
-    border: 1px solid var(--text);
+    background: none;
     pointer-events: none;
   }
 
   @supports (mix-blend-mode: difference) {
     .button div {
       border: 1px solid white;
+      background: white;
     }
   }
 

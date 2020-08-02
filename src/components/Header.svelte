@@ -77,12 +77,6 @@
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
-    header {
-      left: var(--space-3);
-      top: var(--space-1);
-      right: var(--space-2);
-    }
-
     .handheld-row {
       display: none;
     }
@@ -93,10 +87,21 @@
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
+    nav.row {
+      left: var(--space-4);
+      top: calc(var(--space-2) + var(--space-1));
+      right: calc(var(--space-4) - var(--space-1));
+    }
+  }
+  /* Desktop 2560px*/
+  @media only screen and (min-width: 160em) {
     header {
-      left: var(--space-5);
-      top: var(--space-2);
-      right: var(--space-5);
+      font-size: var(--font-4);
+    }
+    nav.row {
+      left: var(--space-6);
+      top: calc(var(--space-3) + var(--space-2));
+      right: calc(var(--space-6) - var(--space-2));
     }
   }
 </style>

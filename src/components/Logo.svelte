@@ -103,10 +103,15 @@
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
     .logo-container {
-      position: fixed;
-      left: var(--space-5);
-      top: 0;
-      right: var(--space-5);
+      left: var(--space-4);
+      right: var(--space-4);
+    }
+  }
+  /* Desktop 2560px*/
+  @media only screen and (min-width: 160em) {
+    .logo-container {
+      left: var(--space-6);
+      right: var(--space-6);
     }
   }
 </style>

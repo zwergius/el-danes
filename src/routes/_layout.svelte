@@ -60,7 +60,7 @@
 <style>
   main {
     position: relative;
-    font-size: var(--font-5);
+    font-size: var(--font-6);
     width: 100%;
   }
 
@@ -92,11 +92,23 @@
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
-    .side {
-      padding: var(--space-5) 0;
+    main {
+      font-size: var(--font-7);
     }
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
+    .side {
+      padding: var(--space-4) 0;
+    }
+  }
+  /* Desktop 2560px*/
+  @media only screen and (min-width: 160em) {
+    main {
+      font-size: var(--font-10);
+    }
+    .side {
+      padding: var(--space-5) 0;
+    }
   }
 </style>
