@@ -18,7 +18,7 @@
   </div>-->
   <nav class="row {$theme && 'visible'}">
     <LanguageSelector {segment} />
-    <Anchor id="contact-link" href="/contact">{$_('contact')}</Anchor>
+    <Anchor id="contact-link" href="/contact">{$_('contact.title')}</Anchor>
     <div class="row {$theme && 'visible'}">
       <FlipButton {toggleFlip} flipped="{showsCode}" />
       <ThemeSelector />

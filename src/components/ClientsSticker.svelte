@@ -8,12 +8,14 @@
 <svelte:window bind:innerHeight="{windowHeight}" />
 
 {#if windowHeight}
-  <Anchor
-    id="clients-link"
-    style="--y-pos: {windowHeight / 1.35}px"
-    href="/clients">
-    {$_('clients')}
-  </Anchor>
+  <div>
+    <Anchor
+      id="clients-link"
+      style="--y-pos: {(windowHeight / 1.35).toFixed(2)}px"
+      href="/clients">
+      {$_('clients.title')}
+    </Anchor>
+  </div>
 {/if}
 
 <style>

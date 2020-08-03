@@ -11,14 +11,19 @@
 </script>
 
 <script>
+  import { onMount } from 'svelte'
   import { _ } from 'svelte-i18n'
-  import { pageCode } from '@/stores.js'
+  import { pageCode, pageHeader } from '@/stores.js'
   import Anchor from '@/components/Anchor.svelte'
   import SEO from '@/components/SEO.svelte'
 
   export let data, email, phoneNo
 
-  $pageCode = atob(data.content)
+  $pageHeader = $_('contact.header')
+
+  onMount(() => {
+    $pageCode = atob(data.content)
+  })
 
   function handleEmail(e) {
     e.preventDefault()
@@ -26,7 +31,7 @@
   }
 </script>
 
-<SEO title="{$_('contact')}" />
+<SEO title="{$_('contact.title')}" />
 
 <section>
   <ul>

@@ -1,6 +1,12 @@
 {
-  "contact": "Kontakt",
-  "clients": "Klienter",
+  "contact": {
+    "title": "Kontakt",
+    "header": "Skriv til os eller følg os!"
+  },
+  "clients": {
+    "title":  "Klienter",
+    "header": "Vi er i godt selskab"
+  },
   "view": "se!",
   "menu": "menu",
   "home": {

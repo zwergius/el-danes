@@ -10,15 +10,22 @@
 </script>
 
 <script>
+  import { onMount } from 'svelte'
   import { _ } from 'svelte-i18n'
-  import { pageCode } from '@/stores.js'
+  import { pageCode, pageHeader } from '@/stores.js'
   import projectsData from '@/assets/data/projects.json'
   import SEO from '@/components/SEO.svelte'
   import Hoverable from '@/components/Hoverable.svelte'
   import Anchor from '@/components/Anchor.svelte'
 
   export let data
-  $pageCode = atob(data.content)
+
+  $pageHeader = $_('clients.header')
+
+  onMount(() => {
+    $pageCode = atob(data.content)
+  })
+
   const projects = projectsData
     .filter(({ visible }) => Boolean(visible))
     .sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase())

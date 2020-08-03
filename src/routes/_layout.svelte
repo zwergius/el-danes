@@ -6,10 +6,11 @@
 </script>
 
 <script>
-  import { pageCode } from '@/stores.js'
+  import { pageCode, pageHeader } from '@/stores.js'
   import Header from '@/components/Header.svelte'
   import ClientsSticker from '@/components/ClientsSticker.svelte'
   import Code from '@/components/Code.svelte'
+  import Footer from '@/components/Footer.svelte'
 
   export let segment
   let showsCode = false
@@ -39,13 +40,13 @@
 <!-- TODO could we avoid init-theme with #if process browser here-->
 <Header {showsCode} {segment} {toggleFlip} />
 
-<main bind:clientWidth="{w}" style="margin-top:{logoHeight}px; height: {h}px;">
+<main
+  bind:clientWidth="{w}"
+  style="transform: translateY({logoHeight}px); height: {h}px;">
   <div class="scene">
     {#if !showsCode}
       <section class="side front" bind:clientHeight="{h}" transition:turn>
-        {#if w}
-          <slot />
-        {/if}
+        <slot />
       </section>
     {:else}
       <section class="side back" bind:clientHeight="{h}" transition:turn>
@@ -55,6 +56,10 @@
   </div>
 </main>
 
+<Footer>
+  <h1>{$pageHeader}</h1>
+</Footer>
+
 <ClientsSticker />
 
 <style>
@@ -62,6 +67,7 @@
     position: relative;
     font-size: var(--font-6);
     width: 100%;
+    transition: transform 0.3s ease-in;
   }
 
   .scene {
@@ -75,7 +81,7 @@
   .side {
     position: absolute;
     width: 100%;
-    padding: var(--space-3) 0;
+    padding: var(--space-3) 0 var(--space-5);
     overflow: hidden;
     transform-style: preserve-3d;
     backface-visibility: hidden;
@@ -95,11 +101,14 @@
     main {
       font-size: var(--font-7);
     }
+    .side {
+      padding: var(--space-3) 0 var(--space-6);
+    }
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
     .side {
-      padding: var(--space-4) 0;
+      padding: var(--space-4) 0 var(--space-7);
     }
   }
   /* Desktop 2560px*/
@@ -108,7 +117,7 @@
       font-size: var(--font-10);
     }
     .side {
-      padding: var(--space-5) 0;
+      padding: var(--space-5) 0 var(--space-8);
     }
   }
 </style>
