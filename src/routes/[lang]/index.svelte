@@ -10,12 +10,18 @@
 </script>
 
 <script>
+  import { onMount } from 'svelte'
   import { _ } from 'svelte-i18n'
-  import { pageCode } from '@/stores.js'
+  import { pageCode, pageHeader } from '@/stores.js'
   import SEO from '@/components/SEO.svelte'
 
   export let data
-  $pageCode = atob(data.content)
+
+  $pageHeader = $_('home.header')
+
+  onMount(() => {
+    $pageCode = atob(data.content)
+  })
 </script>
 
 <SEO />

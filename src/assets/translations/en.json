@@ -1,8 +1,16 @@
 {
-  "contact": "Contact",
-  "clients": "Clients",
+  "contact": {
+    "title": "Contact",
+    "header": "Reach out or follow us!"
+  },
+  "clients": {
+    "title":  "Clients",
+    "header": "We keep great company"
+  },
   "view": "view!",
+  "menu": "menu",
   "home": {
+    "header": "Specialists in digital solutions web & app.",
     "section-1": "Great design must be accompanied by equally great software development. Our solutions use cutting-edge technology which reflects our engineering where quality, speed and efficiency is essential.",
     "section-2": "We treat our customers projects as if they were our own and will be your supporting partner from idea to execution, building and customising to your needs and expectations, so you and your clients can reach your objectives in the best possible way.",
     "section-3": "We love ‘nerding’ around with the latest trends and innovations, you can rely on us, to guarantee you with a state of the art solution.",

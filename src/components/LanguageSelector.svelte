@@ -8,40 +8,35 @@
   }
 </script>
 
-<nav>
-  <ul>
-    <li>
-      <Anchor
-        aria-current="{segment === 'en' ? 'language' : undefined}"
-        class="language-selector"
-        href="/en"
-        target="_self"
-        on:click="{() => handleClick('en')}">
-        EN
-      </Anchor>
-    </li>
-    <li>
-      <Anchor
-        aria-current="{segment === 'es' ? 'language' : undefined}"
-        class="language-selector"
-        href="/es"
-        target="_self"
-        on:click="{() => handleClick('es')}">
-        SP
-      </Anchor>
-    </li>
-    <li>
-      <Anchor
-        aria-current="{segment === 'da' ? 'language' : undefined}"
-        class="language-selector"
-        href="/da"
-        target="_self"
-        on:click="{() => handleClick('da')}">
-        DA
-      </Anchor>
-    </li>
-  </ul>
-</nav>
+<ul>
+  <li>
+    <Anchor
+      aria-current="{segment === 'en' ? 'language' : undefined}"
+      href="/en"
+      target="_self"
+      on:click="{() => handleClick('en')}">
+      EN
+    </Anchor>
+  </li>
+  <li>
+    <Anchor
+      aria-current="{segment === 'es' ? 'language' : undefined}"
+      href="/es"
+      target="_self"
+      on:click="{() => handleClick('es')}">
+      SP
+    </Anchor>
+  </li>
+  <li>
+    <Anchor
+      aria-current="{segment === 'da' ? 'language' : undefined}"
+      href="/da"
+      target="_self"
+      on:click="{() => handleClick('da')}">
+      DA
+    </Anchor>
+  </li>
+</ul>
 
 <style>
   ul {
@@ -60,10 +55,6 @@
     transition: color 0.5s ease;
   }
 
-  :global(li > a.language-selector::after) {
-    background-color: var(--text);
-  }
-
   :global(a[aria-current]) {
     position: relative;
   }
@@ -75,7 +66,6 @@
     right: 0;
     margin: auto;
     content: '\25CF';
-    color: var(--text);
     font-size: 0.2em;
     display: flex;
     justify-content: center;

@@ -24,19 +24,25 @@
 
   --space-1: 4px;
   --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 32px;
+  --space-3: 18px;
+  /* 20px 22px */
+
+  --space-4: 38px;
   --space-5: 64px;
-  --space-6: 128px;
-  --space-7: 256px;
+  --space-6: 76px;
+  --space-7: 114px;
+  --space-8: 152px;
 
   --font-0: calc(0.25em + 1vw + 1vh);
 
   --font-1: calc(-0.1em + 1vw + 1vh);
   --font-2: calc(0em + 1vw + 1vh);
-  --font-3: calc(0.25em + 1vw + 1vh);
-  --font-4: calc(0.5em + 1vw + 1vh);
-  --font-5: calc(2em + 1vw + 1vh);
+  --font-3: calc(0.4em + 1vw + 1vh);
+  --font-4: calc(0.9em + 1vw + 1vh);
+  --font-5: calc(1.25em + 1vw + 1vh);
+  --font-6: calc(1.7em + 1vw + 1vh);
+  --font-7: calc(2.3em + 1vw + 1vh);
+  --font-10: calc(4em + 1vw + 1vh);
 }
 
 html {
@@ -51,9 +57,8 @@ body {
     sans-serif;
   font-size: 16px;
   color: var(--text);
-  background: var(--background);
   transition: background 0.2s ease;
-  padding: var(--space-2) var(--space-2);
+  padding: calc(var(--space-3) + var(--space-1)) var(--space-3) 0;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -63,10 +68,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: La Nord Regular;
-  margin: 0 0 0.5em 0;
-  font-weight: 400;
-  line-height: 1.2;
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 a,
@@ -120,12 +124,17 @@ code {
 /* Tablet - 768px */
 @media only screen and (min-width: 48em) {
   body {
-    padding: var(--space-2) var(--space-3);
   }
 }
 /* Desktop - 1080px*/
 @media only screen and (min-width: 67.5em) {
   body {
-    padding: var(--space-2) var(--space-5);
+    padding: var(--space-2) var(--space-4) 0;
+  }
+}
+/* Desktop 2560px*/
+@media only screen and (min-width: 160em) {
+  body {
+    padding: var(--space-4) var(--space-6) 0;
   }
 }

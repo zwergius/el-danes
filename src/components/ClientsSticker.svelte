@@ -8,33 +8,42 @@
 <svelte:window bind:innerHeight="{windowHeight}" />
 
 {#if windowHeight}
-  <div style="--y-pos: {windowHeight / 2}px">
-    <Anchor id="clients-link" href="/clients">{$_('clients')}</Anchor>
+  <div>
+    <Anchor
+      id="clients-link"
+      style="--y-pos: {(windowHeight / 1.35).toFixed(2)}px"
+      href="/clients">
+      {$_('clients.title')}
+    </Anchor>
   </div>
 {/if}
 
 <style>
-  div {
+  :global(#clients-link) {
     position: fixed;
     top: 0;
-    transform: translate3d(0, var(--y-pos), 0) rotate(-11deg);
-    right: var(--space-2);
-    background: var(--background);
-    color: var(--text);
-    border: 2px solid var(--text);
-    border-radius: 50%;
-    padding: var(--space-2) var(--space-3);
-    font-size: var(--font-4);
-    text-transform: uppercase;
+    right: var(--space-3);
+    padding: var(--space-3) calc(var(--space-3) + var(--space-2));
     display: flex;
     justify-content: center;
     align-items: center;
+    background: var(--background);
+    border: 2px solid var(--text);
+    border-radius: 50%;
+    color: var(--text);
+    font-family: La Nord Regular;
+    font-size: var(--font-5);
+    text-transform: uppercase;
+    transform: translate3d(0, var(--y-pos), 0) rotate(-11deg);
     transition: transform 0.5s ease-out;
   }
 
-  div:hover {
+  :global(#clients-link:hover) {
     transition: none;
-    animation: vibrate 0.2s linear;
+    animation-name: vibrate, vibrate;
+    animation-duration: 0.25s;
+    animation-delay: 0s, 1s;
+    animation-timing-function: ease-in, ease-out;
   }
 
   :global(#clients-link::after) {
@@ -80,16 +89,23 @@
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
-    div {
+    :global(#clients-link) {
       right: var(--space-3);
       transition: none;
     }
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
-    div {
-      right: var(--space-5);
+    :global(#clients-link) {
+      right: var(--space-4);
       padding: var(--space-3) var(--space-4);
+    }
+  }
+  /* Desktop 2560px*/
+  @media only screen and (min-width: 160em) {
+    :global(#clients-link) {
+      right: var(--space-6);
+      /* TODO check padding */
     }
   }
 </style>

@@ -7,3 +7,4 @@ if (typeof window !== 'undefined') {
 }
 
 export let pageCode = writable('')
+export let pageHeader = writable('')
