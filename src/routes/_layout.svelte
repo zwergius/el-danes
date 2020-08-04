@@ -19,11 +19,7 @@
     showsCode = !showsCode
   }
 
-  const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
-  let w = 0
   let h = 0
-
-  $: logoHeight = (w * aspectRatio).toFixed(2)
 
   function turn(node, { delay = 0, duration = 500 }) {
     return {
@@ -40,7 +36,7 @@
 <!-- TODO could we avoid init-theme with #if process browser here-->
 <Header {showsCode} {segment} {toggleFlip} />
 
-<main bind:clientWidth="{w}" style="height: {h}px;">
+<main style="height: {h}px;">
   <div class="scene">
     {#if !showsCode}
       <section class="side front" bind:clientHeight="{h}" transition:turn>

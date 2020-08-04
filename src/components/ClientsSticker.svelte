@@ -12,6 +12,7 @@
     <Anchor
       id="clients-link"
       style="--y-pos: {(windowHeight / 1.35).toFixed(2)}px"
+      rel="prefetch"
       href="/clients">
       {$_('clients.title')}
     </Anchor>

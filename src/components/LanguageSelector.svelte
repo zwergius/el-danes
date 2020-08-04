@@ -13,6 +13,7 @@
     <Anchor
       aria-current="{segment === 'en' ? 'language' : undefined}"
       href="/en"
+      rel="prefetch"
       target="_self"
       on:click="{() => handleClick('en')}">
       EN
@@ -22,6 +23,7 @@
     <Anchor
       aria-current="{segment === 'es' ? 'language' : undefined}"
       href="/es"
+      rel="prefetch"
       target="_self"
       on:click="{() => handleClick('es')}">
       SP
@@ -31,6 +33,7 @@
     <Anchor
       aria-current="{segment === 'da' ? 'language' : undefined}"
       href="/da"
+      rel="prefetch"
       target="_self"
       on:click="{() => handleClick('da')}">
       DA

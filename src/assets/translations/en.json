@@ -9,6 +9,7 @@
   },
   "view": "view!",
   "menu": "menu",
+  "back": "back",
   "home": {
     "header": "Specialists in digital solutions web & app.",
     "section-1": "Great design must be accompanied by equally great software development. Our solutions use cutting-edge technology which reflects our engineering where quality, speed and efficiency is essential.",

@@ -36,7 +36,9 @@
   {#if showsNavigation}
     <nav class="row {$theme && 'visible'}" transition:slide>
       <LanguageSelector {segment} />
-      <Anchor id="contact-link" href="/contact">{$_('contact.title')}</Anchor>
+      <Anchor id="contact-link" rel="prefetch" href="/contact">
+        {$_('contact.title')}
+      </Anchor>
       <div class="row {$theme && 'visible'}">
         <FlipButton {toggleFlip} flipped="{showsCode}" />
         <ThemeSelector />
