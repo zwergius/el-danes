@@ -6,6 +6,7 @@
 </script>
 
 <div class="logo-container" class:turn>
+  <slot />
   <a href="/{$locale}">
     <img
       class="main-logo"
@@ -24,7 +25,8 @@
 
 <style>
   .logo-container {
-    padding: calc(var(--space-3) + var(--space-1)) var(--space-3) 0;
+    position: relative;
+    padding: var(--space-3) var(--space-3) 0;
     transition: transform 0.5s linear;
     transform-style: preserve-3d;
     transform: rotate3d(0, 1, 0, 0deg);

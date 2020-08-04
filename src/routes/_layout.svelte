@@ -40,7 +40,7 @@
 <!-- TODO could we avoid init-theme with #if process browser here-->
 <Header {showsCode} {segment} {toggleFlip} />
 
-<main bind:clientWidth="{w}" style="margin-top: {logoHeight}px; height: {h}px;">
+<main bind:clientWidth="{w}" style="height: {h}px;">
   <div class="scene">
     {#if !showsCode}
       <section class="side front" bind:clientHeight="{h}" transition:turn>

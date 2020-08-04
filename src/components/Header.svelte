@@ -1,6 +1,7 @@
 <script>
+  import { onMount } from 'svelte'
   import { _ } from 'svelte-i18n'
-  import { fly } from 'svelte/transition'
+  import { slide } from 'svelte/transition'
   import { theme } from '@/stores.js'
   import Anchor from '@/components/Anchor.svelte'
   import Logo from '@/components/Logo.svelte'
@@ -9,22 +10,54 @@
   import FlipButton from '@/components/FlipButton.svelte'
 
   export let segment, toggleFlip, showsCode
+
+  const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
+  let showsNavigation
+  let height
+  let headerHeight
+
+  onMount(() => {
+    showsNavigation = window.matchMedia('only screen and (min-width: 48em)')
+      .matches
+  })
+
+  function toggleShowsNavigation() {
+    showsNavigation = !showsNavigation
+  }
+
+  $: {
+    if (isNaN(height)) headerHeight = 0
+    else if (height > 0) headerHeight = height
+    else headerHeight = window.innerWidth * aspectRatio
+  }
 </script>
 
-<header>
-  <Logo turn="{showsCode}" />
-  <!-- <div class="handheld-row">
-    <button>{$_('menu')}</button>
-  </div>-->
-  <nav class="row {$theme && 'visible'}">
-    <LanguageSelector {segment} />
-    <Anchor id="contact-link" href="/contact">{$_('contact.title')}</Anchor>
-    <div class="row {$theme && 'visible'}">
-      <FlipButton {toggleFlip} flipped="{showsCode}" />
-      <ThemeSelector />
+<header bind:clientHeight="{height}">
+  {#if showsNavigation}
+    <nav class="row {$theme && 'visible'}" transition:slide>
+      <LanguageSelector {segment} />
+      <Anchor id="contact-link" href="/contact">{$_('contact.title')}</Anchor>
+      <div class="row {$theme && 'visible'}">
+        <FlipButton {toggleFlip} flipped="{showsCode}" />
+        <ThemeSelector />
+      </div>
+    </nav>
+  {/if}
+  <Logo turn="{showsCode}">
+    <div class="handheld-row">
+      <button on:click="{toggleShowsNavigation}" type="button">
+        {showsNavigation ? $_('back') : $_('menu')}
+      </button>
     </div>
-  </nav>
+  </Logo>
 </header>
+
+{#if headerHeight}
+  <div
+    style="height: {headerHeight}px;"
+    class="height-faker"
+    transition:slide></div>
+{/if}
 
 <style>
   header {
@@ -38,32 +71,38 @@
   }
 
   nav.row {
-    position: absolute;
-    z-index: 10;
-    left: var(--space-3);
-    top: var(--space-1);
-    right: var(--space-2);
+    opacity: 0;
+    border-bottom: 1px solid var(--text);
+    padding: var(--space-2) calc(var(--space-3) - var(--space-2)) var(--space-2)
+      var(--space-3);
+  }
+
+  nav.row.visible {
+    opacity: 1;
   }
 
   :global(#contact-link) {
     text-transform: uppercase;
   }
 
+  button {
+    text-transform: uppercase;
+    padding: calc(var(--space-3) - var(--space-2)) var(--space-3) 0;
+  }
+
   .handheld-row {
-    display: flex;
-    justify-content: flex-end;
+    line-height: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
   }
 
   .row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    opacity: 0;
     transition: opacity 0.3s;
-  }
-
-  .visible {
-    opacity: 1;
   }
 
   @supports (mix-blend-mode: difference) {
@@ -72,10 +111,23 @@
       color: white;
       mix-blend-mode: difference;
     }
+    nav.row {
+      border-bottom: 1px solid white;
+    }
   }
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
+    nav.row {
+      position: absolute;
+      z-index: 10;
+      left: var(--space-3);
+      top: var(--space-1);
+      right: var(--space-2);
+      padding: 0;
+      border: none;
+    }
+
     .handheld-row {
       display: none;
     }

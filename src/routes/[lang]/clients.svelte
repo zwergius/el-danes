@@ -79,6 +79,7 @@
 
   li {
     position: relative;
+    white-space: nowrap;
   }
 
   :global(li > a.client-link::after) {
