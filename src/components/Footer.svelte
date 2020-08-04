@@ -35,6 +35,10 @@
     white-space: nowrap;
   }
 
+  .el-danes::before {
+    content: '\00a0';
+  }
+
   @supports (mix-blend-mode: difference) {
     footer {
       color: white;
