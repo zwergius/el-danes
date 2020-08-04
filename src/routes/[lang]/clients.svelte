@@ -31,7 +31,7 @@
     .sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase())
 </script>
 
-<SEO title="{$_('clients')}" />
+<SEO title="{$_('clients.title')}" />
 
 <section>
   <ul>

@@ -24,9 +24,7 @@
 
 <style>
   .logo-container {
-    left: var(--space-3);
-    top: calc(var(--space-3) + var(--space-1));
-    right: var(--space-3);
+    padding: calc(var(--space-3) + var(--space-1)) var(--space-3) 0;
     transition: transform 0.5s linear;
     transform-style: preserve-3d;
     transform: rotate3d(0, 1, 0, 0deg);
@@ -98,6 +96,7 @@
       left: var(--space-3);
       top: 0;
       right: var(--space-3);
+      padding: 0;
     }
   }
   /* Desktop - 1080px*/

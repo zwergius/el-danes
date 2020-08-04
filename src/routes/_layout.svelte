@@ -40,9 +40,7 @@
 <!-- TODO could we avoid init-theme with #if process browser here-->
 <Header {showsCode} {segment} {toggleFlip} />
 
-<main
-  bind:clientWidth="{w}"
-  style="transform: translateY({logoHeight}px); height: {h}px;">
+<main bind:clientWidth="{w}" style="margin-top: {logoHeight}px; height: {h}px;">
   <div class="scene">
     {#if !showsCode}
       <section class="side front" bind:clientHeight="{h}" transition:turn>
@@ -65,9 +63,9 @@
 <style>
   main {
     position: relative;
-    font-size: var(--font-6);
     width: 100%;
-    transition: transform 0.3s ease-in;
+    flex: 1 0 auto;
+    transition: margin 0.3s ease-in;
   }
 
   .scene {
@@ -78,10 +76,11 @@
     height: 100%;
   }
 
-  .side {
+  section.side {
     position: absolute;
     width: 100%;
-    padding: var(--space-3) 0 var(--space-5);
+    font-size: var(--font-6);
+    padding: var(--space-3);
     overflow: hidden;
     transform-style: preserve-3d;
     backface-visibility: hidden;
@@ -99,25 +98,25 @@
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
     main {
-      font-size: var(--font-7);
     }
-    .side {
-      padding: var(--space-3) 0 var(--space-6);
+    section.side {
+      font-size: var(--font-7);
+      padding: var(--space-3);
     }
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
-    .side {
-      padding: var(--space-4) 0 var(--space-7);
+    section.side {
+      padding: var(--space-4);
     }
   }
   /* Desktop 2560px*/
   @media only screen and (min-width: 160em) {
     main {
-      font-size: var(--font-10);
     }
-    .side {
-      padding: var(--space-5) 0 var(--space-8);
+    section.side {
+      font-size: var(--font-10);
+      padding: var(--space-5);
     }
   }
 </style>

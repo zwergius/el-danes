@@ -48,6 +48,7 @@
 html {
   background: var(--background);
   transition: background 0.2s ease;
+  height: 100%;
 }
 
 body {
@@ -56,10 +57,16 @@ body {
     Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
     sans-serif;
   font-size: 16px;
+  height: 100%;
   color: var(--text);
   transition: background 0.2s ease;
-  padding: calc(var(--space-3) + var(--space-1)) var(--space-3) 0;
   -webkit-overflow-scrolling: touch;
+}
+
+#sapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 h1,
@@ -123,18 +130,10 @@ code {
 
 /* Tablet - 768px */
 @media only screen and (min-width: 48em) {
-  body {
-  }
 }
 /* Desktop - 1080px*/
 @media only screen and (min-width: 67.5em) {
-  body {
-    padding: var(--space-2) var(--space-4) 0;
-  }
 }
 /* Desktop 2560px*/
 @media only screen and (min-width: 160em) {
-  body {
-    padding: var(--space-4) var(--space-6) 0;
-  }
 }

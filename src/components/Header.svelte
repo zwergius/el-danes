@@ -35,7 +35,6 @@
     right: 0;
     font-size: var(--font-3);
     color: var(--text);
-    padding: calc(var(--space-3) + var(--space-1)) var(--space-3);
   }
 
   nav.row {
