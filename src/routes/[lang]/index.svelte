@@ -1,6 +1,7 @@
 <script context="module">
   export async function preload() {
     const res = await this.fetch('index.json')
+    await this.fetch('sitemap.xml')
     if (res.status === 200) {
       const data = await res.json()
       return { data }
