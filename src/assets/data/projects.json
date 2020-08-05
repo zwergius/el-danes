@@ -38,6 +38,7 @@
     "stack": "React, JavaScript, HTML, CSS",
     "title": "Heineken Backoffice Portal",
     "type": "Web App",
+    "url": "https://www.heineken.com/",
     "visible": true
   },
   {
@@ -52,6 +53,7 @@
     "stack": "Ionic, Angular, JavaScript, HTML, CSS",
     "title": "BP Fuels Apps.",
     "type": "Hybrid Apps",
+    "url": "https://www.bp.com/",
     "visible": true
   },
   {
@@ -92,6 +94,7 @@
     "stack": "Angular, JavaScript, HTML, CSS",
     "title": "Jaguar Land Rover",
     "type": "Web App",
+    "url": "https://www.jaguarlandrover.com/",
     "visible": true
   },
   {
@@ -105,6 +108,7 @@
     "stack": "React, JavaScript, HTML, CSS",
     "title": "ARM Deal Evaluator",
     "type": "Web App",
+    "url": "https://www.arm.com/",
     "visible": true
   },
   {
