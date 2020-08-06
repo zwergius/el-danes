@@ -12,6 +12,7 @@
   <li>
     <Anchor
       aria-current="{segment === 'en' ? 'language' : undefined}"
+      class="language-switch"
       href="/en"
       rel="prefetch"
       target="_self"
@@ -22,6 +23,7 @@
   <li>
     <Anchor
       aria-current="{segment === 'es' ? 'language' : undefined}"
+      class="language-switch"
       href="/es"
       rel="prefetch"
       target="_self"
@@ -32,6 +34,7 @@
   <li>
     <Anchor
       aria-current="{segment === 'da' ? 'language' : undefined}"
+      class="language-switch"
       href="/da"
       rel="prefetch"
       target="_self"
@@ -72,6 +75,12 @@
     font-size: 0.2em;
     display: flex;
     justify-content: center;
+  }
+
+  @supports (mix-blend-mode: difference) {
+    :global(li > a.language-switch::after) {
+      background-color: white;
+    }
   }
 
   /* Tablet - 768px */

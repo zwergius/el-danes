@@ -12,7 +12,7 @@
 <script>
   import { onMount } from 'svelte'
   import { _ } from 'svelte-i18n'
-  import { pageCode, pageHeader } from '@/stores.js'
+  import { pageCode, pageHeader, theme } from '@/stores.js'
   import projectsData from '@/assets/data/projects.json'
   import SEO from '@/components/SEO.svelte'
   import Hoverable from '@/components/Hoverable.svelte'
@@ -50,7 +50,9 @@
               <span>{$_('view')}</span>
 
               {#if isHovering}
-                <div class="stack">
+                <div
+                  style="background: {$theme === 'dark' ? 'rgb(0, 0, 0, 0.8)' : 'rgb(255, 255, 255, 0.8)'};"
+                  class="stack">
                   <p>{client.type} - {client.stack}</p>
                 </div>
               {/if}
@@ -60,7 +62,9 @@
             <p>{client.name}</p>
 
             {#if isHovering}
-              <div class="stack">
+              <div
+                style="background: {$theme === 'dark' ? 'rgb(0, 0, 0, 0.8)' : 'rgb(255, 255, 255, 0.8)'};"
+                class="stack">
                 <p>{client.type} - {client.stack}</p>
               </div>
             {/if}
@@ -102,8 +106,7 @@
     z-index: 1;
     min-width: 100%;
     height: 100%;
-    background: rgb(0, 0, 0, 0.8);
-    color: white;
+    color: var(--text);
     display: flex;
     align-items: center;
     white-space: nowrap;

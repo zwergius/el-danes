@@ -39,7 +39,7 @@
       <Anchor id="contact-link" rel="prefetch" href="/contact">
         {$_('contact.title')}
       </Anchor>
-      <div class="row {$theme && 'visible'}">
+      <div class="row">
         <FlipButton {toggleFlip} flipped="{showsCode}" />
         <ThemeSelector />
       </div>
@@ -56,7 +56,7 @@
 
 {#if headerHeight}
   <div
-    style="height: {headerHeight}px;"
+    style="height: {headerHeight.toFixed(2)}px;"
     class="height-faker"
     transition:slide></div>
 {/if}
@@ -108,13 +108,15 @@
   }
 
   @supports (mix-blend-mode: difference) {
-    header,
-    nav.row {
+    header {
       color: white;
       mix-blend-mode: difference;
     }
     nav.row {
       border-bottom: 1px solid white;
+    }
+    :global(#contact-link::after) {
+      background-color: white;
     }
   }
 

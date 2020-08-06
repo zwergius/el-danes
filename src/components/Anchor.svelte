@@ -47,11 +47,11 @@
       width: 100%;
     }
   }
-
+  /*
   @supports (mix-blend-mode: difference) {
     a::after,
     button::after {
       background-color: white;
     }
-  }
+  }*/
 </style>

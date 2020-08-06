@@ -75,6 +75,7 @@
   section.side {
     position: absolute;
     width: 100%;
+    height: 100%;
     font-size: var(--font-6);
     padding: var(--space-3);
     overflow: hidden;
@@ -83,13 +84,14 @@
     -webkit-backface-visibility: hidden;
   }
 
+  /* 
   @supports (mix-blend-mode: difference) {
     main,
     .scene {
       color: white;
       mix-blend-mode: difference;
     }
-  }
+  } */
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {

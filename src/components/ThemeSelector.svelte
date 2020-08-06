@@ -37,7 +37,7 @@
   on:click="{() => setColorMode('dark')}"
   on:keypress="{(e) => handleKeypress(e, 'dark')}"
   tabIndex="0"
-  role="button"
+  role="radio"
   aria-selected="{$theme === 'dark' ? true : undefined}"
   aria-label="Use dark theme">
   <div></div>
@@ -47,7 +47,7 @@
   on:click="{() => setColorMode('light')}"
   on:keypress="{(e) => handleKeypress(e, 'light')}"
   tabIndex="0"
-  role="button"
+  role="radio"
   aria-selected="{$theme === 'light' ? true : undefined}"
   aria-label="Use light theme">
   <div></div>

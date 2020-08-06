@@ -11,7 +11,7 @@
   class="button"
   on:click="{toggleFlip}"
   on:keypress="{handleKeypress}"
-  role="radio"
+  role="button"
   tabindex="0"
   aria-selected="{flipped ? true : undefined}"
   aria-label="Show code">

@@ -38,7 +38,7 @@
   .el-danes::before {
     content: '\00a0';
   }
-
+  /*
   @supports (mix-blend-mode: difference) {
     footer {
       color: white;
@@ -46,7 +46,7 @@
       mix-blend-mode: difference;
     }
   }
-
+*/
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
     footer {
