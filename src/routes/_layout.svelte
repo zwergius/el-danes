@@ -26,8 +26,7 @@
       delay,
       duration,
       css: (t, u) => `
-      transform: rotateY(${1 - u * 180}deg) translate3d(0,0,0);
-      opacity: ${1 - u};
+      transform: rotate3d(0, 1, 0, ${1 - u * 180}deg);
       `,
     }
   }
@@ -39,22 +38,26 @@
 <main style="height: {h}px;">
   <div class="scene">
     {#if !showsCode}
-      <section class="side front" bind:clientHeight="{h}" transition:turn>
-        <slot />
+      <section class="side front" transition:turn>
+        <div class="content" bind:clientHeight="{h}">
+          <slot />
+        </div>
       </section>
     {:else}
-      <section class="side back" bind:clientHeight="{h}" transition:turn>
-        <Code data="{$pageCode}" />
+      <section class="side back" transition:turn>
+        <div class="content" bind:clientHeight="{h}">
+          <Code data="{$pageCode}" />
+        </div>
       </section>
     {/if}
   </div>
 </main>
 
+<ClientsSticker />
+
 <Footer>
   <h1>{$pageHeader}</h1>
 </Footer>
-
-<ClientsSticker />
 
 <style>
   main {
@@ -66,10 +69,10 @@
 
   .scene {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
+    /* z-index: 1; Safari hack */
+    perspective: 900000px; /* Safari hack */
   }
 
   section.side {
@@ -77,11 +80,14 @@
     width: 100%;
     height: 100%;
     font-size: var(--font-6);
-    padding: var(--space-3);
     overflow: hidden;
     transform-style: preserve-3d;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+  }
+
+  .content {
+    padding: var(--space-3);
   }
 
   /* 
@@ -95,25 +101,27 @@
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
-    main {
-    }
     section.side {
       font-size: var(--font-7);
+    }
+
+    .content {
       padding: var(--space-3);
     }
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
-    section.side {
+    .content {
       padding: var(--space-4);
     }
   }
   /* Desktop 2560px*/
   @media only screen and (min-width: 160em) {
-    main {
-    }
     section.side {
       font-size: var(--font-10);
+    }
+
+    .content {
       padding: var(--space-5);
     }
   }

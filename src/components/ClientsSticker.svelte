@@ -8,22 +8,24 @@
 <svelte:window bind:innerHeight="{windowHeight}" />
 
 {#if windowHeight}
-  <div>
-    <Anchor
-      id="clients-link"
-      style="--y-pos: {(windowHeight / 1.35).toFixed(2)}px"
-      rel="prefetch"
-      href="/clients">
+  <div style="--y-pos: {(windowHeight / 1.35).toFixed(2)}px">
+    <Anchor id="clients-link" rel="prefetch" href="/clients">
       {$_('clients.title')}
     </Anchor>
   </div>
 {/if}
 
 <style>
-  :global(#clients-link) {
+  div {
     position: fixed;
     top: 0;
+    z-index: 1;
     right: var(--space-3);
+    transform: translate3d(0, var(--y-pos), 0) rotate(-11deg);
+    transition: transform 0.5s ease-out;
+  }
+
+  :global(#clients-link) {
     padding: var(--space-3) calc(var(--space-3) + var(--space-2));
     display: flex;
     justify-content: center;
@@ -35,11 +37,9 @@
     font-family: La Nord Regular;
     font-size: var(--font-5);
     text-transform: uppercase;
-    transform: translate3d(0, var(--y-pos), 0) rotate(-11deg);
-    transition: transform 0.5s ease-out;
   }
 
-  :global(#clients-link:hover) {
+  div:hover {
     transition: none;
     animation-name: vibrate, vibrate;
     animation-duration: 0.25s;
@@ -90,21 +90,23 @@
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
-    :global(#clients-link) {
+    div {
       right: var(--space-3);
       transition: none;
     }
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
-    :global(#clients-link) {
+    div {
       right: var(--space-4);
+    }
+    :global(#clients-link) {
       padding: var(--space-3) var(--space-4);
     }
   }
   /* Desktop 2560px*/
   @media only screen and (min-width: 160em) {
-    :global(#clients-link) {
+    div {
       right: var(--space-6);
       /* TODO check padding */
     }
