@@ -37,6 +37,7 @@
     font-family: La Nord Regular;
     font-size: var(--font-5);
     text-transform: uppercase;
+    transition: all 0.5s linear;
   }
 
   div:hover {
