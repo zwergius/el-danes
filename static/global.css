@@ -68,6 +68,17 @@ body {
   flex-direction: column;
 }
 
+body:before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
+  z-index: -1;
+  background: var(--background);
+}
+
 #sapper {
   flex: 1 0 auto;
   display: flex;
