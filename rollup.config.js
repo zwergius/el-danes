@@ -116,6 +116,9 @@ export default {
       replace({
         'process.browser': false,
         'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.VERCEL_GITHUB_COMMIT_SHA': JSON.stringify(
+          process.env.VERCEL_GITHUB_COMMIT_SHA || Date.now()
+        ),
       }),
       svelte({
         generate: 'ssr',
@@ -145,8 +148,9 @@ export default {
       replace({
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
-        'process.env.VERCEL_GITHUB_COMMIT_SHA':
-          process.env.VERCEL_GITHUB_COMMIT_SHA || Date.now(),
+        'process.env.VERCEL_GITHUB_COMMIT_SHA': JSON.stringify(
+          process.env.VERCEL_GITHUB_COMMIT_SHA || Date.now()
+        ),
       }),
       commonjs(),
       !dev && terser(),
