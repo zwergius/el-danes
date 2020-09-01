@@ -3,7 +3,7 @@
   "description": "Sapper website for El DANES",
   "version": "0.0.1",
   "scripts": {
-    "dev": "sapper dev",
+    "dev": "npm run dsstore:delete && sapper dev",
     "build": "sapper build --legacy",
     "export": "npm run dsstore:delete && sapper export --legacy --entry '/ /en /da /es'",
     "start": "node __sapper__/build",
