@@ -17,6 +17,7 @@
   const metaTitle = title ? `${title} - ${siteName}` : siteName
 </script>
 
+https%3A%2F%2Fwww.eldan%C3%A9s.com%2Fen
 <svelte:head>
   <title>{metaTitle}</title>
   <meta name="description" content="{description}" />
@@ -25,7 +26,7 @@
   <meta property="og:image" content="{fbImg}" />
   <meta property="og:description" content="{description}" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="{canonicalUrl}" />
+  <meta property="og:url" content="https%3A%2F%2Fwww.eldan%C3%A9s.com%2Fen" />
   <meta property="og:site_name" content="{siteName}" />
   <!-- Twitter Card data -->
   <meta name="twitter:card" content="summary" />
