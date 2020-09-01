@@ -45,8 +45,9 @@ export function i18nMiddleware() {
   init(INIT_OPTIONS)
 
   return (req, res, next) => {
+    let promise
+    // get the initial locale only for a document request
     const isDocument = DOCUMENT_REGEX.test(req.originalUrl)
-    // // get the initial locale only for a document request
     if (!isDocument) {
       next()
       return
@@ -59,18 +60,20 @@ export function i18nMiddleware() {
       if (req.headers['accept-language']) {
         const headerLang = req.headers['accept-language'].split(',')[0].trim()
         if (headerLang && headerLang.length > 1) {
-          $locale.set(headerLang)
+          promise = $locale.set(headerLang)
           let language = headerLang.slice(0, 2)
           if (supportedLanguages.indexOf(language) === -1) language = 'en'
           res.writeHead(301, { Location: `/${language}` })
           res.end(`Redirect to ${language}`)
+          if (promise) return promise.then(() => next())
         }
       } else {
         res.writeHead(301, { Location: `/${INIT_OPTIONS.fallbackLocale}` })
         res.end(`Redirect to ${INIT_OPTIONS.fallbackLocale}`)
       }
     } else if (currentLocale !== urlLocale) {
-      $locale.set(urlLocale)
+      promise = $locale.set(urlLocale)
+      if (promise) return promise.then(() => next())
     }
 
     next()

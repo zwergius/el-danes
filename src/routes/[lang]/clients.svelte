@@ -28,7 +28,7 @@
 
   const projects = projectsData
     .filter(({ visible }) => Boolean(visible))
-    .sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase())
+    .sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()))
 </script>
 
 <SEO title="{$_('clients.title')}" />
@@ -38,7 +38,6 @@
     {#each projects as client}
       <Hoverable let:hovering="{isHovering}">
         <li class:isHovering>
-
           {#if client.url}
             <Anchor
               id="{client.id}"
@@ -56,7 +55,6 @@
                   <p>{client.type} - {client.stack}</p>
                 </div>
               {/if}
-
             </Anchor>
           {:else}
             <p>{client.name}</p>
@@ -69,7 +67,6 @@
               </div>
             {/if}
           {/if}
-
         </li>
       </Hoverable>
     {/each}

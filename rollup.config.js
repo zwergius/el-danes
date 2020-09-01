@@ -18,6 +18,7 @@ const legacy = !!process.env.SAPPER_LEGACY_BUILD
 const onwarn = (warning, onwarn) => {
   if (warning.code === 'THIS_IS_UNDEFINED') return // https://github.com/rollup/rollup/issues/794
   return (
+    (warning.code === 'MISSING_EXPORT' && /'preload'/.test(warning.message)) ||
     (warning.code === 'CIRCULAR_DEPENDENCY' &&
       /[/\\]@sapper[/\\]/.test(warning.message)) ||
     onwarn(warning)
@@ -115,6 +116,9 @@ export default {
       replace({
         'process.browser': false,
         'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.VERCEL_GITHUB_COMMIT_SHA': JSON.stringify(
+          process.env.VERCEL_GITHUB_COMMIT_SHA || Date.now()
+        ),
       }),
       svelte({
         generate: 'ssr',
@@ -144,6 +148,9 @@ export default {
       replace({
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.VERCEL_GITHUB_COMMIT_SHA': JSON.stringify(
+          process.env.VERCEL_GITHUB_COMMIT_SHA || Date.now()
+        ),
       }),
       commonjs(),
       !dev && terser(),

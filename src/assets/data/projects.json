@@ -24,7 +24,7 @@
     "stack": "React, JavaScript, HTML, CSS, WebCrypto",
     "title": "FortKnoxster Web App",
     "type": "Web App",
-    "url": "https://web.fortknoxster.com/",
+    "url": "",
     "visible": true
   },
   {
@@ -38,7 +38,7 @@
     "stack": "React, JavaScript, HTML, CSS",
     "title": "Heineken Backoffice Portal",
     "type": "Web App",
-    "url": "https://www.heineken.com/",
+    "url": "",
     "visible": true
   },
   {
@@ -53,7 +53,7 @@
     "stack": "Ionic, Angular, JavaScript, HTML, CSS",
     "title": "BP Fuels Apps.",
     "type": "Hybrid Apps",
-    "url": "https://www.bp.com/",
+    "url": "",
     "visible": true
   },
   {
@@ -80,7 +80,7 @@
         "stack": "Swift",
         "title": "Herfy Delivery",
         "type": "Native iOS App",
-        "url": "https://apps.apple.com/app/herfy-delivery/id1300514088",
+        "url": "",
         "visible": false
   },
   {
@@ -94,7 +94,7 @@
     "stack": "Angular, JavaScript, HTML, CSS",
     "title": "Jaguar Land Rover",
     "type": "Web App",
-    "url": "https://www.jaguarlandrover.com/",
+    "url": "",
     "visible": true
   },
   {
@@ -108,7 +108,7 @@
     "stack": "React, JavaScript, HTML, CSS",
     "title": "ARM Deal Evaluator",
     "type": "Web App",
-    "url": "https://www.arm.com/",
+    "url": "",
     "visible": true
   },
   {
@@ -192,7 +192,7 @@
     "stack": "angular, javascript, npm, bash, html, css",
     "title": "Packlink Pro",
     "type": "AngularJS Web App",
-    "url": "https://pro.packlink.es",
+    "url": "",
     "visible": false
   },
   {
@@ -206,7 +206,7 @@
     "stack": "Angular, JavaScript, HTML, CSS",
     "title": "Packlink Pro eBay",
     "type": "Web App eBay Integration",
-    "url": "https://envios.ebay.es",
+    "url": "",
     "visible": true
   },
   {
@@ -233,7 +233,7 @@
     "stack": "Java, jQuery, JavaScript, HTML, CSS",
     "title": "British Airways",
     "type": "Web App Integration",
-    "url": "https://www.britishairways.com",
+    "url": "",
     "visible": true
   },
   {
@@ -247,7 +247,7 @@
     "stack": "Java, jQuery, JavaScript, HTML, CSS",
     "title": "Iberia",
     "type": "Web App Integration",
-    "url": "https://www.iberia.com",
+    "url": "",
     "visible": true
   },
   {
