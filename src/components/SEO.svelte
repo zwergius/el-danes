@@ -8,7 +8,8 @@
   export let fbImg = '' // Recommended: up to 1200x630
 
   const { page } = stores()
-  const url = $page.host.startsWith('www') ? $page.host : `www.${$page.host}`
+  //  const url = $page.host.startsWith('www') ? $page.host : `www.${$page.host}`
+  const url = `www.eldanés.com`
   const path = $page.path.substring(3)
 
   const canonicalUrl = `https://${url}/${$page.params.lang}${path}`

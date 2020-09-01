@@ -26,13 +26,14 @@
 	     the current page has one -->
     %sapper.head%
 
+    <!-- Loads and sets initial theme -->
+    <script src="/init-theme.js"></script>
     <!-- Sapper creates a <script> tag containing `src/client.js`
 	     and anything else it needs to hydrate the app and
 	     initialise the router -->
     %sapper.scripts%
   </head>
   <body>
-    <script src="/init-theme.js"></script>
     <!-- The application will be rendered inside this element,
 	     because `src/client.js` references it -->
     <div id="sapper">%sapper.html%</div>
