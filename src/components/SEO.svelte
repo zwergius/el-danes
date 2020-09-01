@@ -1,20 +1,20 @@
 <script>
   import { _ } from 'svelte-i18n'
   import { stores } from '@sapper/app'
-
-  const { page } = stores()
-  //  const url = $page.host.startsWith('www') ? $page.host : `www.${$page.host}`
   const url = `www.eldanés.com`
-  const path = $page.path.substring(3)
-
-  const canonicalUrl = `https://${url}/${$page.params.lang}${path}`
-  const siteName = 'El Danés Solutions'
-  const metaTitle = title ? `${title} - ${siteName}` : siteName
 
   export let title = $_('meta.title')
   export let description = $_('meta.description')
   export let twitterImg = '' // 120x120
   export let fbImg = `https://${url}/el-danes-tablet.jpg` // Recommended: up to 1200x630
+
+  const { page } = stores()
+  //  const url = $page.host.startsWith('www') ? $page.host : `www.${$page.host}`
+  const path = $page.path.substring(3)
+
+  const canonicalUrl = `https://${url}/${$page.params.lang}${path}`
+  const siteName = 'El Danés Solutions'
+  const metaTitle = title ? `${title} - ${siteName}` : siteName
 </script>
 
 <svelte:head>
