@@ -6,9 +6,9 @@
   export let title = $_('meta.title')
   export let description = $_('meta.description')
   export let twitterImg = '' // 120x120
-  export let fbImg = `https://${url}/el-danes-tablet.jpg` // Recommended: up to 1200x630
 
   const { page } = stores()
+  export let fbImg = `https://${$page.host}/el-danes-tablet.jpg` // Recommended: up to 1200x630
   //  const url = $page.host.startsWith('www') ? $page.host : `www.${$page.host}`
   const path = $page.path.substring(3)
 
@@ -21,11 +21,11 @@
   <title>{metaTitle}</title>
   <meta name="description" content="{description}" />
   <!-- Open Graph data -->
-  <meta name="og:title" content="{metaTitle}" />
-  <meta name="og:image" content="{fbImg}" />
-  <meta name="og:description" content="{description}" />
-  <meta name="og:type" content="website" />
-  <meta name="og:url" content="{canonicalUrl}" />
+  <meta property="og:title" content="{metaTitle}" />
+  <meta property="og:image" content="{fbImg}" />
+  <meta property="og:description" content="{description}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{canonicalUrl}" />
   <meta property="og:site_name" content="{siteName}" />
   <!-- Twitter Card data -->
   <meta name="twitter:card" content="summary" />
