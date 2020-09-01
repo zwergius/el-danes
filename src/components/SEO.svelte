@@ -6,9 +6,9 @@
   export let title = $_('meta.title')
   export let description = $_('meta.description')
   export let twitterImg = '' // 120x120
-  export let fbImg = `https://${$page.host}/el-danes-tablet.jpg` // Recommended: up to 1200x630
 
   const { page } = stores()
+  export let fbImg = `https://${$page.host}/el-danes-tablet.jpg` // Recommended: up to 1200x630
   //  const url = $page.host.startsWith('www') ? $page.host : `www.${$page.host}`
   const path = $page.path.substring(3)
 
