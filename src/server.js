@@ -17,9 +17,10 @@ export default polka() // You can also use Express
     sirv('static', { dev }),
     i18nMiddleware(),
     sapper.middleware({
-      session: () => ({
+      session: (_, res) => ({
         email: EMAIL,
         phoneNo: PHONE_NO,
+        language: res.language,
       }),
     })
   )

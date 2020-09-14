@@ -22,7 +22,6 @@ $locale.subscribe((value) => {
   if (value === null) return
 
   currentLocale = value
-
   // if running in the client, save the language preference in a cookie
   if (typeof window !== 'undefined') {
     // localStorage.setItem('locale', value)
@@ -62,13 +61,16 @@ export function i18nMiddleware() {
         if (headerLang && headerLang.length > 1) {
           promise = $locale.set(headerLang)
           let language = headerLang.slice(0, 2)
-          if (supportedLanguages.indexOf(language) === -1) language = 'en'
-          res.writeHead(301, { Location: `/${language}` })
+          if (supportedLanguages.indexOf(language) === -1)
+            language = INIT_OPTIONS.fallbackLocale
+          res.language = language
+          res.writeHead(303, { Location: `/${language}` })
           res.end(`Redirect to ${language}`)
           if (promise) return promise.then(() => next())
         }
       } else {
-        res.writeHead(301, { Location: `/${INIT_OPTIONS.fallbackLocale}` })
+        res.language = INIT_OPTIONS.fallbackLocale
+        res.writeHead(303, { Location: `/${INIT_OPTIONS.fallbackLocale}` })
         res.end(`Redirect to ${INIT_OPTIONS.fallbackLocale}`)
       }
     } else if (currentLocale !== urlLocale) {
