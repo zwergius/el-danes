@@ -37,4 +37,9 @@
   <link rel="alternate" href="{`https://${url}/en${path}`}" hreflang="en-gb" />
   <link rel="alternate" href="{`https://${url}/es${path}`}" hreflang="es-es" />
   <link rel="canonical" href="{canonicalUrl}" />
+  <!-- Localized manifest -->
+  <link
+    rel="manifest"
+    href="{`manifest.${$page.params.lang}.json`}"
+    crossorigin="use-credentials" />
 </svelte:head>
