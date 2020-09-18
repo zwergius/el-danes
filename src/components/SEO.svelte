@@ -20,6 +20,7 @@
   <meta name="description" content="{description}" />
   <!-- Open Graph data -->
   <meta property="og:title" content="{metaTitle}" />
+  <!-- MUST be below 300kb for whatsapp to show -->
   <meta property="og:image" content="{fbImg}" />
   <meta property="og:description" content="{description}" />
   <meta property="og:type" content="website" />
