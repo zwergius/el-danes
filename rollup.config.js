@@ -8,6 +8,7 @@ import { terser } from 'rollup-plugin-terser'
 import inlineSvg from 'rollup-plugin-inline-svg'
 import json from '@rollup/plugin-json'
 import alias from '@rollup/plugin-alias'
+import yaml from '@rollup/plugin-yaml'
 import config from 'sapper/config/rollup.js'
 import pkg from './package.json'
 
@@ -44,6 +45,8 @@ const aliases = alias({
       find: '@',
       replacement: path.resolve(__dirname, 'src'),
     },
+    { find: 'assets', replacement: 'src/assets' },
+    { find: 'components', replacement: 'src/components' },
   ],
 })
 const projectRootDir = path.resolve(__dirname)
@@ -55,6 +58,7 @@ export default {
     plugins: [
       aliases,
       json(),
+      yaml(),
       inlineSvg(),
       replace({
         'process.browser': true,
@@ -112,6 +116,7 @@ export default {
     plugins: [
       aliases,
       json(),
+      yaml(),
       inlineSvg(),
       replace({
         'process.browser': false,
