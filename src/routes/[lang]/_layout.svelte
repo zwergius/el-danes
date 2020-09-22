@@ -1,6 +1,10 @@
 <script context="module">
+  const supportedLanguages = ['da', 'en', 'es']
   export async function preload(page) {
     const { lang } = page.params
+    // Unsupported language redirect to 404
+    if (supportedLanguages.indexOf(lang) === -1)
+      return this.error(404, 'Not found')
     return { lang }
   }
 </script>

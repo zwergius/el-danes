@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "npm run dsstore:delete && sapper dev",
     "build": "sapper build --legacy",
-    "export": "npm run dsstore:delete && sapper export --legacy --entry '/ /en /da /es'",
+    "export": "npm run dsstore:delete && sapper export --legacy --entry '/ /en /en/clients /en/contact /da/clients /da/contact /es /es/clients /es/contact /404'",
+    "postexport": "mv __sapper__/export/404/index.html __sapper__/export/404.html",
     "start": "node __sapper__/build",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
