@@ -9,33 +9,27 @@
   <title>{status}</title>
 </svelte:head>
 
-<h1>{status}</h1>
-
-<p>{error.message}</p>
+<div>
+  <h1>{status}</h1>
+  <p>{error.message}</p>
+</div>
 
 {#if dev && error.stack}
   <pre>{error.stack}</pre>
 {/if}
 
 <style>
-  h1,
-  p {
-    margin: 0 auto;
+  div {
+    margin: auto;
+    text-align: center;
   }
-
   h1 {
-    font-size: 2.8em;
+    font-size: var(--font-10);
     font-weight: 700;
-    margin: 0 0 0.5em 0;
   }
 
   p {
+    font-size: var(--font-2);
     margin: 1em auto;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      font-size: 4em;
-    }
   }
 </style>
