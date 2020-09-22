@@ -1,13 +1,12 @@
 <script>
-  import { locale } from 'svelte-i18n'
   import logo from '@/assets/el-danes-logo.svg'
   import bgLogo from '@/assets/el-danes-solutions-logo.svg'
-  export let turn
+  export let lang, turn
 </script>
 
 <div class="logo-container" class:turn>
   <slot />
-  <a href="/{$locale}">
+  <a href="/{lang}">
     <img
       class="main-logo"
       src="data:image/svg+xml;utf8,{logo}"

@@ -1,16 +1,19 @@
 <script>
-  import { _ } from 'svelte-i18n'
-  import Anchor from '@/components/Anchor.svelte'
+  import { stores } from '@sapper/app'
+  import { cases } from 'assets/translations.yaml'
+  const { page } = stores()
+  const lang = $page.params.lang
+  import Anchor from 'components/Anchor.svelte'
 
   let windowHeight
 </script>
 
-<svelte:window bind:innerHeight="{windowHeight}" />
+<svelte:window bind:innerHeight={windowHeight} />
 
 {#if windowHeight}
   <div style="--y-pos: {(windowHeight / 1.35).toFixed(2)}px">
     <Anchor id="clients-link" rel="prefetch" href="/clients">
-      {$_('clients.title')}
+      {cases[lang]}
     </Anchor>
   </div>
 {/if}

@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
-  import { _ } from 'svelte-i18n'
   import { slide } from 'svelte/transition'
+  import { back, contact, menu } from 'assets/translations.yaml'
   import { theme } from '@/stores.js'
   import Anchor from '@/components/Anchor.svelte'
   import Logo from '@/components/Logo.svelte'
@@ -9,7 +9,7 @@
   import ThemeSelector from '@/components/ThemeSelector.svelte'
   import FlipButton from '@/components/FlipButton.svelte'
 
-  export let segment, toggleFlip, showsCode
+  export let lang, toggleFlip, showsCode
 
   const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
   let showsNavigation
@@ -32,23 +32,23 @@
   }
 </script>
 
-<header bind:clientHeight="{height}">
+<header bind:clientHeight={height}>
   {#if showsNavigation}
     <nav class="row {$theme && 'visible'}" transition:slide>
-      <LanguageSelector {segment} />
+      <LanguageSelector {lang} />
       <Anchor id="contact-link" rel="prefetch" href="/contact">
-        {$_('contact.title')}
+        {contact[lang]}
       </Anchor>
       <div class="row">
-        <FlipButton {toggleFlip} flipped="{showsCode}" />
+        <FlipButton {toggleFlip} flipped={showsCode} />
         <ThemeSelector />
       </div>
     </nav>
   {/if}
-  <Logo turn="{showsCode}">
+  <Logo {lang} turn={showsCode}>
     <div class="handheld-row">
-      <button on:click="{toggleShowsNavigation}" type="button">
-        {showsNavigation ? $_('back') : $_('menu')}
+      <button on:click={toggleShowsNavigation} type="button">
+        {showsNavigation ? back[lang] : menu[lang]}
       </button>
     </div>
   </Logo>
@@ -58,7 +58,7 @@
   <div
     style="height: {headerHeight.toFixed(2)}px;"
     class="height-faker"
-    transition:slide></div>
+    transition:slide />
 {/if}
 
 <style>

@@ -1,7 +1,6 @@
 <script context="module">
   export async function preload() {
     const res = await this.fetch('index.json')
-    await this.fetch('sitemap.xml')
     if (res.status === 200) {
       const data = await res.json()
       return { data }
@@ -11,14 +10,17 @@
 </script>
 
 <script>
+  import { stores } from '@sapper/app'
+  const { page } = stores()
   import { onMount } from 'svelte'
-  import { _ } from 'svelte-i18n'
+  import { home } from 'assets/translations.yaml'
   import { pageCode, pageHeader } from '@/stores.js'
   import SEO from '@/components/SEO.svelte'
 
   export let data
+  const { lang } = $page.params
 
-  $pageHeader = $_('home.header')
+  $pageHeader = home.header[lang]
 
   onMount(() => {
     $pageCode = atob(data.content)
@@ -28,16 +30,16 @@
 <SEO />
 
 <div>
-  <p>{$_('home.section-1')}</p>
-  <p>{$_('home.section-2')}</p>
+  <p>{home.section1[lang]}</p>
+  <p>{home.section2[lang]}</p>
 
   <blockquote>
-    <span>&#8220;{$_('home.quote')}&#8221;</span>
-    <cite>&#8213; {$_('home.quoteAuthor')}</cite>
+    <span>&#8220;{home.quote[lang]}&#8221;</span>
+    <cite>&#8213; {home.author[lang]}</cite>
   </blockquote>
 
-  <p>{$_('home.section-3')}</p>
-  <p>{$_('home.section-4')}</p>
+  <p>{home.section3[lang]}</p>
+  <p>{home.section4[lang]}</p>
 </div>
 
 <style>
