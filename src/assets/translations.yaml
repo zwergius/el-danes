@@ -1,0 +1,66 @@
+cases: 
+  da: Cases
+  en: Cases
+  es: Cases
+contact: 
+  da: Kontakt
+  en: Contact
+  es: Contacto
+letsTalk: 
+  da: Vi har aldrig for travlt til at snakke.
+  en: Let's talk??
+  es: Hablamos??
+goodCompany: 
+  da: Vi er i godt selskab.
+  en: We keep good company.
+  es: Estamos en buena compañia.
+view: 
+  da: se!
+  en: view!
+  es: ver!
+menu: 
+  da: menu
+  en: menu
+  es: menu
+back: 
+  da: back
+  en: back
+  es: back
+home:
+  header: 
+    da: Specialister i digitale løsning web & app.
+    en: Specialists in digital solutions web & app.
+    es: Especialistas en soluciones digitales web y app.
+  section1: 
+    da: Godt design skal understøttes af tilsvarende god softwareudvikling. Vores løsninger er lavet med de seneste teknologier som afspejler vores arbejde  hvor det vigtigste er kvalitet, hastighed og effektivitet.
+    en: Great design must be accompanied by equally great software development. Our solutions use cutting-edge technology which reflects our engineering where quality, speed and efficiency is essential.
+    es: Un buen diseño debe estar respaldado por un desarrollo web igualmente excelente. Nuestros productos digitales utilizan las últimas tecnologías para implementar soluciones de calidad donde velocidad, seguridad y eficacia son esenciales.
+  section2: 
+    da: Vi behandler vores kunders projekter, som var de vores egne og vi vil være jeres supportpartner fra idé til eksekvering. Vi udvikler efter jeres behov og forventninger. For os er opgaven først løst, når kunden er tilfreds. 
+    en: We treat our customers projects as if they were our own and will be your supporting partner from idea to execution, building and customising to your needs and expectations, so you and your clients can reach your objectives in the best possible way.
+    es: Tus proyectos son los nuestros, siendo tus partners desde la conceptualización del proyecto hasta los últimos pasos de su ejecución. Personalizamos cada detalle del proyecto para cumplir expectativas y poder alcanzar todos tus objetivos.
+  section3: 
+    da: Vi elsker at “nørde” med de seneste trends og innovationer. I kan derfor stole på, at vi kan garantere jer med en “state of the art” løsning.
+    en: We love ‘nerding’ around with the latest trends and innovations, you can rely on us, to guarantee you with a state of the art solution.
+    es: Nos encanta ”nerdear” con las últimas tendencias e innovaciones para garantizarte soluciones novedosas y diferenciales.
+  section4: 
+    da: Vi er passionerede omkring kvalitet og med sans for detaljen. Vi nyder at bygge kreative design drevne webs & apps og vi er altid spændte på at lave noget nyt og unikt.
+    en: Passionate about quality with a meticulous sense for detail, we enjoy building creative design driven webs & apps. We are always anxious to create something new and unique to take your digital product to the next level.
+    es: Somos unos apasionados de la calidad con un sentido estricto de los detalles. Disfrutamos creando webs y aplicaciones creativas basadas en grandes y eficaces diseños. Siempre estamos ansiosos por crear algo nuevo y único para llevar tu producto digital al siguiente nivel.
+  quote: 
+    da: Pleasure in the job puts perfection in the work.
+    en: Pleasure in the job puts perfection in the work.
+    es: El placer en la tarea pone la perfección en el trabajo.
+  author: 
+    da: Aristoteles
+    en: Aristoteles
+    es: Aristoteles
+meta: 
+  title:
+    da: Kreativ website & app udvikling.
+    en: Creative website & app development.
+    es: Desarrollo creativo web & app.
+  description: 
+    da: Vi er et web & app udviklings firma som specialiserer os i kreative webs, Jamstack webs, single page apps og progressive web apps.
+    en: We are a web & app development agency specializing in creative webs, Jamstack webs, progressive web apps, single page apps.
+    es: Somos una agencia de desarrollo web & app especializado en webs creativos, Jamstack webs, single page apps y progressive web apps.

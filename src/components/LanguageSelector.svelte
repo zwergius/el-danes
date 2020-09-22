@@ -1,44 +1,36 @@
 <script>
-  import { locale } from 'svelte-i18n'
   import Anchor from '@/components/Anchor.svelte'
-  export let segment
-
-  function handleClick(language) {
-    locale.set(language)
-  }
+  export let lang
 </script>
 
 <ul>
   <li>
     <Anchor
-      aria-current="{segment === 'en' ? 'language' : undefined}"
+      aria-current={lang === 'en' ? 'language' : undefined}
       class="language-switch"
       href="/en"
       rel="prefetch"
-      target="_self"
-      on:click="{() => handleClick('en')}">
+      target="_self">
       EN
     </Anchor>
   </li>
   <li>
     <Anchor
-      aria-current="{segment === 'es' ? 'language' : undefined}"
+      aria-current={lang === 'es' ? 'language' : undefined}
       class="language-switch"
       href="/es"
       rel="prefetch"
-      target="_self"
-      on:click="{() => handleClick('es')}">
+      target="_self">
       SP
     </Anchor>
   </li>
   <li>
     <Anchor
-      aria-current="{segment === 'da' ? 'language' : undefined}"
+      aria-current={lang === 'da' ? 'language' : undefined}
       class="language-switch"
       href="/da"
       rel="prefetch"
-      target="_self"
-      on:click="{() => handleClick('da')}">
+      target="_self">
       DA
     </Anchor>
   </li>

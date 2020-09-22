@@ -11,7 +11,8 @@
 
 <script>
   import { onMount } from 'svelte'
-  import { _ } from 'svelte-i18n'
+  import { stores } from '@sapper/app'
+  import { goodCompany, view } from 'assets/translations.yaml'
   import { pageCode, pageHeader, theme } from '@/stores.js'
   import projectsData from '@/assets/data/projects.json'
   import SEO from '@/components/SEO.svelte'
@@ -19,8 +20,10 @@
   import Anchor from '@/components/Anchor.svelte'
 
   export let data
+  const { page } = stores()
+  const lang = $page.params.lang
 
-  $pageHeader = $_('clients.header')
+  $pageHeader = goodCompany[lang]
 
   onMount(() => {
     $pageCode = atob(data.content)
@@ -31,22 +34,22 @@
     .sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()))
 </script>
 
-<SEO title="{$_('clients.title')}" />
+<SEO title={goodCompany[lang]} />
 
 <section>
   <ul>
     {#each projects as client}
-      <Hoverable let:hovering="{isHovering}">
+      <Hoverable let:hovering={isHovering}>
         <li class:isHovering>
           {#if client.url}
             <Anchor
-              id="{client.id}"
+              id={client.id}
               class="client-link"
-              href="{client.url}"
+              href={client.url}
               rel="external noopener"
               target="_blank">
               {client.name}
-              <span>{$_('view')}</span>
+              <span>{view[lang]}</span>
 
               {#if isHovering}
                 <div

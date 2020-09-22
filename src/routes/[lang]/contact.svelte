@@ -12,14 +12,17 @@
 
 <script>
   import { onMount } from 'svelte'
-  import { _ } from 'svelte-i18n'
+  import { stores } from '@sapper/app'
+  const { page } = stores()
+  import { contact, letsTalk } from 'assets/translations.yaml'
   import { pageCode, pageHeader } from '@/stores.js'
   import Anchor from '@/components/Anchor.svelte'
   import SEO from '@/components/SEO.svelte'
 
   export let data, email, phoneNo
+  const { lang } = $page.params
 
-  $pageHeader = $_('contact.header')
+  $pageHeader = letsTalk[lang]
 
   onMount(() => {
     $pageCode = atob(data.content)
@@ -31,15 +34,15 @@
   }
 </script>
 
-<SEO title="{$_('contact.title')}" />
+<SEO title={contact[lang]} />
 
 <section>
   <ul>
     <li>
-      <Anchor on:click="{handleEmail}">{email}</Anchor>
+      <Anchor on:click={handleEmail}>{email}</Anchor>
     </li>
     <li>
-      <Anchor id="telephone-link" href="{`tel:${phoneNo}`}" target="_self">
+      <Anchor id="telephone-link" href={`tel:${phoneNo}`} target="_self">
         {phoneNo}
       </Anchor>
     </li>
@@ -60,7 +63,6 @@
         target="_blank">
         github
       </Anchor>
-
     </li>
     <li>
       <Anchor

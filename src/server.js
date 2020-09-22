@@ -4,8 +4,6 @@ import polka from 'polka'
 import compression from 'compression'
 import * as sapper from '@sapper/server'
 
-import { i18nMiddleware } from './i18n.js'
-
 config()
 
 const { EMAIL, PHONE_NO, PORT, NODE_ENV } = process.env
@@ -15,12 +13,10 @@ export default polka() // You can also use Express
   .use(
     compression({ threshold: 0 }),
     sirv('static', { dev }),
-    i18nMiddleware(),
     sapper.middleware({
-      session: (_, res) => ({
+      session: () => ({
         email: EMAIL,
         phoneNo: PHONE_NO,
-        language: res.language,
       }),
     })
   )

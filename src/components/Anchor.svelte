@@ -1,13 +1,15 @@
 <script>
-  import { locale } from 'svelte-i18n'
+  import { stores } from '@sapper/app'
+  const { page } = stores()
+  const lang = $page.params.lang
   export let href = null,
     target = null
 
-  $: path = target ? href : `${$locale}${href}`
+  $: path = target ? href : `${lang}${href}`
 </script>
 
 {#if href}
-  <a href="{path}" {target} {...$$restProps}>
+  <a href={path} {target} {...$$restProps}>
     <slot />
   </a>
 {:else}

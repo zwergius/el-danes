@@ -1,6 +1,5 @@
 <footer>
   <h1>
-
     <slot />
   </h1>
   <div class="copyright">
