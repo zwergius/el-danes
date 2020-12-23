@@ -28,21 +28,21 @@ back:
   es: back
 home:
   header: 
-    da: Specialister i digitale løsning web & app.
-    en: Specialists in digital solutions web & app.
-    es: Especialistas en soluciones digitales web y app.
+    da: Specialiserede i digitale løsninger web & mobil.
+    en: Specialised in digital solutions web & mobile.
+    es: Especializado en soluciones digitales web & móvil.
   section1: 
-    da: Godt design skal understøttes af tilsvarende god softwareudvikling. Vores løsninger er lavet med de seneste teknologier som afspejler vores arbejde  hvor det vigtigste er kvalitet, hastighed og effektivitet.
-    en: Great design must be accompanied by equally great software development. Our solutions use cutting-edge technology which reflects our engineering where quality, speed and efficiency is essential.
-    es: Un buen diseño debe estar respaldado por un desarrollo web igualmente excelente. Nuestros productos digitales utilizan las últimas tecnologías para implementar soluciones de calidad donde velocidad, seguridad y eficacia son esenciales.
+    da: Godt design skal understøttes af tilsvarende god softwareudvikling.
+    en: Great design must be accompanied by equally great software development.
+    es: Un buen diseño debe estar respaldado por un desarrollo web igualmente excelente.
   section2: 
-    da: Vi behandler vores kunders projekter, som var de vores egne og vi vil være jeres supportpartner fra idé til eksekvering. Vi udvikler efter jeres behov og forventninger. For os er opgaven først løst, når kunden er tilfreds. 
-    en: We treat our customers projects as if they were our own and will be your supporting partner from idea to execution, building and customising to your needs and expectations, so you and your clients can reach your objectives in the best possible way.
-    es: Tus proyectos son los nuestros, siendo tus partners desde la conceptualización del proyecto hasta los últimos pasos de su ejecución. Personalizamos cada detalle del proyecto para cumplir expectativas y poder alcanzar todos tus objetivos.
+    da: Dit projekt er vores projekt. El Danés vil være din supportpartner fra idé til eksekvering og hjælper med at tage de rigtige beslutninger fra start til slut, så I og jeres klienter på bedst mulig måde får indfriet jeres forventninger.
+    en: Your project is our project. El Danés will be your supporting partner from idea to execution, helping you take the right decisions from start to finish so you and your clients can reach your objectives in the best possible way.
+    es: Tu proyecto es nuestro proyector., El Danés será tu socio desde la idea hasta la ejecución, tomando las decisiones correctas de principio a fin, para que tú y tus clientes alcancéis vuestros objetivos de la mejor manera posible.
   section3: 
-    da: Vi elsker at “nørde” med de seneste trends og innovationer. I kan derfor stole på, at vi kan garantere jer med en “state of the art” løsning.
-    en: We love ‘nerding’ around with the latest trends and innovations, you can rely on us, to guarantee you with a state of the art solution.
-    es: Nos encanta ”nerdear” con las últimas tendencias e innovaciones para garantizarte soluciones novedosas y diferenciales.
+    da: Vi elsker at ‘nørde‘ med de seneste trends og innovationer. I kan derfor stole på, at vi kan garantere jer med en “state of the art” løsning. Du får en individuel løsning som er 100% skræddersyet efter dine behov, lavet med de seneste teknologier hvor kvalitet, hastighed og effektivitet er i fokus.
+    en: We love ‘nerding’ around with the latest trends and innovations, you can rely on us, to guarantee you with a state of the art solution. You get a 100% custom built solution tailored to your needs, using cutting edge technology where quality, speed and efficiency is essential.
+    es: Nos encanta el ‘nerdear‘ con las últimas tendencias e innovaciones. Puedes confiar en nosotros para garantizarte la solución más vanguardista. Conseguirás una solución 100% personalizada que se adapte a tus necesidades, usando las últimas tecnologías donde calidad, velocidad y eficacia son el foco.
   section4: 
     da: Vi er passionerede omkring kvalitet og med sans for detaljen. Vi nyder at bygge kreative design drevne webs & apps og vi er altid spændte på at lave noget nyt og unikt.
     en: Passionate about quality with a meticulous sense for detail, we enjoy building creative design driven webs & apps. We are always anxious to create something new and unique to take your digital product to the next level.
@@ -57,10 +57,10 @@ home:
     es: Aristoteles
 meta: 
   title:
-    da: Kreativ website & app udvikling.
-    en: Creative website & app development.
-    es: Desarrollo creativo web & app.
+    da: Design drevet website & app udvikling.
+    en: Design driven website & app development.
+    es: Desarrollo web & app impulsado por el diseño.
   description: 
-    da: Vi er et web & app udviklings firma som specialiserer os i kreative webs, Jamstack webs, single page apps og progressive web apps.
-    en: We are a web & app development agency specializing in creative webs, Jamstack webs, progressive web apps, single page apps.
-    es: Somos una agencia de desarrollo web & app especializado en webs creativos, Jamstack webs, single page apps y progressive web apps.
+    da: App & web udviklings firma som specialiserer os i kreative webs, Jamstack webs, single page apps og progressive web apps.
+    en: App & web development agency specializing in creative webs, Jamstack webs, progressive web apps, single page apps.
+    es: Agencia de desarrollo web & app especializado en webs creativos, Jamstack webs, single page apps y progressive web apps.
