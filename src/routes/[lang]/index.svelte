@@ -1,9 +1,10 @@
 <script context="module">
-  export async function preload() {
+  export async function preload(_, session) {
+    const { email } = session
     const res = await this.fetch('index.json')
     if (res.status === 200) {
       const data = await res.json()
-      return { data }
+      return { data, email }
     }
     this.error(404, 'Not found')
   }
@@ -16,8 +17,9 @@
   import { home } from 'assets/translations.yaml'
   import { pageCode, pageHeader } from '@/stores.js'
   import SEO from '@/components/SEO.svelte'
+  import Anchor from '@/components/Anchor.svelte'
 
-  export let data
+  export let data, email
   const { lang } = $page.params
 
   $pageHeader = home.header[lang]
@@ -25,6 +27,11 @@
   onMount(() => {
     $pageCode = atob(data.content)
   })
+
+  function handleEmail(e) {
+    e.preventDefault()
+    window.location.href = `mailto:${email}`
+  }
 </script>
 
 <SEO />
@@ -38,8 +45,8 @@
     <p>{home.section2[lang]}</p>
 
     <ul>
-     <li>{home.section2.item1[lang]}</li>
-     <li>{home.section2.item2[lang]}</li>
+      <li>{home.section2.item1[lang]}</li>
+      <li>{home.section2.item2[lang]}</li>
     </ul>
   </section>
 
@@ -56,15 +63,20 @@
     <p>{home.section4[lang]}</p>
 
     <ul>
-     <li>{home.section4.item1[lang]}</li>
-     <li>{home.section4.item2[lang]}</li>
+      <li>{home.section4.item1[lang]}</li>
+      <li>{home.section4.item2[lang]}</li>
     </ul>
 
     <p>{home.section5[lang]}</p>
   </section>
 
   <section>
-    <p>{home.section6[lang]}</p>
+    <p>
+      {home.section6[lang]}
+      <Anchor class="call-to-action" onClick={handleEmail}>
+        &#8594;{home.callToAction[lang]}
+      </Anchor>
+    </p>
   </section>
 </div>
 
@@ -105,6 +117,10 @@
 
   blockquote:hover cite {
     opacity: 1;
+  }
+
+  :global(button.call-to-action::after) {
+    width: 100%;
   }
 
   /* Tablet - 768px */

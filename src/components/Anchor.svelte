@@ -3,7 +3,8 @@
   const { page } = stores()
   const lang = $page.params.lang
   export let href = null,
-    target = null
+    target = null,
+    onClick = null
 
   $: path = target ? href : `${lang}${href}`
 </script>
@@ -13,7 +14,7 @@
     <slot />
   </a>
 {:else}
-  <button type="button" {...$$restProps}>
+  <button type="button" on:click={onClick} {...$$restProps}>
     <slot />
   </button>
 {/if}
@@ -24,6 +25,7 @@
     display: inline-block;
     transition: all 0.275s ease-in-out;
     position: relative;
+    outline: none;
   }
 
   a::after,

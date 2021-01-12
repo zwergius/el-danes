@@ -39,7 +39,7 @@
 <section>
   <ul>
     <li>
-      <Anchor on:click={handleEmail}>{email}</Anchor>
+      <Anchor onClick={handleEmail}>{email}</Anchor>
     </li>
     <li>
       <Anchor id="telephone-link" href={`tel:${phoneNo}`} target="_self">
