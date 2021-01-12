@@ -30,16 +30,42 @@
 <SEO />
 
 <div>
-  <p>{home.section1[lang]}</p>
-  <p>{home.section2[lang]}</p>
+  <section>
+    <p>{home.section1[lang]}</p>
+  </section>
+
+  <section>
+    <p>{home.section2[lang]}</p>
+
+    <ul>
+     <li>{home.section2.item1[lang]}</li>
+     <li>{home.section2.item2[lang]}</li>
+    </ul>
+  </section>
+
+  <section>
+    <p>{home.section3[lang]}</p>
+  </section>
 
   <blockquote>
     <span>&#8220;{home.quote[lang]}&#8221;</span>
     <cite>&#8213; {home.author[lang]}</cite>
   </blockquote>
 
-  <p>{home.section3[lang]}</p>
-  <p>{home.section4[lang]}</p>
+  <section>
+    <p>{home.section4[lang]}</p>
+
+    <ul>
+     <li>{home.section4.item1[lang]}</li>
+     <li>{home.section4.item2[lang]}</li>
+    </ul>
+
+    <p>{home.section5[lang]}</p>
+  </section>
+
+  <section>
+    <p>{home.section6[lang]}</p>
+  </section>
 </div>
 
 <style>
@@ -47,8 +73,14 @@
     overflow-wrap: break-word;
   }
 
-  p {
+  section {
     margin-bottom: var(--space-4);
+  }
+
+  ul {
+    margin: var(--space-3) 0;
+    margin-left: var(--space-7);
+    list-style: disc;
   }
 
   blockquote {
@@ -80,7 +112,7 @@
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
-    p {
+    section {
       margin-bottom: var(--space-5);
     }
 

@@ -42,17 +42,17 @@
 <main style="height: {h}px;">
   <div class="scene">
     {#if !showsCode}
-      <section class="side front" transition:turn>
+      <div class="side front" transition:turn>
         <div class="content" bind:clientHeight={h}>
           <slot />
         </div>
-      </section>
+      </div>
     {:else}
-      <section class="side back" transition:turn>
+      <div class="side back" transition:turn>
         <div class="content" bind:clientHeight={h}>
           <Code data={$pageCode} />
         </div>
-      </section>
+      </div>
     {/if}
   </div>
 </main>
@@ -79,7 +79,7 @@
     perspective: 900000px; /* Safari hack */
   }
 
-  section.side {
+  div.side {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -105,7 +105,7 @@
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
-    section.side {
+    div.side {
       font-size: var(--font-7);
     }
 
@@ -121,7 +121,7 @@
   }
   /* Desktop 2560px*/
   @media only screen and (min-width: 160em) {
-    section.side {
+    div.side {
       font-size: var(--font-10);
     }
 

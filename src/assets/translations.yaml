@@ -32,21 +32,49 @@ home:
     en: Specialised in digital solutions web & mobile.
     es: Especializado en soluciones digitales web & móvil.
   section1: 
-    da: Godt design skal understøttes af tilsvarende god softwareudvikling.
-    en: Great design must be accompanied by equally great software development.
+    da: Vil du gerne skille dig ud digitalt? - Jeg kan hjælpe!
+    en: Want your digital product to stand out? - I can help!
     es: Un buen diseño debe estar respaldado por un desarrollo web igualmente excelente.
   section2: 
-    da: Dit projekt er vores projekt. El Danés vil være din supportpartner fra idé til eksekvering og hjælper med at tage de rigtige beslutninger fra start til slut, så I og jeres klienter på bedst mulig måde får indfriet jeres forventninger.
-    en: Your project is our project. El Danés will be your supporting partner from idea to execution, helping you take the right decisions from start to finish so you and your clients can reach your objectives in the best possible way.
+    da: 'Skal du have udviklet, website, webshop, app eller andre digitale produkter? Lad El Danés være din digitale partner, som:'
+    en: 'Do you need a website, webshop, app or any other digital product? Let El Danés be your digital partner who:'
     es: Tu proyecto es nuestro proyector., El Danés será tu socio desde la idea hasta la ejecución, tomando las decisiones correctas de principio a fin, para que tú y tus clientes alcancéis vuestros objetivos de la mejor manera posible.
+    item1:
+      da: Hjælper dig med at træffe de rigtige beslutninger fra start til slut. Stol på vores erfaring.
+      en: Helps you make the right decisions from start to finish. Trust our experience.
+      es: Especializado en soluciones digitales web & móvil.
+    item2:
+      da: Håndterer alle de tekniske detaljer, fra udvikling til lancering.
+      en: Handles all the technical details from development to launch.
+      es: Especializado en soluciones digitales web & móvil.
   section3: 
-    da: Vi elsker at ‘nørde‘ med de seneste trends og innovationer. I kan derfor stole på, at vi kan garantere jer med en “state of the art” løsning. Du får en individuel løsning som er 100% skræddersyet efter dine behov, lavet med de seneste teknologier hvor kvalitet, hastighed og effektivitet er i fokus.
-    en: We love ‘nerding’ around with the latest trends and innovations, you can rely on us, to guarantee you with a state of the art solution. You get a 100% custom built solution tailored to your needs, using cutting edge technology where quality, speed and efficiency is essential.
+    da: Du får en eksklusiv løsning som er skræddersyet 100% efter dine behov. Bygget med de seneste innovative teknologier, hvor kvalitet, hastighed, effektivitet og automatisering er i fokus.
+    en: You get an exclusive solution 100% tailored to your needs. Built with cutting edge technology where quality, speed, efficiency and automatisation are essential.
     es: Nos encanta el ‘nerdear‘ con las últimas tendencias e innovaciones. Puedes confiar en nosotros para garantizarte la solución más vanguardista. Conseguirás una solución 100% personalizada que se adapte a tus necesidades, usando las últimas tecnologías donde calidad, velocidad y eficacia son el foco.
   section4: 
-    da: Vi er passionerede omkring kvalitet og med sans for detaljen. Vi nyder at bygge kreative design drevne webs & apps og vi er altid spændte på at lave noget nyt og unikt.
-    en: Passionate about quality with a meticulous sense for detail, we enjoy building creative design driven webs & apps. We are always anxious to create something new and unique to take your digital product to the next level.
+    da: 'El Danés elsker at "nørde" med de seneste trends og innovationer. Vi kan derfor garantere jer med en optimal løsning, hvor I får:'
+    en: 'El Danés loves “nerding” around with the latest trends & innovations. This enables us to guarantee you with an optimal solution where you get:'
     es: Somos unos apasionados de la calidad con un sentido estricto de los detalles. Disfrutamos creando webs y aplicaciones creativas basadas en grandes y eficaces diseños. Siempre estamos ansiosos por crear algo nuevo y único para llevar tu producto digital al siguiente nivel.
+    item1:
+      da: Fuld kontrol & fleksibilitet
+      en: Full control & flexibility.
+      es: 
+    item2:
+      da: Mulighed for selv at tilføje & rette tekst og billeder uden altid at skulle have ekstern hjælp.
+      en: The ability to add & edit content without without always needing external assistance.
+      es: 
+  section5: 
+    da: Selvstyring vil fremme jeres vækst, og El Danés tilbyder en smertefri vej til markedet for dit produkt eller idé.
+    en: Being self-sustaining will promote your growth and El Danés offers the smoothest path to market for your product or idea.
+    es: Somos unos apasionados de la calidad con un sentido estricto de los detalles. Disfrutamos creando webs y aplicaciones creativas basadas en grandes y eficaces diseños. Siempre estamos ansiosos por crear algo nuevo y único para llevar tu producto digital al siguiente nivel.
+  section6: 
+    da: Lad os starte digitale rejse nu. El Danés er nysgerrig efter at høre om din idé, jeres produkt eller udfordring og ivrig efter at komme igang.
+    en: Let’s kick off your new digital journey today. El Danés is eager to hear about your idea, digital product or challenge and excited to guide you through the process.
+    es: Somos unos apasionados de la calidad con un sentido estricto de los detalles. Disfrutamos creando webs y aplicaciones creativas basadas en grandes y eficaces diseños. Siempre estamos ansiosos por crear algo nuevo y único para llevar tu producto digital al siguiente nivel.
+  callToAction:
+    da: Lad os tage en snak
+    en: Reach out NOW
+    es:
   quote: 
     da: Pleasure in the job puts perfection in the work.
     en: Pleasure in the job puts perfection in the work.
