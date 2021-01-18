@@ -71,12 +71,13 @@
   </section>
 
   <section>
-    <p>
-      {home.section6[lang]}
-      <Anchor class="call-to-action" onClick={handleEmail}>
-        &#8594;{home.callToAction[lang]}
-      </Anchor>
-    </p>
+    <p>{home.section6[lang]}</p>
+  </section>
+
+  <section>
+    <Anchor class="call-to-action" onClick={handleEmail}>
+      &#8594;{home.callToAction[lang]}
+    </Anchor>
   </section>
 </div>
 

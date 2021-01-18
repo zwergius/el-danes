@@ -51,9 +51,10 @@
     }))
   }
 
-  function handlePanEnd() {
+  function handlePanEnd(e) {
+    const { isTouch } = e.detail
     window.clearTimeout(isPanningTimer)
-    isPanning = false
+    if (isTouch) isPanning = false
   }
 
   function handleAnchorClick(e) {
@@ -73,11 +74,13 @@
     on:panmove={handlePanMove}
     on:panend={handlePanEnd}
     on:mouseenter={handleMouseEnter}
-    style="transform: translate3d({$coords.x}px, {$coords.y}px, 0) rotate({$coords.rotation}deg); --y-pos: {(windowHeight / 1.35).toFixed(2)}px">
+    style="transform: translate3d({$coords.x}px, {$coords.y}px, 0) rotate({$coords.rotation}deg); --y-pos: {(windowHeight / 1.5).toFixed(2)}px">
     <Anchor
       id="clients-link"
       href="/cases"
       rel="prefetch"
+      draggable="false"
+      ondragstart="return false;"
       onClick={handleAnchorClick}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 311.98 129.1">
         <ellipse class="cls-1" cx="155.99" cy="64.55" rx="154.99" ry="63.55" />
@@ -101,6 +104,7 @@
     top: var(--y-pos);
     z-index: 1;
     right: var(--space-3);
+    transition: top 0.2s ease;
   }
 
   :global(#clients-link::after) {

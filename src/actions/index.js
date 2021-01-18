@@ -40,7 +40,7 @@ export function pannable(node) {
 
     node.dispatchEvent(
       new CustomEvent('panend', {
-        detail: { x, y },
+        detail: { x, y, isTouch: e.type === 'touchend' },
       })
     )
 
@@ -51,7 +51,7 @@ export function pannable(node) {
   }
 
   node.addEventListener('mousedown', handleMousedown)
-  node.addEventListener('touchstart', handleMousedown)
+  node.addEventListener('touchstart', handleMousedown, { passive: false })
 
   return {
     destroy() {
