@@ -124,7 +124,7 @@
     }
 
     .content {
-      padding: var(--space-5);
+      padding: var(--space-6);
     }
   }
 </style>

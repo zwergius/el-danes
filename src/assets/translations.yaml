@@ -26,6 +26,10 @@ back:
   da: back
   en: back
   es: back
+mailToSubject:
+  da: 🤗 Hej El Danés
+  en: 🤗 Hi El Danés
+  es: 🤗 Hola El Danés
 home:
   header: 
     da: Specialiserede i digitale løsninger web & mobil.

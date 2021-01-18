@@ -112,7 +112,7 @@
     fill: var(--background);
     stroke: var(--text);
     stroke-width: 2px;
-    width: calc(13em + 1vh + 1vw);
+    width: calc(11em + 1vh + 1vw);
     transition: all 0.5s linear;
   }
 
@@ -128,6 +128,10 @@
       right: var(--space-3);
       transition: none;
     }
+
+    svg {
+      width: calc(13em + 1vh + 1vw);
+    }
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
@@ -140,6 +144,9 @@
     div {
       right: var(--space-6);
       /* TODO check padding */
+    }
+    svg {
+      width: calc(20em + 1vh + 1vw);
     }
   }
 </style>

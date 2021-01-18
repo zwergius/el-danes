@@ -14,7 +14,7 @@
   import { stores } from '@sapper/app'
   const { page } = stores()
   import { onMount } from 'svelte'
-  import { home } from 'assets/translations.yaml'
+  import { home, mailToSubject } from 'assets/translations.yaml'
   import { pageCode, pageHeader } from '@/stores.js'
   import SEO from '@/components/SEO.svelte'
   import Anchor from '@/components/Anchor.svelte'
@@ -30,7 +30,7 @@
 
   function handleEmail(e) {
     e.preventDefault()
-    window.location.href = `mailto:${email}`
+    window.location.href = `mailto:${email}?subject=${mailToSubject[lang]}`
   }
 </script>
 
@@ -91,7 +91,7 @@
 
   ul {
     margin: var(--space-3) 0;
-    margin-left: var(--space-7);
+    margin-left: var(--space-4);
     list-style: disc;
   }
 
@@ -125,6 +125,9 @@
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
+    ul {
+      margin-left: var(--space-5);
+    }
   }
   /* Desktop - 1080px*/
   @media only screen and (min-width: 67.5em) {
@@ -141,6 +144,17 @@
 
     blockquote {
       margin-bottom: var(--space-5);
+    }
+
+    ul {
+      margin-left: var(--space-6);
+      margin-bottom: var(--space-5);
+    }
+  }
+  /* Desktop 2560px*/
+  @media only screen and (min-width: 160em) {
+    ul {
+      margin-left: var(--space-7);
     }
   }
 </style>
