@@ -1,14 +1,84 @@
 <script>
+  import { spring } from 'svelte/motion'
   import Anchor from 'components/Anchor.svelte'
+  import { pannable } from '@/actions'
 
   let windowHeight
+  let isPanningTimer
+  let isPanning = false
+  let didHover = false
+
+  const coords = spring(
+    { x: 0, y: 0, rotation: -11 },
+    {
+      stiffness: 0.2,
+      damping: 0.4,
+    }
+  )
+
+  $: coords.update(($coords) => ({
+    x: $coords.x,
+    y: $coords.y,
+    rotation: didHover ? -7 : -11,
+  }))
+
+  $: if (didHover) {
+    window.setTimeout(() => {
+      didHover = false
+    }, 150)
+  }
+
+  function handleMouseEnter() {
+    if (isPanning) return
+    coords.stiffness = 1
+    coords.damping = 0.15
+    didHover = true
+  }
+
+  function handlePanStart() {
+    // Prevents click when dragging
+    coords.stiffness = coords.damping = 1
+    isPanningTimer = window.setTimeout(() => {
+      isPanning = true
+    }, 300)
+  }
+
+  function handlePanMove(e) {
+    coords.update(($coords) => ({
+      x: $coords.x + e.detail.dx,
+      y: $coords.y + e.detail.dy,
+      rotation: $coords.rotation,
+    }))
+  }
+
+  function handlePanEnd() {
+    window.clearTimeout(isPanningTimer)
+    isPanning = false
+  }
+
+  function handleAnchorClick(e) {
+    if (isPanning) {
+      e.preventDefault()
+      isPanning = false
+    }
+  }
 </script>
 
 <svelte:window bind:innerHeight={windowHeight} />
 
 {#if windowHeight}
-  <div style="--y-pos: {(windowHeight / 1.35).toFixed(2)}px">
-    <Anchor id="clients-link" rel="prefetch" href="/cases">
+  <div
+    use:pannable
+    on:panstart={handlePanStart}
+    on:panmove={handlePanMove}
+    on:panend={handlePanEnd}
+    on:mouseenter={handleMouseEnter}
+    style="transform: translate3d({$coords.x}px, {$coords.y}px, 0) rotate({$coords.rotation}deg); --y-pos: {(windowHeight / 1.35).toFixed(2)}px">
+    <Anchor
+      id="clients-link"
+      href="/cases"
+      rel="prefetch"
+      onClick={handleAnchorClick}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 311.98 129.1">
         <ellipse class="cls-1" cx="155.99" cy="64.55" rx="154.99" ry="63.55" />
         <path
@@ -28,19 +98,9 @@
 <style>
   div {
     position: fixed;
-    top: 0;
+    top: var(--y-pos);
     z-index: 1;
     right: var(--space-3);
-    transform: translate3d(0, var(--y-pos), 0) rotate(-11deg);
-    transition: transform 0.5s ease-out;
-  }
-
-  div:hover {
-    transition: none;
-    animation-name: vibrate, vibrate;
-    animation-duration: 0.25s;
-    animation-delay: 0s, 1s;
-    animation-timing-function: ease-in, ease-out;
   }
 
   :global(#clients-link::after) {
@@ -60,42 +120,6 @@
     fill: var(--text);
     transition: all 0.5s linear;
     stroke-width: 0;
-  }
-
-  @keyframes vibrate {
-    0% {
-      transform: translate3d(0px, var(--y-pos), 0) rotate3d(0, 0, 1, -11deg);
-    }
-    10% {
-      transform: translate3d(-2px, var(--y-pos), 0) rotate3d(0, 0, 1, -13deg);
-    }
-    20% {
-      transform: translate3d(2px, var(--y-pos), 0) rotate3d(0, 0, 1, -9deg);
-    }
-    30% {
-      transform: translate3d(-4px, var(--y-pos), 0) rotate3d(0, 0, 1, -15deg);
-    }
-    40% {
-      transform: translate3d(4px, var(--y-pos), 0) rotate3d(0, 0, 1, -7deg);
-    }
-    50% {
-      transform: translate3d(-4px, var(--y-pos), 0) rotate3d(0, 0, 1, -15deg);
-    }
-    60% {
-      transform: translate3d(4px, var(--y-pos), 0) rotate3d(0, 0, 1, -7deg);
-    }
-    70% {
-      transform: translate3d(-4px, var(--y-pos), 0) rotate3d(0, 0, 1, -15deg);
-    }
-    80% {
-      transform: translate3d(2px, var(--y-pos), 0) rotate3d(0, 0, 1, -9deg);
-    }
-    90% {
-      transform: translate3d(-2px, var(--y-pos), 0) rotate3d(0, 0, 1, -13deg);
-    }
-    100% {
-      transform: translate3d(0px, var(--y-pos), 0) rotate3d(0, 0, 1, -11deg);
-    }
   }
 
   /* Tablet - 768px */

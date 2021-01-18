@@ -59,9 +59,7 @@
 
 <ClientsSticker />
 
-<Footer>
-  <h1>{$pageHeader}</h1>
-</Footer>
+<Footer>{$pageHeader}</Footer>
 
 <style>
   main {

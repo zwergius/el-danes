@@ -10,7 +10,7 @@
 </script>
 
 {#if href}
-  <a href={path} {target} {...$$restProps}>
+  <a draggable="false" href={path} on:click={onClick} {target} {...$$restProps}>
     <slot />
   </a>
 {:else}
