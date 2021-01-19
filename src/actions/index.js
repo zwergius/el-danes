@@ -15,7 +15,7 @@ export function pannable(node) {
     window.addEventListener('mousemove', handleMousemove)
     window.addEventListener('touchmove', handleMousemove, { passive: false })
     window.addEventListener('mouseup', handleMouseup)
-    window.addEventListener('touchend', handleMouseup)
+    window.addEventListener('touchend', handleMouseup, { passive: false })
   }
 
   function handleMousemove(e) {
@@ -56,6 +56,7 @@ export function pannable(node) {
   return {
     destroy() {
       node.removeEventListener('mousedown', handleMousedown)
+      node.removeEventListener('touchstart', handleMousedown)
     },
   }
 }
