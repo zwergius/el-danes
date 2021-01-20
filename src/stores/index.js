@@ -1,9 +1,10 @@
 import { writable } from 'svelte/store'
 
-export let theme
+export let theme = writable(null)
+
 if (typeof window !== 'undefined') {
   const root = window.document.documentElement
-  theme = writable(root.style.getPropertyValue('--color-mode'))
+  theme.set(root.style.getPropertyValue('--color-mode'))
 }
 
 export let pageCode = writable('')

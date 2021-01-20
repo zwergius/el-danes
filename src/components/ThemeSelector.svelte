@@ -1,5 +1,5 @@
 <script>
-  import { theme } from '@/stores.js'
+  import { theme } from '@/stores'
 
   function changeColors(colorMode) {
     const theme = {
@@ -34,23 +34,25 @@
 
 <div
   class="button"
-  on:click="{() => setColorMode('dark')}"
-  on:keypress="{(e) => handleKeypress(e, 'dark')}"
+  on:click={() => setColorMode('dark')}
+  on:keypress={(e) => handleKeypress(e, 'dark')}
   tabIndex="0"
   role="radio"
-  aria-selected="{$theme === 'dark' ? true : undefined}"
-  aria-label="Use dark theme">
-  <div></div>
+  aria-selected={$theme === 'dark' ? true : undefined}
+  aria-label="Use dark theme"
+>
+  <div />
 </div>
 <div
   class="button"
-  on:click="{() => setColorMode('light')}"
-  on:keypress="{(e) => handleKeypress(e, 'light')}"
+  on:click={() => setColorMode('light')}
+  on:keypress={(e) => handleKeypress(e, 'light')}
   tabIndex="0"
   role="radio"
-  aria-selected="{$theme === 'light' ? true : undefined}"
-  aria-label="Use light theme">
-  <div></div>
+  aria-selected={$theme === 'light' ? true : undefined}
+  aria-label="Use light theme"
+>
+  <div />
 </div>
 
 <style>

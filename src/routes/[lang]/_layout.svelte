@@ -10,7 +10,7 @@
 </script>
 
 <script>
-  import { pageCode, pageHeader } from '@/stores.js'
+  import { pageCode, pageHeader } from '@/stores'
   import Header from '@/components/Header.svelte'
   import ClientsSticker from '@/components/ClientsSticker.svelte'
   import Code from '@/components/Code.svelte'
@@ -37,7 +37,9 @@
 </script>
 
 <!-- TODO could we avoid init-theme with #if process browser here-->
-<Header {lang} {showsCode} {toggleFlip} />
+{#if process.browser}
+  <Header {lang} {showsCode} {toggleFlip} />
+{/if}
 
 <main style="height: {h}px;">
   <div class="scene">

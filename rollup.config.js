@@ -65,10 +65,11 @@ export default {
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
       svelte({
-        dev,
-        hydratable: true,
-        emitCss: true,
         preprocess: require('svelte-preprocess')(preprocessOptions),
+        compilerOptions: {
+          dev,
+          hydratable: true,
+        },
       }),
       resolve({
         browser: true,
@@ -112,7 +113,7 @@ export default {
 
   server: {
     input: config.server.input(),
-    output: config.server.output(),
+    output: { ...config.server.output(), exports: 'default' },
     plugins: [
       aliases,
       json(),
@@ -126,10 +127,13 @@ export default {
         ),
       }),
       svelte({
-        generate: 'ssr',
-        dev,
-        hydratable: true,
         preprocess: require('svelte-preprocess')(preprocessOptions),
+        compilerOptions: {
+          generate: 'ssr',
+          dev,
+          hydratable: true,
+        },
+        emitCss: false,
       }),
       resolve({
         dedupe: ['svelte'],

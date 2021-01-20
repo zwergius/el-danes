@@ -15,7 +15,7 @@
   const { page } = stores()
   import { onMount } from 'svelte'
   import { home, mailToSubject } from 'assets/translations.yaml'
-  import { pageCode, pageHeader } from '@/stores.js'
+  import { pageCode, pageHeader } from '@/stores'
   import SEO from '@/components/SEO.svelte'
   import Anchor from '@/components/Anchor.svelte'
 

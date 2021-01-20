@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
   import { slide } from 'svelte/transition'
   import { back, contact, menu } from 'assets/translations.yaml'
-  import { theme } from '@/stores.js'
+  import { theme } from '@/stores'
   import Anchor from '@/components/Anchor.svelte'
   import Logo from '@/components/Logo.svelte'
   import LanguageSelector from '@/components/LanguageSelector.svelte'
@@ -58,7 +58,8 @@
   <div
     style="height: {headerHeight.toFixed(2)}px;"
     class="height-faker"
-    transition:slide />
+    transition:slide
+  />
 {/if}
 
 <style>

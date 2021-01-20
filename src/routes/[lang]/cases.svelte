@@ -13,8 +13,8 @@
   import { onMount } from 'svelte'
   import { stores } from '@sapper/app'
   import { goodCompany, view } from 'assets/translations.yaml'
-  import { pageCode, pageHeader, theme } from '@/stores.js'
-  import projectsData from '@/assets/data/projects.json'
+  import { pageCode, pageHeader, theme } from '@/stores'
+  import projectsData from '@/assets/data/clients.json'
   import SEO from '@/components/SEO.svelte'
   import Hoverable from '@/components/Hoverable.svelte'
   import Anchor from '@/components/Anchor.svelte'
@@ -30,6 +30,8 @@
   })
 
   const projects = projectsData
+    .map((companies) => companies.projects)
+    .flat()
     .filter(({ visible }) => Boolean(visible))
     .sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()))
 </script>
@@ -47,14 +49,18 @@
               class="client-link"
               href={client.url}
               rel="external noopener"
-              target="_blank">
+              target="_blank"
+            >
               {client.name}
               <span>{view[lang]}</span>
 
               {#if isHovering}
                 <div
-                  style="background: {$theme === 'dark' ? 'rgb(0, 0, 0, 0.8)' : 'rgb(255, 255, 255, 0.8)'};"
-                  class="stack">
+                  style="background: {$theme === 'dark'
+                    ? 'rgb(0, 0, 0, 0.8)'
+                    : 'rgb(255, 255, 255, 0.8)'};"
+                  class="stack"
+                >
                   <p>{client.type} - {client.stack}</p>
                 </div>
               {/if}
@@ -64,8 +70,11 @@
 
             {#if isHovering}
               <div
-                style="background: {$theme === 'dark' ? 'rgb(0, 0, 0, 0.8)' : 'rgb(255, 255, 255, 0.8)'};"
-                class="stack">
+                style="background: {$theme === 'dark'
+                  ? 'rgb(0, 0, 0, 0.8)'
+                  : 'rgb(255, 255, 255, 0.8)'};"
+                class="stack"
+              >
                 <p>{client.type} - {client.stack}</p>
               </div>
             {/if}

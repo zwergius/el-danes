@@ -7,71 +7,76 @@
     "link": "",
     "projects": [
       {
-        "id": "heineken",
         "devices": ["web"],
         "description": "project.heineken.description",
         "iconName": "heineken-logo",
-        "stack": "react, javascript, es6, css, html, redux, styled-components, npm",
-        "title": "Heineken Backoffice Portal",
+        "id": "heineken",
         "name": "Heineken",
+        "stack": "React + Redux, JavaScript, CSS, HTML",
+        "title": "Heineken Backoffice Portal",
+        "type": "Web App",
         "visible": true,
-        "type": "ReactJs Web App"
+        "url":""
       },
       {
-        "id": "bp-fuels",
         "devices": ["mobile", "tablet"],
         "description": "project.bpFuels.description",
         "iconName": "bp-logo",
-        "stack": "angular, ionic, npm scripts, javascript",
-        "title": "BP Fuels Apps.",
+        "id": "bp-fuels",
         "name": "British Petroleum",
+        "stack": "Ionic, Angular, JavaScript, HTML, CSS",
+        "title": "BP Fuels Apps.",
+        "type": "Hybrid Apps",
         "visible": true,
-        "type": "Ionic AngularJS Hybrid App"
+        "url":""
       },
       {
-        "id": "bp-service-scan",
         "devices": ["tablet"],
         "description": "project.bpServiceScan.description",
         "iconName": "bp-logo",
-        "stack": "angular, ionic, npm scripts, javascript",
-        "title": "BP Service Scan",
+        "id": "bp-service-scan",
         "name": "British Petroleum",
+        "stack": "Ionic, Angular, JavaScript, HTML, CSS",
+        "title": "BP Service Scan",
+        "type": "Hybrid Apps",
         "visible": false,
-        "type": "Ionic AngularJS Hybrid App"
+        "url":""
       },
       {
-        "id": "herfy",
         "devices": ["mobile"],
         "description": "project.herfy.description",
         "iconName": "herfy-logo",
-        "stack": "swift, storyboard, snapkit",
-        "title": "Herfy Delivery",
-        "type": "Native iOS App",
+        "id": "herfy",
         "name": "Herfy",
+        "stack": "Swift, Snapkit",
+        "title": "Herfy Delivery",
+        "type": "iOS App",
         "visible": false,
-        "url": "https://apps.apple.com/app/herfy-delivery/id1300514088"
+        "url": "https://apps.apple.com/es/app/herfy-delivery/id1300514088"
       },
       {
-        "id": "jaguar-land-rover",
         "devices": ["web"],
         "description": "project.jlr.description",
         "iconName": "jaguar-land-rover-logo",
-        "stack": "angular, bootstrap, npm, oauth, html, css, javascript",
-        "title": "Jaguar Land Rover",
+        "id": "jaguar-land-rover",
         "name": "Jaguar Land Rover",
+        "stack": "Angular, JavaScript, HTML, CSS",
+        "title": "Jaguar Land Rover",
         "visible": true,
-        "type": "AngularJS Web App"
+        "type": "Web App",
+        "url": ""
       },
       {
-        "id": "arm",
         "devices": ["web"],
         "description": "project.arm.description",
         "iconName": "arm-logo",
-        "stack": "react, javascript, mobx, velocity, es6, npm, postman",
-        "title": "ARM Deal Evaluator",
+        "id": "arm",
         "name": "arm",
+        "stack": "React, JavaScript, HTML, CSS",
+        "title": "ARM Deal Evaluator",
+        "type": "Web App",
         "visible": true,
-        "type": "ReactJS Web App"
+        "url": ""
       }
     ],
     "to": "05/30/2018"
@@ -84,51 +89,123 @@
     "link": "/apps/club-vulco",
     "projects": [
       {
-        "id": "keep-komp",
-        "devices": ["web"],
-        "description": "project.keepcomp.description",
-        "iconName": "keep-comp-logo",
-        "stack": "gatsby, react, javascript, html, css",
-        "title": "Keep Comp*",
-        "type": "Corporate Website",
-        "name": "keep comp*",
-        "visible": true,
-        "url": "https://keepcomp.com/"
+        "description": "project.nowtestWebapp.description",
+        "devices": ["web", "mobile"],
+        "iconName": "nowtest-logo",
+        "id": "nowtest.webapp",
+        "name": "NowTest - The App",
+        "stack": "React, JavaScript, HTML, CSS",
+        "title": "NowTest - The App",
+        "type": "Web App",
+        "url": "https://www.nowtest.com/the-app",
+        "visible": false
       },
       {
-        "id": "yes-no-keyboard",
-        "devices": ["iOS"],
+        "description": "project.nowtestReader.description",
+        "devices": ["mobile"],
+        "iconName": "nowtest-logo",
+        "id": "nowtest.reader",
+        "name": "The Reader",
+        "stack": "ReactNative, JavaScript, HTML, CSS",
+        "title": "NowTest - The Reader App",
+        "type": "React Native Apps",
+        "url": "https://apps.apple.com/es/app/nowtest-the-reader-app/id1532799707",
+        "visible": false
+      },
+      {
+        "description": "project.mamachico.description",
+        "devices": ["mobile"],
+        "iconName": "mamachico-logo",
+        "id": "mama-chico",
+        "name": "Mamá Chicó",
+        "stack": "Svelte, Sapper, JavaScript, HTML, CSS",
+        "title": "Mamá Chicó",
+        "type": "Menu Card Web",
+        "url": "http://mamachico.com/madrid/corredera/en/",
+        "visible": true
+      },
+      {
+        "description": "project.bauz.description",
+        "devices": ["web"],
+        "iconName": "bauz-logo",
+        "id": "bauz.studio",
+        "name": "bauz.studio",
+        "stack": "Gatsby, React, JavaScript, HTML, CSS",
+        "title": "bauz.studio",
+        "type": "Creative Wesite",
+        "url": "https://bauz.studio/",
+        "visible": true
+      },
+      {
+        "description": "project.mucolysin.description",
+        "devices": ["web"],
+        "iconName": "ogilvy-logo",
+        "id": "mucolysin",
+        "name": "Ogilvy - Mucolysin",
+        "stack": "HTML, CSS",
+        "title": "Ogilvy - Mucolysin Banner",
+        "type": "Google Banner",
+        "url": "",
+        "visible": true
+      },
+      {
+        "description": "project.ortex.description",
+        "devices": ["web"],
+        "iconName": "ortex-comp-logo",
+        "id": "ortex",
+        "name": "Ortex",
+        "stack": "CSS",
+        "title": "Ortex",
+        "type": "CSS Tidy Up",
+        "url": "",
+        "visible": false
+      },
+      {
+        "description": "project.keepcomp.description",
+        "devices": ["web"],
+        "iconName": "keep-comp-logo",
+        "id": "keep-komp",
+        "name": "keep comp*",
+        "stack": "Gatsby, React, JavaScript, HTML, CSS",
+        "title": "Keep Comp*",
+        "type": "Creative Website",
+        "url": "https://keepcomp.com/",
+        "visible": true
+      },
+      {
         "description": "project.keyboard.description",
+        "devices": ["iOS"],
         "iconName": "yes-no-keyboard-logo",
-        "stack": "swift, snapkit",
+        "id": "yes-no-keyboard",
+        "stack": "Swift, Snapkit",
         "title": "Yes / No Keyboard",
         "name": "Yes / No Keyboard",
         "visible": false,
-        "type": "Native iOS App with keyboard extension",
+        "type": "iOS App with keyboard extension",
         "url": "https://apps.apple.com/us/app/yes-no-keyboard/id1512961865"
       },
       {
-        "id": "zwergius-web",
-        "devices": ["web"],
         "description": "project.portfolio.description",
+        "devices": ["web"],
         "iconName": "portfolio-logo",
-        "stack": "gatsby, react, javascript, html, css",
+        "id": "zwergius-web",
+        "name": "zwergius.com",
+        "stack": "Gatsby, React, JavaScript, HTML, CSS",
         "title": "Portfolio Web",
-        "name": "Zwergius",
         "visible": true,
-        "type": "ReactJS/Gatsby Static Web",
+        "type": "Creative Website + PWA",
         "url": "https://www.zwergius.com"
       },
       {
-        "id": "club-vulco",
-        "devices": ["iOS"],
         "description": "project.clubVulco.description",
+        "devices": ["iOS"],
         "iconName": "club-vulco-logo",
-        "stack": "swift, snapkit, alamofire",
-        "title": "Club Vulco",
+        "id": "club-vulco",
         "name": "Club Vulco",
+        "stack": "Swift, Snapkit",
+        "title": "Club Vulco",
         "visible": false,
-        "type": "Native iOS App",
+        "type": "iOS App",
         "url": ""
       }
     ],
@@ -142,27 +219,27 @@
     "link": "/webs/fortknoxster",
     "projects": [
       {
-        "id": "fortknoxster-web",
-        "devices": ["web"],
         "description": "project.fkxWeb.description",
+        "devices": ["web"],
         "iconName": "fortknoxster-logo",
-        "stack": "react, javascript, es6, npm, react-spring, html, css, webcrypto, webpack",
+        "id": "fortknoxster-web",
+        "stack": "React, JavaScript, HTML, CSS, WebCrypto",
         "title": "FortKnoxster Web App",
         "name": "FortKnoxster",
         "visible": true,
-        "type": "ReactJS Web App",
+        "type": "Web App",
         "url": "https://web.fortknoxster.com/"
       },
       {
-        "id": "fortknoxster-crypto-lib",
-        "devices": ["web"],
         "description": "project.fkxCrypto.description",
+        "devices": ["web"],
         "iconName": "fortknoxster-logo",
-        "stack": "javascript, es6, webpack, npm, webcrypto",
+        "id": "fortknoxster-crypto-lib",
+        "stack": "JavaScript, Webpack, NPM, Webcrypto",
         "title": "FortKnoxster Crypto Library",
         "name": "FortKnoxster",
         "visible": false,
-        "type": "Javascript Library",
+        "type": "JavaScript Library",
         "url": ""
       }
     ],
@@ -176,16 +253,16 @@
     "link": "/apps/pinpointer",
     "projects": [
       {
-        "id": "pinpointer",
-        "devices": ["iOS"],
         "description": "project.pinpointer.description",
+        "devices": ["iOS"],
         "iconName": "pinpointer-logo",
-        "stack": "swift, snapkit, cocoapods, mapkit",
-        "title": "PinPointer",
+        "id": "pinpointer",
         "name": "PinPointer",
-        "visible": false,
-        "type": "Native iOS App",
-        "url": "https://apps.apple.com/us/app/pinpointer/id1076691245?ls=1"
+        "stack": "Swift, Snapkit",
+        "title": "PinPointer",
+        "type": "iOS App",
+        "url": "https://apps.apple.com/us/app/pinpointer/id1076691245?ls=1",
+        "visible": false
       }
     ],
     "to": "10/01/2019"
@@ -198,39 +275,40 @@
     "link": "",
     "projects": [
       {
-        "id": "packlink-pro",
-        "devices": ["web"],
         "description": "project.packlinkPro.description",
+        "devices": ["web"],
         "iconName": "packlink-pro-logo",
-        "stack": "angular, javascript, npm, bash, html, css",
-        "title": "Packlink Pro",
+        "id": "packlink-pro",
         "name": "Packlink Pro",
-        "visible": false,
-        "type": "AngularJS Web App",
-        "url": "https://pro.packlink.es"
+        "stack": "Angular, JavaScript, HTML, CSS",
+        "title": "Packlink Pro",
+        "type": "Web App",
+        "url": "https://pro.packlink.es",
+        "visible": false
       },
       {
-        "id": "packlink-pro-ebay",
-        "devices": ["web"],
         "description": "project.packlinkEbay.description",
+        "devices": ["web"],
         "iconName": "ebay-logo",
-        "stack": "angular, javascript, npm, bash, html, css",
-        "title": "Packlink Pro eBay",
+        "id": "packlink-pro-ebay",
         "name": "Packlink Pro eBay",
-        "visible": true,
-        "type": "AngularJS eBay Integration",
-        "url": "https://envios.ebay.es"
+        "stack": "Angular, JavaScript, HTML, CSS",
+        "title": "eBay Integration",
+        "type": "eBay Integration, Web App",
+        "url": "https://envios.ebay.es",
+        "visible": true
       },
       {
-        "id": "packlink-backoffice",
-        "devices": ["web"],
         "description": "project.packlinkBackoffice.description",
+        "devices": ["web"],
         "iconName": "backoffice-packlink",
-        "stack": "angular, javascript, npm, bash, html, css",
-        "title": "Backoffice",
+        "id": "packlink-backoffice",
         "name": "Packlink Backoffice",
-        "visible": false,
-        "type": "AngularJS Web App"
+        "stack": "Angular, JavaScript, HTML, CSS",
+        "title": "Backoffice",
+        "type": "Web App",
+        "url": "",
+        "visible": false
       }
     ],
     "to": "08/01/2016"
@@ -243,28 +321,28 @@
     "link": "",
     "projects": [
       {
-        "id": "british-airways",
-        "devices": ["web"],
         "description": "project.ba.description",
+        "devices": ["web"],
         "iconName": "british-airways-logo",
-        "stack": "java, jsp, javascript, html, css, jquery, xsl, xml, ota",
-        "title": "British Airways",
+        "id": "british-airways",
         "name": "British Airways",
-        "visible": true,
+        "stack": "Java, JavaScript, HTML, CSS, OTA",
+        "title": "British Airways",
         "type": "Web Integration",
-        "url": "https://www.britishairways.com"
+        "url": "https://www.britishairways.com",
+        "visible": true
       },
       {
-        "id": "iberia",
-        "devices": ["web"],
         "description": "project.iberia.description",
+        "devices": ["web"],
         "iconName": "iberia-logo",
-        "stack": "java, jsp, javascript, html, css, jquery, xsl, xml, ota",
-        "title": "Iberia",
+        "id": "iberia",
         "name": "Iberia",
-        "visible": true,
+        "stack": "Java, JavaScript, HTML, CSS, OTA",
+        "title": "Iberia",
         "type": "Web Integration",
-        "url": "https://www.iberia.com"
+        "url": "https://www.iberia.com",
+        "visible": true
       }
     ],
     "to": "04/01/2015"
@@ -274,18 +352,18 @@
     "contact": "",
     "from": "01/01/2011",
     "jobTitle": "Founder & Fullstack Developer",
-    "link": "/webs/onebookie",
     "projects": [
       {
-        "id": "onebookie",
-        "devices": ["web"],
         "description": "project.onebookie.description",
+        "devices": ["web"],
         "iconName": "onebookie-logo",
-        "stack": "ruby on rails, mysql, javascript, html, css, jquery",
-        "title": "OneBookie Web app",
+        "id": "onebookie",
         "name": "OneBookie",
-        "visible": false,
-        "type": "Ruby On Rails Web App"
+        "stack": "Ruby On Rails, MySQL, JavaScript, HTML, CSS",
+        "title": "OneBookie Web app",
+        "type": "Web App",
+        "url": "",
+        "visible": false
       }
     ],
     "to": "05/01/2015"
