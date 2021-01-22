@@ -21,6 +21,8 @@
 
   h1 {
     flex: 2 0 auto;
+    overflow-wrap: break-word;
+    max-width: 100%;
   }
 
   .copyright {

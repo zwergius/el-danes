@@ -7,13 +7,13 @@ contact:
   en: Contact
   es: Contacto
 letsTalk: 
-  da: Vi har aldrig for travlt til at snakke.
+  da: Lad os tage en snak??
   en: Let's talk??
   es: Hablamos??
 goodCompany: 
-  da: Vi er i godt selskab.
-  en: We keep good company.
-  es: Estamos en buena compañia.
+  da: Holder godt selskab.
+  en: Keeping good company.
+  es: En buena compañia.
 view: 
   da: se!
   en: view!
@@ -26,27 +26,59 @@ back:
   da: back
   en: back
   es: back
+mailToSubject:
+  da: 🤗 Hej El Danés
+  en: 🤗 Hi El Danés
+  es: 🤗 Hola El Danés
 home:
   header: 
-    da: Specialister i digitale løsning web & app.
-    en: Specialists in digital solutions web & app.
-    es: Especialistas en soluciones digitales web y app.
+    da: Ekspert i digitale løsninger web & mobil.
+    en: Expert in digital products web & mobile.
+    es: Experto en soluciones web & móvil.
   section1: 
-    da: Godt design skal understøttes af tilsvarende god softwareudvikling. Vores løsninger er lavet med de seneste teknologier som afspejler vores arbejde  hvor det vigtigste er kvalitet, hastighed og effektivitet.
-    en: Great design must be accompanied by equally great software development. Our solutions use cutting-edge technology which reflects our engineering where quality, speed and efficiency is essential.
-    es: Un buen diseño debe estar respaldado por un desarrollo web igualmente excelente. Nuestros productos digitales utilizan las últimas tecnologías para implementar soluciones de calidad donde velocidad, seguridad y eficacia son esenciales.
+    da: Vil du gerne skille dig ud digitalt? - Jeg kan hjælpe!
+    en: Want your digital product to stand out? - I can help!
+    es: ¿Quieres que tu negocio destaque en la red?
   section2: 
-    da: Vi behandler vores kunders projekter, som var de vores egne og vi vil være jeres supportpartner fra idé til eksekvering. Vi udvikler efter jeres behov og forventninger. For os er opgaven først løst, når kunden er tilfreds. 
-    en: We treat our customers projects as if they were our own and will be your supporting partner from idea to execution, building and customising to your needs and expectations, so you and your clients can reach your objectives in the best possible way.
-    es: Tus proyectos son los nuestros, siendo tus partners desde la conceptualización del proyecto hasta los últimos pasos de su ejecución. Personalizamos cada detalle del proyecto para cumplir expectativas y poder alcanzar todos tus objetivos.
+    da: 'Skal du have udviklet, website, webshop, app eller andre digitale produkter? Lad El Danés være din digitale partner, som:'
+    en: 'Do you need a website, webshop, app or any other digital product? Let El Danés be your digital partner who:'
+    es: '¿Necesitas una página web, una tienda, aplicación o cualquier otro producto digital? Deja que El Danés sea tu asesor tecnológico:'
+    item1:
+      da: Hjælper dig med at træffe de rigtige beslutninger fra start til slut. Stol på vores erfaring.
+      en: Helps you make the right decisions from start to finish. Trust our experience.
+      es: Te ayudará a tomar las decisiones adecuadas de principio a fin. Confía en nuestra experiencia.
+    item2:
+      da: Håndterer alle de tekniske detaljer, fra udvikling til lancering.
+      en: Handles all the technical details from development to launch.
+      es: Se encargará de todos los detalles técnicos, desde el desarrollo hasta el lanzamiento.
   section3: 
-    da: Vi elsker at “nørde” med de seneste trends og innovationer. I kan derfor stole på, at vi kan garantere jer med en “state of the art” løsning.
-    en: We love ‘nerding’ around with the latest trends and innovations, you can rely on us, to guarantee you with a state of the art solution.
-    es: Nos encanta ”nerdear” con las últimas tendencias e innovaciones para garantizarte soluciones novedosas y diferenciales.
+    da: Du får en eksklusiv løsning som er skræddersyet 100% efter dine behov. Bygget med de seneste innovative teknologier, hvor kvalitet, hastighed, effektivitet og automatisering er i fokus.
+    en: You get an exclusive solution 100% tailored to your needs. Built with cutting edge technology where quality, speed, efficiency and automatisation are essential.
+    es: Obtendrás una solución exclusiva, 100% adaptada a tus necesidades.  Construida con tecnología puntera donde la calidad, rapidez, eficiencia y automatización sean esenciales.
   section4: 
-    da: Vi er passionerede omkring kvalitet og med sans for detaljen. Vi nyder at bygge kreative design drevne webs & apps og vi er altid spændte på at lave noget nyt og unikt.
-    en: Passionate about quality with a meticulous sense for detail, we enjoy building creative design driven webs & apps. We are always anxious to create something new and unique to take your digital product to the next level.
-    es: Somos unos apasionados de la calidad con un sentido estricto de los detalles. Disfrutamos creando webs y aplicaciones creativas basadas en grandes y eficaces diseños. Siempre estamos ansiosos por crear algo nuevo y único para llevar tu producto digital al siguiente nivel.
+    da: 'El Danés elsker at “nørde” med de seneste trends og innovationer. Vi kan derfor garantere jer med en optimal løsning, hvor I får:'
+    en: 'El Danés loves “nerding” around with the latest trends & innovations. This enables us to guarantee you with an optimal solution where you get:'
+    es: 'A EL Danés le encanta “nerdear” con las últimas tendencias e innovaciones lo que le permite garantizarte una solución óptima en la que obtendrás:'
+    item1:
+      da: Fuld kontrol & fleksibilitet
+      en: Full control & flexibility.
+      es: Control total & flexibilidad.
+    item2:
+      da: Mulighed for selv at tilføje & rette tekst og billeder uden altid at skulle have ekstern hjælp.
+      en: The ability to add & edit content without without always needing external assistance.
+      es: Capacidad para agregar & editar contenido sin necesidad de asistencia externa continua.
+  section5: 
+    da: Selvstyring vil fremme jeres vækst, og El Danés tilbyder en smertefri vej til markedet for dit produkt eller idé.
+    en: Being self-sustaining will promote your growth and El Danés offers the smoothest path to market for your product or idea.
+    es: Ser autogestionable promoverá tu crecimiento y El Danés te allanará el camino para que tu producto o idea llegue al mercado de la forma mas sencilla.
+  section6: 
+    da: Lad os starte din digitale rejse nu. El Danés er nysgerrig efter at høre om din idé, jeres produkt eller udfordring og ivrig efter at komme igang.
+    en: Let’s kick off your new digital journey today. El Danés is eager to hear about your idea, digital product or challenge and excited to guide you through the process.
+    es: Comencemos hoy tu nuevo viaje digital. El Danés está ansioso de escuchar tu idea, producto o desafío y encantado  de guiarte en el proceso.
+  callToAction:
+    da: Skriv NU
+    en: Reach out NOW
+    es: Hablamos??
   quote: 
     da: Pleasure in the job puts perfection in the work.
     en: Pleasure in the job puts perfection in the work.
@@ -57,10 +89,10 @@ home:
     es: Aristoteles
 meta: 
   title:
-    da: Kreativ website & app udvikling.
-    en: Creative website & app development.
-    es: Desarrollo creativo web & app.
+    da: Design drevet website & app udvikling.
+    en: Design driven website & app development.
+    es: Desarrollo web & app impulsado por el diseño.
   description: 
-    da: Vi er et web & app udviklings firma som specialiserer os i kreative webs, Jamstack webs, single page apps og progressive web apps.
-    en: We are a web & app development agency specializing in creative webs, Jamstack webs, progressive web apps, single page apps.
-    es: Somos una agencia de desarrollo web & app especializado en webs creativos, Jamstack webs, single page apps y progressive web apps.
+    da: App & web udviklings firma som specialiserer os i kreative webs, Jamstack webs, single page apps og progressive web apps.
+    en: App & web development agency specializing in creative webs, Jamstack webs, progressive web apps, single page apps.
+    es: Agencia de desarrollo web & app especializado en webs creativos, Jamstack webs, single page apps y progressive web apps.

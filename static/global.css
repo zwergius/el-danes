@@ -1,11 +1,4 @@
 @font-face {
-  font-family: 'La Nord Regular';
-  src: url('./fonts/LaNordRegular.woff2') format('woff2'),
-    url('./fonts/LaNordRegular.woff') format('woff'); /* Modern Browsers */
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
   font-family: 'La Nord Light';
   src: url('./fonts/LaNordLight.woff2') format('woff2'),
     url('./fonts/LaNordLight.woff') format('woff'); /* Modern Browsers */
@@ -104,6 +97,7 @@ h6 {
 
 a,
 button,
+li,
 p,
 blockquote,
 cite {
