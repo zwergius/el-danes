@@ -1,32 +1,26 @@
 <script context="module">
-  export async function preload(_, session) {
+  export async function preload(page, session) {
+    const { lang } = page.params
     const { email } = session
-    const res = await this.fetch('index.json')
+    const res = await this.fetch(`/${lang}.json`)
     if (res.status === 200) {
-      const data = await res.json()
-      return { data, email }
+      const code = await res.json()
+      return { code, lang, email }
     }
     this.error(404, 'Not found')
   }
 </script>
 
 <script>
-  import { stores } from '@sapper/app'
-  const { page } = stores()
-  import { onMount } from 'svelte'
   import { home, mailToSubject } from 'assets/translations.yaml'
   import { pageCode, pageHeader } from '@/stores'
   import SEO from '@/components/SEO.svelte'
   import Anchor from '@/components/Anchor.svelte'
 
-  export let data, email
-  const { lang } = $page.params
+  export let code, lang, email
 
   $pageHeader = home.header[lang]
-
-  onMount(() => {
-    $pageCode = atob(data.content)
-  })
+  $pageCode = code
 
   function handleEmail(e) {
     e.preventDefault()
