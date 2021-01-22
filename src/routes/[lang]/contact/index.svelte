@@ -1,32 +1,26 @@
 <script context="module">
-  export async function preload(_, session) {
+  export async function preload(page, session) {
+    const { lang } = page.params
     const { email, phoneNo } = session
-    const res = await this.fetch('contact.json')
+    const res = await this.fetch(`/${lang}/contact.json`)
     if (res.status === 200) {
-      const data = await res.json()
-      return { data, email, phoneNo }
+      const code = await res.json()
+      return { code, email, lang, phoneNo }
     }
-    return { email, phoneNo }
+    this.error(404, `/${lang}/contact.json Not found`)
   }
 </script>
 
 <script>
-  import { onMount } from 'svelte'
-  import { stores } from '@sapper/app'
-  const { page } = stores()
+  import { pageCode, pageHeader } from '@/stores'
   import { contact, letsTalk } from 'assets/translations.yaml'
-  import { pageCode, pageHeader } from '@/stores.js'
   import Anchor from '@/components/Anchor.svelte'
   import SEO from '@/components/SEO.svelte'
 
-  export let data, email, phoneNo
-  const { lang } = $page.params
+  export let code, email, lang, phoneNo
 
   $pageHeader = letsTalk[lang]
-
-  onMount(() => {
-    $pageCode = atob(data.content)
-  })
+  $pageCode = code
 
   function handleEmail(e) {
     e.preventDefault()
@@ -52,33 +46,33 @@
       <Anchor
         href="https://www.instagram.com/el.danes/"
         rel="external noopener"
-        target="_blank">
-        instagram
-      </Anchor>
+        target="_blank"
+      >instagram</Anchor
+      >
     </li>
     <li>
       <Anchor
         href="https://github.com/zwergius"
         rel="external noopener"
-        target="_blank">
-        github
-      </Anchor>
+        target="_blank"
+      >github</Anchor
+      >
     </li>
     <li>
       <Anchor
         href="https://www.linkedin.com/in/christian-zwergius"
         rel="external noopener"
-        target="_blank">
-        linkedin
-      </Anchor>
+        target="_blank"
+      >linkedin</Anchor
+      >
     </li>
     <li>
       <Anchor
         href="https://www.behance.net/christizwergiu"
         rel="external noopener"
-        target="_blank">
-        behance
-      </Anchor>
+        target="_blank"
+      >behance</Anchor
+      >
     </li>
   </ul>
 </section>

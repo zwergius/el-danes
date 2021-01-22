@@ -18,3 +18,12 @@ export function hexToRGB(hex, alpha = 1) {
 
   return 'rgb(' + +r + ',' + +g + ',' + +b + ',' + alpha + ')'
 }
+
+export function safeParseJSON(data) {
+  try {
+    const json = JSON.parse(data)
+    return json
+  } catch (err) {
+    console.error(err)
+  }
+}

@@ -1,5 +1,5 @@
 const languages = ['en', 'es', 'da']
-const pages = ['', 'contact', 'clients']
+const pages = ['', 'contact', 'cases']
 const baseUrl = `https://www.xn--eldans-fva.com/sitemap.xml`
 
 const render = (languages, pages) => `<?xml version="1.0" encoding="UTF-8" ?>

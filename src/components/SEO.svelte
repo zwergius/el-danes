@@ -1,13 +1,13 @@
 <script>
   import { stores } from '@sapper/app'
-  import { meta } from 'assets/translations.yaml'
+  import { meta as metaTags } from 'assets/translations.yaml'
   const { page } = stores()
   const path = $page.path.substring(3)
   const url = $page.host
   const lang = $page.params.lang
 
-  export let title = meta.title[lang]
-  export let description = meta.description[lang]
+  export let title = metaTags.title[lang]
+  export let description = metaTags.description[lang]
   export let twitterImg = '' // 120x120
   export let fbImg = `https://${url}/el-danes-tablet.jpg` // Recommended: up to 1200x630
 
@@ -43,5 +43,6 @@
   <link
     rel="manifest"
     href={`manifest.${lang}.json`}
-    crossorigin="use-credentials" />
+    crossorigin="use-credentials"
+  />
 </svelte:head>

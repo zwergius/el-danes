@@ -3,14 +3,16 @@ let json
 
 export async function get(req, res) {
   const url =
-    'https://api.github.com/repos/zwergius/el-danes/contents/src/routes/%5Blang%5D/clients.svelte'
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000/code-mock'
+      : 'https://raw.githubusercontent.com/zwergius/el-danes/master/src/routes/%5Blang%5D/contact.svelte'
   if (!json) {
     const response = await fetch(url, {
       headers: {
         'User-Agent': 'zwergius',
       },
     })
-    json = await response.text()
+    json = JSON.stringify(await response.text())
   }
 
   res.writeHead(200, {
