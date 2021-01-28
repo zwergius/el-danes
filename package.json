@@ -1,7 +1,7 @@
 {
   "name": "el-danes",
   "description": "Sapper website for El DANES",
-  "version": "0.0.1",
+  "version": "1.1.0",
   "scripts": {
     "dev": "npm run dsstore:delete && sapper dev",
     "build": "sapper build --legacy",
@@ -57,7 +57,7 @@
     "rollup-plugin-inline-svg": "^2.0.0",
     "rollup-plugin-svelte": "^7.0.0",
     "rollup-plugin-terser": "^7.0.2",
-    "sapper": "^0.28.10",
+    "sapper": "^0.29.0",
     "svelte": "^3.31.2",
     "svelte-preprocess": "^4.6.1",
     "svelte-prism": "^1.1.3"
