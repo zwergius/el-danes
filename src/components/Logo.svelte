@@ -60,6 +60,7 @@
 
   a:hover .secondary-logo {
     opacity: 1;
+    animation-play-state: running;
   }
 
   img {
@@ -75,11 +76,13 @@
     width: auto;
     transform: translate3d(0, 0, 0);
     animation: marquee 20s linear infinite;
+    animation-play-state: paused;
   }
 
   .secondary-logo.two {
     margin-left: 2em;
     animation: marqueeTwo 20s linear infinite;
+    animation-play-state: paused;
   }
 
   .turn {
@@ -91,16 +94,16 @@
       transform: translate3d(0, 0, 0);
     }
     to {
-      transform: translate3d(-100%, 0, 0);
+      transform: translate3d(calc(-100% - 2em), 0, 0);
     }
   }
 
   @keyframes marqueeTwo {
     from {
-      transform: translate3d(100%, 0, 0);
+      transform: translate3d(calc(100% + 2em), 0, 0);
     }
     to {
-      transform: translate3d(0, 0, 0);
+      transform: translate3d(-2em, 0, 0);
     }
   }
 
