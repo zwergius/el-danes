@@ -71,6 +71,7 @@
     right: 0;
     font-size: var(--font-3);
     color: var(--text);
+    transform: translate3d(0, 0, 0);
   }
 
   nav.row {
