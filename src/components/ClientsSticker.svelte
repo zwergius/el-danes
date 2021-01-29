@@ -8,11 +8,18 @@
   let isPanningTimer
   let isPanning = false
   let didHover = false
+  const timeOuts = []
 
   onMount(() => {
-    window.setTimeout(() => {
-      handleMouseEnter()
-    }, 500)
+    timeOuts.push(
+      window.setTimeout(() => {
+        handleMouseEnter()
+      }, 500)
+    )
+    return () => {
+      timeOuts.forEach((t) => window.clearTimeout(t))
+      window.clearTimeout(isPanningTimer)
+    }
   })
 
   const coords = spring(
@@ -30,9 +37,11 @@
   }))
 
   $: if (didHover) {
-    window.setTimeout(() => {
-      didHover = false
-    }, 150)
+    timeOuts.push(
+      window.setTimeout(() => {
+        didHover = false
+      }, 150)
+    )
   }
 
   function handleMouseEnter() {
@@ -97,7 +106,8 @@
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 311.98 129.1"
         aria-labelledby="casesSticker"
-        role="img">
+        role="img"
+      >
         <title id="casesSticker">Cases Worked</title>
         <ellipse class="cls-1" cx="155.99" cy="64.55" rx="154.99" ry="63.55" />
         <path
