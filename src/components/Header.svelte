@@ -36,7 +36,7 @@
   {#if showsNavigation}
     <nav class="row {$theme && 'visible'}" transition:slide>
       <LanguageSelector {lang} />
-      <Anchor id="contact-link" rel="prefetch" href="/contact">
+      <Anchor id="contact-link" sapper:prefetch href="/contact">
         {contact[lang]}
       </Anchor>
       <div class="row">

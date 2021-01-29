@@ -90,6 +90,10 @@
     list-style: disc;
   }
 
+  li {
+    margin-bottom: var(--space-3);
+  }
+
   blockquote {
     position: relative;
     margin-bottom: var(--space-4);
@@ -98,12 +102,10 @@
   cite {
     font-size: inherit;
     display: block;
-    transition: all 1s;
   }
 
   blockquote > span {
     margin-left: var(--space-1);
-    transition: all 1s;
   }
 
   blockquote:hover span {

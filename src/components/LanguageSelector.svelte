@@ -9,7 +9,7 @@
       aria-current={lang === 'en' ? 'language' : undefined}
       class="language-switch"
       href="/en"
-      rel="prefetch"
+      sapper:prefetch
       target="_self">
       EN
     </Anchor>
@@ -19,7 +19,7 @@
       aria-current={lang === 'es' ? 'language' : undefined}
       class="language-switch"
       href="/es"
-      rel="prefetch"
+      sapper:prefetch
       target="_self">
       SP
     </Anchor>
@@ -29,7 +29,7 @@
       aria-current={lang === 'da' ? 'language' : undefined}
       class="language-switch"
       href="/da"
-      rel="prefetch"
+      sapper:prefetch
       target="_self">
       DA
     </Anchor>

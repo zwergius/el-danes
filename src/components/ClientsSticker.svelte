@@ -88,7 +88,7 @@
     <Anchor
       id="clients-link"
       href="/cases"
-      rel="prefetch"
+      sapper:prefetch
       draggable="false"
       ondragstart="return false;"
       onClick={handleAnchorClick}

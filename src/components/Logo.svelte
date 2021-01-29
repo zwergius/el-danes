@@ -8,17 +8,26 @@
   <slot />
   <a href="/{lang}">
     <img
+      width="1197.07"
+      height="296.6"
       class="main-logo"
       src="data:image/svg+xml;utf8,{logo}"
-      alt="El Danés logo" />
+      alt="El Danés logo"
+    />
     <img
+      width="3924.39"
+      height="427.05"
       class="secondary-logo"
       src="data:image/svg+xml;utf8,{bgLogo}"
-      alt="El Danés Solutions logo" />
+      alt="El Danés Solutions logo"
+    />
     <img
+      width="3924.39"
+      height="427.05"
       class="secondary-logo two"
       src="data:image/svg+xml;utf8,{bgLogo}"
-      alt="El Danés Solutions logo" />
+      alt="El Danés Solutions logo"
+    />
   </a>
 </div>
 
@@ -33,6 +42,11 @@
     -webkit-backface-visibility: visible;
   }
 
+  .main-logo {
+    height: auto;
+    width: 100%;
+  }
+
   a {
     position: relative;
     display: block;
@@ -41,11 +55,11 @@
   }
 
   a:hover .main-logo {
-    visibility: hidden;
+    opacity: 0;
   }
 
   a:hover .secondary-logo {
-    display: block;
+    opacity: 1;
   }
 
   img {
@@ -53,7 +67,7 @@
   }
 
   .secondary-logo {
-    display: none;
+    opacity: 0;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -74,19 +88,19 @@
 
   @keyframes marquee {
     from {
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
     }
     to {
-      transform: translateX(-100%);
+      transform: translate3d(-100%, 0, 0);
     }
   }
 
   @keyframes marqueeTwo {
     from {
-      transform: translateX(100%);
+      transform: translate3d(100%, 0, 0);
     }
     to {
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
     }
   }
 
