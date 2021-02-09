@@ -1,6 +1,5 @@
 module.exports = {
-  extends: ['eslint:recommended'],
-  parser: 'babel-eslint',
+  extends: ['eslint:recommended', 'prettier'],
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: 'module',
@@ -10,7 +9,7 @@ module.exports = {
     es6: true,
     node: true,
   },
-  plugins: ['prettier', 'svelte3'],
+  plugins: ['svelte3'],
   overrides: [
     {
       files: ['**/*.svelte'],

@@ -1,4 +1,8 @@
-<footer>
+<script>
+  export let headerHeight
+</script>
+
+<footer style="transform: translate3d(0, {headerHeight}px, 0);">
   <h1>
     <slot />
   </h1>
@@ -17,6 +21,7 @@
     font-size: var(--font-3);
     border-top: 1px solid var(--text);
     padding: var(--space-1) var(--space-3);
+    transition: transform 0.6s cubic-bezier(0.64, 0, 0.78, 0);
   }
 
   h1 {

@@ -11,10 +11,8 @@
 
   export let lang, toggleFlip, showsCode
 
-  const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
   let showsNavigation
   let height
-  let headerHeight
 
   onMount(() => {
     showsNavigation = window.matchMedia('only screen and (min-width: 48em)')
@@ -23,12 +21,6 @@
 
   function toggleShowsNavigation() {
     showsNavigation = !showsNavigation
-  }
-
-  $: {
-    if (isNaN(height)) headerHeight = 0
-    else if (height > 0) headerHeight = height
-    else headerHeight = window.innerWidth * aspectRatio
   }
 </script>
 
@@ -53,14 +45,6 @@
     </div>
   </Logo>
 </header>
-
-{#if headerHeight}
-  <div
-    style="height: {headerHeight.toFixed(2)}px;"
-    class="height-faker"
-    transition:slide
-  />
-{/if}
 
 <style>
   header {
