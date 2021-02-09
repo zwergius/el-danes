@@ -10,6 +10,7 @@
 </script>
 
 <script>
+  import { onMount } from 'svelte'
   import { pageCode, pageHeader } from '@/stores'
   import Header from '@/components/Header.svelte'
   import ClientsSticker from '@/components/ClientsSticker.svelte'
@@ -18,12 +19,17 @@
 
   export let lang
   let showsCode = false
+  let h = 0
+  const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
+  let headerHeight = 0
+
+  onMount(() => {
+    headerHeight = window.innerWidth * aspectRatio
+  })
 
   function toggleFlip() {
     showsCode = !showsCode
   }
-
-  let h = 0
 
   function turn(node, { delay = 0, duration = 500 }) {
     return {
@@ -41,7 +47,7 @@
   <Header {lang} {showsCode} {toggleFlip} />
 {/if}
 
-<main style="height: {h}px;">
+<main style="height: {h}px; transform: translate3d(0, {headerHeight}px, 0);">
   <div class="scene">
     {#if !showsCode}
       <div class="side front" transition:turn>
@@ -61,14 +67,14 @@
 
 <ClientsSticker />
 
-<Footer>{$pageHeader}</Footer>
+<Footer {headerHeight}>{$pageHeader}</Footer>
 
 <style>
   main {
     position: relative;
     width: 100%;
     flex: 1 0 auto;
-    transition: margin 0.3s ease-in;
+    transition: transform 0.6s cubic-bezier(0.64, 0, 0.78, 0);
   }
 
   .scene {
@@ -113,13 +119,13 @@
       padding: var(--space-3);
     }
   }
-  /* Desktop - 1080px*/
+  /* Desktop - 1080px */
   @media only screen and (min-width: 67.5em) {
     .content {
       padding: var(--space-4);
     }
   }
-  /* Desktop 2560px*/
+  /* Desktop 2560px */
   @media only screen and (min-width: 160em) {
     div.side {
       font-size: var(--font-10);
