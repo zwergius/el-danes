@@ -5,7 +5,7 @@ export async function get(req, res) {
   const url =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000/code-mock'
-      : 'https://raw.githubusercontent.com/zwergius/el-danes/master/src/routes/%5Blang%5D/contact.svelte'
+      : 'https://raw.githubusercontent.com/zwergius/el-danes/master/src/routes/%5Blang%5D/contact/index.svelte'
   if (!json) {
     const response = await fetch(url, {
       headers: {

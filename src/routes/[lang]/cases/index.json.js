@@ -5,7 +5,7 @@ export async function get(req, res) {
   const codeUrl =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000/code-mock'
-      : 'https://raw.githubusercontent.com/zwergius/el-danes/main/src/routes/%5Blang%5D/cases/index.svelte'
+      : 'https://raw.githubusercontent.com/zwergius/el-danes/master/src/routes/%5Blang%5D/cases/index.svelte'
   const experiencesUrl =
     'https://raw.githubusercontent.com/zwergius/XP/main/src/experiences.json'
 
