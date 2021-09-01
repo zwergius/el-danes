@@ -4,10 +4,15 @@
   export let data
   let Prism
 
+  $: console.log(data)
   onMount(async () => {
-    const module = await import('svelte-prism')
-    Prism = module.default
+    try {
+      await import('prismjs')
+      Prism = (await import('svelte-prism')).default
+    } catch (e) {
+      console.error('Could not load svelte-prism: ', e)
+    }
   })
 </script>
 
-<svelte:component this="{Prism}" language="html" source="{data}" />
+<svelte:component this={Prism} language="html" source={data} />

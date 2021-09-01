@@ -1,12 +1,11 @@
 <script>
-  import { stores } from '@sapper/app'
-  const { page } = stores()
+  import { page } from '$app/stores'
   const lang = $page.params.lang
   export let href = null,
     target = null,
     onClick = null
 
-  $: path = target ? href : `${lang}${href}`
+  $: path = target ? href : `/${lang}${href}`
 </script>
 
 {#if href}

@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
   import { spring } from 'svelte/motion'
-  import Anchor from 'components/Anchor.svelte'
+  import Anchor from '@/components/Anchor.svelte'
   import { pannable } from '@/actions'
 
   let windowHeight
@@ -97,7 +97,7 @@
     <Anchor
       id="clients-link"
       href="/cases"
-      sapper:prefetch
+      sveltekit:prefetch
       draggable="false"
       ondragstart="return false;"
       onClick={handleAnchorClick}

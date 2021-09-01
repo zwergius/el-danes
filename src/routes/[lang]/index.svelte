@@ -1,18 +1,26 @@
 <script context="module">
-  export async function preload(page, session) {
+  import { dev } from '$app/env'
+
+  export async function load({ fetch, page, session }) {
+    const url = !dev
+      ? 'http://localhost:3000/code-mock'
+      : 'https://raw.githubusercontent.com/zwergius/el-danes/master/src/routes/%5Blang%5D/index.svelte'
     const { lang } = page.params
     const { email } = session
-    const res = await this.fetch(`/${lang}.json`)
-    if (res.status === 200) {
-      const code = await res.json()
-      return { code, lang, email }
+    const res = await fetch(url)
+    if (!res.status === 200) {
+      return {
+        status: res.status,
+        error: new Error(`Could not load code for ${page.path}`),
+      }
     }
-    this.error(404, 'Not found')
+    const code = await res.text()
+    return { props: { code, lang, email } }
   }
 </script>
 
 <script>
-  import { home, mailToSubject } from 'assets/translations.yaml'
+  import { home, mailToSubject } from '@/assets/translations.yaml'
   import { pageCode, pageHeader } from '@/stores'
   import SEO from '@/components/SEO.svelte'
   import Anchor from '@/components/Anchor.svelte'

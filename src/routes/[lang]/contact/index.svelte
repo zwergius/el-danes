@@ -1,19 +1,27 @@
 <script context="module">
-  export async function preload(page, session) {
+  import { dev } from '$app/env'
+
+  export async function load({ fetch, page, session }) {
+    const url = dev
+      ? 'http://localhost:3000/code-mock'
+      : 'https://raw.githubusercontent.com/zwergius/el-danes/master/src/routes/%5Blang%5D/contact/index.svelte'
     const { lang } = page.params
     const { email, phoneNo } = session
-    const res = await this.fetch(`/${lang}/contact.json`)
-    if (res.status === 200) {
-      const code = await res.json()
-      return { code, email, lang, phoneNo }
+    const res = await fetch(url)
+    if (!res.status === 200) {
+      return {
+        status: 404,
+        error: new Error(`/${lang}/contact.json Not found`),
+      }
     }
-    this.error(404, `/${lang}/contact.json Not found`)
+    const code = JSON.stringify(await res.text())
+    return { props: { code, email, lang, phoneNo } }
   }
 </script>
 
 <script>
   import { pageCode, pageHeader } from '@/stores'
-  import { contact, letsTalk } from 'assets/translations.yaml'
+  import { contact, letsTalk } from '@/assets/translations.yaml'
   import Anchor from '@/components/Anchor.svelte'
   import SEO from '@/components/SEO.svelte'
 
@@ -46,32 +54,28 @@
       <Anchor
         href="https://www.instagram.com/el.danes/"
         rel="external noopener"
-        target="_blank"
-      >instagram</Anchor
+        target="_blank">instagram</Anchor
       >
     </li>
     <li>
       <Anchor
         href="https://github.com/zwergius"
         rel="external noopener"
-        target="_blank"
-      >github</Anchor
+        target="_blank">github</Anchor
       >
     </li>
     <li>
       <Anchor
         href="https://www.linkedin.com/in/christian-zwergius"
         rel="external noopener"
-        target="_blank"
-      >linkedin</Anchor
+        target="_blank">linkedin</Anchor
       >
     </li>
     <li>
       <Anchor
         href="https://www.behance.net/christizwergiu"
         rel="external noopener"
-        target="_blank"
-      >behance</Anchor
+        target="_blank">behance</Anchor
       >
     </li>
   </ul>

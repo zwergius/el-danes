@@ -15,7 +15,7 @@
   import { stores } from '@sapper/app'
   const { page } = stores()
   import { onMount } from 'svelte'
-  import { home } from 'assets/translations.yaml'
+  import { home } from '@/assets/translations.yaml'
   import { pageCode, pageHeader } from '@/stores.js'
   import SEO from '@/components/SEO.svelte'
 

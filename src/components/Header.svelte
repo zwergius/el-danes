@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
   import { slide } from 'svelte/transition'
-  import { back, contact, menu } from 'assets/translations.yaml'
+  import { back, contact, menu } from '@/assets/translations.yaml'
   import { theme } from '@/stores'
   import Anchor from '@/components/Anchor.svelte'
   import Logo from '@/components/Logo.svelte'
@@ -28,7 +28,7 @@
   {#if showsNavigation}
     <nav class="row {$theme && 'visible'}" transition:slide>
       <LanguageSelector {lang} />
-      <Anchor id="contact-link" sapper:prefetch href="/contact">
+      <Anchor id="contact-link" sveltekit:prefetch href="/contact">
         {contact[lang]}
       </Anchor>
       <div class="row">

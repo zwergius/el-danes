@@ -1,7 +1,6 @@
 <script>
-  import { stores } from '@sapper/app'
-  import { meta as metaTags } from 'assets/translations.yaml'
-  const { page } = stores()
+  import { page } from '$app/stores'
+  import { meta as metaTags } from '@/assets/translations.yaml'
   const path = $page.path.substring(3)
   const url = $page.host
   const lang = $page.params.lang
@@ -42,7 +41,7 @@
   <!-- Localized manifest -->
   <link
     rel="manifest"
-    href={`manifest.${lang}.json`}
+    href={`/manifest.${lang}.json`}
     crossorigin="use-credentials"
   />
 </svelte:head>

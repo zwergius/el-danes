@@ -9,8 +9,9 @@
       aria-current={lang === 'en' ? 'language' : undefined}
       class="language-switch"
       href="/en"
-      sapper:prefetch
-      target="_self">
+      sveltekit:prefetch
+      target="_self"
+    >
       EN
     </Anchor>
   </li>
@@ -19,8 +20,9 @@
       aria-current={lang === 'es' ? 'language' : undefined}
       class="language-switch"
       href="/es"
-      sapper:prefetch
-      target="_self">
+      sveltekit:prefetch
+      target="_self"
+    >
       SP
     </Anchor>
   </li>
@@ -29,8 +31,9 @@
       aria-current={lang === 'da' ? 'language' : undefined}
       class="language-switch"
       href="/da"
-      sapper:prefetch
-      target="_self">
+      sveltekit:prefetch
+      target="_self"
+    >
       DA
     </Anchor>
   </li>

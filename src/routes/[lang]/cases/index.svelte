@@ -1,20 +1,43 @@
 <script context="module">
-  import { safeParseJSON } from '@/helpers'
+  import { dev } from '$app/env'
 
-  export async function preload(page) {
+  export async function load({ fetch, page }) {
     const { lang } = page.params
-    const res = await this.fetch(`/${lang}/cases.json`)
-    if (res.status === 200) {
-      const { code, experiences } = await res.json()
-      return { code, experiences: safeParseJSON(experiences), lang }
+    const codeUrl = dev
+      ? 'http://localhost:3000/code-mock'
+      : 'https://raw.githubusercontent.com/zwergius/el-danes/master/src/routes/%5Blang%5D/cases/index.svelte'
+    const experiencesUrl =
+      'https://raw.githubusercontent.com/zwergius/XP/main/src/experiences.json'
+
+    const codeRes = await fetch(codeUrl)
+    const experiencesRes = await fetch(experiencesUrl)
+    if (!codeRes.status === 200) {
+      return {
+        status: codeRes.status,
+        error: new Error(`Could not load cases code`),
+      }
     }
-    this.error(404, `/${lang}/cases.json Not found`)
+    if (!experiencesRes.status === 200) {
+      return {
+        status: experiencesRes.status,
+        error: new Error(`Could not load experiences`),
+      }
+    }
+    const code = JSON.stringify(await codeRes.text())
+    const experiences = JSON.parse(await experiencesRes.text())
+    return {
+      props: {
+        code,
+        experiences,
+        lang,
+      },
+    }
   }
 </script>
 
 <script>
   import { pageCode, pageHeader, theme } from '@/stores'
-  import { goodCompany, view } from 'assets/translations.yaml'
+  import { goodCompany, view } from '@/assets/translations.yaml'
   import SEO from '@/components/SEO.svelte'
   import Hoverable from '@/components/Hoverable.svelte'
   import Anchor from '@/components/Anchor.svelte'
