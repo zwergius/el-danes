@@ -53,8 +53,8 @@
 <section>
   <ul>
     {#each projects as client}
-      <Hoverable let:hovering={isHovering}>
-        <li class:isHovering>
+      <li>
+        <Hoverable let:hovering={isHovering}>
           {#if client.url}
             <Anchor
               id={client.id}
@@ -91,8 +91,8 @@
               </div>
             {/if}
           {/if}
-        </li>
-      </Hoverable>
+        </Hoverable>
+      </li>
     {/each}
   </ul>
 </section>
