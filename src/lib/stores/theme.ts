@@ -1,6 +1,6 @@
-import { writable } from 'svelte/store'
+import { Writable, writable } from 'svelte/store'
 
-export let theme
+export let theme: Writable<string>
 
 function getInitialColorMode() {
   const persistedColorPreference = window.localStorage.getItem('color-mode')

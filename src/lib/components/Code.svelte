@@ -4,7 +4,6 @@
   export let data
   let Prism
 
-  $: console.log(data)
   onMount(async () => {
     try {
       await import('prismjs')

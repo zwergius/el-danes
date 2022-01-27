@@ -1,4 +1,4 @@
-<script context="module">
+<script context="module" lang="ts">
   export function load({ error, status }) {
     return {
       props: {
@@ -8,8 +8,8 @@
   }
 </script>
 
-<script>
-  export let title
+<script lang="ts">
+  export let title: string
 </script>
 
 <h1>{title}</h1>

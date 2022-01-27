@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
   import { page } from '$app/stores'
-  import { meta as metaTags } from '@/assets/translations.yaml'
-  const path = $page.path.substring(3)
-  const url = $page.host
+  import { meta as metaTags } from '$lib/assets/translations.yaml'
+  const path = $page.url.pathname.substring(3)
+  const url = $page.url.host
   const lang = $page.params.lang
 
   export let title = metaTags.title[lang]

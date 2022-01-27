@@ -1,5 +1,5 @@
 <script>
-  import Anchor from '@/components/Anchor.svelte'
+  import Anchor from '$lib/components/Anchor.svelte'
   export let lang
 </script>
 

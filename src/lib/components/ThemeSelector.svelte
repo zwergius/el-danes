@@ -1,7 +1,7 @@
-<script>
-  import { theme } from '@/stores'
+<script lang="ts">
+  import { theme } from '$lib/stores'
 
-  function changeColors(colorMode) {
+  function changeColors(colorMode: string) {
     const theme = {
       dark: [
         { name: '--text', value: 'white' },
@@ -20,13 +20,13 @@
     root.style.setProperty('--color-mode', colorMode)
   }
 
-  function setColorMode(newValue) {
+  function setColorMode(newValue: string) {
     $theme = newValue
     window.localStorage.setItem('color-mode', newValue)
     changeColors(newValue)
   }
 
-  function handleKeypress(e, colorMode) {
+  function handleKeypress(e: KeyboardEvent, colorMode: string) {
     const { key } = e
     if (key === `Enter` || key === ` `) setColorMode(colorMode)
   }

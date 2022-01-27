@@ -1,6 +1,6 @@
 <script>
-  import logo from '@/assets/el-danes-logo.svg?raw'
-  import bgLogo from '@/assets/el-danes-solutions-logo.svg?raw'
+  import logo from '$lib/assets/el-danes-logo.svg?raw'
+  import bgLogo from '$lib/assets/el-danes-solutions-logo.svg?raw'
   export let lang, turn
 </script>
 

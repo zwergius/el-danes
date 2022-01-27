@@ -1,10 +1,15 @@
-export function pannable(node) {
-  let x
-  let y
+export function pannable(node: Element) {
+  let x: number
+  let y: number
 
-  function handleMousedown(e) {
-    x = e.clientX || e.touches[0].clientX
-    y = e.clientY || e.touches[0].clientY
+  function handleMousedown(e: MouseEvent | TouchEvent) {
+    if (e instanceof MouseEvent) {
+      x = e.clientX
+      y = e.clientY
+    } else if (e instanceof TouchEvent) {
+      x = e.touches[0].clientX
+      y = e.touches[0].clientY
+    }
 
     node.dispatchEvent(
       new CustomEvent('panstart', {
@@ -18,10 +23,19 @@ export function pannable(node) {
     window.addEventListener('touchend', handleMouseup, { passive: false })
   }
 
-  function handleMousemove(e) {
+  function handleMousemove(e: MouseEvent | TouchEvent) {
     e.preventDefault()
-    const clientX = e.clientX || e.touches[0].clientX
-    const clientY = e.clientY || e.touches[0].clientY
+    let clientX: number
+    let clientY: number
+
+    if (e instanceof MouseEvent) {
+      clientX = e.clientX
+      clientY = e.clientY
+    } else if (e instanceof TouchEvent) {
+      clientX = e.touches[0].clientX
+      clientY = e.touches[0].clientY
+    }
+
     const dx = clientX - x
     const dy = clientY - y
     x = clientX
@@ -34,7 +48,7 @@ export function pannable(node) {
     )
   }
 
-  function handleMouseup(e) {
+  function handleMouseup(e: MouseEvent) {
     x = e.clientX // || e.touches[0].clientX
     y = e.clientY // || e.touches[0].clientY
 

@@ -1,22 +1,23 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte'
   import { slide } from 'svelte/transition'
-  import { back, contact, menu } from '@/assets/translations.yaml'
-  import { theme } from '@/stores'
-  import Anchor from '@/components/Anchor.svelte'
-  import Logo from '@/components/Logo.svelte'
-  import LanguageSelector from '@/components/LanguageSelector.svelte'
-  import ThemeSelector from '@/components/ThemeSelector.svelte'
-  import FlipButton from '@/components/FlipButton.svelte'
+  import { back, contact, menu } from '$lib/assets/translations.yaml'
+  import { theme } from '$lib/stores'
+  import Anchor from '$lib/components/Anchor.svelte'
+  import Logo from '$lib/components/Logo.svelte'
+  import LanguageSelector from '$lib/components/LanguageSelector.svelte'
+  import ThemeSelector from '$lib/components/ThemeSelector.svelte'
+  import FlipButton from '$lib/components/FlipButton.svelte'
 
-  export let lang, toggleFlip, showsCode
+  export let lang: string, toggleFlip: () => void, showsCode: boolean
 
-  let showsNavigation
-  let height
+  let showsNavigation: boolean
+  // let height: number
 
   onMount(() => {
-    showsNavigation = window.matchMedia('only screen and (min-width: 48em)')
-      .matches
+    showsNavigation = window.matchMedia(
+      'only screen and (min-width: 48em)'
+    ).matches
   })
 
   function toggleShowsNavigation() {
@@ -24,7 +25,7 @@
   }
 </script>
 
-<header bind:clientHeight={height}>
+<header>
   {#if showsNavigation}
     <nav class="row {$theme && 'visible'}" transition:slide>
       <LanguageSelector {lang} />

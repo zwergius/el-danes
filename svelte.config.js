@@ -6,19 +6,17 @@ import adapter from '@sveltejs/adapter-static'
 import { dirname, resolve } from 'path'
 const __dirname = resolve(dirname(decodeURI(new URL(import.meta.url).pathname)))
 
-// function errorHandler(errorDetails) {
-//   console.log(errorDetails);
-// }
+/** @type {import('@sveltejs/kit').PrerenderErrorHandler} */
+const handleError = ({ status, path, referrer, referenceType }) => {
+	// if (path.startsWith('/blog')) throw new Error('Missing a blog page!');
+	console.warn(`${status} ${path}${referrer ? ` (${referenceType} from ${referrer})` : ''}`);
+};
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   preprocess: [
     sveltePreprocess({
-      defaults: {
-        style: 'postcss',
-      },
-
-      postcss: true,
-      postcss: true,
+      lang: 'postcss',
     }),
   ],
   kit: {
@@ -29,8 +27,8 @@ const config = {
     prerender: {
       crawl: true,
       enabled: true,
-      //onError: errorHandler,
-      pages: [
+      onError: handleError,
+      entries: [
         '/da',
         '/es',
         '/en',
@@ -46,11 +44,6 @@ const config = {
 
     vite: {
       plugins: [yaml(), inlineSvg(), json()],
-      resolve: {
-        alias: {
-          '@': resolve(__dirname, './src'),
-        },
-      },
     },
   },
 }

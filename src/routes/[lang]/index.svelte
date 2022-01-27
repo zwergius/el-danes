@@ -1,17 +1,13 @@
-<script context="module">
-  import { dev } from '$app/env'
-
-  export async function load({ fetch, page, session }) {
-    const url = !dev
-      ? 'http://localhost:3000/code-mock'
-      : 'https://raw.githubusercontent.com/zwergius/el-danes/master/src/routes/%5Blang%5D/index.svelte'
-    const { lang } = page.params
+<script context="module" lang="ts">
+  /** @type {import('@sveltejs/kit').Load} */
+  export async function load({ fetch, params, session, url }) {
+    const { lang } = params
     const { email } = session
-    const res = await fetch(url)
-    if (!res.status === 200) {
+    const res = await fetch(`/code/home.json`)
+    if (!res.ok) {
       return {
         status: res.status,
-        error: new Error(`Could not load code for ${page.path}`),
+        error: new Error(`Could not load code for ${url.pathname}`),
       }
     }
     const code = await res.text()
@@ -19,18 +15,18 @@
   }
 </script>
 
-<script>
-  import { home, mailToSubject } from '@/assets/translations.yaml'
-  import { pageCode, pageHeader } from '@/stores'
-  import SEO from '@/components/SEO.svelte'
-  import Anchor from '@/components/Anchor.svelte'
+<script lang="ts">
+  import { home, mailToSubject } from '$lib/assets/translations.yaml'
+  import { pageCode, pageHeader } from '$lib/stores'
+  import SEO from '$lib/components/SEO.svelte'
+  import Anchor from '$lib/components/Anchor.svelte'
 
-  export let code, lang, email
+  export let code: string, lang: string, email: string
 
   $pageHeader = home.header[lang]
   $pageCode = code
 
-  function handleEmail(e) {
+  function handleEmail(e: Event) {
     e.preventDefault()
     window.location.href = `mailto:${email}?subject=${mailToSubject[lang]}`
   }

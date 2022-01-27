@@ -10,15 +10,15 @@
   // }
 </script>
 
-<script>
+<script lang="ts">
   import { browser } from '$app/env'
   import { page } from '$app/stores'
   import { onMount } from 'svelte'
-  import { pageCode, pageHeader } from '@/stores'
-  import Header from '@/components/Header.svelte'
-  import ClientsSticker from '@/components/ClientsSticker.svelte'
-  import Code from '@/components/Code.svelte'
-  import Footer from '@/components/Footer.svelte'
+  import { pageCode, pageHeader } from '$lib/stores'
+  import Header from '$lib/components/Header.svelte'
+  import ClientsSticker from '$lib/components/ClientsSticker.svelte'
+  import Code from '$lib/components/Code.svelte'
+  import Footer from '$lib/components/Footer.svelte'
 
   const { lang } = $page.params
   let showsCode = false
@@ -34,11 +34,11 @@
     showsCode = !showsCode
   }
 
-  function turn(node, { delay = 0, duration = 500 }) {
+  function turn(_node: Element, { delay = 0, duration = 500 }) {
     return {
       delay,
       duration,
-      css: (t, u) => `
+      css: (_t: number, u: number) => `
       transform: rotate3d(0, 1, 0, ${1 - u * 180}deg);
       `,
     }

@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte'
   import { spring } from 'svelte/motion'
-  import Anchor from '@/components/Anchor.svelte'
-  import { pannable } from '@/actions'
+  import Anchor from '$lib/components/Anchor.svelte'
+  import { pannable } from '$lib/actions'
 
-  let windowHeight
-  let isPanningTimer
+  let windowHeight: number
+  let isPanningTimer: number
   let isPanning = false
   let didHover = false
   const timeOuts = []
@@ -59,7 +59,7 @@
     }, 300)
   }
 
-  function handlePanMove(e) {
+  function handlePanMove(e: CustomEvent) {
     coords.update(($coords) => ({
       x: $coords.x + e.detail.dx,
       y: $coords.y + e.detail.dy,
@@ -67,13 +67,13 @@
     }))
   }
 
-  function handlePanEnd(e) {
+  function handlePanEnd(e: CustomEvent) {
     const { isTouch } = e.detail
     window.clearTimeout(isPanningTimer)
     if (isTouch) isPanning = false
   }
 
-  function handleAnchorClick(e) {
+  function handleAnchorClick(e: Event) {
     if (isPanning) {
       e.preventDefault()
       isPanning = false
@@ -86,8 +86,8 @@
 {#if windowHeight}
   <div
     use:pannable
-    on:panstart={handlePanStart}
     on:panmove={handlePanMove}
+    on:panstart={handlePanStart}
     on:panend={handlePanEnd}
     on:mouseenter={handleMouseEnter}
     style="transform: translate3d({$coords.x}px, {$coords.y}px, 0) rotate({$coords.rotation}deg); --y-pos: {(

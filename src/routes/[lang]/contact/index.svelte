@@ -1,36 +1,31 @@
-<script context="module">
-  import { dev } from '$app/env'
-
-  export async function load({ fetch, page, session }) {
-    const url = dev
-      ? 'http://localhost:3000/code-mock'
-      : 'https://raw.githubusercontent.com/zwergius/el-danes/master/src/routes/%5Blang%5D/contact/index.svelte'
-    const { lang } = page.params
+<script context="module" lang="ts">
+  /** @type {import('@sveltejs/kit').Load} */
+  export async function load({ fetch, params, session }) {
+    const { lang } = params
     const { email, phoneNo } = session
-    const res = await fetch(url)
-    if (!res.status === 200) {
+    const res = await fetch('/code/contact.json')
+    if (!res.ok) {
       return {
         status: 404,
         error: new Error(`/${lang}/contact.json Not found`),
       }
     }
-    const code = JSON.stringify(await res.text())
-    return { props: { code, email, lang, phoneNo } }
+    return { props: { code: await res.text(), email, lang, phoneNo } }
   }
 </script>
 
-<script>
-  import { pageCode, pageHeader } from '@/stores'
-  import { contact, letsTalk } from '@/assets/translations.yaml'
-  import Anchor from '@/components/Anchor.svelte'
-  import SEO from '@/components/SEO.svelte'
+<script lang="ts">
+  import { pageCode, pageHeader } from '$lib/stores'
+  import { contact, letsTalk } from '$lib/assets/translations.yaml'
+  import Anchor from '$lib/components/Anchor.svelte'
+  import SEO from '$lib/components/SEO.svelte'
 
-  export let code, email, lang, phoneNo
+  export let code: string, email: string, lang: string, phoneNo: string
 
   $pageHeader = letsTalk[lang]
   $pageCode = code
 
-  function handleEmail(e) {
+  function handleEmail(e: Event) {
     e.preventDefault()
     window.location.href = `mailto:${email}`
   }

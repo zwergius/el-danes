@@ -1,48 +1,42 @@
-<script context="module">
-  import { dev } from '$app/env'
-
-  export async function load({ fetch, page }) {
-    const { lang } = page.params
-    const codeUrl = dev
-      ? 'http://localhost:3000/code-mock'
-      : 'https://raw.githubusercontent.com/zwergius/el-danes/master/src/routes/%5Blang%5D/cases/index.svelte'
-    const experiencesUrl =
-      'https://raw.githubusercontent.com/zwergius/XP/main/src/experiences.json'
-
-    const codeRes = await fetch(codeUrl)
-    const experiencesRes = await fetch(experiencesUrl)
-    if (!codeRes.status === 200) {
+<script context="module" lang="ts">
+  /** @type {import('@sveltejs/kit').Load} */
+  export async function load({ fetch, params }) {
+    const { lang } = params
+    const [codeRes, expRes] = await Promise.all([
+      fetch(`/code/cases.json`),
+      fetch(`/en/cases.json`),
+    ])
+    if (!codeRes.ok) {
       return {
         status: codeRes.status,
         error: new Error(`Could not load cases code`),
       }
     }
-    if (!experiencesRes.status === 200) {
+    if (!expRes.ok) {
       return {
-        status: experiencesRes.status,
+        status: expRes.status,
         error: new Error(`Could not load experiences`),
       }
     }
-    const code = JSON.stringify(await codeRes.text())
-    const experiences = JSON.parse(await experiencesRes.text())
     return {
       props: {
-        code,
-        experiences,
+        code: await codeRes.text(),
+        experiences: await expRes.json(),
         lang,
       },
     }
   }
 </script>
 
-<script>
-  import { pageCode, pageHeader, theme } from '@/stores'
-  import { goodCompany, view } from '@/assets/translations.yaml'
-  import SEO from '@/components/SEO.svelte'
-  import Hoverable from '@/components/Hoverable.svelte'
-  import Anchor from '@/components/Anchor.svelte'
+<script lang="ts">
+  import type { Experience } from '$lib/types'
+  import { pageCode, pageHeader, theme } from '$lib/stores'
+  import { goodCompany, view } from '$lib/assets/translations.yaml'
+  import SEO from '$lib/components/SEO.svelte'
+  import Hoverable from '$lib/components/Hoverable.svelte'
+  import Anchor from '$lib/components/Anchor.svelte'
 
-  export let code, experiences, lang
+  export let code: string, experiences: Experience[], lang: string
 
   $pageHeader = goodCompany[lang]
   $pageCode = code
