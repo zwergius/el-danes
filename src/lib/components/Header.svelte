@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { LL } from '$i18n/i18n-svelte'
   import { onMount } from 'svelte'
   import { slide } from 'svelte/transition'
-  import { back, contact, menu } from '$lib/assets/translations.yaml'
   import { theme } from '$lib/stores'
   import Anchor from '$lib/components/Anchor.svelte'
   import Logo from '$lib/components/Logo.svelte'
@@ -30,7 +30,7 @@
     <nav class="row {$theme && 'visible'}" transition:slide>
       <LanguageSelector {lang} />
       <Anchor id="contact-link" sveltekit:prefetch href="/contact">
-        {contact[lang]}
+        {$LL.contact()}
       </Anchor>
       <div class="row">
         <FlipButton {toggleFlip} flipped={showsCode} />
@@ -41,7 +41,7 @@
   <Logo {lang} turn={showsCode}>
     <div class="handheld-row">
       <button on:click={toggleShowsNavigation} type="button">
-        {showsNavigation ? back[lang] : menu[lang]}
+        {showsNavigation ? $LL.back() : $LL.menu()}
       </button>
     </div>
   </Logo>

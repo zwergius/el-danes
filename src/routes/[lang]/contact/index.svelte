@@ -10,28 +10,28 @@
         error: new Error(`/${lang}/contact.json Not found`),
       }
     }
-    return { props: { code: await res.text(), email, lang, phoneNo } }
+    return { props: { code: await res.text(), email, phoneNo } }
   }
 </script>
 
 <script lang="ts">
+  import { LL } from '$i18n/i18n-svelte'
   import { pageCode, pageHeader } from '$lib/stores'
-  import { contact, letsTalk } from '$lib/assets/translations.yaml'
   import Anchor from '$lib/components/Anchor.svelte'
   import SEO from '$lib/components/SEO.svelte'
 
-  export let code: string, email: string, lang: string, phoneNo: string
+  export let code: string, email: string, phoneNo: string
 
-  $pageHeader = letsTalk[lang]
+  $pageHeader = $LL.letsTalk()
   $pageCode = code
 
   function handleEmail(e: Event) {
     e.preventDefault()
-    window.location.href = `mailto:${email}`
+    window.location.href = `mailto:${email}?subject=${$LL.mailToSubject()}`
   }
 </script>
 
-<SEO title={contact[lang]} />
+<SEO title={$LL.contact()} />
 
 <section>
   <ul>

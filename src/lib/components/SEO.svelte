@@ -1,12 +1,12 @@
 <script lang="ts">
+  import { LL } from '$i18n/i18n-svelte'
   import { page } from '$app/stores'
-  import { meta as metaTags } from '$lib/assets/translations.yaml'
   const path = $page.url.pathname.substring(3)
   const url = $page.url.host
   const lang = $page.params.lang
 
-  export let title = metaTags.title[lang]
-  export let description = metaTags.description[lang]
+  export let title = $LL.meta.title()
+  export let description = $LL.meta.description()
   export let twitterImg = '' // 120x120
   export let fbImg = `https://${url}/el-danes-tablet.jpg` // Recommended: up to 1200x630
 

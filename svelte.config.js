@@ -1,16 +1,15 @@
-import yaml from '@rollup/plugin-yaml'
 import inlineSvg from 'rollup-plugin-inline-svg'
-import json from '@rollup/plugin-json'
 import sveltePreprocess from 'svelte-preprocess'
 import adapter from '@sveltejs/adapter-static'
-import { dirname, resolve } from 'path'
-const __dirname = resolve(dirname(decodeURI(new URL(import.meta.url).pathname)))
+import path from 'path'
 
 /** @type {import('@sveltejs/kit').PrerenderErrorHandler} */
 const handleError = ({ status, path, referrer, referenceType }) => {
-	// if (path.startsWith('/blog')) throw new Error('Missing a blog page!');
-	console.warn(`${status} ${path}${referrer ? ` (${referenceType} from ${referrer})` : ''}`);
-};
+  // if (path.startsWith('/blog')) throw new Error('Missing a blog page!');
+  console.warn(
+    `${status} ${path}${referrer ? ` (${referenceType} from ${referrer})` : ''}`
+  )
+}
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -27,7 +26,7 @@ const config = {
     prerender: {
       crawl: true,
       enabled: true,
-      onError: handleError,
+      // onError: handleError,
       entries: [
         '/da',
         '/es',
@@ -43,7 +42,13 @@ const config = {
     },
 
     vite: {
-      plugins: [yaml(), inlineSvg(), json()],
+      plugins: [inlineSvg()],
+      resolve: {
+        alias: {
+          $i18n: path.resolve('./src/i18n'),
+          $lib: path.resolve('./src/lib'),
+        },
+      },
     },
   },
 }

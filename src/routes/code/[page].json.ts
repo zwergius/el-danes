@@ -3,8 +3,8 @@ import { dev } from '$app/env'
 /** @type {import('@sveltejs/kit').RequestHandler */
 export async function get({ params }) {
   const page = params.page === 'home' ? '' : `${params.page}/`
-  const url = dev
-    ? 'http://localhost:3000/code-mock'
+  const url = !dev
+    ? 'http://localhost:3000/code-mock.txt'
     : `https://raw.githubusercontent.com/zwergius/el-danes/master/src/routes/%5Blang%5D/${page}index.svelte`
 
   const res = await fetch(url, {

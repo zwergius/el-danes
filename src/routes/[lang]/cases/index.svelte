@@ -1,7 +1,6 @@
 <script context="module" lang="ts">
   /** @type {import('@sveltejs/kit').Load} */
-  export async function load({ fetch, params }) {
-    const { lang } = params
+  export async function load({ fetch }) {
     const [codeRes, expRes] = await Promise.all([
       fetch(`/code/cases.json`),
       fetch(`/en/cases.json`),
@@ -22,23 +21,22 @@
       props: {
         code: await codeRes.text(),
         experiences: await expRes.json(),
-        lang,
       },
     }
   }
 </script>
 
 <script lang="ts">
+  import { LL } from '$i18n/i18n-svelte'
   import type { Experience } from '$lib/types'
   import { pageCode, pageHeader, theme } from '$lib/stores'
-  import { goodCompany, view } from '$lib/assets/translations.yaml'
   import SEO from '$lib/components/SEO.svelte'
   import Hoverable from '$lib/components/Hoverable.svelte'
   import Anchor from '$lib/components/Anchor.svelte'
 
-  export let code: string, experiences: Experience[], lang: string
+  export let code: string, experiences: Experience[]
 
-  $pageHeader = goodCompany[lang]
+  $pageHeader = $LL.goodCompany()
   $pageCode = code
 
   const projects = experiences
@@ -48,7 +46,7 @@
     .sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()))
 </script>
 
-<SEO title={goodCompany[lang]} />
+<SEO title={$LL.goodCompany()} />
 
 <section>
   <ul>
@@ -64,7 +62,7 @@
               target="_blank"
             >
               {client.name}
-              <span>{view[lang]}</span>
+              <span>{$LL.view()}</span>
 
               {#if isHovering}
                 <div

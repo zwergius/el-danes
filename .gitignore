@@ -5,6 +5,7 @@ node_modules
 /.svelte
 /build
 /functions
+/src/i18n/*.ts
 
 # Local Netlify folder
 .netlify

@@ -1,15 +1,3 @@
-<script context="module">
-  // TODO
-  // const supportedLanguages = ['da', 'en', 'es']
-  // export async function load(page) {
-  //   const { lang } = page.params
-  //   // Unsupported language redirect to 404
-  //   if (supportedLanguages.indexOf(lang) === -1)
-  //     return this.error(404, 'Not found')
-  //   return { lang }
-  // }
-</script>
-
 <script lang="ts">
   import { browser } from '$app/env'
   import { page } from '$app/stores'
@@ -17,7 +5,6 @@
   import { pageCode, pageHeader } from '$lib/stores'
   import Header from '$lib/components/Header.svelte'
   import ClientsSticker from '$lib/components/ClientsSticker.svelte'
-  import Code from '$lib/components/Code.svelte'
   import Footer from '$lib/components/Footer.svelte'
 
   const { lang } = $page.params
@@ -61,7 +48,7 @@
     {:else}
       <div class="side back" transition:turn>
         <div class="content" bind:clientHeight={h}>
-          <Code data={$pageCode} />
+          <code>{$pageCode}</code>
         </div>
       </div>
     {/if}
