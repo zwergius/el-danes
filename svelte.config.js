@@ -25,6 +25,7 @@ const config = {
     adapter: adapter(),
     prerender: {
       crawl: true,
+      default: true,
       enabled: true,
       // onError: handleError,
       entries: [
