@@ -8,19 +8,19 @@
     const { lang } = params
 
     // Redirect from root
-    if (!lang) {
-      return {
-        status: 302,
-        redirect: `/${baseLocale}`,
-      }
-    }
-    // Unsupported language redirect to 404
-    if (!locales.includes(lang)) {
-      return {
-        status: 404,
-        error: `${lang} language is not supported.`,
-      }
-    }
+    // if (!lang) {
+    //   return {
+    //     status: 302,
+    //     redirect: `/${baseLocale}`,
+    //   }
+    // }
+    // // Unsupported language redirect to 404
+    // if (!locales.includes(lang)) {
+    //   return {
+    //     status: 404,
+    //     error: `${lang} language is not supported.`,
+    //   }
+    // }
 
     await loadLocaleAsync(lang)
     setLocale(lang)
