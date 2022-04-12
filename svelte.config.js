@@ -23,7 +23,7 @@ const config = {
     // You can create optimized builds for different platforms by
     // specifying a different adapter
     adapter: adapter({
-      // fallback: '404.html'
+      fallback: '404.html'
     }),
     prerender: {
       crawl: true,
