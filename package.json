@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"svelte-kit dev\" \"npm:check:watch\" \"npm:typesafe-i18n\"",
     "build": "svelte-kit build",
-    "postbuild": "mv build/404/index.html build/404.html",
+    "postbuildXXXX": "mv build/404/index.html build/404.html",
     "start": "svelte-kit start",
     "preview": "svelte-kit preview --port 3001",
     "lint": "prettier --check . && eslint --ignore-path .gitignore .",

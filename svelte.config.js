@@ -22,12 +22,14 @@ const config = {
     // By default, `npm run build` will create a standard Node app.
     // You can create optimized builds for different platforms by
     // specifying a different adapter
-    adapter: adapter(),
+    adapter: adapter({
+      fallback: '404.html'
+    }),
     prerender: {
       crawl: true,
       default: true,
       enabled: true,
-      // onError: handleError,
+      onError: handleError,
       entries: [
         '/da',
         '/es',
