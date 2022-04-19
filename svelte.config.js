@@ -40,7 +40,7 @@ const config = {
         '/da/contact',
         '/en/contact',
         '/es/contact',
-        '*',
+        // '*',
       ],
     },
 
