@@ -9,6 +9,9 @@
     const { lang } = params
     const { locale } = session
 
+    console.log('accept-language: ', locale)
+    console.log('url: ', url.pathname)
+
     // Redirect from root
     if (pathname === '/') {
       const language = locales.includes(locale) ? locale : baseLocale
