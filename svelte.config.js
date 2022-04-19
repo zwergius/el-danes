@@ -44,6 +44,7 @@ const config = {
       ],
     },
 
+    trailingSlash: 'always',
     vite: {
       plugins: [inlineSvg()],
       resolve: {
