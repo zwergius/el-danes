@@ -4,16 +4,20 @@
   import { setLocale } from '$i18n/i18n-svelte'
 
   /** @type {import('@sveltejs/kit').Load} */
-  export async function load({ params }) {
+  export async function load({ params, session, url }) {
+    const { pathname } = url
     const { lang } = params
+    const { locale } = session
 
     // Redirect from root
-    // if (!lang) {
-    //   return {
-    //     status: 302,
-    //     redirect: `/${baseLocale}`,
-    //   }
-    // }
+    if (pathname === '/') {
+      const language = locales.includes(locale) ? locale : baseLocale
+
+      return {
+        status: 302,
+        redirect: `/${language}`,
+      }
+    }
     // Unsupported language redirect to 404
     if (!locales.includes(lang)) {
       return {
