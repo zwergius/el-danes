@@ -1,0 +1,4 @@
+RewriteCond %{HTTP:Accept-Language} (da|es|en) [NC]
+RewriteRule ^$ http://%{HTTP_HOST}/%1/ [L,R=302]
+
+RewriteRule ^$ http://%{HTTP_HOST}/en/ [L,R=302]

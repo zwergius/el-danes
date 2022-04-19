@@ -13,23 +13,23 @@
     console.log('url: ', url.pathname)
 
     // Redirect from root
-    if (pathname === '/') {
-      console.log('302')
-      const language = locales.includes(locale) ? locale : baseLocale
+    // if (pathname === '/') {
+    //   console.log('302')
+    //   const language = locales.includes(locale) ? locale : baseLocale
 
-      return {
-        status: 302,
-        redirect: `/${language}`,
-      }
-    }
-    // Unsupported language redirect to 404
-    if (!locales.includes(lang)) {
-      console.log('404')
-      return {
-        status: 404,
-        error: new Error(`${lang} language is not supported.`),
-      }
-    }
+    //   return {
+    //     status: 302,
+    //     redirect: `/${language}`,
+    //   }
+    // }
+    // // Unsupported language redirect to 404
+    // if (!locales.includes(lang)) {
+    //   console.log('404')
+    //   return {
+    //     status: 404,
+    //     error: new Error(`${lang} language is not supported.`),
+    //   }
+    // }
 
     await loadLocaleAsync(lang)
     setLocale(lang)
