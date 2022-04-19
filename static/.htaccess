@@ -1,5 +1,4 @@
 RewriteEngine on
-RewriteBase /
 
 RewriteCond %{HTTP:Accept-Language} (da|es|en) [NC]
 RewriteRule ^$ https://%{HTTP_HOST}/%1 [L,R=302]
