@@ -1,7 +1,3 @@
-<script>
-  export let headerHeight
-</script>
-
 <footer style="transform: translateY(var(--header-height));">
   <h1>
     <slot />

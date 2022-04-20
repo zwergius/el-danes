@@ -5,11 +5,11 @@
 
 <ul>
   <li>
+    <!-- TODO cannot use sveltekit:prefetch as it triggers language change on hover-->
     <Anchor
       aria-current={lang === 'en' ? 'language' : undefined}
       class="language-switch"
       href="/en"
-      sveltekit:prefetch
       target="_self"
     >
       EN
@@ -20,7 +20,6 @@
       aria-current={lang === 'es' ? 'language' : undefined}
       class="language-switch"
       href="/es"
-      sveltekit:prefetch
       target="_self"
     >
       SP
@@ -31,7 +30,6 @@
       aria-current={lang === 'da' ? 'language' : undefined}
       class="language-switch"
       href="/da"
-      sveltekit:prefetch
       target="_self"
     >
       DA

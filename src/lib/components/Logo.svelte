@@ -74,6 +74,7 @@
     left: 0;
     height: 77%;
     width: auto;
+    max-width: unset;
     transform: translate3d(0, 0, 0);
     animation: marquee 20s linear infinite;
     animation-play-state: paused;

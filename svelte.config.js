@@ -1,4 +1,3 @@
-import inlineSvg from 'rollup-plugin-inline-svg'
 import sveltePreprocess from 'svelte-preprocess'
 import adapter from '@sveltejs/adapter-static'
 import path from 'path'
@@ -45,7 +44,7 @@ const config = {
     },
 
     vite: {
-      plugins: [inlineSvg()],
+      plugins: [],
       resolve: {
         alias: {
           $i18n: path.resolve('./src/i18n'),
