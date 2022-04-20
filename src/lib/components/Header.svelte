@@ -54,6 +54,7 @@
     left: 0;
     top: 0;
     right: 0;
+    height: var(--header-height);
     font-size: var(--font-3);
     color: var(--text);
     transform: translate3d(0, 0, 0);

@@ -4,32 +4,24 @@
   import { setLocale } from '$i18n/i18n-svelte'
 
   /** @type {import('@sveltejs/kit').Load} */
-  export async function load({ params, session, url }) {
+  export async function load({ params, url }) {
     const { pathname } = url
     const { lang } = params
-    const { locale } = session
 
-    console.log('accept-language: ', locale)
-    console.log('url: ', url.pathname)
-
-    // Redirect from root
-    // if (pathname === '/') {
-    //   console.log('302')
-    //   const language = locales.includes(locale) ? locale : baseLocale
-
-    //   return {
-    //     status: 302,
-    //     redirect: `/${language}`,
-    //   }
-    // }
-    // // Unsupported language redirect to 404
-    // if (!locales.includes(lang)) {
-    //   console.log('404')
-    //   return {
-    //     status: 404,
-    //     error: new Error(`${lang} language is not supported.`),
-    //   }
-    // }
+    // Redirect from root NOT WORKING with static-adapter
+    if (pathname === '/') {
+      return {
+        status: 302,
+        redirect: `/${baseLocale}`,
+      }
+    }
+    // Unsupported language redirect to 404
+    if (!locales.includes(lang)) {
+      return {
+        status: 404,
+        error: new Error(`${lang} language is not supported.`),
+      }
+    }
 
     await loadLocaleAsync(lang)
     setLocale(lang)
@@ -41,7 +33,7 @@
 </script>
 
 <script lang="ts">
-  import '../app.postcss'
+  import '../app.css'
 </script>
 
 <slot />

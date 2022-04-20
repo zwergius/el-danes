@@ -25,6 +25,7 @@
     transition: all 0.275s ease-in-out;
     position: relative;
     outline: none;
+    line-height: unset;
   }
 
   a::after,

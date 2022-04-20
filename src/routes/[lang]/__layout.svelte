@@ -10,11 +10,12 @@
   const { lang } = $page.params
   let showsCode = false
   let h = 0
-  const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
+  // const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
   let headerHeight = 0
+  let mounted = false
 
   onMount(() => {
-    headerHeight = window.innerWidth * aspectRatio
+    mounted = true
   })
 
   function toggleFlip() {
@@ -37,8 +38,8 @@
   <Header {lang} {showsCode} {toggleFlip} />
 {/if}
 
-<main style="height: {h}px; transform: translate3d(0, {headerHeight}px, 0);">
-  <div class="scene">
+<main style="height: {h}px; ">
+  <div class="scene" class:mounted>
     {#if !showsCode}
       <div class="side front" transition:turn>
         <div class="content" bind:clientHeight={h}>
@@ -64,7 +65,6 @@
     position: relative;
     width: 100%;
     flex: 1 0 auto;
-    transition: transform 0.6s cubic-bezier(0.64, 0, 0.78, 0);
   }
 
   .scene {
@@ -73,6 +73,11 @@
     height: 100%;
     /* z-index: 1; Safari hack */
     perspective: 900000px; /* Safari hack */
+    transition: transform 0.6s cubic-bezier(0.64, 0, 0.78, 0);
+  }
+
+  .scene.mounted {
+    transform: translateY(var(--header-height));
   }
 
   div.side {

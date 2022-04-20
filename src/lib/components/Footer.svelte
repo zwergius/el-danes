@@ -2,7 +2,7 @@
   export let headerHeight
 </script>
 
-<footer style="transform: translate3d(0, {headerHeight}px, 0);">
+<footer style="transform: translateY(var(--header-height));">
   <h1>
     <slot />
   </h1>
