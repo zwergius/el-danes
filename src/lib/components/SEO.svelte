@@ -2,7 +2,7 @@
   import { LL } from '$i18n/i18n-svelte'
   import { page } from '$app/stores'
   const path = $page.url.pathname.substring(3)
-  const url = $page.url.host
+  const url = 'www.eldanés.com'
   const lang = $page.params.lang
 
   export let title = $LL.meta.title()

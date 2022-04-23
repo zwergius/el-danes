@@ -11,7 +11,6 @@
   let showsCode = false
   let h = 0
   // const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
-  let headerHeight = 0
   let mounted = false
 
   onMount(() => {
@@ -58,7 +57,7 @@
 
 <ClientsSticker />
 
-<Footer {headerHeight}>{$pageHeader}</Footer>
+<Footer>{$pageHeader}</Footer>
 
 <style>
   main {
