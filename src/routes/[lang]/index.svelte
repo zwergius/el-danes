@@ -1,30 +1,33 @@
-<script context="module">
-  export async function preload(page, session) {
-    const { lang } = page.params
+<script context="module" lang="ts">
+  /** @type {import('@sveltejs/kit').Load} */
+  export async function load({ fetch, session, url }) {
     const { email } = session
-    const res = await this.fetch(`/${lang}.json`)
-    if (res.status === 200) {
-      const code = await res.json()
-      return { code, lang, email }
+    const res = await fetch(`/code/home.json`)
+    if (!res.ok) {
+      return {
+        status: res.status,
+        error: new Error(`Could not load code for ${url.pathname}`),
+      }
     }
-    this.error(404, 'Not found')
+    const code = await res.text()
+    return { props: { code, email } }
   }
 </script>
 
-<script>
-  import { home, mailToSubject } from 'assets/translations.yaml'
-  import { pageCode, pageHeader } from '@/stores'
-  import SEO from '@/components/SEO.svelte'
-  import Anchor from '@/components/Anchor.svelte'
+<script lang="ts">
+  import LL from '$i18n/i18n-svelte'
+  import { pageCode, pageHeader } from '$lib/stores'
+  import SEO from '$lib/components/SEO.svelte'
+  import Anchor from '$lib/components/Anchor.svelte'
 
-  export let code, lang, email
+  export let code: string, email: string
 
-  $pageHeader = home.header[lang]
+  $pageHeader = $LL.home.header()
   $pageCode = code
 
-  function handleEmail(e) {
+  function handleEmail(e: Event) {
     e.preventDefault()
-    window.location.href = `mailto:${email}?subject=${mailToSubject[lang]}`
+    window.location.href = `mailto:${email}?subject=${$LL.mailToSubject()}`
   }
 </script>
 
@@ -32,45 +35,45 @@
 
 <div>
   <section>
-    <p>{home.section1[lang]}</p>
+    <p>{$LL.home.section1()}</p>
   </section>
 
   <section>
-    <p>{home.section2[lang]}</p>
+    <p>{$LL.home.section2()}</p>
 
     <ul>
-      <li>{home.section2.item1[lang]}</li>
-      <li>{home.section2.item2[lang]}</li>
+      <li>{$LL.home.section2item1()}</li>
+      <li>{$LL.home.section2item2()}</li>
     </ul>
   </section>
 
   <section>
-    <p>{home.section3[lang]}</p>
+    <p>{$LL.home.section3()}</p>
   </section>
 
   <blockquote>
-    <span>&#8220;{home.quote[lang]}&#8221;</span>
-    <cite>&#8213; {home.author[lang]}</cite>
+    <span>&#8220;{$LL.home.quote()}&#8221;</span>
+    <cite>&#8213; {$LL.home.author()}</cite>
   </blockquote>
 
   <section>
-    <p>{home.section4[lang]}</p>
+    <p>{$LL.home.section4()}</p>
 
     <ul>
-      <li>{home.section4.item1[lang]}</li>
-      <li>{home.section4.item2[lang]}</li>
+      <li>{$LL.home.section4item1()}</li>
+      <li>{$LL.home.section4item2()}</li>
     </ul>
 
-    <p>{home.section5[lang]}</p>
+    <p>{$LL.home.section5()}</p>
   </section>
 
   <section>
-    <p>{home.section6[lang]}</p>
+    <p>{$LL.home.section6()}</p>
   </section>
 
   <section>
     <Anchor class="call-to-action" onClick={handleEmail}>
-      &#8594;{home.callToAction[lang]}
+      &#8594;{$LL.home.callToAction()}
     </Anchor>
   </section>
 </div>

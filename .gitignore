@@ -1,10 +1,10 @@
 .DS_Store
-/node_modules/
-/src/node_modules/@sapper/
-yarn-error.log
-/cypress/screenshots/
-/__sapper__/
-
-
-.vercel
 .env
+node_modules
+/.svelte-kit
+/.svelte
+/build
+/functions
+
+# Local Netlify folder
+.netlify

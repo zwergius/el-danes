@@ -1,27 +1,42 @@
-<script context="module">
-  import { safeParseJSON } from '@/helpers'
-
-  export async function preload(page) {
-    const { lang } = page.params
-    const res = await this.fetch(`/${lang}/cases.json`)
-    if (res.status === 200) {
-      const { code, experiences } = await res.json()
-      return { code, experiences: safeParseJSON(experiences), lang }
+<script context="module" lang="ts">
+  /** @type {import('@sveltejs/kit').Load} */
+  export async function load({ fetch }) {
+    const [codeRes, expRes] = await Promise.all([
+      fetch(`/code/cases.json`),
+      fetch(`/en/cases.json`),
+    ])
+    if (!codeRes.ok) {
+      return {
+        status: codeRes.status,
+        error: new Error(`Could not load cases code`),
+      }
     }
-    this.error(404, `/${lang}/cases.json Not found`)
+    if (!expRes.ok) {
+      return {
+        status: expRes.status,
+        error: new Error(`Could not load experiences`),
+      }
+    }
+    return {
+      props: {
+        code: await codeRes.text(),
+        experiences: await expRes.json(),
+      },
+    }
   }
 </script>
 
-<script>
-  import { pageCode, pageHeader, theme } from '@/stores'
-  import { goodCompany, view } from 'assets/translations.yaml'
-  import SEO from '@/components/SEO.svelte'
-  import Hoverable from '@/components/Hoverable.svelte'
-  import Anchor from '@/components/Anchor.svelte'
+<script lang="ts">
+  import { LL } from '$i18n/i18n-svelte'
+  import type { Experience } from '$lib/types'
+  import { pageCode, pageHeader, theme } from '$lib/stores'
+  import SEO from '$lib/components/SEO.svelte'
+  import Hoverable from '$lib/components/Hoverable.svelte'
+  import Anchor from '$lib/components/Anchor.svelte'
 
-  export let code, experiences, lang
+  export let code: string, experiences: Experience[]
 
-  $pageHeader = goodCompany[lang]
+  $pageHeader = $LL.goodCompany()
   $pageCode = code
 
   const projects = experiences
@@ -31,13 +46,13 @@
     .sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()))
 </script>
 
-<SEO title={goodCompany[lang]} />
+<SEO title={$LL.goodCompany()} />
 
 <section>
   <ul>
     {#each projects as client}
-      <Hoverable let:hovering={isHovering}>
-        <li class:isHovering>
+      <li>
+        <Hoverable let:hovering={isHovering}>
           {#if client.url}
             <Anchor
               id={client.id}
@@ -47,7 +62,7 @@
               target="_blank"
             >
               {client.name}
-              <span>{view[lang]}</span>
+              <span>{$LL.view()}</span>
 
               {#if isHovering}
                 <div
@@ -74,8 +89,8 @@
               </div>
             {/if}
           {/if}
-        </li>
-      </Hoverable>
+        </Hoverable>
+      </li>
     {/each}
   </ul>
 </section>
