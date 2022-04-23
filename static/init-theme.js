@@ -1,4 +1,4 @@
-;(function () {
+; (function() {
   function getInitialColorMode() {
     const persistedColorPreference = window.localStorage.getItem('color-mode')
     const hasPersistedPreference = typeof persistedColorPreference === 'string'
@@ -31,6 +31,10 @@
   }
   var colorMode = getInitialColorMode()
   var root = document.documentElement
+  const meta = document.createElement('meta');
+  meta.name = 'theme-color'
+  meta.content = colorMode === 'dark' ? '#000' : '#fff'
+  document.head.append(meta)
 
   theme[colorMode].forEach(({ name, value }) => {
     root.style.setProperty(name, value)
