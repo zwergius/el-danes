@@ -40,7 +40,7 @@
     "prettier-plugin-svelte": "^2.7.0",
     "stylelint": "^14.7.1",
     "stylelint-config-prettier": "^9.0.3",
-    "svelte": "^3.47.0",
+    "svelte": "^3.49.0",
     "svelte-check": "^2.7.0",
     "svelte-preprocess": "^4.10.6",
     "tslib": "^2.3.1",
