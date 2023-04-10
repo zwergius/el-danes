@@ -31,7 +31,7 @@
     <!-- Loads and sets initial theme -->
     <script src="/init-theme.js" crossorigin></script>
   </head>
-  <body>
-    <div>%sveltekit.body%</div>
+  <body data-sveltekit-preload-data>
+    <div style="display: contents">%sveltekit.body%</div>
   </body>
 </html>

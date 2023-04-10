@@ -5,7 +5,7 @@
 
 <ul>
   <li>
-    <!-- TODO cannot usedata-sveltekit-preload-data  as it triggers language change on hover-->
+    <!-- TODO cannot   as it triggers language change on hover-->
     <Anchor
       aria-current={lang === 'en' ? 'language' : undefined}
       class="language-switch"
