@@ -11,9 +11,9 @@
   class="button"
   on:click={toggleFlip}
   on:keypress={handleKeypress}
-  role="button"
+  role="option"
   tabindex="0"
-  aria-pressed={flipped ? true : undefined}
+  aria-selected={flipped ? true : undefined}
   aria-label="Show code"
 >
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256.5 262.57">
@@ -40,7 +40,7 @@
     fill: var(--text);
   }
 
-  [aria-pressed] {
+  [aria-selected] {
     transform: rotateY(-180deg);
   }
 
