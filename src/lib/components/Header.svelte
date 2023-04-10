@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LL } from '$i18n/i18n-svelte'
+  import { LL } from '../../i18n/i18n-svelte'
   import { onMount } from 'svelte'
   import { slide } from 'svelte/transition'
   import { theme } from '$lib/stores'
@@ -29,7 +29,7 @@
   {#if showsNavigation}
     <nav class="row {$theme && 'visible'}" transition:slide>
       <LanguageSelector {lang} />
-      <Anchor id="contact-link" sveltekit:prefetch href="/contact">
+      <Anchor id="contact-link" data-sveltekit-preload-data href="/contact">
         {$LL.contact()}
       </Anchor>
       <div class="row">

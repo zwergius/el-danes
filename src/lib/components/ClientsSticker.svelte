@@ -97,7 +97,7 @@
     <Anchor
       id="clients-link"
       href="/cases"
-      sveltekit:prefetch
+      data-sveltekit-preload-data
       draggable="false"
       ondragstart="return false;"
       onClick={handleAnchorClick}

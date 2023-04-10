@@ -1,5 +1,6 @@
-/** @type {import('@sveltejs/kit').RequestHandler} */
-export async function get() {
+// @migration task: Check imports
+/** @type {import('./$types').RequestHandler} */
+export async function GET() {
   const url =
     'https://raw.githubusercontent.com/zwergius/XP/main/src/experiences.json'
 
@@ -11,12 +12,8 @@ export async function get() {
   })
 
   if (!res.ok) {
-    return {
-      status: 404,
-    }
+    return new Response(undefined, { status: 404 })
   }
-  return {
-    status: res.status,
-    body: await res.json(),
-  }
+
+  return new Response(await res.text(), { status: res.status })
 }

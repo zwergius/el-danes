@@ -22,13 +22,15 @@ const config = {
     // You can create optimized builds for different platforms by
     // specifying a different adapter
     adapter: adapter({
-      fallback: '404.html'
+      pages: 'build',
+      assets: 'build',
+      fallback: 'index.html',
+      precompress: false,
+      strict: true,
     }),
     prerender: {
       crawl: true,
-      default: true,
-      enabled: true,
-      onError: handleError,
+
       entries: [
         '/da',
         '/es',
@@ -41,16 +43,6 @@ const config = {
         '/es/contact',
         '*',
       ],
-    },
-
-    vite: {
-      plugins: [],
-      resolve: {
-        alias: {
-          $i18n: path.resolve('./src/i18n'),
-          $lib: path.resolve('./src/lib'),
-        },
-      },
     },
   },
 }

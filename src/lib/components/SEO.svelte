@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LL } from '$i18n/i18n-svelte'
+  import { LL } from '../../i18n/i18n-svelte'
   import { page } from '$app/stores'
   const path = $page.url.pathname.substring(3)
   const url = 'www.eldanés.com'
