@@ -1,7 +1,7 @@
 import { redirect, error } from '@sveltejs/kit'
-import { baseLocale, locales } from '../i18n/i18n-util'
-import { loadLocaleAsync } from '../i18n/i18n-util.async'
-import { setLocale } from '../i18n/i18n-svelte'
+import { baseLocale, locales } from '$i18n/i18n-util'
+import { loadLocaleAsync } from '$i18n/i18n-util.async'
+import { setLocale } from '$i18n/i18n-svelte'
 import type { LayoutLoad } from './$types'
 import type { Locales } from '$i18n/i18n-types'
 export const prerender = true

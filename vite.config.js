@@ -4,9 +4,11 @@ import path from 'path'
 /** @type {import('vite').UserConfig} */
 const config = {
   plugins: [sveltekit()],
-  alias: {
-    $i18n: path.resolve('./src/i18n'),
-    $lib: path.resolve('./src/lib'),
+  resolve: {
+    alias: {
+      $i18n: path.resolve('./src/i18n'),
+      $lib: path.resolve('./src/lib'),
+    },
   },
 }
 

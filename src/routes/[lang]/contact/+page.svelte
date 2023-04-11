@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LL } from '../../../i18n/i18n-svelte'
+  import { LL } from '$i18n/i18n-svelte'
   import { pageCode, pageHeader } from '$lib/stores'
   import Anchor from '$lib/components/Anchor.svelte'
   import SEO from '$lib/components/SEO.svelte'

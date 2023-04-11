@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LL } from '../../../i18n/i18n-svelte'
+  import { LL } from '$i18n/i18n-svelte'
   import type { Experience } from '$lib/types'
   import { pageCode, pageHeader, theme } from '$lib/stores'
   import SEO from '$lib/components/SEO.svelte'
