@@ -29,7 +29,7 @@
   {#if showsNavigation}
     <nav class="row {$theme && 'visible'}" transition:slide>
       <LanguageSelector {lang} />
-      <Anchor id="contact-link" sveltekit:prefetch href="/contact">
+      <Anchor id="contact-link" href="/contact">
         {$LL.contact()}
       </Anchor>
       <div class="row">

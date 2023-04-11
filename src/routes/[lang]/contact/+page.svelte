@@ -1,26 +1,14 @@
-<script context="module" lang="ts">
-  /** @type {import('@sveltejs/kit').Load} */
-  export async function load({ fetch, params, session }) {
-    const { lang } = params
-    const { email, phoneNo } = session
-    const res = await fetch('/code/contact.json')
-    if (!res.ok) {
-      return {
-        status: 404,
-        error: new Error(`/${lang}/contact.json Not found`),
-      }
-    }
-    return { props: { code: await res.text(), email, phoneNo } }
-  }
-</script>
-
 <script lang="ts">
   import { LL } from '$i18n/i18n-svelte'
   import { pageCode, pageHeader } from '$lib/stores'
   import Anchor from '$lib/components/Anchor.svelte'
   import SEO from '$lib/components/SEO.svelte'
+  import type { PageData } from './$types'
 
-  export let code: string, email: string, phoneNo: string
+  /** @type {import('./$types').PageData */
+  export let data: PageData
+  let { code, phoneNo, email } = data
+  $: ({ code, phoneNo, email } = data)
 
   $pageHeader = $LL.letsTalk()
   $pageCode = code

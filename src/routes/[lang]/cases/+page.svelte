@@ -1,31 +1,3 @@
-<script context="module" lang="ts">
-  /** @type {import('@sveltejs/kit').Load} */
-  export async function load({ fetch }) {
-    const [codeRes, expRes] = await Promise.all([
-      fetch(`/code/cases.json`),
-      fetch(`/en/cases.json`),
-    ])
-    if (!codeRes.ok) {
-      return {
-        status: codeRes.status,
-        error: new Error(`Could not load cases code`),
-      }
-    }
-    if (!expRes.ok) {
-      return {
-        status: expRes.status,
-        error: new Error(`Could not load experiences`),
-      }
-    }
-    return {
-      props: {
-        code: await codeRes.text(),
-        experiences: await expRes.json(),
-      },
-    }
-  }
-</script>
-
 <script lang="ts">
   import { LL } from '$i18n/i18n-svelte'
   import type { Experience } from '$lib/types'
@@ -33,17 +5,22 @@
   import SEO from '$lib/components/SEO.svelte'
   import Hoverable from '$lib/components/Hoverable.svelte'
   import Anchor from '$lib/components/Anchor.svelte'
+  import type { PageData } from './$types'
 
-  export let code: string, experiences: Experience[]
+  /** @type {import('./$types').PageData */
+  export let data: PageData
+  let { code, experiences } = data
+  $: ({ code, experiences } = data)
 
   $pageHeader = $LL.goodCompany()
   $pageCode = code
-
   const projects = experiences
-    .map((companies) => companies.projects)
+    .map((companies: Experience) => companies.projects)
     .flat()
     .filter(({ visible }) => Boolean(visible))
-    .sort((a, b) => a.name.toUpperCase().localeCompare(b.name.toUpperCase()))
+    .sort((a: { name: string }, b: { name: string }) =>
+      a.name.toUpperCase().localeCompare(b.name.toUpperCase())
+    )
 </script>
 
 <SEO title={$LL.goodCompany()} />

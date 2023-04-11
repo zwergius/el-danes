@@ -5,7 +5,7 @@
 
 <ul>
   <li>
-    <!-- TODO cannot use sveltekit:prefetch as it triggers language change on hover-->
+    <!-- TODO cannot   as it triggers language change on hover-->
     <Anchor
       aria-current={lang === 'en' ? 'language' : undefined}
       class="language-switch"

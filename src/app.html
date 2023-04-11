@@ -26,12 +26,12 @@
 
     <!-- This contains the contents of the <svelte:head> component, if
 	     the current page has one -->
-    %svelte.head%
+    %sveltekit.head%
 
     <!-- Loads and sets initial theme -->
     <script src="/init-theme.js" crossorigin></script>
   </head>
-  <body>
-    %svelte.body%
+  <body data-sveltekit-preload-code="eager" data-sveltekit-preload-data="hover">
+    <div style="display: contents">%sveltekit.body%</div>
   </body>
 </html>

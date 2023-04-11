@@ -1,26 +1,14 @@
-<script context="module" lang="ts">
-  /** @type {import('@sveltejs/kit').Load} */
-  export async function load({ fetch, session, url }) {
-    const { email } = session
-    const res = await fetch(`/code/home.json`)
-    if (!res.ok) {
-      return {
-        status: res.status,
-        error: new Error(`Could not load code for ${url.pathname}`),
-      }
-    }
-    const code = await res.text()
-    return { props: { code, email } }
-  }
-</script>
-
 <script lang="ts">
   import LL from '$i18n/i18n-svelte'
   import { pageCode, pageHeader } from '$lib/stores'
   import SEO from '$lib/components/SEO.svelte'
   import Anchor from '$lib/components/Anchor.svelte'
+  import type { PageData } from './$types'
 
-  export let code: string, email: string
+  /** @type {import('./$types').PageData */
+  export let data: PageData
+  let { code, email } = data
+  $: ({ code, email } = data)
 
   $pageHeader = $LL.home.header()
   $pageCode = code

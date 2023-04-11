@@ -1,5 +1,5 @@
-/** @type {import('@sveltejs/kit').RequestHandler */
-export async function get({ params }) {
+/** @type {import('@sveltejs/kit').RequestHandler} */
+export async function GET({ params }) {
   const page = params.page === 'home' ? '' : `${params.page}/`
   const url = `https://raw.githubusercontent.com/zwergius/el-danes/master/src/routes/%5Blang%5D/${page}index.svelte`
 
@@ -11,13 +11,7 @@ export async function get({ params }) {
   })
 
   if (!res.ok) {
-    return {
-      status: 404,
-    }
+    return new Response(undefined, { status: 404 })
   }
-
-  return {
-    status: res.status,
-    body: await res.text(),
-  }
+  return new Response(await res.text(), { status: res.status })
 }
