@@ -2,17 +2,18 @@
   import { browser } from '$app/environment'
   import { page } from '$app/stores'
   import { onMount } from 'svelte'
-  import { pageCode, pageHeader } from '$lib/stores'
+  import { pageHeader } from '$lib/stores'
   import Header from '$lib/components/Header.svelte'
   import ClientsSticker from '$lib/components/ClientsSticker.svelte'
   import Footer from '$lib/components/Footer.svelte'
+  import type { PageData } from './$types'
 
   const { lang } = $page.params
-  let showsCode = false
+
+  let showsCode = true
   let h = 0
   // const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
   let mounted = false
-
   onMount(() => {
     mounted = true
   })
@@ -48,7 +49,7 @@
     {:else}
       <div class="side back" transition:turn>
         <div class="content" bind:clientHeight={h}>
-          <code>{$pageCode}</code>
+          <code>{$page.data.code}</code>
         </div>
       </div>
     {/if}

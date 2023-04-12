@@ -11,9 +11,9 @@
   export let data: PageData
   let { code, experiences } = data
   $: ({ code, experiences } = data)
-
   $pageHeader = $LL.goodCompany()
   $pageCode = code
+
   const projects = experiences
     .map((companies: Experience) => companies.projects)
     .flat()

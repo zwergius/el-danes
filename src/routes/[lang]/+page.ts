@@ -9,5 +9,6 @@ export const load: PageLoad = async ({ fetch, url }) => {
     throw error(500, `Could not load code for ${url.pathname}`)
   }
   const code = await res.text()
+
   return { code, email }
 }
