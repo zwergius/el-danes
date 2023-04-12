@@ -1,7 +1,7 @@
 <script lang="ts">
   import { LL } from '$i18n/i18n-svelte'
   import type { Experience } from '$lib/types'
-  import { pageCode, pageHeader, theme } from '$lib/stores'
+  import { pageHeader, theme } from '$lib/stores'
   import SEO from '$lib/components/SEO.svelte'
   import Hoverable from '$lib/components/Hoverable.svelte'
   import Anchor from '$lib/components/Anchor.svelte'
@@ -12,7 +12,6 @@
   let { code, experiences } = data
   $: ({ code, experiences } = data)
   $pageHeader = $LL.goodCompany()
-  $pageCode = code
 
   const projects = experiences
     .map((companies: Experience) => companies.projects)
