@@ -6,11 +6,10 @@
   import Header from '$lib/components/Header.svelte'
   import ClientsSticker from '$lib/components/ClientsSticker.svelte'
   import Footer from '$lib/components/Footer.svelte'
-  import type { PageData } from './$types'
 
   const { lang } = $page.params
 
-  let showsCode = true
+  let showsCode = false
   let h = 0
   // const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
   let mounted = false
