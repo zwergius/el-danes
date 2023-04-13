@@ -9,8 +9,8 @@
 
   /** @type {import('./$types').PageData */
   export let data: PageData
-  let { code, experiences } = data
-  $: ({ code, experiences } = data)
+  let { experiences } = data
+  $: ({ experiences } = data)
   $pageHeader = $LL.goodCompany()
 
   const projects = experiences
