@@ -16,6 +16,9 @@ export async function handle({ event, resolve }) {
   const [, lang] = event.url.pathname.split('/')
 
   // replace html lang attribute with correct language
-  const body = await response.text();
-  return new Response(body.replace('<html lang="en">', `<html lang="${lang}">`), response)
+  const body = await response.text()
+  return new Response(
+    body.replace('<html lang="en">', `<html lang="${lang}">`),
+    response
+  )
 }
