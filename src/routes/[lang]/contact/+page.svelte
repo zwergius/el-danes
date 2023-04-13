@@ -5,16 +5,15 @@
   import SEO from '$lib/components/SEO.svelte'
   import type { PageData } from './$types'
 
-  /** @type {import('./$types').PageData */
   export let data: PageData
   let { phoneNo, email } = data
-  $: ({ code, phoneNo, email } = data)
+  $: ({ phoneNo, email } = data)
 
   $pageHeader = $LL.letsTalk()
 
   function handleEmail(e: Event) {
-    e.preventDefault()
-    window.location.href = `mailto:${email}?subject=${$LL.mailToSubject()}`
+    e.preventDefault(),
+      (window.location.href = `mailto:${email}?subject=${$LL.mailToSubject()}`)
   }
 </script>
 
