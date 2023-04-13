@@ -8,7 +8,7 @@
   /** @type {import('./$types').PageData */
   export let data: PageData
   let { phoneNo, email } = data
-  $: ({ phoneNo, email } = data)
+  $: ({ code, phoneNo, email } = data)
 
   $pageHeader = $LL.letsTalk()
 
