@@ -7,5 +7,4 @@ if (typeof window !== 'undefined') {
   theme.set(root.style.getPropertyValue('--color-mode'))
 }
 
-export let pageCode = writable('')
 export let pageHeader = writable('')
