@@ -7,7 +7,7 @@
 
   /** @type {import('./$types').PageData */
   export let data: PageData
-  let { email } = data
+  let { code, email } = data
   $: ({ email } = data)
 
   $pageHeader = $LL.home.header()
