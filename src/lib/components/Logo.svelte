@@ -39,7 +39,6 @@
     transform-style: preserve-3d;
     transform: rotate3d(0, 1, 0, 0deg);
     backface-visibility: visible;
-    -webkit-backface-visibility: visible;
   }
 
   .main-logo {

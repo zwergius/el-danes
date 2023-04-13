@@ -12,8 +12,11 @@ export const load: PageLoad = async ({ fetch }) => {
   if (!expRes.ok) {
     throw error(500, `Could not load experiences`)
   }
+  const code = await codeRes.text()
+
+  const experiences = await expRes.json()
   return {
-    code: await codeRes.text(),
-    experiences: await expRes.json(),
+    code,
+    experiences,
   }
 }

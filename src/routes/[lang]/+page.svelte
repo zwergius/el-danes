@@ -1,17 +1,16 @@
 <script lang="ts">
   import LL from '$i18n/i18n-svelte'
-  import { pageCode, pageHeader } from '$lib/stores'
+  import { pageHeader } from '$lib/stores'
   import SEO from '$lib/components/SEO.svelte'
   import Anchor from '$lib/components/Anchor.svelte'
   import type { PageData } from './$types'
 
   /** @type {import('./$types').PageData */
   export let data: PageData
-  let { code, email } = data
-  $: ({ code, email } = data)
+  let { email } = data
+  $: ({ email } = data)
 
   $pageHeader = $LL.home.header()
-  $pageCode = code
 
   function handleEmail(e: Event) {
     e.preventDefault()
