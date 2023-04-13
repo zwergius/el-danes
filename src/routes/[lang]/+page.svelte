@@ -7,9 +7,9 @@
 
   /** @type {import('./$types').PageData */
   export let data: PageData
-  let { code, email } = data
+  let { email } = data
   $: ({ email } = data)
-  let nada
+
   $pageHeader = $LL.home.header()
 
   function handleEmail(e: Event) {
