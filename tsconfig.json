@@ -22,10 +22,10 @@
     }
   },
   "include": [
+    "src/**/*.svelte",
     "src/**/*.d.ts",
     "src/**/*.js",
     "src/**/*.ts",
-    "src/**/*.svelte",
     "src/**/*.yaml",
     "src/**/*",
     "src/node_modules",

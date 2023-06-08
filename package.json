@@ -8,7 +8,7 @@
     "build": "vite build",
     "postbuildXXXX": "mv build/404/index.html build/404.html",
     "start": "svelte-kit start",
-    "preview": "svelte-kit preview --port 3001",
+    "preview": "vite preview --port 3001",
     "lint": "prettier --check . && eslint --ignore-path .gitignore .",
     "update": "npx npm-check-updates -i",
     "check": "svelte-check --tsconfig ./tsconfig.json",
@@ -25,19 +25,20 @@
   "devDependencies": {
     "@sveltejs/adapter-static": "^2.0.1",
     "@sveltejs/kit": "^1.14.0",
-    "@typescript-eslint/eslint-plugin": "^5.20.0",
-    "@typescript-eslint/parser": "^5.20.0",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
     "autoprefixer": "^10.4.4",
     "concurrently": "^7.1.0",
     "cssnano": "^5.1.7",
-    "eslint": "^8.13.0",
+    "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-svelte3": "^3.4.1",
+    "husky": "^8.0.3",
     "postcss": "^8.4.12",
     "postcss-load-config": "^3.1.4",
-    "prettier": "^2.6.2",
-    "prettier-plugin-svelte": "^2.7.0",
+    "prettier": "^2.8.7",
+    "prettier-plugin-svelte": "^2.10.0",
     "stylelint": "^14.7.1",
     "stylelint-config-prettier": "^9.0.3",
     "svelte": "^3.57.0",
@@ -48,6 +49,15 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "lint-staged": "^13.2.1",
     "vite": "^4.2.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,svelte}": "eslint"
   }
 }
