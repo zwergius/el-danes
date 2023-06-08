@@ -79,7 +79,7 @@
 
 <SEO />
 
-<div class="letters">
+<div class="container">
   <section>
     <div>
       <label>
@@ -87,7 +87,7 @@
       </label>
     </div>
     {#if show}
-      <div class="box">
+      <div class="wrapper">
         <div class="sign" />
         <div class="sign" />
         <div class="sign" />
@@ -111,7 +111,7 @@
         <div class="sign" />
         <div class="sign" />
         <div class="sign" />
-        <div class="box2">
+        <div class="letters">
           {#each [words[index]] as { word } (index)}
             {#each word as letter}
               <p transition:flipboard>{letter}</p>
@@ -165,33 +165,29 @@
 <style>
   p {
     width: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
   }
-  .box2 {
+  .letters {
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1000;
   }
 
-  .box {
+  .wrapper {
     position: relative;
     display: flex;
   }
 
   .sign {
-    width: 1em;
-    height: 1em;
+    width: 80px;
+    height: 80px;
     display: inline-block;
     margin: 0 auto;
-    border-radius: 0.05em;
-    border: 0.01em solid #000000;
+    border-radius: 10px;
+    border: 1px solid #000000;
     position: relative;
     background: white;
     text-align: center;
@@ -199,7 +195,7 @@
     font-size: 80px;
     color: black;
     font-family: monospace;
-    box-shadow: 0px 0.02em 0 #ccc, 0px 0.05em 0 black;
+    box-shadow: 0px 2px 0 #ccc, 0px 5px 0 black;
     text-shadow: -1px -2px 2px rgb(140, 140, 140);
     z-index: 50;
   }
@@ -230,8 +226,8 @@
     z-index: 10;
     margin-top: -1px;
   }
-  .letters {
-    margin-top: 100px;
+  .container {
+    padding-top: 180px;
   }
   div {
     overflow-wrap: break-word;
