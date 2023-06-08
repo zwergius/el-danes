@@ -72,7 +72,7 @@
     height: 100%;
     /* z-index: 1; Safari hack */
     perspective: 900000px; /* Safari hack */
-    transition: transform 0.6s cubic-bezier(0.64, 0, 0.78, 0);
+    transition: transform 0s cubic-bezier(0.64, 0, 0.78, 0);
   }
 
   .scene.mounted {
