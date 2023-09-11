@@ -38,7 +38,7 @@
   on:keypress={(e) => handleKeypress(e, 'dark')}
   tabIndex="0"
   role="radio"
-  aria-selected={$theme === 'dark' ? true : undefined}
+  aria-checked={$theme === 'dark' ? true : undefined}
   aria-label="Use dark theme"
 >
   <div />
@@ -49,7 +49,7 @@
   on:keypress={(e) => handleKeypress(e, 'light')}
   tabIndex="0"
   role="radio"
-  aria-selected={$theme === 'light' ? true : undefined}
+  aria-checked={$theme === 'light' ? true : undefined}
   aria-label="Use light theme"
 >
   <div />
@@ -71,7 +71,7 @@
     transition: all 0.2s ease;
   }
 
-  .button[aria-selected] div::before {
+  .button[aria-checked] div::before {
     position: absolute;
     top: -2.5em;
     left: 0;
@@ -83,7 +83,7 @@
     justify-content: center;
   }
 
-  .button[aria-selected] div {
+  .button[aria-checked] div {
     position: relative;
     background: none;
     pointer-events: none;
