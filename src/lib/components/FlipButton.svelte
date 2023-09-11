@@ -11,7 +11,7 @@
   class="button"
   on:click={toggleFlip}
   on:keypress={handleKeypress}
-  role="option"
+  role="button"
   tabindex="0"
   aria-pressed={flipped ? true : undefined}
   aria-label="Show code"
