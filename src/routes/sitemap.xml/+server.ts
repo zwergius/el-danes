@@ -15,12 +15,11 @@ const render = (languages: string[], pages: string[]) => `
   </urlset>
 `
 
-export function get() {
-  return {
+export function GET() {
+  return new Response(render(languages, pages), {
     headers: {
       'Cache-Control': 'max-age=0, s-maxage=3600',
       'Content-Type': 'application/rss+xml',
     },
-    body: render(languages, pages),
-  }
+  })
 }

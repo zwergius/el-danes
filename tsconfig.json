@@ -2,10 +2,7 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "DOM"
-    ],
+    "lib": ["es2020", "DOM"],
     "target": "es2020",
     "importsNotUsedAsValues": "error",
     "isolatedModules": true,
@@ -18,18 +15,10 @@
     "allowJs": true,
     "checkJs": true,
     "paths": {
-      "$lib": [
-        "src/lib"
-      ],
-      "$lib/*": [
-        "src/lib/*"
-      ],
-      "$i18n": [
-        "src/i18n"
-      ],
-      "$i18n/*": [
-        "src/i18n/*"
-      ]
+      "$lib": ["src/lib"],
+      "$lib/*": ["src/lib/*"],
+      "$i18n": ["src/i18n"],
+      "$i18n/*": ["src/i18n/*"]
     }
   },
   "include": [
@@ -37,7 +26,10 @@
     "src/**/*.js",
     "src/**/*.ts",
     "src/**/*.svelte",
-    "src/**/*.yaml"
+    "src/**/*.yaml",
+    "src/**/*",
+    "src/node_modules",
+    ".svelte-kit/ambient.d.ts"
   ],
   "extends": "./.svelte-kit/tsconfig.json"
 }
