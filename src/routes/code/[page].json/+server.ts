@@ -1,4 +1,7 @@
 import { dev } from '$app/environment'
+
+export const prerender = true
+
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function GET({ params }) {
   const page = params.page === 'home' ? '' : `${params.page}/`
