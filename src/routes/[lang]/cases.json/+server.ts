@@ -1,9 +1,11 @@
 import { dev } from '$app/environment'
+
+export const prerender = true
+
 /** @type {import('./$types').RequestHandler} */
 export async function GET() {
   const branch = dev ? 'dev' : 'main'
-  const url =
-    `https://raw.githubusercontent.com/zwergius/XP/${branch}/src/experiences.json`
+  const url = `https://raw.githubusercontent.com/zwergius/XP/${branch}/src/experiences.json`
 
   const res = await fetch(url, {
     headers: {
