@@ -11,7 +11,6 @@ export const prerender = true
 export const load: LayoutLoad = async ({ params, url }) => {
   const { pathname } = url
   const { lang } = <{ lang: Locales }>params
-  console.log({ pathname, browser })
 
   // DEV only - cloudflare redirects 🔥
   if (pathname === '/') {
