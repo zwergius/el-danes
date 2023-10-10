@@ -10,7 +10,7 @@ module.exports = {
   ignorePatterns: ['*.cjs'],
   overrides: [{ files: ['*.svelte'], processor: 'svelte/svelte' }],
   settings: {
-    'svelte3/typescript': () => require('typescript'),
+    'svelte/typescript': () => require('typescript'),
   },
   parserOptions: {
     sourceType: 'module',
