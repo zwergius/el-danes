@@ -26,17 +26,13 @@
 </script>
 
 <div class="add-wallet ">
-  <div class="ios">
-    <a href={pkpass}><img src={iosWallet} alt="button"></a>
-  </div>
-  <div class="android">
-    <a href={passGoogle}><img src={googleWallet} alt="button"></a>
-  </div>
+    <a href={pkpass}><img class="ios" src={iosWallet} alt="button"></a>
+    <a href={passGoogle}><img class="android" src={googleWallet} alt="button"></a>
+ 
 </div>
 
 <style>
   .add-wallet {
-    flex-direction: column;
     gap: 50px;
     width: 100%;
     display: flex;
@@ -53,6 +49,7 @@
   }
   @media only screen and (max-width: 1024px) {
      .add-wallet {
+    flex-direction: column;
     padding-top: var(--header-height);
      }
     .android{
