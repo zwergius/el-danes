@@ -27,7 +27,7 @@
 
 <header>
   {#if showsNavigation}
-    <nav class="row {$theme && 'visible'}" transition:slide>
+    <nav class="row {$theme && 'visible'}" transition:slide|global>
       <LanguageSelector {lang} />
       <Anchor id="contact-link" href="/contact">
         {$LL.contact()}

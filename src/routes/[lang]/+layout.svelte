@@ -40,13 +40,13 @@
 <main style="height: {h}px; ">
   <div class="scene" class:mounted>
     {#if !showsCode}
-      <div class="side front" transition:turn>
+      <div class="side front" transition:turn|global>
         <div class="content" bind:clientHeight={h}>
           <slot />
         </div>
       </div>
     {:else}
-      <div class="side back" transition:turn>
+      <div class="side back" transition:turn|global>
         <div class="content" bind:clientHeight={h}>
           <code>{$page.data.code}</code>
         </div>
