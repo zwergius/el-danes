@@ -41,11 +41,11 @@
   }
   .android {
     width: 320px;
-    height: 89px;
+    height: auto;
   }
   .ios {
     width: 320px;
-    height: 102px;
+    height: auto;
   }
   @media only screen and (max-width: 1024px) {
     .add-wallet {
@@ -54,21 +54,17 @@
     }
     .android {
       width: 280px;
-      height: 78px;
     }
     .ios {
       width: 280px;
-      height: 89px;
     }
   }
   @media only screen and (max-width: 767px) {
     .android {
       width: 200px;
-      height: 55px;
     }
     .ios {
       width: 200px;
-      height: 63px;
     }
   }
 </style>
