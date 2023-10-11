@@ -12,6 +12,8 @@
     "lint": "prettier --check . && eslint --ignore-path .gitignore .",
     "update": "npx npm-check-updates -i",
     "check": "svelte-check --tsconfig ./tsconfig.json",
+    "check:lint": "eslint --max-warnings=0 --ignore-path .eslintignore",
+    "check:prettier": "prettier -c",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "format": "prettier --write .",
     "typesafe-i18n": "typesafe-i18n"
