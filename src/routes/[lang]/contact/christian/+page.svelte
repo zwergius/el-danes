@@ -3,7 +3,6 @@
   import googleWallet from '$lib/assets/google-wallet.svg'
   import iosWallet from '$lib/assets/ios-wallet.svg'
 
-
   export let data
   const { passGoogle, pkpass } = data
 
@@ -25,10 +24,11 @@
   }
 </script>
 
-<div class="add-wallet ">
-    <a href={pkpass}><img class="ios" src={iosWallet} alt="button"></a>
-    <a href={passGoogle}><img class="android" src={googleWallet} alt="button"></a>
- 
+<div class="add-wallet">
+  <a href={pkpass}><img class="ios" src={iosWallet} alt="button" /></a>
+  <a href={passGoogle}
+    ><img class="android" src={googleWallet} alt="button" /></a
+  >
 </div>
 
 <style>
@@ -39,38 +39,36 @@
     justify-content: center;
     align-items: center;
   }
-  .android{
-    width: 400px;
-    height: 111px;
-  } 
-  .ios{
-    width: 400px;
-    height: 127px;
+  .android {
+    width: 320px;
+    height: 89px;
+  }
+  .ios {
+    width: 320px;
+    height: 102px;
   }
   @media only screen and (max-width: 1024px) {
-     .add-wallet {
-    flex-direction: column;
-    padding-top: var(--header-height);
-     }
-    .android{
-      width: 300px; 
-      height: 83px;
-     }
-     .ios{
-      width: 300px; 
-      height: 95px;
-     }
+    .add-wallet {
+      flex-direction: column;
+      padding-top: var(--header-height);
+    }
+    .android {
+      width: 280px;
+      height: 78px;
+    }
+    .ios {
+      width: 280px;
+      height: 89px;
+    }
   }
-   @media only screen and (max-width: 767px) {
-    .android{
-    width: 200px;
-    height: 55px;
-   }
-    .ios{
-    width: 200px;
-    height: 63px;
-   }
-   }
-
- 
+  @media only screen and (max-width: 767px) {
+    .android {
+      width: 200px;
+      height: 55px;
+    }
+    .ios {
+      width: 200px;
+      height: 63px;
+    }
+  }
 </style>
