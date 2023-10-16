@@ -51,27 +51,27 @@
     didHover = true
   }
 
-  // function handlePanStart() {
-  //   //Prevents click when dragging
-  //   coords.stiffness = coords.damping = 1
-  //   isPanningTimer = window.setTimeout(() => {
-  //     isPanning = true
-  //   }, 300)
-  // }
+  function handlePanStart() {
+    //Prevents click when dragging
+    coords.stiffness = coords.damping = 1
+    isPanningTimer = window.setTimeout(() => {
+      isPanning = true
+    }, 300)
+  }
 
-  // function handlePanMove(e: CustomEvent) {
-  //   coords.update(($coords) => ({
-  //     x: $coords.x + e.detail.dx,
-  //     y: $coords.y + e.detail.dy,
-  //     rotation: $coords.rotation,
-  //   }))
-  // }
+  function handlePanMove(event: CustomEvent) {
+    coords.update(($coords) => ({
+      x: $coords.x + event.detail.dx,
+      y: $coords.y + event.detail.dy,
+      rotation: $coords.rotation,
+    }))
+  }
 
-  // function handlePanEnd(e: CustomEvent) {
-  //   const { isTouch } = e.detail
-  //   window.clearTimeout(isPanningTimer)
-  //   if (isTouch) isPanning = false
-  // }
+  function handlePanEnd(event: CustomEvent) {
+    const { isTouch } = event.detail
+    window.clearTimeout(isPanningTimer)
+    if (isTouch) isPanning = false
+  }
 
   function handleAnchorClick(e: Event) {
     if (isPanning) {
@@ -82,9 +82,6 @@
 </script>
 
 <svelte:window bind:innerHeight={windowHeight} />
-<!-- on:panmove={handlePanMove}
-on:panstart={handlePanStart}
-on:panend={handlePanEnd} -->
 
 {#if windowHeight}
   <div
@@ -95,6 +92,9 @@ on:panend={handlePanEnd} -->
     style="transform: translate3d({$coords.x}px, {$coords.y}px, 0) rotate({$coords.rotation}deg); --y-pos: {(
       windowHeight / 1.5
     ).toFixed(2)}px"
+    on:panmove={handlePanMove}
+    on:panstart={handlePanStart}
+    on:panend={handlePanEnd}
   >
     <Anchor
       id="clients-link"
