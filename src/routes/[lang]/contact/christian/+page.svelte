@@ -25,9 +25,11 @@
 </script>
 
 <div class="add-wallet">
-  <a href={pkpass}><img class="ios" src={iosWallet} alt="button" /></a>
+  <a href={pkpass}
+    ><img class="link-wallet" src={iosWallet} alt="button-ios" /></a
+  >
   <a href={passGoogle}
-    ><img class="android" src={googleWallet} alt="button" /></a
+    ><img class="link-wallet" src={googleWallet} alt="button-android" /></a
   >
 </div>
 
@@ -39,11 +41,7 @@
     justify-content: center;
     align-items: center;
   }
-  .android {
-    width: 320px;
-    height: auto;
-  }
-  .ios {
+  .link-wallet {
     width: 320px;
     height: auto;
   }
@@ -52,18 +50,12 @@
       flex-direction: column;
       padding-top: var(--header-height);
     }
-    .android {
-      width: 280px;
-    }
-    .ios {
+    .link-wallet {
       width: 280px;
     }
   }
   @media only screen and (max-width: 767px) {
-    .android {
-      width: 200px;
-    }
-    .ios {
+    .link-wallet {
       width: 200px;
     }
   }
