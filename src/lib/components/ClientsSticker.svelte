@@ -52,7 +52,7 @@
   }
 
   // function handlePanStart() {
-  //   // Prevents click when dragging
+  //   //Prevents click when dragging
   //   coords.stiffness = coords.damping = 1
   //   isPanningTimer = window.setTimeout(() => {
   //     isPanning = true
@@ -82,16 +82,16 @@
 </script>
 
 <svelte:window bind:innerHeight={windowHeight} />
+<!-- on:panmove={handlePanMove}
+on:panstart={handlePanStart}
+on:panend={handlePanEnd} -->
 
 {#if windowHeight}
-  <!-- on:panmove|preventDefault={handlePanMove} -->
-  <!-- on:panstart={handlePanStart}
-on:panend={handlePanEnd} -->
   <div
     use:pannable
     on:mouseenter={handleMouseEnter}
     role="button"
-    tabindex="0"
+    tabindex={0}
     style="transform: translate3d({$coords.x}px, {$coords.y}px, 0) rotate({$coords.rotation}deg); --y-pos: {(
       windowHeight / 1.5
     ).toFixed(2)}px"
