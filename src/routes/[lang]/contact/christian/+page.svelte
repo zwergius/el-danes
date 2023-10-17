@@ -25,51 +25,47 @@
   }
 </script>
 
-<div class="add-wallet">
-  <a href={pkpass}><img class="ios" src={iosWallet} alt="button" /></a>
-  <a href={passGoogle}
-    ><img class="android" src={googleWallet} alt="button" /></a
-  >
+<div class="container">
+  <a rel="external" href={pkpass}>
+    <img
+      class="wallet-logo"
+      src={iosWallet}
+      alt="add the card to your wallet for ios"
+    />
+  </a>
+  <a rel="external" target="_blank" href={passGoogle}>
+    <img
+      class="wallet-logo"
+      src={googleWallet}
+      alt="add the card to your wallet for android"
+    />
+  </a>
 </div>
 
 <style>
-  .add-wallet {
+  .container {
     gap: 50px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .android {
+  .wallet-logo {
     width: 320px;
-    height: 89px;
-  }
-  .ios {
-    width: 320px;
-    height: 102px;
+    height: auto;
   }
   @media only screen and (max-width: 1024px) {
-    .add-wallet {
+    .container {
       flex-direction: column;
       padding-top: var(--header-height);
     }
-    .android {
+    .wallet-logo {
       width: 280px;
-      height: 78px;
-    }
-    .ios {
-      width: 280px;
-      height: 89px;
     }
   }
   @media only screen and (max-width: 767px) {
-    .android {
+    .wallet-logo {
       width: 200px;
-      height: 55px;
-    }
-    .ios {
-      width: 200px;
-      height: 63px;
     }
   }
 </style>
