@@ -32,37 +32,33 @@
   }
 </script>
 
-<div
-  class="button"
+<button
   on:click={() => setColorMode('dark')}
   on:keypress={(e) => handleKeypress(e, 'dark')}
-  tabindex="0"
   role="radio"
   aria-checked={$theme === 'dark' ? true : undefined}
   aria-label="Use dark theme"
 >
   <div />
-</div>
-<div
-  class="button"
+</button>
+<button
   on:click={() => setColorMode('light')}
   on:keypress={(e) => handleKeypress(e, 'light')}
-  tabindex="0"
   role="radio"
   aria-checked={$theme === 'light' ? true : undefined}
   aria-label="Use light theme"
 >
   <div />
-</div>
+</button>
 
 <style>
-  .button {
+  button {
     padding: var(--space-2);
     cursor: pointer;
     outline: none;
   }
 
-  .button div {
+  button div {
     background: var(--text);
     height: 1em;
     width: 1em;
@@ -71,7 +67,7 @@
     transition: all 0.2s ease;
   }
 
-  .button[aria-checked] div::before {
+  button[aria-checked] div::before {
     position: absolute;
     top: -2.5em;
     left: 0;
@@ -83,14 +79,14 @@
     justify-content: center;
   }
 
-  .button[aria-checked] div {
+  button[aria-checked] div {
     position: relative;
     background: none;
     pointer-events: none;
   }
 
   @supports (mix-blend-mode: difference) {
-    .button div {
+    button div {
       border: 1px solid white;
       background: white;
     }
@@ -98,7 +94,7 @@
 
   /* Tablet - 768px */
   @media only screen and (min-width: 48em) {
-    .button div {
+    button div {
       height: 0.75em;
       width: 0.75em;
     }

@@ -87,8 +87,7 @@
   <div
     use:pannable
     on:mouseenter={handleMouseEnter}
-    role="button"
-    tabindex={0}
+    role="presentation"
     style="transform: translate3d({$coords.x}px, {$coords.y}px, 0) rotate({$coords.rotation}deg); --y-pos: {(
       windowHeight / 1.5
     ).toFixed(2)}px"
