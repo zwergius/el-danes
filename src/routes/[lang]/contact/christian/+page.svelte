@@ -27,7 +27,7 @@
 <div class="container">
   <a rel="external" href={pkpass}>
     <img
-      class="wallet-log"
+      class="wallet-logo"
       src={iosWallet}
       alt="add the card to your wallet for ios"
     />
