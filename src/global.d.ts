@@ -10,10 +10,14 @@ declare module '*.yaml' {
   export default content
 }
 
-declare namespace svelte.JSX {
-  interface HTMLProps<T> {
-    onpanstart?: (e: CustomEvent) => void
-    onpanmove?: (e: CustomEvent) => void
-    onpanend?: (e: CustomEvent) => void
+declare global {
+  namespace svelteHTML {
+    interface HTMLAttributes<> {
+      'on:panmove'?: (event: CustomEvent) => void
+      'on:panstart'?: () => void
+      'on:panend'?: (event: CustomEvent) => void
+    }
   }
 }
+
+export {}

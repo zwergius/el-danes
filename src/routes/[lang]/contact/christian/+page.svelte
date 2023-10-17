@@ -4,6 +4,7 @@
   import iosWallet from '$lib/assets/ios-wallet.svg'
 
   export let data
+
   const { passGoogle, pkpass } = data
 
   let isIOS: boolean

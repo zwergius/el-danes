@@ -12,6 +12,8 @@
     "lint": "prettier --check . && eslint --ignore-path .gitignore .",
     "update": "npx npm-check-updates -i",
     "check": "svelte-check --tsconfig ./tsconfig.json",
+    "check:lint": "eslint --max-warnings=0 --ignore-path .eslintignore",
+    "check:prettier": "prettier -c",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "format": "prettier --write .",
     "typesafe-i18n": "typesafe-i18n"
@@ -25,6 +27,7 @@
   "devDependencies": {
     "@sveltejs/adapter-static": "^2.0.3",
     "@sveltejs/kit": "^1.25.2",
+    "@tsconfig/svelte": "^5.0.2",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "autoprefixer": "^10.4.16",
@@ -34,18 +37,32 @@
     "eslint-config-prettier": "^8.10.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-svelte": "^2.34.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
     "postcss": "^8.4.31",
     "postcss-load-config": "^3.1.4",
     "prettier": "^2.8.8",
     "prettier-plugin-svelte": "^2.10.1",
     "stylelint": "^14.16.1",
     "stylelint-config-prettier": "^9.0.5",
-    "svelte": "^4.0.0",
+    "svelte": "^4.2.1",
     "svelte-check": "^3.4.3",
-    "svelte-preprocess": "^5.0.3",
+    "svelte-preprocess": "^5.0.4",
     "tslib": "^2.6.2",
     "typesafe-i18n": "^5.26.2",
-    "typescript": "^5.0.0",
+    "typescript": "^5.2.2",
     "vite": "^4.4.11"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,svelte}": [
+      "npm run check --",
+      "npm run check:lint --",
+      "npm run check:prettier -- --write"
+    ]
   }
 }

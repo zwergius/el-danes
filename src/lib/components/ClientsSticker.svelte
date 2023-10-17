@@ -52,23 +52,23 @@
   }
 
   function handlePanStart() {
-    // Prevents click when dragging
+    //Prevents click when dragging
     coords.stiffness = coords.damping = 1
     isPanningTimer = window.setTimeout(() => {
       isPanning = true
     }, 300)
   }
 
-  function handlePanMove(e: CustomEvent) {
+  function handlePanMove(event: CustomEvent) {
     coords.update(($coords) => ({
-      x: $coords.x + e.detail.dx,
-      y: $coords.y + e.detail.dy,
+      x: $coords.x + event.detail.dx,
+      y: $coords.y + event.detail.dy,
       rotation: $coords.rotation,
     }))
   }
 
-  function handlePanEnd(e: CustomEvent) {
-    const { isTouch } = e.detail
+  function handlePanEnd(event: CustomEvent) {
+    const { isTouch } = event.detail
     window.clearTimeout(isPanningTimer)
     if (isTouch) isPanning = false
   }
@@ -86,13 +86,14 @@
 {#if windowHeight}
   <div
     use:pannable
-    on:panmove={handlePanMove}
-    on:panstart={handlePanStart}
-    on:panend={handlePanEnd}
     on:mouseenter={handleMouseEnter}
+    role="presentation"
     style="transform: translate3d({$coords.x}px, {$coords.y}px, 0) rotate({$coords.rotation}deg); --y-pos: {(
       windowHeight / 1.5
     ).toFixed(2)}px"
+    on:panmove={handlePanMove}
+    on:panstart={handlePanStart}
+    on:panend={handlePanEnd}
   >
     <Anchor
       id="clients-link"

@@ -1,20 +1,20 @@
 import sveltePreprocess from 'svelte-preprocess'
 import adapter from '@sveltejs/adapter-static'
-import path from 'path'
+// import path from 'path'
 
-/** @type {import('@sveltejs/kit').PrerenderErrorHandler} */
-const handleError = ({ status, path, referrer, referenceType }) => {
-  // if (path.startsWith('/blog')) throw new Error('Missing a blog page!');
-  console.warn(
-    `${status} ${path}${referrer ? ` (${referenceType} from ${referrer})` : ''}`
-  )
-}
+// /** @type {import('@sveltejs/kit').PrerenderErrorHandler} */
+// const handleError = ({ status, path, referrer, referenceType }) => {
+//   // if (path.startsWith('/blog')) throw new Error('Missing a blog page!');
+//   console.warn(
+//     `${status} ${path}${referrer ? ` (${referenceType} from ${referrer})` : ''}`
+//   )
+// }
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   preprocess: [
     sveltePreprocess({
-      lang: 'postcss',
+      lang: ['postcss'],
     }),
   ],
   kit: {
