@@ -9,6 +9,7 @@ export function load({ url }) {
     throw error(404)
   }
   return {
+    url,
     passGoogle,
     pkpass,
   }

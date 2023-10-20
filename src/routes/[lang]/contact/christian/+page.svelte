@@ -1,11 +1,15 @@
 <script lang="ts">
   import { browser } from '$app/environment'
-  import googleWallet from '$lib/assets/google-wallet.svg'
-  import iosWallet from '$lib/assets/ios-wallet.svg'
+  import googleWalletDk from '$lib/assets/google-wallet-dk.svg'
+  import googleWalletEs from '$lib/assets/google-wallet-es.svg'
+  import googleWalletEn from '$lib/assets/google-wallet-en.svg'
+  import iosWalletDk from '$lib/assets/apple-wallet-dk.svg'
+  import iosWalletEs from '$lib/assets/apple-wallet-es.svg'
+  import iosWalletEn from '$lib/assets/apple-wallet-en.svg'
 
   export let data
 
-  const { passGoogle, pkpass } = data
+  const { passGoogle, pkpass, url } = data
 
   let isIOS: boolean
   let isAndroid: boolean
@@ -26,20 +30,52 @@
 </script>
 
 <div class="container">
-  <a rel="external" href={pkpass}>
-    <img
-      class="wallet-logo"
-      src={iosWallet}
-      alt="add the card to your wallet for ios"
-    />
-  </a>
-  <a rel="external" target="_blank" href={passGoogle}>
-    <img
-      class="wallet-logo"
-      src={googleWallet}
-      alt="add the card to your wallet for android"
-    />
-  </a>
+  {#if url.pathname === '/da/contact/christian'}
+    <a rel="external" href={pkpass}>
+      <img
+        class="wallet-logo"
+        src={iosWalletDk}
+        alt="add the card to your wallet for ios"
+      />
+    </a>
+    <a rel="external" target="_blank" href={passGoogle}>
+      <img
+        class="wallet-logo"
+        src={googleWalletDk}
+        alt="add the card to your wallet for android"
+      /></a
+    >
+  {:else if url.pathname === '/es/contact/christian'}
+    <a rel="external" href={pkpass}>
+      <img
+        class="wallet-logo"
+        src={iosWalletEs}
+        alt="add the card to your wallet for ios"
+      />
+    </a>
+    <a rel="external" target="_blank" href={passGoogle}>
+      <img
+        class="wallet-logo"
+        src={googleWalletEs}
+        alt="add the card to your wallet for android"
+      />
+    </a>
+  {:else if url.pathname === '/en/contact/christian'}
+    <a rel="external" href={pkpass}>
+      <img
+        class="wallet-logo"
+        src={iosWalletEn}
+        alt="add the card to your wallet for ios"
+      />
+    </a>
+    <a rel="external" target="_blank" href={passGoogle}>
+      <img
+        class="wallet-logo"
+        src={googleWalletEn}
+        alt="add the card to your wallet for android"
+      />
+    </a>
+  {/if}
 </div>
 
 <style>
@@ -51,21 +87,13 @@
     align-items: center;
   }
   .wallet-logo {
-    width: 320px;
-    height: auto;
+    width: auto;
+    height: 60px;
   }
   @media only screen and (max-width: 1024px) {
     .container {
       flex-direction: column;
       padding-top: var(--header-height);
-    }
-    .wallet-logo {
-      width: 280px;
-    }
-  }
-  @media only screen and (max-width: 767px) {
-    .wallet-logo {
-      width: 200px;
     }
   }
 </style>
