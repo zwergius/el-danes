@@ -27,14 +27,14 @@
   <a rel="external" href={pkpass}>
     <img
       class="wallet-logo"
-      src="/src/lib/assets/apple-wallet-{language}.svg"
+      src="/apple-wallet-da.svg/"
       alt="add the card to your wallet for ios"
     />
   </a>
   <a rel="external" target="_blank" href={passGoogle}>
     <img
       class="wallet-logo"
-      src="/src/lib/assets/google-wallet-{language}.svg"
+      src="/google-wallet-{language}.svg"
       alt="add the card to your wallet for android"
     />
   </a>

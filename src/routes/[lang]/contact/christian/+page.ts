@@ -12,7 +12,6 @@ export function load({ url }) {
     throw error(404)
   }
   return {
-    path,
     language,
     passGoogle,
     pkpass,
