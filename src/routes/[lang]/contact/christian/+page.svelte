@@ -1,9 +1,12 @@
 <script lang="ts">
   import { browser } from '$app/environment'
+  import { page } from '$app/stores'
+
+  const { lang } = $page.params
 
   export let data
 
-  const { passGoogle, pkpass, language } = data
+  const { passGoogle, pkpass } = data
 
   let isIOS: boolean
   let isAndroid: boolean
@@ -27,14 +30,14 @@
   <a rel="external" href={pkpass}>
     <img
       class="wallet-logo"
-      src="/apple-wallet-da.svg/"
+      src="/apple-wallet-{lang}.svg"
       alt="add the card to your wallet for ios"
     />
   </a>
   <a rel="external" target="_blank" href={passGoogle}>
     <img
       class="wallet-logo"
-      src="/google-wallet-{language}.svg"
+      src="/google-wallet-{lang}.svg"
       alt="add the card to your wallet for android"
     />
   </a>
