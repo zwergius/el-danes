@@ -20,9 +20,9 @@ test('shows the navigation to contact and that the email is a link', async ({
     await page.getByTestId('contact').click()
     const contactPage = page.url()
     expect(contactPage).toContain('/en/contact')
+
     const emailElement = await page.$('[data-testid="email"]')
     const linkElement = await emailElement.$('a')
-
     const emailText = await linkElement.textContent()
     expect(emailText).not.toBeEmpty()
   }

@@ -16,5 +16,6 @@ test('shows the navigation up to cases and what links there are', async ({
     const linkElements = element.querySelectorAll('a')
     return linkElements.length > 0
   })
+
   expect(areLinksPresent).toBeTruthy()
 })
