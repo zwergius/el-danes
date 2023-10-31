@@ -5,11 +5,10 @@
 
 <div class="container" style="--logo: url('data:image/svg+xml;utf8,{logo}')">
   <div class="wrapper {isFolded && 'active'}">
-
-    <span class="a"></span>
+    <span class="a" />
     <span class="bc">
-      <span class="b"></span>
-      <span class="c"></span>
+      <span class="b" />
+      <span class="c" />
     </span>
 
     <div class="img">

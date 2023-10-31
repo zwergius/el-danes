@@ -1,5 +1,6 @@
 <script lang="ts">
-  export let toggleFlip: () => void, flipped: boolean
+  export let toggleFlip: () => void
+  export let flipped: boolean
 
   function handleKeypress(e: KeyboardEvent) {
     const { key } = e

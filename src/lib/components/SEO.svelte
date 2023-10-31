@@ -3,7 +3,7 @@
   import { page } from '$app/stores'
   const path = $page.url.pathname.substring(3)
   const url = 'www.eldanés.com'
-  const lang = $page.params.lang
+  const { lang } = $page.params
 
   export let title = $LL.meta.title()
   export let description = $LL.meta.description()
