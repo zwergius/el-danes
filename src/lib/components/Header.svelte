@@ -9,7 +9,9 @@
   import ThemeSelector from '$lib/components/ThemeSelector.svelte'
   import FlipButton from '$lib/components/FlipButton.svelte'
 
-  export let lang: string, toggleFlip: () => void, showsCode: boolean
+  export let lang: string
+  export let toggleFlip: () => void
+  export let showsCode: boolean
 
   let showsNavigation: boolean
   // let height: number
@@ -29,7 +31,7 @@
   {#if showsNavigation}
     <nav class="row {$theme && 'visible'}" transition:slide>
       <LanguageSelector {lang} />
-      <Anchor id="contact-link" href="/contact">
+      <Anchor id="contact-link" data-testid="contact" href="/contact">
         {$LL.contact()}
       </Anchor>
       <div class="row">
@@ -40,7 +42,11 @@
   {/if}
   <Logo {lang} turn={showsCode}>
     <div class="handheld-row">
-      <button on:click={toggleShowsNavigation} type="button">
+      <button
+        data-testid="showMenu"
+        on:click={toggleShowsNavigation}
+        type="button"
+      >
         {showsNavigation ? $LL.back() : $LL.menu()}
       </button>
     </div>

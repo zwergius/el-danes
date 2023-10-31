@@ -1,9 +1,9 @@
 <script>
   import { page } from '$app/stores'
-  const lang = $page.params.lang
-  export let href = null,
-    target = null,
-    onClick = null
+  const { lang } = $page.params
+  export let href = null
+  export let target = null
+  export let onClick = null
 
   $: path = target ? href : `/${lang}${href}`
 </script>

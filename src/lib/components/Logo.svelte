@@ -1,7 +1,8 @@
 <script>
   import logo from '$lib/assets/el-danes-logo.svg?raw'
   import bgLogo from '$lib/assets/el-danes-solutions-logo.svg?raw'
-  export let lang, turn
+  export let lang
+  export let turn
 </script>
 
 <div class="logo-container" class:turn>

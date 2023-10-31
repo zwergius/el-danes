@@ -96,6 +96,7 @@
     on:panend={handlePanEnd}
   >
     <Anchor
+      data-testid="cases"
       id="clients-link"
       href="/cases"
       draggable="false"
