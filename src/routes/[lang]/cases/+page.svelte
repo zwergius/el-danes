@@ -25,7 +25,7 @@
 <SEO title={$LL.goodCompany()} />
 
 <section>
-  <ul>
+  <ul data-testid="linksJobs">
     {#each projects as client}
       <li>
         <Hoverable let:hovering={isHovering}>

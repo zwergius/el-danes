@@ -1,6 +1,8 @@
 import { test, expect, devices } from '@playwright/test'
 
-test('test', async ({ page }) => {
+test('shows the navigation to contact and that the email is a link', async ({
+  page,
+}) => {
   await page.goto('/en')
   if (devices === 'Mobile Chrome' || devices === 'Mobile Safar') {
     await page.getByTestId('showMenu').click()
