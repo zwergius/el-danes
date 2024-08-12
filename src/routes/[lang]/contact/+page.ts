@@ -9,7 +9,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
   const res = await fetch('/code/contact.json')
   const code = await res.text()
   if (!res.ok) {
-    throw error(404, `/${lang}/contact.json Not found`)
+    error(404, `/${lang}/contact.json Not found`);
   }
   return {
     code,

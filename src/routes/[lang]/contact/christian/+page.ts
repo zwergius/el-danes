@@ -6,7 +6,7 @@ const passGoogle =
 export function load({ url }) {
   const pkpass = `${url.origin}/el-danes.pkpass`
   if (!passGoogle || !pkpass) {
-    throw error(404)
+    error(404);
   }
   return {
     passGoogle,
