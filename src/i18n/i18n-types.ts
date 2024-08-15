@@ -57,6 +57,10 @@ type RootTranslation = {
 		 */
 		headerTwo: string
 		/**
+		 * E​x​p​e​r​t​ ​i​n​ ​d​i​g​i​t​a​l​ ​p​r​o​d​u​c​t​s​ ​w​e​b​ ​&​ ​m​o​b​i​l​e​.
+		 */
+		footer: string
+		/**
 		 * W​a​n​t​ ​y​o​u​r​ ​d​i​g​i​t​a​l​ ​p​r​o​d​u​c​t​ ​t​o​ ​s​t​a​n​d​ ​o​u​t​?​ ​-​ ​I​ ​c​a​n​ ​h​e​l​p​!
 		 */
 		section1: string
@@ -115,7 +119,7 @@ type RootTranslation = {
 		 */
 		title: string
 		/**
-		 * A​p​p​ ​&​ ​w​e​b​ ​d​e​v​e​l​o​p​m​e​n​t​ ​a​g​e​n​c​y​ ​s​p​e​c​i​a​l​i​z​i​n​g​ ​i​n​ ​c​r​e​a​t​i​v​e​ ​w​e​b​s​,​ ​J​a​m​s​t​a​c​k​ ​w​e​b​s​,​ ​p​r​o​g​r​e​s​s​i​v​e​ ​w​e​b​ ​a​p​p​s​,​ ​s​i​n​g​l​e​ ​p​a​g​e​ ​a​p​p​s​.
+		 * W​e​b​ ​a​n​d​ ​m​o​b​i​l​e​ ​d​e​v​e​l​o​p​e​r​ ​w​i​t​h​ ​o​v​e​r​ ​1​0​ ​y​e​a​r​s​ ​o​f​ ​p​r​o​f​e​s​s​i​o​n​a​l​ ​e​x​p​e​r​i​e​n​c​e​,​ ​s​p​e​c​i​a​l​i​z​i​n​g​ ​i​n​ ​a​p​p​l​i​c​a​t​i​o​n​ ​a​r​c​h​i​t​e​c​t​u​r​e​,​ ​f​r​o​n​t​-​e​n​d​ ​d​e​v​e​l​o​p​m​e​n​t​,​ ​a​n​d​ ​c​o​l​l​a​b​o​r​a​t​i​o​n​ ​w​i​t​h​i​n​ ​t​e​c​h​ ​t​e​a​m​s​.​ ​E​x​p​e​r​t​ ​i​n​ ​b​u​i​l​d​i​n​g​ ​m​o​d​e​r​n​ ​w​e​b​s​i​t​e​s​,​ ​h​y​b​r​i​d​ ​m​o​b​i​l​e​ ​a​p​p​s​,​ ​e​-​c​o​m​m​e​r​c​e​ ​p​l​a​t​f​o​r​m​s​,​ ​a​n​d​ ​a​d​d​i​n​g​ ​n​e​w​ ​f​u​n​c​t​i​o​n​a​l​i​t​i​e​s​ ​t​o​ ​e​x​i​s​t​i​n​g​ ​w​e​b​s​i​t​e​s​.​ ​E​x​t​e​n​s​i​v​e​ ​e​x​p​e​r​i​e​n​c​e​ ​i​n​ ​m​a​n​a​g​i​n​g​ ​c​l​o​u​d​ ​s​e​r​v​i​c​e​s​ ​a​n​d​ ​e​-​c​o​m​m​e​r​c​e​ ​s​o​l​u​t​i​o​n​s​ ​u​s​i​n​g​ ​C​M​S​ ​l​i​k​e​ ​C​o​n​t​e​n​t​f​u​l​,​ ​P​r​i​s​m​i​c​,​ ​a​n​d​ ​S​h​o​p​i​f​y​.​ ​F​o​c​u​s​e​d​ ​o​n​ ​p​e​r​f​o​r​m​a​n​c​e​,​ ​s​c​a​l​a​b​i​l​i​t​y​,​ ​a​n​d​ ​b​e​s​t​ ​p​r​a​c​t​i​c​e​s​,​ ​I​ ​h​a​v​e​ ​w​o​r​k​e​d​ ​o​n​ ​s​u​c​c​e​s​s​f​u​l​ ​p​r​o​j​e​c​t​s​ ​f​o​r​ ​A​d​n​a​m​i​,​ ​M​e​a​t​y​,​ ​I​b​e​r​i​a​,​ ​G​O​R​M​ ​x​ ​E​n​v​i​s​i​o​n​,​ ​a​n​d​ ​m​o​r​e​.
 		 */
 		description: string
 	}
@@ -126,7 +130,7 @@ type RootTranslation = {
 			 */
 			title: string
 			/**
-			 * E​n​s​u​r​e​ ​y​o​u​ ​a​r​e​ ​o​f​f​ ​t​o​ ​a​ ​g​r​e​a​t​ ​s​t​a​r​t​ ​w​i​t​h​ ​a​ ​h​i​g​h​-​p​e​r​f​o​r​m​i​n​g​ ​s​o​l​u​t​i​o​n​,​ ​t​h​a​t​ ​s​c​a​l​e​s​ ​w​e​l​l​ ​a​s​ ​y​o​u​r​ ​a​p​p​l​i​c​a​t​i​o​n​ ​g​r​o​w​s​.​ ​I​ ​c​a​n​ ​a​s​s​i​s​t​ ​w​i​t​h​ ​s​e​l​e​c​t​i​n​g​ ​t​h​e​ ​t​e​c​h​ ​s​t​a​c​k​,​ ​a​p​p​l​i​c​a​t​i​o​n​ ​t​y​p​e​,​ ​a​u​t​o​m​a​t​i​o​n​ ​t​o​o​l​s​,​ ​b​e​s​t​ ​p​r​a​c​t​i​c​e​s​,​ ​a​n​d​ ​b​o​o​t​s​t​r​a​p​p​i​n​g​ ​y​o​u​r​ ​a​p​p​l​i​c​a​t​i​o​n​,​ ​a​s​ ​I​ ​h​a​v​e​ ​d​o​n​e​ ​f​o​r​ ​<​i​>​A​d​n​a​m​i​ ​&​ ​M​e​a​t​y​<​/​i​>​,​ ​a​m​o​n​g​ ​o​t​h​e​r​s​.
+			 * E​n​s​u​r​e​ ​y​o​u​ ​a​r​e​ ​o​f​f​ ​t​o​ ​a​ ​g​r​e​a​t​ ​s​t​a​r​t​ ​w​i​t​h​ ​a​ ​h​i​g​h​-​p​e​r​f​o​r​m​i​n​g​ ​s​o​l​u​t​i​o​n​,​ ​t​h​a​t​ ​s​c​a​l​e​s​ ​w​e​l​l​ ​a​s​ ​y​o​u​r​ ​a​p​p​l​i​c​a​t​i​o​n​ ​g​r​o​w​s​.​ ​I​ ​c​a​n​ ​a​s​s​i​s​t​ ​w​i​t​h​ ​s​e​l​e​c​t​i​n​g​ ​t​h​e​ ​t​e​c​h​ ​s​t​a​c​k​,​ ​a​p​p​l​i​c​a​t​i​o​n​ ​t​y​p​e​,​ ​a​u​t​o​m​a​t​i​o​n​ ​t​o​o​l​s​,​ ​b​e​s​t​ ​p​r​a​c​t​i​c​e​s​,​ ​a​n​d​ ​b​o​o​t​s​t​r​a​p​p​i​n​g​ ​y​o​u​r​ ​a​p​p​l​i​c​a​t​i​o​n​,​ ​a​s​ ​I​ ​h​a​v​e​ ​d​o​n​e​ ​f​o​r​ ​<​i​>​A​d​n​a​m​i​,​ ​B​r​i​t​i​s​h​ ​P​e​t​r​o​l​e​u​m​ ​&​ ​M​e​a​t​y​<​/​i​>​,​ ​a​m​o​n​g​ ​o​t​h​e​r​s​.
 			 */
 			subtitle: string
 		}
@@ -256,6 +260,10 @@ export type TranslationFunctions = {
 		 */
 		headerTwo: () => LocalizedString
 		/**
+		 * Expert in digital products web & mobile.
+		 */
+		footer: () => LocalizedString
+		/**
 		 * Want your digital product to stand out? - I can help!
 		 */
 		section1: () => LocalizedString
@@ -314,7 +322,7 @@ export type TranslationFunctions = {
 		 */
 		title: () => LocalizedString
 		/**
-		 * App & web development agency specializing in creative webs, Jamstack webs, progressive web apps, single page apps.
+		 * Web and mobile developer with over 10 years of professional experience, specializing in application architecture, front-end development, and collaboration within tech teams. Expert in building modern websites, hybrid mobile apps, e-commerce platforms, and adding new functionalities to existing websites. Extensive experience in managing cloud services and e-commerce solutions using CMS like Contentful, Prismic, and Shopify. Focused on performance, scalability, and best practices, I have worked on successful projects for Adnami, Meaty, Iberia, GORM x Envision, and more.
 		 */
 		description: () => LocalizedString
 	}
@@ -325,7 +333,7 @@ export type TranslationFunctions = {
 			 */
 			title: () => LocalizedString
 			/**
-			 * Ensure you are off to a great start with a high-performing solution, that scales well as your application grows. I can assist with selecting the tech stack, application type, automation tools, best practices, and bootstrapping your application, as I have done for <i>Adnami & Meaty</i>, among others.
+			 * Ensure you are off to a great start with a high-performing solution, that scales well as your application grows. I can assist with selecting the tech stack, application type, automation tools, best practices, and bootstrapping your application, as I have done for <i>Adnami, British Petroleum & Meaty</i>, among others.
 			 */
 			subtitle: () => LocalizedString
 		}
