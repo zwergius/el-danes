@@ -1,25 +1,17 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "module": "es2020",
     "lib": ["es2020", "DOM"],
     "target": "es2020",
-    "importsNotUsedAsValues": "error",
     "isolatedModules": true,
     "resolveJsonModule": true,
     "sourceMap": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
     "allowJs": true,
-    "checkJs": true,
-    "paths": {
-      "$lib": ["src/lib"],
-      "$lib/*": ["src/lib/*"],
-      "$i18n": ["src/i18n"],
-      "$i18n/*": ["src/i18n/*"]
-    }
+    "checkJs": true
   },
   "include": [
     "src/**/*.d.ts",

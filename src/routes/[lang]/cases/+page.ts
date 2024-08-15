@@ -7,10 +7,10 @@ export const load: PageLoad = async ({ fetch }) => {
     fetch(`/en/cases.json`),
   ])
   if (!codeRes.ok) {
-    throw error(500, `Could not load cases code`)
+    error(500, `Could not load cases code`);
   }
   if (!expRes.ok) {
-    throw error(500, `Could not load experiences`)
+    error(500, `Could not load experiences`);
   }
   const code = await codeRes.text()
 

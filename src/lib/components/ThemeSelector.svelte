@@ -6,10 +6,12 @@
       dark: [
         { name: '--text', value: 'white' },
         { name: '--background', value: 'black' },
+        { name: '--overlay', value: 'rgb(0, 0, 0, 0.8)' },
       ],
       light: [
         { name: '--text', value: 'black' },
         { name: '--background', value: 'white' },
+        { name: '--overlay', value: 'rgb(255, 255, 255, 0.8)' },
       ],
     }
     const root = document.documentElement

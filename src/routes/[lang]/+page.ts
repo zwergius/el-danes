@@ -6,7 +6,7 @@ export const load: PageLoad = async ({ fetch, url }) => {
   const res = await fetch(`/code/home.json`)
   const email = PUBLIC_EMAIL
   if (!res.ok) {
-    throw error(500, `Could not load code for ${url.pathname}`)
+    error(500, `Could not load code for ${url.pathname}`);
   }
   const code = await res.text()
 

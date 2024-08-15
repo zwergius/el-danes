@@ -4,7 +4,8 @@
 @font-face {
   font-family: 'La Nord Light';
   src: url('/fonts/LaNordLight.woff2') format('woff2'),
-    url('/fonts/LaNordLight.woff') format('woff'); /* Modern Browsers */
+    url('/fonts/LaNordLight.woff') format('woff');
+  /* Modern Browsers */
   font-weight: normal;
   font-style: normal;
 }
@@ -13,6 +14,7 @@
   /* fallback colors */
   --text: #fff;
   --background: #000;
+  --overlay: rgb(0, 0, 0, 0.8);
 
   --space-1: 4px;
   --space-2: 8px;
@@ -135,11 +137,10 @@ code {
 }
 
 /* Tablet - 768px */
-@media only screen and (min-width: 48em) {
-}
+@media only screen and (min-width: 48em) {}
+
 /* Desktop - 1080px*/
-@media only screen and (min-width: 67.5em) {
-}
+@media only screen and (min-width: 67.5em) {}
+
 /* Desktop 2560px*/
-@media only screen and (min-width: 160em) {
-}
+@media only screen and (min-width: 160em) {}

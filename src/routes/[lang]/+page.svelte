@@ -10,7 +10,7 @@
   let { email } = data
   $: ({ email } = data)
 
-  $pageHeader = $LL.home.header()
+  $pageHeader = $LL.home.footer()
 
   function handleEmail(e: Event) {
     e.preventDefault()
@@ -20,54 +20,45 @@
 
 <SEO />
 
+<section>
+  <h1>{$LL.home.header()}</h1>
+  <h2>{$LL.home.headerTwo()}</h2>
+  <ul>
+    {#each Object.values($LL.roles) as { title, subtitle }, index (index)}
+      <li>
+        <p>{title()}</p>
+        <div class="subtitle">
+          <p>{@html subtitle()}</p>
+        </div>
+      </li>
+    {/each}
+  </ul>
+</section>
 <div>
-  <section>
-    <p>{$LL.home.section1()}</p>
-  </section>
-
-  <section>
-    <p>{$LL.home.section2()}</p>
-
-    <ul>
-      <li>{$LL.home.section2item1()}</li>
-      <li>{$LL.home.section2item2()}</li>
-    </ul>
-  </section>
-
-  <section>
-    <p>{$LL.home.section3()}</p>
-  </section>
-
-  <blockquote>
-    <span>&#8220;{$LL.home.quote()}&#8221;</span>
-    <cite>&#8213; {$LL.home.author()}</cite>
-  </blockquote>
-
-  <section>
-    <p>{$LL.home.section4()}</p>
-
-    <ul>
-      <li>{$LL.home.section4item1()}</li>
-      <li>{$LL.home.section4item2()}</li>
-    </ul>
-
-    <p>{$LL.home.section5()}</p>
-  </section>
-
-  <section>
-    <p>{$LL.home.section6()}</p>
-  </section>
-
-  <section>
-    <Anchor class="call-to-action" onClick={handleEmail}>
-      &#8594;{$LL.home.callToAction()}
-    </Anchor>
-  </section>
+  <Anchor class="call-to-action" onClick={handleEmail}>
+    &#8594;{$LL.home.callToAction()}
+  </Anchor>
 </div>
 
 <style>
-  div {
-    overflow-wrap: break-word;
+  .subtitle {
+    background-color: var(--overlay);
+    font-size: var(--font-2);
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 1;
+    min-width: 100%;
+    color: var(--text);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .subtitle:hover {
+    opacity: 1;
   }
 
   section {
@@ -77,33 +68,12 @@
   ul {
     margin: var(--space-3) 0;
     margin-left: var(--space-4);
-    list-style: disc;
+    list-style: disclosure-closed;
   }
 
   li {
-    margin-bottom: var(--space-3);
-  }
-
-  blockquote {
     position: relative;
-    margin-bottom: var(--space-4);
-  }
-
-  cite {
-    font-size: inherit;
-    display: block;
-  }
-
-  blockquote > span {
-    margin-left: var(--space-1);
-  }
-
-  blockquote:hover span {
-    opacity: 0;
-  }
-
-  blockquote:hover cite {
-    opacity: 1;
+    margin-bottom: var(--space-3);
   }
 
   :global(button.call-to-action::after) {
@@ -122,17 +92,6 @@
       margin-bottom: var(--space-5);
     }
 
-    cite {
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-    }
-
-    blockquote {
-      margin-bottom: var(--space-5);
-    }
-
     ul {
       margin-left: var(--space-6);
       margin-bottom: var(--space-5);
@@ -140,8 +99,5 @@
   }
   /* Desktop 2560px*/
   @media only screen and (min-width: 160em) {
-    ul {
-      margin-left: var(--space-7);
-    }
   }
 </style>

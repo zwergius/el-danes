@@ -10,7 +10,9 @@ const es: BaseTranslation = {
   back: 'back',
   mailToSubject: '🤗 Hola El Danés',
   home: {
-    header: 'Experto en soluciones web & móvil.',
+    header: 'Senior Freelance Web Developer',
+    headerTwo: 'Puedo asistir con:',
+    footer: 'Experto en soluciones web & móvil.',
     section1: '¿Quieres que tu negocio destaque en la red?',
     section2:
       '¿Necesitas una página web, una tienda, aplicación o cualquier otro producto digital? Deja que El Danés sea tu asesor tecnológico:',
@@ -34,9 +36,56 @@ const es: BaseTranslation = {
     author: 'Aristoteles',
   },
   meta: {
-    title: 'Desarrollo web & app impulsado por el diseño.',
+    title: 'Desarrollo independiente de sitios web y aplicaciones.',
     description:
-      'Agencia de desarrollo web & app especializado en webs creativos, Jamstack webs, single page apps y progressive web apps.',
+      'Desarrollador web y móvil con más de 10 años de experiencia profesional, especializado en la arquitectura de aplicaciones, desarrollo front-end, y colaboración en equipos técnicos. Experto en crear sitios web modernos, aplicaciones móviles híbridas, plataformas de e-commerce y añadir nuevas funcionalidades a sitios web existentes. Amplia experiencia en gestión de servicios en la nube y soluciones de comercio electrónico utilizando CMS como Contentful, Prismic y Shopify. Con un enfoque en el rendimiento, escalabilidad y mejores prácticas, he trabajado en proyectos exitosos para Adnami, Meaty, Iberia, GORM x Envision, y más.',
+  },
+  roles: {
+    architect: {
+      title: 'Arquitectura de Tu Aplicación',
+      subtitle:
+        'Asegúrate de comenzar con una solución de alto rendimiento que escale bien a medida que tu aplicación crece. Puedo ayudarte a seleccionar el stack tecnológico, tipo de aplicación, herramientas de automatización, mejores prácticas y a iniciar tu aplicación, como lo he hecho para <i>Adnami, British Petroleum & Meaty</i>, entre otros.',
+    },
+    lead: {
+      title: 'Liderar el Desarrollo Front-End',
+      subtitle:
+        'Con más de 10 años de experiencia profesional en desarrollo de aplicaciones web, he liderado equipos de front-end, realizado revisiones de código, asegurado mejores prácticas y mentorizado a otros desarrolladores en proyectos como <i>Iberia, Adnami & FortKnoxster.</i>',
+    },
+    team: {
+      title: 'Unirte a Tu Equipo Técnico',
+      subtitle:
+        'Soy experto en colaborar con equipos multifuncionales para alcanzar los objetivos del proyecto de manera efectiva y eficiente. Permíteme ayudar a elevar tu equipo y darte una ventaja en el front-end, como lo he hecho en roles anteriores para <i>Adnami, Meaty, Now Test, FortKnoxster, Keytree, Packlink & OpenJaw Technologies.</i>',
+    },
+    webApp: {
+      title: 'Construir un Sitio Web Moderno',
+      subtitle:
+        'Soy competente en construir sitios web de píxel perfecto según tus diseños. La integración con un CMS headless te permite agregar y editar contenido sin necesidad de asistencia externa. Tengo amplia experiencia con varios proveedores de CMS como <i>Contentful, Prismic, Storyblok</i>, y otros, como lo demuestran los casos para <i>Vermouth.Nu, GORM x Envision, Flint & Ørsted, Bauz.studio</i>, entre otros.',
+    },
+    mobileApp: {
+      title: 'Crear una Aplicación Móvil Híbrida',
+      subtitle:
+        'Mi amplia experiencia en desarrollo web, combinada con algo de desarrollo nativo de iOS, me permite construir aplicaciones móviles híbridas usando React Native. Este enfoque ofrece ahorros significativos de tiempo y costos, como se ha visto en aplicaciones desarrolladas para <i>Paladina Marketing & MyType Dating</i>, entre otros.',
+    },
+    addFunctionality: {
+      title: 'Agregar Nueva Funcionalidad a Tu Sitio Web',
+      subtitle:
+        'Agregar funciones modernas a sitios web antiguos nunca ha sido tan fácil. Los componentes web, un nuevo estándar, permiten construir componentes modulares que se pueden integrar perfectamente en cualquier sitio web existente. He construido componentes web para <i>GORM x Envision</i>.',
+    },
+    eCommerce: {
+      title: 'Crear Tu Plataforma de E-Commerce',
+      subtitle:
+        'Construyo soluciones de e-commerce de alto rendimiento que lucen geniales, ya sea con backends personalizados, como con <i>Meaty</i>, o utilizando <i>Shopify</i> headless, como se hizo para <i>Toma Café & Martinsen Nordic</i>.',
+    },
+    problem: {
+      title: 'Resolver Problemas con Tu Sitio Web',
+      subtitle:
+        'Soy muy competente en la resolución de problemas y en la solución de problemas técnicos, habilidades que he perfeccionado a lo largo de mi carrera. Trabajemos juntos para encontrar una solución efectiva a tus desafíos técnicos.',
+    },
+    cloudService: {
+      title: 'Gestionar Servicios en la Nube',
+      subtitle:
+        'Tengo experiencia profesional con la mayoría de los servicios modernos de alojamiento en la nube, incluyendo <i>Azure, Cloudflare, Netlify, Vercel</i>, y otros. Utilizar sus arquitecturas sin servidor y migrar entre ellos me ha ayudado a resolver desafíos en la mayoría de mis casos, incluyendo <i>GORM x Envision</i>.',
+    },
   },
 }
 

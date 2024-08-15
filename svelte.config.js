@@ -28,6 +28,13 @@ const config = {
       precompress: false,
       strict: true,
     }),
+    alias: {
+      $lib: 'src/lib',
+      '$lib/*': 'src/lib/*',
+      $i18n: 'src/i18n',
+      '$i18n/*': 'src/i18n/*',
+    },
+
     prerender: {
       crawl: true,
 

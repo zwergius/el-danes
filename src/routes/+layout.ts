@@ -14,11 +14,11 @@ export const load: LayoutLoad = async ({ params, url }) => {
 
   // DEV only - cloudflare redirects 🔥
   if (pathname === '/') {
-    throw redirect(302, `/${baseLocale}`)
+    redirect(302, `/${baseLocale}`);
   }
   // Unsupported language redirect to 404
   if (!locales.includes(lang)) {
-    throw error(404, `${lang} language is not supported.`)
+    error(404, `${lang} language is not supported.`);
   }
 
   await loadLocaleAsync(lang)
