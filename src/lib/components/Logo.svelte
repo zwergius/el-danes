@@ -1,33 +1,19 @@
 <script>
-  import logo from '$lib/assets/el-danes-logo.svg?raw'
-  import bgLogo from '$lib/assets/el-danes-solutions-logo.svg?raw'
+  import logo from '$lib/assets/el-danes-logo.svg'
+  import bgLogo from '$lib/assets/el-danes-solutions-logo.svg'
   export let lang, turn
 </script>
 
 <div class="logo-container" class:turn>
   <slot />
   <a href="/{lang}">
-    <img
-      width="1197.07"
-      height="296.6"
-      class="main-logo"
-      src="data:image/svg+xml;utf8,{logo}"
-      alt="El Danés logo"
-    />
-    <img
-      width="3924.39"
-      height="427.05"
-      class="secondary-logo"
-      src="data:image/svg+xml;utf8,{bgLogo}"
-      alt="El Danés Solutions logo"
-    />
-    <img
-      width="3924.39"
-      height="427.05"
-      class="secondary-logo two"
-      src="data:image/svg+xml;utf8,{bgLogo}"
-      alt="El Danés Solutions logo"
-    />
+    <img class="main-logo" src={logo} alt="El Danés logo" />
+    <div class="wrapper">
+      <div class="marquee">
+        <img src={bgLogo} alt="GG" />
+        <img src={bgLogo} alt="GG" />
+      </div>
+    </div>
   </a>
 </div>
 
@@ -41,11 +27,6 @@
     backface-visibility: visible;
   }
 
-  .main-logo {
-    height: auto;
-    width: 100%;
-  }
-
   a {
     position: relative;
     display: block;
@@ -57,31 +38,37 @@
     opacity: 0;
   }
 
-  a:hover .secondary-logo {
+  a:hover .marquee img {
     opacity: 1;
     animation-play-state: running;
   }
 
-  img {
-    display: block;
+  .main-logo {
+    height: auto;
+    width: 100%;
   }
 
-  .secondary-logo {
-    opacity: 0;
+  .wrapper {
     position: absolute;
     bottom: 0;
     left: 0;
+    right: 0;
     height: 77%;
-    width: auto;
-    max-width: unset;
-    transform: translate3d(0, 0, 0);
-    animation: marquee 20s linear infinite;
-    animation-play-state: paused;
   }
 
-  .secondary-logo.two {
-    margin-left: 2em;
-    animation: marqueeTwo 20s linear infinite;
+  .marquee {
+    --gap: 1rem;
+    display: flex;
+    gap: var(--gap);
+    height: 100%;
+  }
+
+  .marquee img {
+    opacity: 0;
+    max-width: unset;
+    height: 100%;
+    width: auto;
+    animation: scroll 20s linear infinite;
     animation-play-state: paused;
   }
 
@@ -89,21 +76,12 @@
     transform: rotate3d(0, 1, 0, -180deg);
   }
 
-  @keyframes marquee {
+  @keyframes scroll {
     from {
-      transform: translate3d(0, 0, 0);
+      transform: translateX(0);
     }
     to {
-      transform: translate3d(calc(-100% - 2em), 0, 0);
-    }
-  }
-
-  @keyframes marqueeTwo {
-    from {
-      transform: translate3d(calc(100% + 2em), 0, 0);
-    }
-    to {
-      transform: translate3d(-2em, 0, 0);
+      transform: translateX(calc(-100% - var(--gap)));
     }
   }
 

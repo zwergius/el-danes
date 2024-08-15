@@ -1,7 +1,7 @@
 <footer style="transform: translateY(var(--header-height));">
-  <h1>
+  <p class="title">
     <slot />
-  </h1>
+  </p>
   <div class="copyright">
     <span>&copy;</span>
     <span class="el-danes">EL DAN&Eacute;S</span>
@@ -20,7 +20,7 @@
     transition: transform 0.6s cubic-bezier(0.64, 0, 0.78, 0);
   }
 
-  h1 {
+  .title {
     flex: 2 0 auto;
     overflow-wrap: break-word;
     max-width: 100%;
