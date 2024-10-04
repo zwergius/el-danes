@@ -1,4 +1,5 @@
 import { type Writable, writable } from 'svelte/store'
+import { themeConfig } from '$lib/constants'
 
 export let theme: Writable<string>
 
@@ -22,28 +23,14 @@ function getInitialColorMode() {
   return 'light'
 }
 
-var themeColors = {
-  dark: [
-    { name: '--text', value: '#fff' },
-    { name: '--background', value: '#000' },
-    { name: '--overlay', value: 'rgb(0, 0, 0, 0.8)' },
-  ],
-  light: [
-    { name: '--text', value: '#000' },
-    { name: '--background', value: '#fff' },
-    { name: '--overlay', value: 'rgb(255, 255, 255, 0.8)' },
-  ],
-}
-
 if (typeof window !== 'undefined') {
-  var colorMode = getInitialColorMode()
-  var root = document.documentElement
+  const colorMode = getInitialColorMode()
+  const root = document.documentElement
 
-  themeColors[colorMode].forEach(({ name, value }) => {
+  themeConfig[colorMode].forEach(({ name, value }) => {
     root.style.setProperty(name, value)
   })
   root.style.setProperty('--color-mode', colorMode)
 
-  console.log('store')
   theme = writable(colorMode)
 }
