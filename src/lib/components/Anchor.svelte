@@ -1,6 +1,6 @@
 <script>
   import { page } from '$app/stores'
-  const lang = $page.params.lang
+  const { lang } = $page.params
   export let href = null,
     target = null,
     onClick = null
@@ -26,6 +26,10 @@
     position: relative;
     outline: none;
     line-height: unset;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   a::after,

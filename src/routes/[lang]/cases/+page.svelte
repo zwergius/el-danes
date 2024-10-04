@@ -73,6 +73,7 @@
 
 <style>
   ul {
+    width: 100%;
     display: inline-block;
   }
 
