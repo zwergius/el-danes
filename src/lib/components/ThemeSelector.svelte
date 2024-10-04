@@ -1,22 +1,11 @@
 <script lang="ts">
   import { theme } from '$lib/stores'
+  import { themeConfig } from '$lib/constants'
 
   function changeColors(colorMode: string) {
-    const theme = {
-      dark: [
-        { name: '--text', value: 'white' },
-        { name: '--background', value: 'black' },
-        { name: '--overlay', value: 'rgb(0, 0, 0, 0.8)' },
-      ],
-      light: [
-        { name: '--text', value: 'black' },
-        { name: '--background', value: 'white' },
-        { name: '--overlay', value: 'rgb(255, 255, 255, 0.8)' },
-      ],
-    }
     const root = document.documentElement
 
-    theme[colorMode].forEach(({ name, value }) => {
+    themeConfig[colorMode].forEach(({ name, value }) => {
       root.style.setProperty(name, value)
     })
     root.style.setProperty('--color-mode', colorMode)

@@ -19,7 +19,8 @@
     return 'light'
   }
 
-  var theme = {
+  // should match const in src/lib/constants
+  let themeConfig = {
     dark: [
       { name: '--text', value: '#fff' },
       { name: '--background', value: '#000' },
@@ -28,17 +29,17 @@
     light: [
       { name: '--text', value: '#000' },
       { name: '--background', value: '#fff' },
-      { name: '--overlay', value: 'rgb(255, 255, 255, 0.8)' },
+      { name: '--overlay', value: 'rgb(255, 255, 255, 0.95)' },
     ],
   }
-  var colorMode = getInitialColorMode()
-  var root = document.documentElement
+  let colorMode = getInitialColorMode()
+  let root = document.documentElement
   const meta = document.createElement('meta')
   meta.name = 'theme-color'
   meta.content = colorMode === 'dark' ? '#000' : '#fff'
   document.head.append(meta)
 
-  theme[colorMode].forEach(({ name, value }) => {
+  themeConfig[colorMode].forEach(({ name, value }) => {
     root.style.setProperty(name, value)
   })
   root.style.setProperty('--color-mode', colorMode)

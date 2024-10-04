@@ -4,7 +4,7 @@
   "version": "1.1.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite dev\" \"npm:check:watch\" \"npm:typesafe-i18n\"",
+    "dev": "concurrently \"vite dev --host\" \"npm:check:watch\" \"npm:typesafe-i18n\"",
     "build": "vite build",
     "postbuildXXXX": "mv build/404/index.html build/404.html",
     "start": "svelte-kit start",
