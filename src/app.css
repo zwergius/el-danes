@@ -14,7 +14,7 @@
   /* fallback colors */
   --text: #fff;
   --background: #000;
-  --overlay: rgb(0, 0, 0, 0.95);
+  --overlay: rgb(0, 0, 0);
 
   --space-1: 4px;
   --space-2: 8px;

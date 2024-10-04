@@ -29,7 +29,7 @@
     light: [
       { name: '--text', value: '#000' },
       { name: '--background', value: '#fff' },
-      { name: '--overlay', value: 'rgb(255, 255, 255, 0.95)' },
+      { name: '--overlay', value: 'rgb(255, 255, 255)' },
     ],
   }
   let colorMode = getInitialColorMode()
