@@ -9,7 +9,10 @@
   import ThemeSelector from '$lib/components/ThemeSelector.svelte'
   import FlipButton from '$lib/components/FlipButton.svelte'
 
-  export let lang: string, toggleFlip: () => void, showsCode: boolean
+  export let lang: string
+  export let toggleFlip: () => void
+  export let showsCode: boolean
+  export let hasCode: boolean
 
   let showsNavigation: boolean
   // let height: number
@@ -33,7 +36,9 @@
         {$LL.contact()}
       </Anchor>
       <div class="row">
-        <FlipButton {toggleFlip} flipped={showsCode} />
+        {#if hasCode}
+          <FlipButton {toggleFlip} flipped={showsCode} />
+        {/if}
         <ThemeSelector />
       </div>
     </nav>
