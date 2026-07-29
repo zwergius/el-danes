@@ -90,3 +90,12 @@ The default five-role triage vocabulary is used. See `docs/agents/triage-labels.
 ### Domain docs
 
 This repository uses the single-context layout. See `docs/agents/domain.md`.
+
+## E2E verification policy
+
+- Add a focused Playwright regression test for every bug fix.
+- While iterating, run the narrowest affected journey or named Playwright project.
+- Before handing off runtime changes, run the full `npm run verify` command.
+- After pushing, confirm and report the remote `Preview E2E` result when that check applies.
+- State explicitly when E2E was skipped because a change is documentation-only or otherwise cannot affect runtime behavior.
+- Never bypass hooks or claim a check passed unless it actually ran; report external-service limitations.
