@@ -5,6 +5,9 @@ node_modules
 /.svelte
 /build
 /functions
+/playwright-report
+/test-results
+/blob-report
 
 # Local Netlify folder
 .netlify
