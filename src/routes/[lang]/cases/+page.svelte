@@ -105,10 +105,6 @@
     min-width: 0;
   }
 
-  :global(.case-heading > a.client-link::after) {
-    width: 100%;
-  }
-
   :global(.client-link .view) {
     position: absolute;
     top: 0.4em;
@@ -118,6 +114,8 @@
   }
 
   .details-toggle {
+    position: relative;
+    z-index: 2;
     flex: 0 0 auto;
     margin-left: var(--space-2);
     font-size: var(--font-1);
@@ -132,7 +130,21 @@
 
   .stack {
     font-size: var(--font-2);
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    z-index: 1;
+    min-inline-size: 100%;
+    min-block-size: 100%;
     color: var(--text);
-    white-space: normal;
+    background: var(--background);
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .stack[hidden] {
+    display: none;
   }
 </style>

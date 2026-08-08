@@ -9,6 +9,7 @@ if (!casesRoute)
 
 async function openCases(page: import('@playwright/test').Page) {
   await page.goto(casesRoute.path)
+  await page.evaluate(() => document.fonts.ready)
   const linkedCase = page
     .locator('[data-case]')
     .filter({ has: page.locator('a') })
@@ -26,10 +27,36 @@ test('reveals case details with pointer and keyboard without nested controls', a
   const caseLink = linkedCase.getByRole('link')
   const detailsButton = linkedCase.getByRole('button')
   const details = linkedCase.locator('[data-case-details]')
+  const nextCase = linkedCase.locator('xpath=following-sibling::*[1]')
 
   await expect(details).toBeHidden()
-  await linkedCase.hover()
+  await caseLink.hover()
   await expect(details).toBeVisible()
+  await page.mouse.move(0, 0)
+  await expect(details).toBeHidden()
+  await expect
+    .poll(() =>
+      caseLink.evaluate((element) => getComputedStyle(element, '::after').width)
+    )
+    .toBe('0px')
+
+  const nextCaseTop = await nextCase.evaluate(
+    (element) => element.getBoundingClientRect().top + window.scrollY
+  )
+
+  await caseLink.hover()
+  await expect(details).toBeVisible()
+  await expect(details).toHaveCSS('position', 'absolute')
+  await expect
+    .poll(() =>
+      caseLink.evaluate((element) => getComputedStyle(element, '::after').width)
+    )
+    .not.toBe('0px')
+  expect(
+    await nextCase.evaluate(
+      (element) => element.getBoundingClientRect().top + window.scrollY
+    )
+  ).toBe(nextCaseTop)
 
   await page.mouse.move(0, 0)
   await expect(details).toBeHidden()
