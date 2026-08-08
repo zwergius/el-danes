@@ -38,7 +38,7 @@ export default defineConfig({
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 2 : undefined,
-  reporter: 'list',
+  reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
   use: {
     baseURL,
     trace: 'retain-on-failure',

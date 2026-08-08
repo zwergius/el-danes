@@ -1,0 +1,261 @@
+name: Preview E2E
+
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  classify:
+    name: Classify pull request
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      docs_only: ${{ steps.classify.outputs.docs_only }}
+      is_draft: ${{ steps.classify.outputs.is_draft }}
+      is_fork: ${{ steps.classify.outputs.is_fork }}
+
+    steps:
+      - name: Checkout pull request head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+
+      - name: Test the preview resolver
+        run: npm run test:preview-resolver
+
+      - name: Classify changed files
+        id: classify
+        env:
+          GH_TOKEN: ${{ github.token }}
+          IS_DRAFT: ${{ github.event.pull_request.draft }}
+          IS_FORK: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mapfile -t changed_files < <(
+            gh api --paginate \
+              "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files?per_page=100" \
+              --jq '.[].filename'
+          )
+
+          docs_only=true
+          if (( ${#changed_files[@]} == 0 )); then
+            docs_only=false
+          fi
+
+          for file in "${changed_files[@]}"; do
+            case "$file" in
+              *.md | docs/* | .agents/* | .codex/*) ;;
+              *) docs_only=false ;;
+            esac
+          done
+
+          echo "docs_only=${docs_only}" >> "$GITHUB_OUTPUT"
+          echo "is_draft=${IS_DRAFT}" >> "$GITHUB_OUTPUT"
+          echo "is_fork=${IS_FORK}" >> "$GITHUB_OUTPUT"
+
+          {
+            echo "### Pull request classification"
+            echo
+            echo "- Documentation or agent guidance only: \`${docs_only}\`"
+            echo "- Draft: \`${IS_DRAFT}\`"
+            echo "- Fork: \`${IS_FORK}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  resolve-preview:
+    name: Resolve immutable Cloudflare preview
+    needs:
+      - classify
+    if: >-
+      needs.classify.result == 'success' &&
+      needs.classify.outputs.docs_only != 'true' &&
+      needs.classify.outputs.is_draft != 'true' &&
+      needs.classify.outputs.is_fork != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      preview_url: ${{ steps.resolve.outputs.preview_url }}
+
+    steps:
+      - name: Checkout trusted resolver
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+
+      - name: Resolve SHA-matched preview
+        id: resolve
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
+          CLOUDFLARE_PAGES_READ_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_READ_TOKEN }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: node scripts/resolve-cloudflare-preview.mjs
+
+      - name: Summarize preview
+        env:
+          PREVIEW_URL: ${{ steps.resolve.outputs.preview_url }}
+        run: |
+          {
+            echo "### Cloudflare preview"
+            echo
+            echo "Test target: ${PREVIEW_URL}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  browser:
+    name: Playwright (${{ matrix.project }})
+    needs:
+      - classify
+      - resolve-preview
+    if: needs.resolve-preview.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - project: desktop-chromium
+            browser: chromium
+          - project: mobile-chromium
+            browser: chromium
+          - project: firefox
+            browser: firefox
+          - project: webkit
+            browser: webkit
+
+    steps:
+      - name: Checkout pull request head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install ${{ matrix.browser }}
+        run: npx playwright install --with-deps "${{ matrix.browser }}"
+
+      - name: Run Playwright against the preview
+        env:
+          PLAYWRIGHT_BASE_URL: ${{ needs.resolve-preview.outputs.preview_url }}
+        run: npm run test:e2e:project -- --project="${{ matrix.project }}"
+
+      - name: Upload failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: playwright-${{ matrix.project }}-${{ github.run_attempt }}
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Summarize project
+        if: always()
+        env:
+          PREVIEW_URL: ${{ needs.resolve-preview.outputs.preview_url }}
+          PROJECT: ${{ matrix.project }}
+          STATUS: ${{ job.status }}
+        run: |
+          {
+            echo "### ${PROJECT}"
+            echo
+            echo "- Preview: ${PREVIEW_URL}"
+            echo "- Result: ${STATUS}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  preview-e2e:
+    name: Preview E2E
+    needs:
+      - classify
+      - resolve-preview
+      - browser
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Evaluate preview gate
+        env:
+          BROWSER_RESULT: ${{ needs.browser.result }}
+          CLASSIFY_RESULT: ${{ needs.classify.result }}
+          DOCS_ONLY: ${{ needs.classify.outputs.docs_only }}
+          IS_DRAFT: ${{ needs.classify.outputs.is_draft }}
+          IS_FORK: ${{ needs.classify.outputs.is_fork }}
+          PREVIEW_URL: ${{ needs.resolve-preview.outputs.preview_url }}
+          RESOLVE_RESULT: ${{ needs.resolve-preview.result }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          outcome=failed
+          detail="Preview E2E did not reach an expected terminal state."
+
+          if [[ "$CLASSIFY_RESULT" != "success" ]]; then
+            detail="Pull request classification or resolver tests failed."
+          elif [[ "$IS_DRAFT" == "true" ]]; then
+            outcome=passed
+            detail="Browser tests are deferred until the pull request is ready for review."
+          elif [[ "$IS_FORK" == "true" ]]; then
+            detail="Cloudflare does not create the required preview for fork pull requests; use a maintainer-owned branch."
+          elif [[ "$DOCS_ONLY" == "true" ]]; then
+            outcome=passed
+            detail="Browser tests are not required for documentation or agent-guidance-only changes."
+          elif [[ "$RESOLVE_RESULT" != "success" ]]; then
+            detail="The immutable Cloudflare preview could not be resolved successfully."
+          elif [[ "$BROWSER_RESULT" != "success" ]]; then
+            detail="At least one Playwright browser project failed, was cancelled, or was unexpectedly skipped."
+          else
+            outcome=passed
+            detail="All Playwright projects passed against ${PREVIEW_URL}."
+          fi
+
+          {
+            echo "### Preview E2E gate"
+            echo
+            echo "- Result: ${outcome}"
+            echo "- Detail: ${detail}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if [[ "$outcome" != "passed" ]]; then
+            echo "$detail" >&2
+            exit 1
+          fi
