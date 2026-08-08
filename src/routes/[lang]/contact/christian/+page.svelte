@@ -1,6 +1,8 @@
 <script lang="ts">
   import { browser } from '$app/environment'
   import { page } from '$app/stores'
+  import { LL } from '$i18n/i18n-svelte'
+  import SEO from '$lib/components/SEO.svelte'
 
   const { lang } = $page.params
 
@@ -25,6 +27,8 @@
     }
   }
 </script>
+
+<SEO title={$LL.walletTitle()} />
 
 <div class="container">
   <a rel="external" href={pkpass}>
