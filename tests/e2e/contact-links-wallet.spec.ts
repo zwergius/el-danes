@@ -27,14 +27,18 @@ test('validates contact and social destinations without visiting them', async ({
   await expect(phoneLink).toHaveAttribute('href', `tel:${displayedPhone}`)
   await expect(phoneLink).toHaveAttribute('target', '_self')
 
-  const emailLink = page.getByRole('link', { name: /@/ })
-  const displayedEmail = (await emailLink.textContent())?.trim()
+  const emailButton = page.getByRole('button', { name: /@/ })
+  const displayedEmail = (await emailButton.textContent())?.trim()
   expect(displayedEmail).toBeTruthy()
-  const mailto = new URL((await emailLink.getAttribute('href'))!)
+  await expect(emailButton).not.toHaveAttribute('href', /./)
+  const handoff = waitForAttempt(page, (request) =>
+    request.url().startsWith('mailto:')
+  )
+  await emailButton.click()
+  const mailto = new URL((await handoff).url())
   expect(mailto.protocol).toBe('mailto:')
   expect(mailto.pathname).toBe(displayedEmail)
   expect(mailto.searchParams.get('subject')).toBeTruthy()
-  await expect(emailLink).toHaveAttribute('target', '_self')
 
   for (const [name, destination] of Object.entries(socialDestinations)) {
     const link = page.getByRole('link', { name, exact: true })
