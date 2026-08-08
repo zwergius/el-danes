@@ -1,5 +1,5 @@
 <script lang="ts">
-  let title: string
+  import { page } from '$app/stores'
 </script>
 
-<h1>{title}</h1>
+<h1>{$page.status}: {$page.error?.message ?? 'Page not found'}</h1>

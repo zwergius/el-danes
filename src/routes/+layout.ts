@@ -1,4 +1,3 @@
-import { browser } from '$app/environment'
 import { redirect, error } from '@sveltejs/kit'
 import { baseLocale, locales } from '$i18n/i18n-util'
 import { loadLocaleAsync } from '$i18n/i18n-util.async'
@@ -10,15 +9,18 @@ export const prerender = true
 
 export const load: LayoutLoad = async ({ params, url }) => {
   const { pathname } = url
-  const { lang } = <{ lang: Locales }>params
+  const lang = params.lang as Locales | undefined
 
   // DEV only - cloudflare redirects 🔥
   if (pathname === '/') {
-    redirect(302, `/${baseLocale}`);
+    redirect(302, `/${baseLocale}`)
   }
+  // Unmatched routes have no language parameter; preserve their original 404.
+  if (lang === undefined) return
+
   // Unsupported language redirect to 404
   if (!locales.includes(lang)) {
-    error(404, `${lang} language is not supported.`);
+    error(404, `${lang} language is not supported.`)
   }
 
   await loadLocaleAsync(lang)
