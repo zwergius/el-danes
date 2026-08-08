@@ -10,6 +10,8 @@
   const { lang } = $page.params
 
   let showsCode = false
+  $: hasCode = Boolean($page.data.code)
+  $: if (!hasCode) showsCode = false
   let h = 0
   // const aspectRatio = 296.6 / 1197.07 // logo svg viewbox
   let mounted = false
@@ -34,7 +36,7 @@
 
 <!-- TODO could we avoid init-theme with #if process browser here-->
 {#if browser}
-  <Header {lang} {showsCode} {toggleFlip} />
+  <Header {lang} {showsCode} {toggleFlip} {hasCode} />
 {/if}
 
 <main style="height: {h}px; ">
@@ -45,7 +47,7 @@
           <slot />
         </div>
       </div>
-    {:else}
+    {:else if hasCode}
       <div class="side back" transition:turn={{ delay: 0, duration: 500 }}>
         <div class="content" bind:clientHeight={h}>
           <code>{$page.data.code}</code>
