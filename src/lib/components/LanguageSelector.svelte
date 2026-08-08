@@ -1,6 +1,11 @@
 <script>
+  import { page } from '$app/stores'
   import Anchor from '$lib/components/Anchor.svelte'
   export let lang
+
+  $: currentRoute = `${$page.url.pathname.replace(/^\/[^/]+/, '')}${
+    $page.url.search
+  }${$page.url.hash}`
 </script>
 
 <ul>
@@ -9,7 +14,7 @@
     <Anchor
       aria-current={lang === 'en' ? 'language' : undefined}
       class="language-switch"
-      href="/en"
+      href={`/en${currentRoute}`}
       target="_self"
     >
       EN
@@ -19,7 +24,7 @@
     <Anchor
       aria-current={lang === 'es' ? 'language' : undefined}
       class="language-switch"
-      href="/es"
+      href={`/es${currentRoute}`}
       target="_self"
     >
       SP
@@ -29,7 +34,7 @@
     <Anchor
       aria-current={lang === 'da' ? 'language' : undefined}
       class="language-switch"
-      href="/da"
+      href={`/da${currentRoute}`}
       target="_self"
     >
       DA
