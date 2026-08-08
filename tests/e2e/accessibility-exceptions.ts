@@ -9,7 +9,6 @@ export interface AccessibilityException {
   bugURL: `https://github.com/${string}`
 }
 
-const caseRoutes = ['/en/cases', '/da/cases', '/es/cases'] as const
 const walletRoutes = [
   '/en/contact/christian',
   '/da/contact/christian',
@@ -17,14 +16,6 @@ const walletRoutes = [
 ] as const
 
 export const accessibilityExceptions: readonly AccessibilityException[] = [
-  {
-    rule: 'nested-interactive',
-    routes: caseRoutes,
-    projects: ['desktop-chromium', 'mobile-chromium', 'firefox', 'webkit'],
-    maxAffectedNodes: 13,
-    rationale: 'Measured legacy case-card markup; scope may only shrink.',
-    bugURL: 'https://github.com/zwergius/el-danes/issues/104',
-  },
   {
     rule: 'document-title',
     routes: walletRoutes,
