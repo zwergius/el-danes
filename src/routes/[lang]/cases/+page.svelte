@@ -137,7 +137,7 @@
     min-inline-size: 100%;
     min-block-size: 100%;
     color: var(--text);
-    background: var(--background);
+    background: color-mix(in oklab, var(--background) 80%, transparent);
     display: flex;
     align-items: center;
     white-space: nowrap;

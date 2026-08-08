@@ -47,6 +47,19 @@ test('reveals case details with pointer and keyboard without nested controls', a
   await caseLink.hover()
   await expect(details).toBeVisible()
   await expect(details).toHaveCSS('position', 'absolute')
+  expect(
+    await details.evaluate((element) => {
+      const canvas = document.createElement('canvas')
+      canvas.width = 1
+      canvas.height = 1
+      const context = canvas.getContext('2d')
+      if (!context) throw new Error('Canvas 2D context is unavailable')
+
+      context.fillStyle = getComputedStyle(element).backgroundColor
+      context.fillRect(0, 0, 1, 1)
+      return context.getImageData(0, 0, 1, 1).data[3]
+    })
+  ).toBe(204)
   await expect
     .poll(() =>
       caseLink.evaluate((element) => getComputedStyle(element, '::after').width)
