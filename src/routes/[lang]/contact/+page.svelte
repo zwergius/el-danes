@@ -11,11 +11,6 @@
   $: ({ phoneNo, email } = data)
 
   $pageHeader = $LL.letsTalk()
-
-  function handleEmail(e: Event) {
-    e.preventDefault()
-    window.location.href = `mailto:${email}?subject=${$LL.mailToSubject()}`
-  }
 </script>
 
 <SEO title={$LL.contact()} />
@@ -23,7 +18,10 @@
 <section>
   <ul>
     <li>
-      <Anchor onClick={handleEmail}>{email}</Anchor>
+      <Anchor
+        href={`mailto:${email}?subject=${$LL.mailToSubject()}`}
+        target="_self">{email}</Anchor
+      >
     </li>
     <li>
       <Anchor id="telephone-link" href={`tel:${phoneNo}`} target="_self">

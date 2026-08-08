@@ -34,7 +34,7 @@
       alt="add the card to your wallet for ios"
     />
   </a>
-  <a rel="external" target="_blank" href={passGoogle}>
+  <a rel="external noopener" target="_blank" href={passGoogle}>
     <img
       class="wallet-logo"
       src="/google-wallet-{lang}.svg"
