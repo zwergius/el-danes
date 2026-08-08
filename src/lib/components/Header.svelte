@@ -14,7 +14,7 @@
   export let showsCode: boolean
   export let hasCode: boolean
 
-  let showsNavigation: boolean
+  let showsNavigation = false
   // let height: number
 
   onMount(() => {
@@ -30,7 +30,11 @@
 
 <header>
   {#if showsNavigation}
-    <nav class="row {$theme && 'visible'}" transition:slide>
+    <nav
+      id="primary-navigation"
+      class="row {$theme && 'visible'}"
+      transition:slide
+    >
       <LanguageSelector {lang} />
       <Anchor id="contact-link" href="/contact">
         {$LL.contact()}
@@ -45,7 +49,13 @@
   {/if}
   <Logo {lang} turn={showsCode}>
     <div class="handheld-row">
-      <button on:click={toggleShowsNavigation} type="button">
+      <button
+        id="mobile-navigation-toggle"
+        type="button"
+        aria-controls="primary-navigation"
+        aria-expanded={showsNavigation}
+        on:click={toggleShowsNavigation}
+      >
         {showsNavigation ? $LL.back() : $LL.menu()}
       </button>
     </div>
