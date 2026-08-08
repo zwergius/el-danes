@@ -53,7 +53,7 @@ test('validates wallet choices or captures the platform handoff', async ({
     const handoff = waitForAttempt(page, (request) =>
       request.url().startsWith('https://pay.google.com/gp/v/save/')
     )
-    await page.goto('/en/contact/christian')
+    await page.goto('/en/contact/christian', { waitUntil: 'commit' })
     expect(new URL((await handoff).url()).protocol).toBe('https:')
     return
   }
@@ -63,7 +63,7 @@ test('validates wallet choices or captures the platform handoff', async ({
     const handoff = waitForAttempt(page, (request) =>
       request.url().endsWith('/el-danes.pkpass')
     )
-    await page.goto('/en/contact/christian')
+    await page.goto('/en/contact/christian', { waitUntil: 'commit' })
     const pkpass = new URL((await handoff).url())
     expect(pkpass.pathname).toBe('/el-danes.pkpass')
     expect(pkpass.origin).toBe(new URL(page.url()).origin)

@@ -36,7 +36,7 @@ test('does not expose source on the wallet', async ({ page }, testInfo) => {
       predicate: (request) =>
         request.url().startsWith('https://pay.google.com/gp/v/save/'),
     })
-    await page.goto('/en/contact/christian')
+    await page.goto('/en/contact/christian', { waitUntil: 'commit' })
     expect(new URL((await handoff).url()).protocol).toBe('https:')
     return
   }
@@ -46,7 +46,7 @@ test('does not expose source on the wallet', async ({ page }, testInfo) => {
     const handoff = page.waitForEvent('request', {
       predicate: (request) => request.url().endsWith('/el-danes.pkpass'),
     })
-    await page.goto('/en/contact/christian')
+    await page.goto('/en/contact/christian', { waitUntil: 'commit' })
     expect(new URL((await handoff).url()).pathname).toBe('/el-danes.pkpass')
     return
   }
