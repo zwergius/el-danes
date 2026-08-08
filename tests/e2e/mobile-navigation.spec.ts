@@ -17,19 +17,21 @@ async function seriousOrCriticalToggleViolations(page: Page) {
 }
 
 test.describe('mobile navigation', () => {
-  test.skip(
-    ({ isMobile }) => !isMobile,
-    'Mobile navigation is viewport-specific'
-  )
-
   test.beforeEach(async ({ page }) => {
     await page.goto(spanishHome.path)
   })
 
   test('exposes state and supports pointer and keyboard activation', async ({
     page,
+    isMobile,
   }) => {
     const toggle = page.locator('#mobile-navigation-toggle')
+
+    if (!isMobile) {
+      await expect(toggle).toBeHidden()
+      await expect(page.getByRole('navigation')).toBeVisible()
+      return
+    }
 
     await expect(toggle).toHaveAccessibleName('menu')
     await expect(toggle).toHaveAttribute('aria-expanded', 'false')
@@ -60,10 +62,13 @@ test.describe('mobile navigation', () => {
     await expect(toggle).toHaveAttribute('aria-expanded', 'false')
   })
 
-  test('navigates through a localized menu link', async ({ page }) => {
+  test('navigates through a localized menu link', async ({
+    page,
+    isMobile,
+  }) => {
     const toggle = page.getByRole('button', { name: 'menu' })
 
-    await toggle.click()
+    if (isMobile) await toggle.click()
     await page.getByRole('link', { name: 'Contacto' }).click()
 
     await expect(page).toHaveURL(/\/es\/contact\/?$/)
