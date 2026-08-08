@@ -3,6 +3,7 @@ import type { BaseTranslation } from '../i18n-types'
 const en: BaseTranslation = {
   cases: 'Cases',
   contact: 'Contact',
+  walletTitle: "Christian's contact card",
   letsTalk: "Let's talk??",
   goodCompany: 'Keeping good company.',
   view: 'view!',

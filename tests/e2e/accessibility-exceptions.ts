@@ -9,22 +9,7 @@ export interface AccessibilityException {
   bugURL: `https://github.com/${string}`
 }
 
-const walletRoutes = [
-  '/en/contact/christian',
-  '/da/contact/christian',
-  '/es/contact/christian',
-] as const
-
-export const accessibilityExceptions: readonly AccessibilityException[] = [
-  {
-    rule: 'document-title',
-    routes: walletRoutes,
-    projects: ['desktop-chromium', 'firefox'],
-    maxAffectedNodes: 1,
-    rationale: 'Measured missing wallet document title; scope may only shrink.',
-    bugURL: 'https://github.com/zwergius/el-danes/issues/108',
-  },
-]
+export const accessibilityExceptions: readonly AccessibilityException[] = []
 
 export function accessibilityExceptionsFor(
   route: RouteContract['path'],

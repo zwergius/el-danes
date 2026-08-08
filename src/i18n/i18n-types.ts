@@ -24,6 +24,10 @@ type RootTranslation = {
 	 */
 	contact: string
 	/**
+	 * C​h​r​i​s​t​i​a​n​'​s​ ​c​o​n​t​a​c​t​ ​c​a​r​d
+	 */
+	walletTitle: string
+	/**
 	 * L​e​t​'​s​ ​t​a​l​k​?​?
 	 */
 	letsTalk: string
@@ -226,6 +230,10 @@ export type TranslationFunctions = {
 	 * Contact
 	 */
 	contact: () => LocalizedString
+	/**
+	 * Christian's contact card
+	 */
+	walletTitle: () => LocalizedString
 	/**
 	 * Let's talk??
 	 */
