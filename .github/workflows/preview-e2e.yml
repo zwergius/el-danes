@@ -15,6 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
+  checks: read
   contents: read
   pull-requests: read
 
@@ -115,10 +116,10 @@ jobs:
     outputs:
       preview_url: ${{ steps.resolve.outputs.preview_url }}
     steps:
-      - name: Check out trusted base revision
+      - name: Check out preview resolver
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.event.pull_request.base.sha }}
+          ref: ${{ github.event.pull_request.head.sha }}
           sparse-checkout: scripts/resolve-cloudflare-preview.mjs
           sparse-checkout-cone-mode: false
           persist-credentials: false
@@ -131,9 +132,7 @@ jobs:
       - name: Resolve preview for pull request head
         id: resolve
         env:
-          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
-          CLOUDFLARE_PAGES_READ_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_READ_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: node scripts/resolve-cloudflare-preview.mjs
 
@@ -260,7 +259,7 @@ jobs:
             fi
 
             if [[ "$IS_FORK" == "true" ]]; then
-              echo "Fork pull requests cannot receive the Cloudflare Pages token or produce the required preview. Use a maintainer-owned branch."
+              echo "Cloudflare Pages does not produce the required preview for fork pull requests. Use a maintainer-owned branch."
               exit 1
             fi
 

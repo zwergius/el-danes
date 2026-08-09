@@ -5,7 +5,7 @@ import { join } from 'node:path'
 import test from 'node:test'
 
 import {
-  fetchPreviewDeployments,
+  fetchCloudflareCheckRuns,
   resolveCloudflarePreview,
   runFromEnvironment,
   validateImmutablePreviewUrl,
@@ -13,53 +13,63 @@ import {
 
 const HEAD_SHA = '0123456789abcdef0123456789abcdef01234567'
 const OTHER_SHA = 'abcdef0123456789abcdef0123456789abcdef01'
+const REPOSITORY = 'zwergius/el-danes'
 
-function deployment({
+function checkRun({
+  id = 101,
   sha = HEAD_SHA,
-  createdOn = '2026-07-29T08:00:00.000Z',
-  status = 'success',
-  url = 'https://deadbeef.el-danes.pages.dev',
+  name = 'Cloudflare Pages',
+  status = 'completed',
+  conclusion = status === 'completed' ? 'success' : null,
+  startedAt = '2026-08-09T08:00:00.000Z',
+  completedAt = status === 'completed' ? '2026-08-09T08:01:00.000Z' : null,
+  appOwner = 'cloudflare',
+  appSlug = 'cloudflare-workers-and-pages',
+  summary = `<a href='https://deadbeef.el-danes.pages.dev'>Preview URL</a>
+<a href='https://feature.el-danes.pages.dev'>Branch Preview URL</a>`,
 } = {}) {
   return {
-    created_on: createdOn,
-    deployment_trigger: { metadata: { commit_hash: sha } },
-    latest_stage: { status },
-    url,
+    id,
+    head_sha: sha,
+    name,
+    status,
+    conclusion,
+    started_at: startedAt,
+    completed_at: completedAt,
+    app: { owner: { login: appOwner }, slug: appSlug },
+    output: { summary },
   }
 }
 
 function response(
-  result,
-  { page = 1, totalPages = 1, ok = true, success = true } = {}
+  checkRuns,
+  { ok = true, status = ok ? 200 : 500, totalCount = checkRuns.length } = {}
 ) {
   return {
     ok,
-    status: ok ? 200 : 500,
+    status,
     json() {
-      return Promise.resolve({
-        success,
-        result,
-        result_info: { page, total_pages: totalPages },
-      })
+      return Promise.resolve({ total_count: totalCount, check_runs: checkRuns })
     },
   }
 }
 
 function pagedFetch(pages, calls = []) {
+  const totalCount = pages.flat().length
   return (url, options) => {
     const parsed = new URL(url)
     const page = Number(parsed.searchParams.get('page') ?? '1')
     calls.push({ parsed, options })
-    return response(pages[page - 1] ?? [], { page, totalPages: pages.length })
+    return response(pages[page - 1] ?? [], { totalCount })
   }
 }
 
 function roundsFetch(rounds) {
   let round = 0
   return () => {
-    const result = rounds[Math.min(round, rounds.length - 1)]
+    const checkRuns = rounds[Math.min(round, rounds.length - 1)]
     round += 1
-    return response(result)
+    return response(checkRuns)
   }
 }
 
@@ -94,49 +104,51 @@ test('rejects aliases, production, credentials, paths, queries, fragments, HTTP,
   }
 })
 
-test('follows Cloudflare pagination without exposing the token in the URL', async () => {
+test('fetches every GitHub check-run page without exposing the token in the URL', async () => {
   const calls = []
-  const deployments = await fetchPreviewDeployments({
-    accountId: 'account/id',
-    project: 'el danes',
-    token: 'top-secret-token',
+  const checkRuns = await fetchCloudflareCheckRuns({
+    repository: REPOSITORY,
+    token: 'github-token',
+    headSha: HEAD_SHA,
     fetchImpl: pagedFetch(
-      [[deployment({ sha: OTHER_SHA })], [deployment()]],
+      [[checkRun({ id: 1 })], [checkRun({ id: 2 })]],
       calls
     ),
   })
 
-  assert.equal(deployments.length, 2)
+  assert.equal(checkRuns.length, 2)
   assert.deepEqual(
     calls.map(({ parsed }) => parsed.searchParams.get('page')),
     ['1', '2']
   )
   for (const { parsed, options } of calls) {
-    assert.equal(parsed.searchParams.get('env'), 'preview')
+    assert.equal(parsed.searchParams.get('check_name'), 'Cloudflare Pages')
+    assert.equal(parsed.searchParams.get('filter'), 'all')
     assert.equal(
       parsed.pathname,
-      '/client/v4/accounts/account%2Fid/pages/projects/el%20danes/deployments'
+      `/repos/zwergius/el-danes/commits/${HEAD_SHA}/check-runs`
     )
-    assert.equal(options.headers.Authorization, 'Bearer top-secret-token')
-    assert.equal(parsed.href.includes('top-secret-token'), false)
+    assert.equal(options.headers.Authorization, 'Bearer github-token')
+    assert.equal(parsed.href.includes('github-token'), false)
   }
 })
 
-test('requires an exact full commit SHA match instead of accepting a prefix', async () => {
+test('requires an exact full commit SHA match', async () => {
   const resolved = await resolveCloudflarePreview({
-    accountId: 'account',
-    project: 'el-danes',
+    repository: REPOSITORY,
     token: 'token',
     headSha: HEAD_SHA,
     fetchImpl: pagedFetch([
       [
-        deployment({
-          sha: HEAD_SHA.slice(0, 12),
-          url: 'https://aaaaaaaa.el-danes.pages.dev',
+        checkRun({
+          id: 2,
+          sha: OTHER_SHA,
+          summary: 'https://aaaaaaaa.el-danes.pages.dev',
         }),
-        deployment({
+        checkRun({
+          id: 1,
           sha: HEAD_SHA,
-          url: 'https://bbbbbbbb.el-danes.pages.dev',
+          summary: 'https://bbbbbbbb.el-danes.pages.dev',
         }),
       ],
     ]),
@@ -145,21 +157,21 @@ test('requires an exact full commit SHA match instead of accepting a prefix', as
   assert.equal(resolved, 'https://bbbbbbbb.el-danes.pages.dev')
 })
 
-test('selects the newest same-SHA redeployment by created_on', async () => {
+test('accepts checks only from the official Cloudflare GitHub app', async () => {
   const resolved = await resolveCloudflarePreview({
-    accountId: 'account',
-    project: 'el-danes',
+    repository: REPOSITORY,
     token: 'token',
     headSha: HEAD_SHA,
     fetchImpl: pagedFetch([
       [
-        deployment({
-          createdOn: '2026-07-29T08:00:00.000Z',
-          url: 'https://aaaaaaaa.el-danes.pages.dev',
+        checkRun({
+          id: 2,
+          appOwner: 'attacker',
+          summary: 'https://aaaaaaaa.el-danes.pages.dev',
         }),
-        deployment({
-          createdOn: '2026-07-29T08:01:00.000Z',
-          url: 'https://bbbbbbbb.el-danes.pages.dev',
+        checkRun({
+          id: 1,
+          summary: 'https://bbbbbbbb.el-danes.pages.dev',
         }),
       ],
     ]),
@@ -168,42 +180,62 @@ test('selects the newest same-SHA redeployment by created_on', async () => {
   assert.equal(resolved, 'https://bbbbbbbb.el-danes.pages.dev')
 })
 
-test('fails when the newest same-SHA redeployment failed even if an older one succeeded', async () => {
+test('selects the newest same-SHA Cloudflare check run', async () => {
+  const resolved = await resolveCloudflarePreview({
+    repository: REPOSITORY,
+    token: 'token',
+    headSha: HEAD_SHA,
+    fetchImpl: pagedFetch([
+      [
+        checkRun({
+          id: 1,
+          startedAt: '2026-08-09T08:00:00.000Z',
+          summary: 'https://aaaaaaaa.el-danes.pages.dev',
+        }),
+        checkRun({
+          id: 2,
+          startedAt: '2026-08-09T08:01:00.000Z',
+          summary: 'https://bbbbbbbb.el-danes.pages.dev',
+        }),
+      ],
+    ]),
+  })
+
+  assert.equal(resolved, 'https://bbbbbbbb.el-danes.pages.dev')
+})
+
+test('fails when the newest same-SHA check failed even if an older one succeeded', async () => {
   await assert.rejects(
     resolveCloudflarePreview({
-      accountId: 'account',
-      project: 'el-danes',
+      repository: REPOSITORY,
       token: 'token',
       headSha: HEAD_SHA,
       fetchImpl: pagedFetch([
         [
-          deployment({
-            createdOn: '2026-07-29T08:00:00.000Z',
-            status: 'success',
-          }),
-          deployment({
-            createdOn: '2026-07-29T08:01:00.000Z',
-            status: 'failure',
+          checkRun({ id: 1, startedAt: '2026-08-09T08:00:00.000Z' }),
+          checkRun({
+            id: 2,
+            startedAt: '2026-08-09T08:01:00.000Z',
+            conclusion: 'failure',
           }),
         ],
       ]),
     }),
-    /terminal status: failure/
+    /terminal conclusion: failure/
   )
 })
 
-test('polls idle and active deployments every 15 seconds until success', async () => {
+test('polls queued and in-progress checks every 15 seconds until success', async () => {
   let now = 0
   const sleeps = []
   const resolved = await resolveCloudflarePreview({
-    accountId: 'account',
-    project: 'el-danes',
+    repository: REPOSITORY,
     token: 'token',
     headSha: HEAD_SHA,
     fetchImpl: roundsFetch([
-      [deployment({ status: 'idle' })],
-      [deployment({ status: 'active' })],
-      [deployment({ status: 'success' })],
+      [checkRun({ status: 'queued' })],
+      [checkRun({ status: 'in_progress' })],
+      [checkRun()],
     ]),
     now: () => now,
     sleep: (milliseconds) => {
@@ -216,33 +248,38 @@ test('polls idle and active deployments every 15 seconds until success', async (
   assert.deepEqual(sleeps, [15_000, 15_000])
 })
 
-for (const status of ['failure', 'canceled', 'cancelled', 'skipped']) {
-  test(`fails immediately for terminal status ${status}`, async () => {
+for (const conclusion of [
+  'failure',
+  'cancelled',
+  'timed_out',
+  'action_required',
+  'stale',
+  'skipped',
+]) {
+  test(`fails immediately for terminal conclusion ${conclusion}`, async () => {
     let slept = false
     await assert.rejects(
       resolveCloudflarePreview({
-        accountId: 'account',
-        project: 'el-danes',
+        repository: REPOSITORY,
         token: 'token',
         headSha: HEAD_SHA,
-        fetchImpl: pagedFetch([[deployment({ status })]]),
+        fetchImpl: pagedFetch([[checkRun({ conclusion })]]),
         sleep: () => {
           slept = true
         },
       }),
-      new RegExp(`terminal status: ${status}`)
+      new RegExp(`terminal conclusion: ${conclusion}`)
     )
     assert.equal(slept, false)
   })
 }
 
-test('times out when no matching deployment appears', async () => {
+test('times out when no matching check appears', async () => {
   let now = 0
   let requests = 0
   await assert.rejects(
     resolveCloudflarePreview({
-      accountId: 'account',
-      project: 'el-danes',
+      repository: REPOSITORY,
       token: 'token',
       headSha: HEAD_SHA,
       fetchImpl: () => {
@@ -264,8 +301,7 @@ test('uses a 15-minute default hard timeout', async () => {
   const times = [0, 15 * 60_000]
   await assert.rejects(
     resolveCloudflarePreview({
-      accountId: 'account',
-      project: 'el-danes',
+      repository: REPOSITORY,
       token: 'token',
       headSha: HEAD_SHA,
       fetchImpl: () => response([]),
@@ -279,18 +315,17 @@ test('does not accept a successful response that arrives after the deadline', as
   const times = [0, 15 * 60_000 + 1]
   await assert.rejects(
     resolveCloudflarePreview({
-      accountId: 'account',
-      project: 'el-danes',
+      repository: REPOSITORY,
       token: 'token',
       headSha: HEAD_SHA,
-      fetchImpl: () => response([deployment()]),
+      fetchImpl: () => response([checkRun()]),
       now: () => times.shift(),
     }),
     /timed out after 900 seconds/
   )
 })
 
-test('rejects malformed API responses', async () => {
+test('rejects malformed GitHub API responses', async () => {
   const malformedResponses = [
     { ok: false, status: 503, json: () => Promise.resolve({}) },
     {
@@ -301,77 +336,97 @@ test('rejects malformed API responses', async () => {
     {
       ok: true,
       status: 200,
-      json: () =>
-        Promise.resolve({
-          success: false,
-          result: [],
-          result_info: { page: 1, total_pages: 1 },
-        }),
+      json: () => Promise.resolve({ total_count: -1, check_runs: [] }),
     },
     {
       ok: true,
       status: 200,
-      json: () =>
-        Promise.resolve({
-          success: true,
-          result: {},
-          result_info: { page: 1, total_pages: 1 },
-        }),
-    },
-    {
-      ok: true,
-      status: 200,
-      json: () =>
-        Promise.resolve({
-          success: true,
-          result: [],
-          result_info: { page: 1 },
-        }),
+      json: () => Promise.resolve({ total_count: 0, check_runs: {} }),
     },
   ]
 
   for (const malformed of malformedResponses) {
     await assert.rejects(
-      fetchPreviewDeployments({
-        accountId: 'account',
-        project: 'el-danes',
+      fetchCloudflareCheckRuns({
+        repository: REPOSITORY,
         token: 'token',
+        headSha: HEAD_SHA,
         fetchImpl: () => malformed,
       }),
-      /Cloudflare API/
+      /GitHub check-runs/
     )
   }
 })
 
-test('rejects malformed matching deployment records', async () => {
-  const malformed = deployment()
-  delete malformed.latest_stage
+test('rejects malformed matching check runs', async () => {
+  const missingApp = checkRun()
+  delete missingApp.app
 
-  await assert.rejects(
-    resolveCloudflarePreview({
-      accountId: 'account',
-      project: 'el-danes',
-      token: 'token',
-      headSha: HEAD_SHA,
-      fetchImpl: pagedFetch([[malformed]]),
-    }),
-    /malformed deployment/
-  )
+  for (const malformed of [
+    missingApp,
+    checkRun({ conclusion: null }),
+    checkRun({ status: 'queued', conclusion: 'success' }),
+  ]) {
+    await assert.rejects(
+      resolveCloudflarePreview({
+        repository: REPOSITORY,
+        token: 'token',
+        headSha: HEAD_SHA,
+        fetchImpl: pagedFetch([[malformed]]),
+      }),
+      /malformed check run/
+    )
+  }
 })
 
-test('reads canonical environment variables and writes only the validated URL output', async () => {
+test('rejects successful checks without exactly one immutable preview URL', async () => {
+  for (const summary of [
+    'https://feature.el-danes.pages.dev',
+    'https://deadbeef.el-danes.pages.dev.evil.example',
+    'https://aaaaaaaa.el-danes.pages.dev https://bbbbbbbb.el-danes.pages.dev',
+  ]) {
+    await assert.rejects(
+      resolveCloudflarePreview({
+        repository: REPOSITORY,
+        token: 'token',
+        headSha: HEAD_SHA,
+        fetchImpl: pagedFetch([[checkRun({ summary })]]),
+      }),
+      /exactly one immutable preview URL/
+    )
+  }
+})
+
+test('normalizes duplicate representations of the same immutable URL', async () => {
+  const resolved = await resolveCloudflarePreview({
+    repository: REPOSITORY,
+    token: 'token',
+    headSha: HEAD_SHA,
+    fetchImpl: pagedFetch([
+      [
+        checkRun({
+          summary:
+            'https://deadbeef.el-danes.pages.dev https://deadbeef.el-danes.pages.dev/',
+        }),
+      ],
+    ]),
+  })
+
+  assert.equal(resolved, 'https://deadbeef.el-danes.pages.dev')
+})
+
+test('reads canonical GitHub environment values and writes only the validated URL output', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'el-danes-resolver-'))
   const outputPath = join(directory, 'github-output')
   try {
     const resolved = await runFromEnvironment({
       env: {
-        CLOUDFLARE_ACCOUNT_ID: 'account',
-        CLOUDFLARE_PAGES_PROJECT: 'el-danes',
-        CLOUDFLARE_PAGES_READ_TOKEN: 'top-secret-token',
+        GITHUB_REPOSITORY: REPOSITORY,
+        GITHUB_TOKEN: 'github-token',
         PR_HEAD_SHA: HEAD_SHA,
         GITHUB_OUTPUT: outputPath,
       },
-      fetchImpl: pagedFetch([[deployment()]]),
+      fetchImpl: pagedFetch([[checkRun()]]),
     })
 
     assert.equal(resolved, 'https://deadbeef.el-danes.pages.dev')
@@ -380,7 +435,7 @@ test('reads canonical environment variables and writes only the validated URL ou
       'preview_url=https://deadbeef.el-danes.pages.dev\n'
     )
     assert.equal(
-      (await readFile(outputPath, 'utf8')).includes('top-secret-token'),
+      (await readFile(outputPath, 'utf8')).includes('github-token'),
       false
     )
   } finally {
@@ -388,11 +443,10 @@ test('reads canonical environment variables and writes only the validated URL ou
   }
 })
 
-test('rejects missing environment values and non-full head SHAs', async () => {
+test('rejects missing environment values, malformed repositories, and non-full head SHAs', async () => {
   const base = {
-    CLOUDFLARE_ACCOUNT_ID: 'account',
-    CLOUDFLARE_PAGES_PROJECT: 'el-danes',
-    CLOUDFLARE_PAGES_READ_TOKEN: 'token',
+    GITHUB_REPOSITORY: REPOSITORY,
+    GITHUB_TOKEN: 'token',
     PR_HEAD_SHA: HEAD_SHA,
     GITHUB_OUTPUT: '/tmp/output',
   }
@@ -403,6 +457,12 @@ test('rejects missing environment values and non-full head SHAs', async () => {
       new RegExp(name)
     )
   }
+  await assert.rejects(
+    runFromEnvironment({
+      env: { ...base, GITHUB_REPOSITORY: 'invalid' },
+    }),
+    /owner\/repository/
+  )
   await assert.rejects(
     runFromEnvironment({
       env: { ...base, PR_HEAD_SHA: HEAD_SHA.slice(0, 12) },
