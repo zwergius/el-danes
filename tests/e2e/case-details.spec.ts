@@ -3,12 +3,12 @@ import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from './fixtures/health'
 import { routes } from './routes'
 
-const casesRoute = routes.find((route) => route.path === '/en/cases')
-if (!casesRoute)
+const casesPath = routes.find((route) => route.path === '/en/cases')?.path
+if (!casesPath)
   throw new Error('English cases route is missing from the manifest')
 
 async function openCases(page: import('@playwright/test').Page) {
-  await page.goto(casesRoute.path)
+  await page.goto(casesPath)
   await page.evaluate(() => document.fonts.ready)
   const linkedCase = page
     .locator('[data-case]')
@@ -18,16 +18,35 @@ async function openCases(page: import('@playwright/test').Page) {
   return linkedCase
 }
 
-test('reveals case details with pointer and keyboard without nested controls', async ({
+test('renders deployed cases with accessible details and link contracts', async ({
   page,
-}, testInfo) => {
-  test.skip(testInfo.project.name !== 'desktop-chromium')
-
+  isMobile,
+}) => {
   const linkedCase = await openCases(page)
   const caseLink = linkedCase.getByRole('link')
   const detailsButton = linkedCase.getByRole('button')
   const details = linkedCase.locator('[data-case-details]')
   const nextCase = linkedCase.locator('xpath=following-sibling::*[1]')
+
+  const cases = page.locator('[data-case]')
+  expect(await cases.count()).toBeGreaterThan(0)
+  for (const link of await cases.getByRole('link').all()) {
+    const href = await link.getAttribute('href')
+    expect(href).toBeTruthy()
+    expect(new URL(href!).protocol).toBe('https:')
+    await expect(link).toHaveAttribute('target', '_blank')
+    await expect(link).toHaveAttribute('rel', /\bnoopener\b/)
+  }
+
+  await expect(linkedCase.locator('button a, a button')).toHaveCount(0)
+
+  if (isMobile) {
+    await expect(details).toBeHidden()
+    await detailsButton.tap()
+    await expect(detailsButton).toHaveAttribute('aria-expanded', 'true')
+    await expect(details).toBeVisible()
+    return
+  }
 
   await expect(details).toBeHidden()
   await caseLink.hover()
@@ -82,14 +101,6 @@ test('reveals case details with pointer and keyboard without nested controls', a
   await expect(detailsButton).toHaveAttribute('aria-expanded', 'true')
   await expect(details).toBeVisible()
 
-  const href = await caseLink.getAttribute('href')
-  expect(href).toBeTruthy()
-  expect(new URL(href!).protocol).toBe('https:')
-  await expect(caseLink).toHaveAttribute('target', '_blank')
-  await expect(caseLink).toHaveAttribute('rel', /\bnoopener\b/)
-
-  await expect(linkedCase.locator('button a, a button')).toHaveCount(0)
-
   const axeResults = await new AxeBuilder({ page })
     .include('[data-case]')
     .analyze()
@@ -97,17 +108,4 @@ test('reveals case details with pointer and keyboard without nested controls', a
     ['serious', 'critical'].includes(violation.impact ?? '')
   )
   expect(seriousOrCritical).toEqual([])
-})
-
-test('reveals case details by touch on mobile', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== 'mobile-chromium')
-
-  const linkedCase = await openCases(page)
-  const detailsButton = linkedCase.getByRole('button')
-  const details = linkedCase.locator('[data-case-details]')
-
-  await expect(details).toBeHidden()
-  await detailsButton.tap()
-  await expect(detailsButton).toHaveAttribute('aria-expanded', 'true')
-  await expect(details).toBeVisible()
 })
