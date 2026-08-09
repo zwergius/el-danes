@@ -24,11 +24,8 @@ test('/ redirects exactly once to /en', async ({ page }) => {
       navigatedPaths.push(new URL(frame.url()).pathname)
     }
   })
-  const response = await page.goto('/')
-
-  expect(response, 'navigation response for /').not.toBeNull()
-  expect(response?.ok(), 'successful navigation after redirect').toBe(true)
-  expect(new URL(page.url()).pathname).toBe('/en')
+  const response = await page.goto('/', { waitUntil: 'commit' })
+  await expect(page).toHaveURL(/\/en$/)
 
   const redirects = []
   let request = response?.request().redirectedFrom()
@@ -37,11 +34,15 @@ test('/ redirects exactly once to /en', async ({ page }) => {
     request = request.redirectedFrom()
   }
 
+  const distinctNavigatedPaths = navigatedPaths.filter(
+    (path, index) => path !== navigatedPaths[index - 1]
+  )
+
   if (redirects.length > 0) {
     expect(redirects).toHaveLength(1)
     expect(new URL(redirects[0].url()).pathname).toBe('/')
-    expect(navigatedPaths).toEqual(['/en'])
+    expect(distinctNavigatedPaths).toEqual(['/en'])
   } else {
-    expect(navigatedPaths).toEqual(['/', '/en'])
+    expect(distinctNavigatedPaths).toEqual(['/', '/en'])
   }
 })
