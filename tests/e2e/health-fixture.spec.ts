@@ -1,15 +1,26 @@
-import { expect, test } from './fixtures/health'
+import { expect, test, type Page } from './fixtures/health'
 import { routes } from './routes'
 
 const englishHome = routes.find((route) => route.path === '/en')
 if (!englishHome)
   throw new Error('English home route is missing from the manifest')
 
+const loadControlledHome = async (page: Page) => {
+  await page.route('**/en', async (route) => {
+    await route.fulfill({
+      body: '<!doctype html><html lang="en"><head><title>Fixture page</title></head><body><main>Fixture page</main></body></html>',
+      contentType: 'text/html',
+    })
+  })
+
+  return page.goto(englishHome.path)
+}
+
 test('ignores Cloudflare RUM console failures', async ({
   page,
   pageHealth,
 }) => {
-  const response = await page.goto(englishHome.path)
+  const response = await loadControlledHome(page)
   await page.evaluate(() => {
     window.console.error(
       "Access to XMLHttpRequest at 'https://cloudflareinsights.com/cdn-cgi/rum' from origin 'https://preview.example' has been blocked by CORS policy."
@@ -20,7 +31,7 @@ test('ignores Cloudflare RUM console failures', async ({
 })
 
 test('ignores Cloudflare RUM page exceptions', async ({ page, pageHealth }) => {
-  const response = await page.goto(englishHome.path)
+  const response = await loadControlledHome(page)
   const pageError = page.waitForEvent('pageerror')
   await page.evaluate(() => {
     setTimeout(() => {
@@ -38,7 +49,7 @@ test('reports unrelated first-party console errors', async ({
   page,
   pageHealth,
 }) => {
-  const response = await page.goto(englishHome.path)
+  const response = await loadControlledHome(page)
   const firstPartyScript = new URL('/e2e-console-error.js', page.url()).href
   await page.route(firstPartyScript, async (route) => {
     await route.fulfill({
@@ -54,7 +65,7 @@ test('reports unrelated first-party console errors', async ({
 })
 
 test('reports unrelated page exceptions', async ({ page, pageHealth }) => {
-  const response = await page.goto(englishHome.path)
+  const response = await loadControlledHome(page)
   const pageError = page.waitForEvent('pageerror')
   await page.evaluate(() => {
     setTimeout(() => {
