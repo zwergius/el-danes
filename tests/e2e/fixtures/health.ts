@@ -21,7 +21,7 @@ interface HealthFixtures {
   pageHealth: PageHealth
 }
 
-const CLOUDFLARE_RUM_ENDPOINT = 'https://cloudflareinsights.com/cdn-cgi/rum'
+const CLOUDFLARE_RUM_ENDPOINT = 'cloudflareinsights.com/cdn-cgi/rum'
 
 const isCloudflareRumFailure = (message: string) =>
   message.includes(CLOUDFLARE_RUM_ENDPOINT)
