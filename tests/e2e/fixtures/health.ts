@@ -9,6 +9,13 @@ import {
 import { accessibilityExceptionsFor } from '../accessibility-exceptions'
 import type { RouteContract } from '../routes'
 
+const cloudflareWebAnalyticsRumEndpoint =
+  /https:\/\/cloudflareinsights\.com\/cdn-cgi\/rum(?=$|[?#\s"'()[\]{},;:]|\.(?=$|[\s"'()[\]{},;:]))/
+
+export function isCloudflareWebAnalyticsRumFailure(message: string): boolean {
+  return cloudflareWebAnalyticsRumEndpoint.test(message)
+}
+
 interface PageHealth {
   // ESLint's base rule treats interface parameter names as runtime variables.
   // eslint-disable-next-line no-unused-vars
@@ -20,11 +27,6 @@ interface PageHealth {
 interface HealthFixtures {
   pageHealth: PageHealth
 }
-
-const CLOUDFLARE_RUM_ENDPOINT = 'cloudflareinsights.com/cdn-cgi/rum'
-
-const isCloudflareRumFailure = (message: string) =>
-  message.includes(CLOUDFLARE_RUM_ENDPOINT)
 
 export const test = base.extend<HealthFixtures>({
   pageHealth: async ({ page }, use, testInfo) => {
@@ -63,12 +65,12 @@ export const test = base.extend<HealthFixtures>({
           request.includes(targetOrigin)
         )
         const actionablePageErrors = pageErrors.filter(
-          (error) => !isCloudflareRumFailure(error.message)
+          (error) => !isCloudflareWebAnalyticsRumFailure(error.message)
         )
         const actionableConsoleErrors = consoleErrors.filter(
           (message) =>
-            !isCloudflareRumFailure(message.text) &&
-            (!message.url || message.url.startsWith(targetOrigin))
+            (!message.url || message.url.startsWith(targetOrigin)) &&
+            !isCloudflareWebAnalyticsRumFailure(message.text)
         )
         expect(actionablePageErrors, 'uncaught page exceptions').toEqual([])
         expect(
