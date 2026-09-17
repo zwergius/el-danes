@@ -39,9 +39,14 @@ test('reports unrelated first-party console errors', async ({
   pageHealth,
 }) => {
   const response = await page.goto(englishHome.path)
-  await page.evaluate(() => {
-    window.console.error('Application failed to initialize')
+  const firstPartyScript = new URL('/e2e-console-error.js', page.url()).href
+  await page.route(firstPartyScript, async (route) => {
+    await route.fulfill({
+      body: "console.error('Application failed to initialize')",
+      contentType: 'application/javascript',
+    })
   })
+  await page.addScriptTag({ url: firstPartyScript })
 
   await expect(pageHealth.assertLoaded(response, englishHome)).rejects.toThrow(
     'first-party console.error messages'
