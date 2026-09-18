@@ -21,6 +21,11 @@ interface HealthFixtures {
   pageHealth: PageHealth
 }
 
+const CLOUDFLARE_RUM_ENDPOINT = 'cloudflareinsights.com/cdn-cgi/rum'
+
+const isCloudflareRumFailure = (message: string) =>
+  message.includes(CLOUDFLARE_RUM_ENDPOINT)
+
 export const test = base.extend<HealthFixtures>({
   pageHealth: async ({ page }, use, testInfo) => {
     const pageErrors: Error[] = []
@@ -57,10 +62,15 @@ export const test = base.extend<HealthFixtures>({
         const firstPartyFailures = failedRequests.filter((request) =>
           request.includes(targetOrigin)
         )
-        const actionableConsoleErrors = consoleErrors.filter(
-          (message) => !message.url || message.url.startsWith(targetOrigin)
+        const actionablePageErrors = pageErrors.filter(
+          (error) => !isCloudflareRumFailure(error.message)
         )
-        expect(pageErrors, 'uncaught page exceptions').toEqual([])
+        const actionableConsoleErrors = consoleErrors.filter(
+          (message) =>
+            !isCloudflareRumFailure(message.text) &&
+            (!message.url || message.url.startsWith(targetOrigin))
+        )
+        expect(actionablePageErrors, 'uncaught page exceptions').toEqual([])
         expect(
           actionableConsoleErrors,
           'first-party console.error messages'

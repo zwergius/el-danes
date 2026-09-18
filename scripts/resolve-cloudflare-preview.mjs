@@ -1,10 +1,13 @@
 import { appendFile } from 'node:fs/promises'
 import { pathToFileURL } from 'node:url'
 
-const API_ORIGIN = 'https://api.cloudflare.com'
+const API_ORIGIN = 'https://api.github.com'
+const API_VERSION = '2022-11-28'
+const CHECK_NAME = 'Cloudflare Pages'
+const CLOUDFLARE_APP_OWNER = 'cloudflare'
+const CLOUDFLARE_APP_SLUG = 'cloudflare-workers-and-pages'
 const POLL_INTERVAL_MS = 15_000
 const MAX_WAIT_MS = 15 * 60_000
-const NON_TERMINAL_STATUSES = new Set(['idle', 'active'])
 const IMMUTABLE_PREVIEW_HOST = /^[0-9a-f]{8}\.el-danes\.pages\.dev$/
 const FULL_SHA = /^[0-9a-f]{40}$/i
 
@@ -16,52 +19,63 @@ function requiredEnvironmentValue(env, name) {
   return value
 }
 
+function parseRepository(value) {
+  const parts = value.split('/')
+  if (
+    parts.length !== 2 ||
+    parts.some((part) => !/^[A-Za-z0-9_.-]+$/.test(part))
+  ) {
+    throw new Error('GITHUB_REPOSITORY must be in owner/repository format')
+  }
+  return parts
+}
+
 function malformedApiResponse(detail) {
-  return new Error(`Malformed Cloudflare API response: ${detail}`)
+  return new Error(`Malformed GitHub check-runs response: ${detail}`)
 }
 
-function validatePage(body, expectedPage) {
-  if (body === null || typeof body !== 'object' || body.success !== true) {
-    throw malformedApiResponse('request was not successful')
-  }
-  if (!Array.isArray(body.result)) {
-    throw malformedApiResponse('result must be an array')
-  }
-
-  const page = body.result_info?.page
-  const totalPages = body.result_info?.total_pages
-  if (
-    !Number.isInteger(page) ||
-    page !== expectedPage ||
-    !Number.isInteger(totalPages) ||
-    totalPages < 1 ||
-    totalPages < page
-  ) {
-    throw malformedApiResponse('invalid pagination metadata')
-  }
-
-  return { deployments: body.result, totalPages }
-}
-
-function validateDeployment(value) {
+function validateCheckRun(value) {
   if (value === null || typeof value !== 'object') {
-    throw malformedApiResponse('malformed deployment')
+    throw malformedApiResponse('malformed check run')
   }
 
-  const commitHash = value.deployment_trigger?.metadata?.commit_hash
-  const status = value.latest_stage?.status
-  const { created_on: createdOn, url } = value
+  const appOwner = value.app?.owner?.login
+  const appSlug = value.app?.slug
+  const { completed_at: completedAt, conclusion, head_sha: headSha } = value
+  const { id, name, output, started_at: startedAt, status } = value
   if (
-    typeof commitHash !== 'string' ||
+    !Number.isSafeInteger(id) ||
+    typeof headSha !== 'string' ||
+    typeof name !== 'string' ||
     typeof status !== 'string' ||
-    typeof createdOn !== 'string' ||
-    Number.isNaN(Date.parse(createdOn)) ||
-    typeof url !== 'string'
+    (conclusion !== null && typeof conclusion !== 'string') ||
+    typeof startedAt !== 'string' ||
+    Number.isNaN(Date.parse(startedAt)) ||
+    (completedAt !== null &&
+      (typeof completedAt !== 'string' ||
+        Number.isNaN(Date.parse(completedAt)))) ||
+    typeof appOwner !== 'string' ||
+    typeof appSlug !== 'string' ||
+    output === null ||
+    typeof output !== 'object' ||
+    (status === 'completed' && (completedAt === null || conclusion === null)) ||
+    (status !== 'completed' && conclusion !== null)
   ) {
-    throw malformedApiResponse('malformed deployment')
+    throw malformedApiResponse('malformed check run')
   }
 
-  return { commitHash, status, createdOn, url }
+  return {
+    appOwner,
+    appSlug,
+    completedAt,
+    conclusion,
+    headSha,
+    id,
+    name,
+    startedAt,
+    status,
+    summary: output.summary,
+  }
 }
 
 export function validateImmutablePreviewUrl(value) {
@@ -88,40 +102,64 @@ export function validateImmutablePreviewUrl(value) {
   return parsed.origin
 }
 
-export async function fetchPreviewDeployments({
-  accountId,
-  project,
+function previewUrlFromSummary(summary) {
+  if (typeof summary !== 'string') {
+    throw malformedApiResponse('successful check run has no summary')
+  }
+
+  const candidates = new Set()
+  for (const value of summary.match(/https:\/\/[^\s'"<>]+/g) ?? []) {
+    try {
+      candidates.add(validateImmutablePreviewUrl(value))
+    } catch {
+      // The Cloudflare summary also contains its mutable branch alias and dashboard URL.
+    }
+  }
+  if (candidates.size !== 1) {
+    throw malformedApiResponse(
+      'successful check run must expose exactly one immutable preview URL'
+    )
+  }
+  return [...candidates][0]
+}
+
+export async function fetchCloudflareCheckRuns({
+  repository,
   token,
+  headSha,
   fetchImpl = globalThis.fetch,
   signal,
 }) {
   if (typeof fetchImpl !== 'function') {
     throw new Error('A fetch implementation is required')
   }
-
-  const deployments = []
+  const [owner, repo] = parseRepository(repository)
+  const checkRuns = []
   let page = 1
-  let totalPages = 1
+  let totalCount = 0
 
   do {
     const url = new URL(
-      `/client/v4/accounts/${encodeURIComponent(accountId)}/pages/projects/${encodeURIComponent(project)}/deployments`,
+      `/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/commits/${encodeURIComponent(headSha)}/check-runs`,
       API_ORIGIN
     )
-    url.searchParams.set('env', 'preview')
+    url.searchParams.set('check_name', CHECK_NAME)
+    url.searchParams.set('filter', 'all')
     url.searchParams.set('page', String(page))
+    url.searchParams.set('per_page', '100')
 
     let apiResponse
     try {
       apiResponse = await fetchImpl(url, {
         signal,
         headers: {
-          Accept: 'application/json',
+          Accept: 'application/vnd.github+json',
           Authorization: `Bearer ${token}`,
+          'X-GitHub-Api-Version': API_VERSION,
         },
       })
     } catch {
-      throw new Error('Cloudflare API request failed')
+      throw new Error('GitHub check-runs request failed')
     }
 
     if (
@@ -132,7 +170,7 @@ export async function fetchPreviewDeployments({
       const status = Number.isInteger(apiResponse?.status)
         ? ` (${apiResponse.status})`
         : ''
-      throw new Error(`Cloudflare API request failed${status}`)
+      throw new Error(`GitHub check-runs request failed${status}`)
     }
 
     let body
@@ -141,20 +179,33 @@ export async function fetchPreviewDeployments({
     } catch {
       throw malformedApiResponse('response was not valid JSON')
     }
+    if (
+      body === null ||
+      typeof body !== 'object' ||
+      !Number.isInteger(body.total_count) ||
+      body.total_count < 0 ||
+      !Array.isArray(body.check_runs)
+    ) {
+      throw malformedApiResponse('invalid result shape')
+    }
+    if (page === 1) {
+      totalCount = body.total_count
+    } else if (body.total_count !== totalCount) {
+      throw malformedApiResponse('total count changed during pagination')
+    }
+    if (body.check_runs.length === 0 && checkRuns.length < totalCount) {
+      throw malformedApiResponse('pagination ended before total count')
+    }
 
-    const { deployments: pageDeployments, totalPages: validatedTotalPages } =
-      validatePage(body, page)
-    deployments.push(...pageDeployments)
-    totalPages = validatedTotalPages
+    checkRuns.push(...body.check_runs)
     page += 1
-  } while (page <= totalPages)
+  } while (checkRuns.length < totalCount)
 
-  return deployments
+  return checkRuns
 }
 
 export async function resolveCloudflarePreview({
-  accountId,
-  project,
+  repository,
   token,
   headSha,
   fetchImpl = globalThis.fetch,
@@ -167,6 +218,7 @@ export async function resolveCloudflarePreview({
   if (!FULL_SHA.test(headSha)) {
     throw new Error('PR_HEAD_SHA must be a full 40-character commit SHA')
   }
+  parseRepository(repository)
   if (!Number.isFinite(pollIntervalMs) || pollIntervalMs <= 0) {
     throw new Error('Poll interval must be positive')
   }
@@ -182,12 +234,12 @@ export async function resolveCloudflarePreview({
   const timeoutSignal = AbortSignal.timeout(maxWaitMs)
 
   for (;;) {
-    let rawDeployments
+    let rawCheckRuns
     try {
-      rawDeployments = await fetchPreviewDeployments({
-        accountId,
-        project,
+      rawCheckRuns = await fetchCloudflareCheckRuns({
+        repository,
         token,
+        headSha,
         fetchImpl,
         signal: timeoutSignal,
       })
@@ -207,22 +259,29 @@ export async function resolveCloudflarePreview({
       )
     }
 
-    const matching = rawDeployments
-      .map(validateDeployment)
-      .filter((candidate) => candidate.commitHash === headSha)
-      .sort(
-        (left, right) =>
-          Date.parse(right.createdOn) - Date.parse(left.createdOn)
+    const matching = rawCheckRuns
+      .map(validateCheckRun)
+      .filter(
+        (candidate) =>
+          candidate.headSha === headSha &&
+          candidate.name === CHECK_NAME &&
+          candidate.appOwner === CLOUDFLARE_APP_OWNER &&
+          candidate.appSlug === CLOUDFLARE_APP_SLUG
       )
+      .sort((left, right) => {
+        const timeDifference =
+          Date.parse(right.startedAt) - Date.parse(left.startedAt)
+        return timeDifference === 0 ? right.id - left.id : timeDifference
+      })
     const [newest] = matching
 
-    if (newest?.status === 'success') {
-      return validateImmutablePreviewUrl(newest.url)
-    }
-    if (newest && !NON_TERMINAL_STATUSES.has(newest.status)) {
-      throw new Error(
-        `Newest matching Cloudflare deployment reached terminal status: ${newest.status}`
-      )
+    if (newest?.status === 'completed') {
+      if (newest.conclusion !== 'success') {
+        throw new Error(
+          `Newest matching Cloudflare check reached terminal conclusion: ${newest.conclusion ?? 'missing'}`
+        )
+      }
+      return previewUrlFromSummary(newest.summary)
     }
 
     await sleep(Math.min(pollIntervalMs, maxWaitMs - elapsed))
@@ -236,15 +295,13 @@ export async function runFromEnvironment({
   now,
   appendFileImpl = appendFile,
 } = {}) {
-  const accountId = requiredEnvironmentValue(env, 'CLOUDFLARE_ACCOUNT_ID')
-  const project = requiredEnvironmentValue(env, 'CLOUDFLARE_PAGES_PROJECT')
-  const token = requiredEnvironmentValue(env, 'CLOUDFLARE_PAGES_READ_TOKEN')
+  const repository = requiredEnvironmentValue(env, 'GITHUB_REPOSITORY')
+  const token = requiredEnvironmentValue(env, 'GITHUB_TOKEN')
   const headSha = requiredEnvironmentValue(env, 'PR_HEAD_SHA')
   const outputPath = requiredEnvironmentValue(env, 'GITHUB_OUTPUT')
 
   const url = await resolveCloudflarePreview({
-    accountId,
-    project,
+    repository,
     token,
     headSha,
     fetchImpl,
