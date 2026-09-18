@@ -10,7 +10,7 @@ import { accessibilityExceptionsFor } from '../accessibility-exceptions'
 import type { RouteContract } from '../routes'
 
 const cloudflareWebAnalyticsRumEndpoint =
-  /https:\/\/cloudflareinsights\.com\/cdn-cgi\/rum(?=$|[?#\s"'()[\]{},;:]|\.(?=$|[\s"'()[\]{},;:]))/
+  /(?:^|[^A-Za-z0-9.-])cloudflareinsights\.com\/cdn-cgi\/rum(?=$|[?#\s"'()[\]{},;:]|\.(?=$|[\s"'()[\]{},;:]))/
 
 export function isCloudflareWebAnalyticsRumFailure(message: string): boolean {
   return cloudflareWebAnalyticsRumEndpoint.test(message)

@@ -10,8 +10,17 @@ const cloudflareConsoleErrors = [
 const cloudflarePageException =
   'XMLHttpRequest cannot load https://cloudflareinsights.com/cdn-cgi/rum due to access control checks.'
 
+const browserNormalizedPageExceptions = [
+  'XMLHttpRequest cannot load https:/cloudflareinsights.com/cdn-cgi/rum due to access control checks.',
+  'Cross-Origin Request Blocked at cloudflareinsights.com/cdn-cgi/rum',
+]
+
 test('recognizes the observed Cloudflare RUM browser failures', () => {
-  for (const message of [...cloudflareConsoleErrors, cloudflarePageException]) {
+  for (const message of [
+    ...cloudflareConsoleErrors,
+    cloudflarePageException,
+    ...browserNormalizedPageExceptions,
+  ]) {
     expect(isCloudflareWebAnalyticsRumFailure(message)).toBe(true)
   }
 })
@@ -22,6 +31,8 @@ test('does not recognize unrelated or lookalike browser failures', () => {
     'https://cloudflareinsights.com/cdn-cgi/other failed',
     'https://cloudflareinsights.com/cdn-cgi/rumor failed',
     'https://cloudflareinsights.com.evil.example/cdn-cgi/rum failed',
+    'https://subdomain.cloudflareinsights.com/cdn-cgi/rum failed',
+    'https://evilcloudflareinsights.com/cdn-cgi/rum failed',
   ]
 
   for (const message of unrelatedFailures) {
