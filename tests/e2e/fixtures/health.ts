@@ -16,6 +16,16 @@ export function isCloudflareWebAnalyticsRumFailure(message: string): boolean {
   return cloudflareWebAnalyticsRumEndpoint.test(message)
 }
 
+function isCloudflareWebAnalyticsRumCorsCompanion(
+  message: string,
+  targetOrigin: string
+): boolean {
+  return (
+    message ===
+    `Origin ${targetOrigin} is not allowed by Access-Control-Allow-Origin. Status code: 404`
+  )
+}
+
 interface PageHealth {
   // ESLint's base rule treats interface parameter names as runtime variables.
   // eslint-disable-next-line no-unused-vars
@@ -64,13 +74,23 @@ export const test = base.extend<HealthFixtures>({
         const firstPartyFailures = failedRequests.filter((request) =>
           request.includes(targetOrigin)
         )
+        const hasCloudflareRumPageError = pageErrors.some((error) =>
+          isCloudflareWebAnalyticsRumFailure(error.message)
+        )
         const actionablePageErrors = pageErrors.filter(
           (error) => !isCloudflareWebAnalyticsRumFailure(error.message)
         )
         const actionableConsoleErrors = consoleErrors.filter(
           (message) =>
             (!message.url || message.url.startsWith(targetOrigin)) &&
-            !isCloudflareWebAnalyticsRumFailure(message.text)
+            !isCloudflareWebAnalyticsRumFailure(message.text) &&
+            !(
+              hasCloudflareRumPageError &&
+              isCloudflareWebAnalyticsRumCorsCompanion(
+                message.text,
+                targetOrigin
+              )
+            )
         )
         expect(actionablePageErrors, 'uncaught page exceptions').toEqual([])
         expect(
