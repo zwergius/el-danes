@@ -55,6 +55,7 @@ export default defineConfig({
     },
     {
       name: 'mobile-chromium',
+      grepInvert: /@desktop-only/,
       use: { ...devices['Pixel 5'], viewport: { width: 390, height: 844 } },
     },
     {
@@ -66,6 +67,7 @@ export default defineConfig({
     },
     {
       name: 'webkit',
+      grepInvert: /@desktop-only/,
       use: { ...devices['iPhone 13'], viewport: { width: 390, height: 844 } },
     },
   ],

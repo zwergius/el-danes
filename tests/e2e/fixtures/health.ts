@@ -38,11 +38,36 @@ interface HealthFixtures {
   pageHealth: PageHealth
 }
 
+function absoluteURLs(value: string): URL[] {
+  return (value.match(/https?:\/\/[^\s'"\])]+/g) ?? []).flatMap((value) => {
+    try {
+      return [new URL(value)]
+    } catch {
+      return []
+    }
+  })
+}
+
+function isFirstPartyConsoleError(
+  message: { text: string; url: string },
+  targetOrigin: string
+): boolean {
+  const referencedURLs = absoluteURLs(message.text)
+  if (referencedURLs.some((url) => url.origin !== targetOrigin)) return false
+
+  if (!message.url) return true
+  try {
+    return new URL(message.url).origin === targetOrigin
+  } catch {
+    return true
+  }
+}
+
 export const test = base.extend<HealthFixtures>({
   pageHealth: async ({ page }, use, testInfo) => {
     const pageErrors: Error[] = []
     const consoleErrors: { text: string; url: string }[] = []
-    const failedRequests: string[] = []
+    const failedRequests: { method: string; url: string }[] = []
 
     page.on('pageerror', (error) => pageErrors.push(error))
     page.on('console', (message) => {
@@ -54,7 +79,7 @@ export const test = base.extend<HealthFixtures>({
       }
     })
     page.on('requestfailed', (request) => {
-      failedRequests.push(`${request.method()} ${request.url()}`)
+      failedRequests.push({ method: request.method(), url: request.url() })
     })
 
     await use({
@@ -67,12 +92,26 @@ export const test = base.extend<HealthFixtures>({
           'lang',
           route.expectedLanguage
         )
-        await expect(page).toHaveTitle(/\S+/)
-        await expect(page.locator(route.primaryLandmark)).toBeVisible()
+        await expect(page).toHaveTitle(route.expectedTitle)
+        const primaryLandmark = page.locator(route.primaryLandmark)
+        await expect(primaryLandmark).toHaveCount(1)
+        await expect(primaryLandmark).toBeVisible()
+
+        const currentLanguage = page.locator(
+          'a.language-switch[aria-current="language"]'
+        )
+        if ((await currentLanguage.count()) === 0) {
+          await page.locator('#mobile-navigation-toggle').click()
+        }
+        await expect(currentLanguage).toHaveCount(1)
+        await expect(currentLanguage).toHaveAttribute(
+          'href',
+          new RegExp(`^/${route.locale}(?:/|$)`)
+        )
 
         const targetOrigin = new URL(response!.url()).origin
-        const firstPartyFailures = failedRequests.filter((request) =>
-          request.includes(targetOrigin)
+        const firstPartyFailures = failedRequests.filter(
+          (request) => new URL(request.url).origin === targetOrigin
         )
         const hasCloudflareRumPageError = pageErrors.some((error) =>
           isCloudflareWebAnalyticsRumFailure(error.message)
@@ -82,7 +121,7 @@ export const test = base.extend<HealthFixtures>({
         )
         const actionableConsoleErrors = consoleErrors.filter(
           (message) =>
-            (!message.url || message.url.startsWith(targetOrigin)) &&
+            isFirstPartyConsoleError(message, targetOrigin) &&
             !isCloudflareWebAnalyticsRumFailure(message.text) &&
             !(
               hasCloudflareRumPageError &&
@@ -121,6 +160,20 @@ export const test = base.extend<HealthFixtures>({
           unexpected,
           'unexpected serious or critical axe violations'
         ).toEqual([])
+
+        for (const exception of exceptions) {
+          const violation = seriousOrCritical.find(
+            (violation) => violation.id === exception.rule
+          )
+          expect(
+            violation,
+            `approved ${exception.rule} exception must still affect ${route.path}`
+          ).toBeDefined()
+          expect(
+            violation!.nodes.length,
+            `${exception.rule} affected-node ceiling for ${route.path}`
+          ).toBeLessThanOrEqual(exception.maxAffectedNodes)
+        }
       },
     })
   },

@@ -8,7 +8,7 @@ if (!englishHome)
 const loadControlledHome = async (page: Page) => {
   await page.route('**/en', async (route) => {
     await route.fulfill({
-      body: '<!doctype html><html lang="en"><head><title>Fixture page</title></head><body><main>Fixture page</main></body></html>',
+      body: `<!doctype html><html lang="${englishHome.expectedLanguage}"><head><meta charset="utf-8"><title>${englishHome.expectedTitle}</title></head><body><main>Fixture page</main><a class="language-switch" aria-current="language" href="${englishHome.path}">English</a></body></html>`,
       contentType: 'text/html',
     })
   })

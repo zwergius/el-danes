@@ -16,33 +16,34 @@
     window.localStorage.setItem('color-mode', newValue)
     changeColors(newValue)
   }
-
-  function handleKeypress(e: KeyboardEvent, colorMode: string) {
-    const { key } = e
-    if (key === `Enter` || key === ` `) setColorMode(colorMode)
-  }
 </script>
 
-<button
-  on:click={() => setColorMode('dark')}
-  on:keypress={(e) => handleKeypress(e, 'dark')}
-  role="radio"
-  aria-checked={$theme === 'dark' ? true : undefined}
-  aria-label="Use dark theme"
->
-  <div />
-</button>
-<button
-  on:click={() => setColorMode('light')}
-  on:keypress={(e) => handleKeypress(e, 'light')}
-  role="radio"
-  aria-checked={$theme === 'light' ? true : undefined}
-  aria-label="Use light theme"
->
-  <div />
-</button>
+<div class="theme-selector" role="radiogroup" aria-label="Theme">
+  <button
+    type="button"
+    on:click={() => setColorMode('dark')}
+    role="radio"
+    aria-checked={$theme === 'dark'}
+    aria-label="Use dark theme"
+  >
+    <div />
+  </button>
+  <button
+    type="button"
+    on:click={() => setColorMode('light')}
+    role="radio"
+    aria-checked={$theme === 'light'}
+    aria-label="Use light theme"
+  >
+    <div />
+  </button>
+</div>
 
 <style>
+  .theme-selector {
+    display: flex;
+  }
+
   button {
     padding: var(--space-2);
     cursor: pointer;
@@ -58,7 +59,7 @@
     transition: all 0.2s ease;
   }
 
-  button[aria-checked] div::before {
+  button[aria-checked='true'] div::before {
     position: absolute;
     top: -2.5em;
     left: 0;
@@ -70,7 +71,7 @@
     justify-content: center;
   }
 
-  button[aria-checked] div {
+  button[aria-checked='true'] div {
     position: relative;
     background: none;
     pointer-events: none;
