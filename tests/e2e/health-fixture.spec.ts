@@ -45,6 +45,46 @@ test('ignores Cloudflare RUM page exceptions', async ({ page, pageHealth }) => {
   await pageHealth.assertLoaded(response, englishHome)
 })
 
+test('ignores the target-less WebKit CORS companion to a Cloudflare RUM exception', async ({
+  page,
+  pageHealth,
+}) => {
+  const response = await loadControlledHome(page)
+  const pageError = page.waitForEvent('pageerror')
+  await page.evaluate(() => {
+    window.console.error(
+      `Origin ${window.location.origin} is not allowed by Access-Control-Allow-Origin. Status code: 404`
+    )
+    setTimeout(() => {
+      throw new Error(
+        'XMLHttpRequest cannot load https:/cloudflareinsights.com/cdn-cgi/rum due to access control checks.'
+      )
+    })
+  })
+  await pageError
+
+  await pageHealth.assertLoaded(response, englishHome)
+})
+
+test('reports an unpaired target-less CORS console error', async ({
+  page,
+  pageHealth,
+}) => {
+  const response = await loadControlledHome(page)
+  const firstPartyScript = new URL('/e2e-cors-error.js', page.url()).href
+  await page.route(firstPartyScript, async (route) => {
+    await route.fulfill({
+      body: `console.error('Origin ${new URL(page.url()).origin} is not allowed by Access-Control-Allow-Origin. Status code: 404')`,
+      contentType: 'application/javascript',
+    })
+  })
+  await page.addScriptTag({ url: firstPartyScript })
+
+  await expect(pageHealth.assertLoaded(response, englishHome)).rejects.toThrow(
+    'first-party console.error messages'
+  )
+})
+
 test('reports unrelated first-party console errors', async ({
   page,
   pageHealth,
